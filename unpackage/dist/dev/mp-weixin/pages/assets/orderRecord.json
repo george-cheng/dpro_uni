@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "订单记录",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "uni-drawer": "/components/uni-drawer/uni-drawer"
+  }
+}

@@ -1,0 +1,289 @@
+@charset "UTF-8";
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.register.data-v-891c2434 {
+  padding-bottom: 45rpx;
+}
+.register .loginSwitch.data-v-891c2434 {
+  margin: 0 78rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+}
+.register .loginSwitch text.data-v-891c2434 {
+  color: #fff;
+  font-size: 28rpx;
+  line-height: 28rpx;
+}
+.register .loginSwitch text.data-v-891c2434:last-child {
+  margin-left: 62rpx;
+}
+.register .loginSwitch .textLine.data-v-891c2434 {
+  position: relative;
+}
+.register .loginSwitch .textLine.data-v-891c2434::after {
+  content: '';
+  display: inline-block;
+  width: 120rpx;
+  height: 4rpx;
+  position: absolute;
+  bottom: -15rpx;
+  left: 0;
+  background-color: #fff;
+}
+.register .regBox .loginIpt view.data-v-891c2434 {
+  position: relative;
+}
+.register .regBox .loginIpt view input.data-v-891c2434 {
+  margin: 68rpx auto 0;
+  width: 584rpx;
+  height: 80rpx;
+  border: 1px solid #676869;
+  -webkit-border-radius: 6px;
+          border-radius: 6px;
+  color: #fff;
+}
+.register .regBox .loginIpt view input.data-v-891c2434:last-child {
+  margin-top: 42rpx;
+}
+.register .regBox .loginIpt view .phoneBox.data-v-891c2434 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.register .regBox .loginIpt view .phoneBox .preIptConID.data-v-891c2434 {
+  width: 120rpx;
+  height: 80rpx;
+  margin: 68rpx 20rpx 20rpx 68rpx;
+  border: 1px solid #676869;
+  -webkit-border-radius: 6px;
+          border-radius: 6px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  color: #fff;
+}
+.register .regBox .loginIpt view .phoneBox .preIpt.data-v-891c2434 {
+  width: 110rpx;
+  margin: 68rpx 20rpx 20rpx 68rpx;
+}
+.register .regBox .loginIpt view .phoneBox .phoneIpt.data-v-891c2434 {
+  width: 454rpx;
+  margin: 68rpx 68rpx 20rpx 0;
+}
+.register .regBox .loginIpt view .dropDownCOn.data-v-891c2434 {
+  width: 592rpx;
+  margin: 0 auto;
+  border: 1px solid #676869;
+  -webkit-border-radius: 6rpx;
+          border-radius: 6rpx;
+  position: absolute;
+  top: 96rpx;
+  right: 77rpx;
+  background-color: #282828;
+}
+.register .regBox .loginIpt view .dropDownCOn text.data-v-891c2434 {
+  padding: 0 5rpx;
+  margin: 0 5rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+  color: #fff;
+  line-height: 48rpx;
+}
+.register .regBox .loginIpt view .iconLogin.data-v-891c2434 {
+  position: absolute;
+  right: 100rpx;
+  top: 25rpx;
+  z-index: 9;
+}
+.register .regBox .loginIpt view .i-downArrow.data-v-891c2434::before, .register .regBox .loginIpt view .i-eye.data-v-891c2434::before {
+  color: #515151;
+  font-size: 42rpx;
+}
+.register .registerTop.data-v-891c2434 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+}
+.register .loginSwitch.data-v-891c2434 {
+  padding-top: 70rpx;
+}
+.register .loginArea.data-v-891c2434 {
+  float: right;
+  margin-top: 60rpx;
+  margin-right: 40rpx;
+  color: #fff;
+  position: relative;
+}
+.register .loginArea .areaIcon.data-v-891c2434 {
+  margin-left: 5rpx;
+}
+.register .loginArea .areaList.data-v-891c2434 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  position: absolute;
+  background-color: #282828;
+  top: 44rpx;
+  right: 5rpx;
+  white-space: nowrap;
+  border: 1px solid #676869;
+  -webkit-border-radius: 6rpx;
+          border-radius: 6rpx;
+  padding: 5rpx;
+  line-height: 48rpx;
+  z-index: 9;
+  padding: 5rpx;
+}
+.register .regBox .regEmail .regMsg.data-v-891c2434, .register .regBox .regPhone .regMsg.data-v-891c2434 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+}
+.register .regBox .regEmail .regMsg .megBox.data-v-891c2434, .register .regBox .regPhone .regMsg .megBox.data-v-891c2434 {
+  position: relative;
+}
+.register .regBox .regEmail .regMsg .megBox input.data-v-891c2434, .register .regBox .regPhone .regMsg .megBox input.data-v-891c2434 {
+  margin: 68rpx 30rpx 0 78rpx;
+  width: 390rpx;
+  text-align: left;
+}
+.register .regBox .regEmail .regMsg .megBox ._span.data-v-891c2434, .register .regBox .regPhone .regMsg .megBox ._span.data-v-891c2434 {
+  position: absolute;
+  top: 102rpx;
+  right: 50rpx;
+  color: #BD3A3B;
+  font-size: 24rpx;
+  z-index: 9;
+  line-height: 24rpx;
+}
+.register .regBox .regEmail .regMsg .msgBtn.data-v-891c2434, .register .regBox .regPhone .regMsg .msgBtn.data-v-891c2434 {
+  width: 165rpx;
+  margin-top: 68rpx;
+}
+.register .regBox .regEmail .regMsg .msgBtn button.data-v-891c2434, .register .regBox .regPhone .regMsg .msgBtn button.data-v-891c2434 {
+  font-size: 24rpx;
+  height: 80rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  white-space: nowrap;
+  background-color: #ED6B58;
+  color: #fff;
+}
+.register .regBox .regEmail .regMsg .msgBtn image.data-v-891c2434, .register .regBox .regPhone .regMsg .msgBtn image.data-v-891c2434 {
+  width: 165rpx;
+  height: 80rpx;
+}
+.register .btnBox.data-v-891c2434 {
+  margin: 90rpx auto 0;
+  width: 594rpx;
+}
+.register .btnBox .regBox button.data-v-891c2434 {
+  background-color: #BD3A3B;
+  color: #fff;
+  font-size: 28rpx;
+}
+.register .btnBox .loginBox.data-v-891c2434 {
+  margin-top: 20rpx;
+}
+.register .btnBox .loginBox button.data-v-891c2434 {
+  background-color: #282828;
+  color: #BD3A3B;
+  font-size: 28rpx;
+  border: 1px solid #EBA8AD;
+  -webkit-border-radius: 4rpx;
+          border-radius: 4rpx;
+}
+.register .regTip.data-v-891c2434 {
+  margin: 50rpx auto 0;
+  text-align: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+}
+.register .regTip .checkIcon.data-v-891c2434 {
+  color: #888;
+}
+.register .regTip text.data-v-891c2434 {
+  font-size: 22rpx;
+  line-height: 22rpx;
+  color: #999999;
+  margin-left: 10rpx;
+}
+.register .regTip text.agreement.data-v-891c2434 {
+  color: #BD3A3B;
+}
+.register .regWarn.data-v-891c2434 {
+  margin-top: 20rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  margin-left: 72rpx;
+}
+.register .regWarn text.data-v-891c2434 {
+  margin-left: 10rpx;
+  color: #5B5C5B;
+  font-size: 24rpx;
+}
+.register .regWarn .i-excla.data-v-891c2434:before {
+  color: #99403d;
+}
+

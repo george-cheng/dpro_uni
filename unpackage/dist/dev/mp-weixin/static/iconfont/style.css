@@ -1,0 +1,192 @@
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-yooxi:before {
+  content: "\e92a";
+  color: #fff;
+}
+.icon-zhifubao:before {
+  content: "\e92b";
+  color: #fff;
+}
+.icon-jiantou8:before {
+  content: "\e929";
+  color: #fff;
+}
+.icon-youjiantou2:before {
+  content: "\e927";
+  color: #fff;
+}
+.icon-youjiantou1:before {
+  content: "\e928";
+  color: #fff;
+}
+.icon-chongzhi:before {
+  content: "\e923";
+  color: #fff;
+}
+.icon-qiehuan:before {
+  content: "\e924";
+  color: #fff;
+}
+.icon-tixianguize:before {
+  content: "\e925";
+  color: #fff;
+}
+.icon-zijinzhuanzhang:before {
+  content: "\e926";
+  color: #fff;
+}
+.icon-downarrow:before {
+  content: "\e921";
+  color: #fff;
+}
+.icon-jilu:before {
+  content: "\e922";
+  color: #fff;
+}
+.icon-ego-menu:before {
+  content: "\e91d";
+  color: #fff;
+}
+.icon-hangqing:before {
+  content: "\e91e";
+  color: #fff;
+}
+.icon-tishi:before {
+  content: "\e91f";
+  color: #fff;
+}
+.icon-xiangshangjiantou:before {
+  content: "\e920";
+  color: #fff;
+}
+.icon-yinxingqia:before {
+  content: "\e91b";
+  color: #fff;
+}
+.icon-youjiantou:before {
+  content: "\e91c";
+  color: #fff;
+}
+.icon-search:before {
+  content: "\e918";
+  color: #fff;
+}
+.icon-star:before {
+  content: "\e919";
+  color: #fff;
+}
+.icon-wujiaoxing:before {
+  content: "\e91a";
+  color: #fff;
+}
+.icon-fuxuankuang_xuanzhong:before {
+  content: "\e916";
+  color: #fff;
+}
+.icon-kuangxuan:before {
+  content: "\e917";
+  color: #fff;
+}
+.icon-eye:before {
+  content: "\e914";
+  color: #fff;
+}
+.icon-xiajiantou:before {
+  content: "\e915";
+  color: #fff;
+}
+.icon--2:before {
+  content: "\e913";
+}
+.icon-uniE912:before {
+  content: "\e912";
+}
+.icon--:before {
+  content: "\e902";
+}
+.icon-uniE903:before {
+  content: "\e903";
+  color: #707070;
+}
+.icon-edit:before {
+  content: "\e901";
+  color: #fff;
+}
+.icon-uniE900:before {
+  content: "\e900";
+  color: #707070;
+}
+.icon--1:before {
+  content: "\e911";
+  color: #fff;
+}
+.icon-anquanzhuye:before {
+  content: "\e905";
+  color: #fff;
+}
+.icon-biaoqiankuozhan_jiaoyi-179:before {
+  content: "\e906";
+  color: #fff;
+}
+.icon-dingdan:before {
+  content: "\e907";
+  color: #fff;
+}
+.icon-guanyu:before {
+  content: "\e908";
+  color: #fff;
+}
+.icon-lianxi:before {
+  content: "\e909";
+  color: #fff;
+}
+.icon-shenfenrenzhengtubiao:before {
+  content: "\e90a";
+  color: #fff;
+}
+.icon-yaoqinghaoyou:before {
+  content: "\e90b";
+  color: #fff;
+}
+.icon-yuyanfanyi .path1:before {
+  content: "\e90c";
+  color: rgb(154, 220, 207);
+}
+.icon-yuyanfanyi .path2:before {
+  content: "\e90d";
+  margin-left: -1em;
+  color: rgb(255, 243, 112);
+}
+.icon-yuyanfanyi .path3:before {
+  content: "\e90e";
+  margin-left: -1em;
+  color: rgb(79, 61, 59);
+}
+.icon-yuyanfanyi .path4:before {
+  content: "\e90f";
+  margin-left: -1em;
+  color: rgb(79, 61, 59);
+}
+.icon-yuyanfanyi .path5:before {
+  content: "\e910";
+  margin-left: -1em;
+  color: rgb(79, 61, 59);
+}
+.icon-uniE9001:before {
+  content: "\e904";
+  color: #707070;
+}

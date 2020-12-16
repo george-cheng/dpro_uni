@@ -1,0 +1,19 @@
+/* 全局公共css */
+body{
+	background-color: #282828;
+}
+.mainBox{
+	background-color: #282828;
+	/* padding-bottom: 30rpx; */
+}
+text{
+	font-weight: 400;
+}
+
+.uni-page-head-ft{
+	margin-right: 10rpx;
+}
+input{
+	 padding-left: 10rpx;
+	 color: #fff;
+}

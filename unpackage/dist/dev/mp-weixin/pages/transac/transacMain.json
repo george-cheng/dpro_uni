@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "交易",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "transac": "/pages/transac/transac",
+    "tran-legal": "/pages/transac/tranLegal",
+    "tran-contract": "/pages/transac/tranContract/tranContract"
+  }
+}

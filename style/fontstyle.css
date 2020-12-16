@@ -1,0 +1,201 @@
+@charset "utf-8";
+
+/*  设置  */
+.i-setting::before{
+	font-family: 'icomoon' !important;
+	content: "\e900";
+}
+/*  编辑  */
+.i-edit::before{
+	font-family: 'icomoon' !important;
+	content: "\e901";
+}
+/*  感叹号  */
+.i-excla::before{
+	font-family: 'icomoon' !important;
+	content: "\e903";
+}
+/*  等级  */
+.i-grade::before{
+	font-family: 'icomoon' !important;
+	content: "\e902";
+}
+
+/*  身份认证  */
+.i-idAuth::before{
+	font-family: 'icomoon' !important;
+	content: "\e90a";
+}
+
+/*  安全中心  */
+.i-security::before{
+	font-family: 'icomoon' !important;
+	content: "\e905";
+}
+
+/*  邀请返佣  */
+.i-invita::before{
+	font-family: 'icomoon' !important;
+	content: "\e90b";
+}
+
+/*  交易挖矿  */
+.i-tran::before{
+	font-family: 'icomoon' !important;
+	content: "\e906";
+}
+
+/*  我的订单  */
+.i-order::before{
+	font-family: 'icomoon' !important;
+	content: "\e907";
+}
+
+/*  语言设置  */
+.i-language::before{
+	font-family: 'icomoon' !important;
+	content: "\e911";
+}
+
+/*  关于我们  */
+.i-about::before{
+	font-family: 'icomoon' !important;
+	content: "\e908";
+}
+
+/*  联系客服  */
+.i-service::before{
+	font-family: 'icomoon' !important;
+	content: "\e909";
+}
+/*  右箭头  */
+.i-rgtArrow::before{
+	font-family: 'icomoon' !important;
+	content: "\e912";
+}
+.i-rgtArrowAfter::after{
+	font-family: 'icomoon' !important;
+	content: "\e912";
+}
+/*  关闭  */
+.i-close::before{
+	font-family: 'icomoon' !important;
+	content: "\e913";
+}
+/*  eye  */
+.i-eye::before{
+	font-family: 'icomoon' !important;
+	content: "\e914";
+}
+/*  下实箭头  */
+.i-downArrow::before{
+	font-family: 'icomoon' !important;
+	content: "\e915";
+}
+/* 未框选 */
+.i-check::before{
+	font-family: 'icomoon' !important;
+	content: "\e917";
+}
+/* 已框选 */
+.i-checked::before{
+	font-family: 'icomoon' !important;
+	content: "\e916";
+}
+
+/* 搜索 */
+.i-search::before{
+	font-family: 'icomoon' !important;
+	content: "\e918";
+}
+/* 五角星 */
+.i-star::before{
+	font-family: 'icomoon' !important;
+	content: "\e91a";
+}
+/* 五角星-已选中 */
+.i-stared::before{
+	font-family: 'icomoon' !important;
+	content: "\e919";
+}
+
+/* 银行卡 */
+.i-bankIco::before{
+	font-family: 'icomoon' !important;
+	content: "\e91b";
+}
+/* 向右箭头 */
+.i-lftArrow::before{
+	font-family: 'icomoon' !important;
+	content: "\e91c";
+}
+
+/* 菜单 */
+.i-menu::before{
+	font-family: 'icomoon' !important;
+	content: "\e91d";
+}
+/* 行情 */
+.i-quota::before{
+	font-family: 'icomoon' !important;
+	content: "\e91e";
+}
+/* 警告 */
+.i-warn::before{
+	font-family: 'icomoon' !important;
+	content: "\e91f";
+}
+/* 向上箭头 */
+.i-upArrow::before{
+	font-family: 'icomoon' !important;
+	content: "\e920";
+}
+.i-upArrowed::before{
+	font-family: 'icomoon' !important;
+	content: "\e921";
+}
+.i-record::before{
+	font-family: 'icomoon' !important;
+	content: "\e922";
+}
+
+/* 充值 */
+.i-recharge::before{
+	font-family: 'icomoon' !important;
+	content: "\e923";
+}
+/* 提现 */
+.i-wdrawal::before{
+	font-family: 'icomoon' !important;
+	content: "\e925";
+}
+/* 充值记录 */
+.i-reRecord::before{
+	font-family: 'icomoon' !important;
+	content: "\e924";
+}
+/* 法币记录 */
+.i-legalCurrRecord::before{
+	font-family: 'icomoon' !important;
+	content: "\e926";
+}
+
+/* 向右 --- 转账 */
+.i-tranAcc::before{
+	font-family: 'icomoon' !important;
+	content: "\e927";
+}
+/* 向下箭头 */
+.i-dwArrow::before{
+	font-family: 'icomoon' !important;
+	content: "\e929";
+}
+
+.i-wx::before{
+	font-family: 'icomoon' !important;
+	content: "\e92a";
+}
+.i-zfb::before{
+	font-family: 'icomoon' !important;
+	content: "\e92b";
+}

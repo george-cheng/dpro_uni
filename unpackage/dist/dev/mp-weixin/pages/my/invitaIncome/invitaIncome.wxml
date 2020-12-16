@@ -1,0 +1,1 @@
+<view class="invita mainBox data-v-6bd9d276"><view class="invitaTit data-v-6bd9d276">扫码推荐</view><image src="{{qrCode}}" mode class="data-v-6bd9d276"></image><view data-event-opts="{{[['tap',[['linkCopy',['$event']]]]]}}" class="linkCopy data-v-6bd9d276" bindtap="__e">邀请注册链接(点击复制)</view><view class="invitaLink data-v-6bd9d276">{{invitaLink}}</view></view>

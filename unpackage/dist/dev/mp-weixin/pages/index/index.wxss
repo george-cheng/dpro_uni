@@ -1,0 +1,327 @@
+@charset "UTF-8";
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.home .upDate {
+  margin: 0 20rpx;
+}
+.home .upDate .downProgress {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  margin: 20rpx 0;
+  padding-bottom: 20rpx;
+}
+.home swiper {
+  width: 750rpx;
+  height: 350rpx;
+}
+.home swiper image {
+  width: 100%;
+  height: 100%;
+}
+.home .limitp-hg {
+  width: 100%;
+  height: 60rpx;
+  line-height: 60rpx;
+  color: #8C8C8C;
+  background-color: #303030;
+}
+.home .limitp-hg .scrool-list-item {
+  font-size: 24rpx;
+  text-align: center;
+}
+.home .limitp-hg .scrool-list-item .title {
+  font-size: 32rpx;
+  color: #ccc;
+}
+.home .content {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-around;
+          justify-content: space-around;
+}
+.home .content view {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  text-align: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  padding-top: 50rpx;
+}
+.home .content view .image {
+  margin: 0 auto;
+  width: 56rpx;
+  height: 56rpx;
+}
+.home .content view .kind {
+  margin-top: 22rpx;
+  color: #FFFFFF;
+  font-size: 24rpx;
+  line-height: 24rpx;
+}
+.home .content view .money {
+  margin-top: 30rpx;
+  color: #BD3A3B;
+  font-size: 28rpx;
+  line-height: 28rpx;
+}
+.home .content view .per {
+  margin-top: 20rpx;
+  color: #13134A;
+  font-size: 24rpx;
+  line-height: 24rpx;
+}
+.home .content view .cny {
+  margin-top: 24rpx;
+  margin-bottom: 50rpx;
+  color: #666666;
+  font-size: 24rpx;
+  line-height: 24rpx;
+}
+.home .info {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+}
+.home .info .quickMoney {
+  width: 368rpx;
+  height: 240rpx;
+  background-color: #303030;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  margin-right: 12rpx;
+}
+.home .info .quickMoney text {
+  margin-left: 36rpx;
+}
+.home .info .quickMoney text:first-child {
+  margin-top: 32rpx;
+  color: #ccc;
+  font-weight: 400;
+  font-size: 28rpx;
+  line-height: 28rpx;
+}
+.home .info .quickMoney text:nth-child(2) {
+  margin-top: 22rpx;
+  color: #8C8C8C;
+  font-weight: 400;
+  font-size: 24rpx;
+  line-height: 24rpx;
+}
+.home .info .quickMoney .image {
+  margin-left: 232rpx;
+  width: 110rpx;
+  height: 82rpx;
+}
+.home .info .quickMoney .image image {
+  width: 100%;
+  height: 100%;
+}
+.home .info .rgt .cooTran {
+  width: calc( 100% - 380) rpx;
+  height: 115rpx;
+  background-color: #303030;
+  margin-bottom: 12rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.home .info .rgt .cooTran text {
+  font-size: 28rpx;
+  line-height: 28rpx;
+  font-weight: 400;
+  color: #ccc;
+}
+.home .info .rgt .cooTran image {
+  margin-left: 42rpx;
+  margin-right: 45rpx;
+  width: 62rpx;
+  height: 69rpx;
+}
+.home .info .rgt .helpCen {
+  width: 370rpx;
+  height: 113rpx;
+  background-color: #303030;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.home .info .rgt .helpCen text {
+  font-size: 28rpx;
+  line-height: 28rpx;
+  font-family: PingFangSC;
+  font-weight: 400;
+  color: #ccc;
+}
+.home .info .rgt .helpCen image {
+  margin-left: 42rpx;
+  margin-right: 45rpx;
+  width: 59rpx;
+  height: 65rpx;
+}
+.home .invita {
+  margin: 12rpx 0;
+  height: 130rpx;
+  background-color: #303030;
+}
+.home .invita .invitaCon {
+  margin: 0 30rpx;
+  height: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-justify-content: space-around;
+          justify-content: space-around;
+}
+.home .invita .invitaCon .lft {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.home .invita .invitaCon .lft image {
+  width: 60rpx;
+  height: 53rpx;
+}
+.home .invita .invitaCon .lft text {
+  margin-left: 24rpx;
+  font-size: 28rpx;
+  line-height: 28rpx;
+  font-weight: 400;
+  color: #8C8C8C;
+}
+.home .invita .invitaCon .invitaBtn {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+          justify-content: flex-end;
+}
+.home .invita .invitaCon .invitaBtn .btnTxt {
+  width: 150rpx;
+  height: 70rpx;
+  background-color: #BD3A3B;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  color: #fff;
+  font-size: 26rpx;
+  line-height: 26rpx;
+}
+.home .upMarket {
+  margin-top: 12rpx;
+  background-color: #303030;
+  padding: 0 36rpx;
+}
+.home .upMarket .marketTit {
+  height: 105rpx;
+  font-size: 30rpx;
+  line-height: 105rpx;
+  color: #FDFFFE;
+}
+.home .upMarket .marketCon view {
+  height: 116rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  border-top: 1px solid #383838;
+}
+.home .upMarket .marketCon view .marketImg {
+  width: 33%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+          justify-content: flex-start;
+  color: #fff;
+}
+.home .upMarket .marketCon view .marketImg text {
+  font-size: 26rpx;
+  line-height: 26rpx;
+  margin-left: 20rpx;
+  white-space: nowrap;
+}
+.home .upMarket .marketCon view .marketImg text ._span {
+  font-size: 20rpx;
+  line-height: 20rpx;
+}
+.home .upMarket .marketCon view .marketImg image {
+  width: 62rpx;
+  height: 62rpx;
+}
+.home .upMarket .marketCon view .money {
+  width: 33%;
+  color: #fff;
+}
+
