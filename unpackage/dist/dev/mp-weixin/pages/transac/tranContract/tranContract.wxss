@@ -135,10 +135,11 @@
   -webkit-flex-wrap: nowrap;
           flex-wrap: nowrap;
   font-size: 26rpx;
-  margin: 0 14rpx;
+  margin: 0 60rpx;
   padding: 5rpx 12rpx;
   -webkit-border-radius: 4rpx;
           border-radius: 4rpx;
+  white-space: nowrap;
 }
 .close.data-v-598f5cbe {
   color: #f00 !important;

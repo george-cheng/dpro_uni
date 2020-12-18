@@ -21,8 +21,7 @@
 					</view>
 					<view class="listMid">
 						<text class="midNewPrice">{{item.lastDealPrize}}</text>
-						<text class="midNewCny">¥ {{accMul(item.lastDealPrize, usdtRate).toFixed(2)}} CNY</text>
-						<!--  获取缓存的人民币汇率  -->
+						<text class="midNewCny">¥{{accMul(item.lastDealPrize, usdtRate).toFixed(2)}} CNY</text>
 					</view>
 					<view class="listRgt">
 						<view class="rgtIncre" :style="{color: parseFloat(item.fupanddown)>0?'#3ba987':'#bd3a3b'}">{{item.fupanddown}}%</view>
@@ -92,15 +91,7 @@
 		methods:{
 			/* 行情跳转K线图 */
 			listConEvent(item){
-				uni.switchTab({
-					url: '/pages/transac/transacMain',
-					success: () => {
-						uni.setStorage({
-							key: 'quotatList',
-							data: item
-						})
-					}
-				})
+				
 			},
 			/* 顶部切换 */
 			switchEvent(index){
@@ -125,8 +116,7 @@
 					 newQuotaList.push(this.quotaList[this.starIndex[i]]);
 					}
 					this.newQuotaList = newQuotaList
-				}
-				else{
+				}else{
 					this.newQuotaList.splice(index, 1)
 					this.starIndex.splice(index, 1)
 				}
@@ -241,20 +231,21 @@
 					color: #7D7C82;
 					font-size: 24rpx;
 				}
+				text:nth-of-type(1){
+					margin-right: 80rpx;
+				}
 				text:nth-of-type(2){
-					margin-right: 20rpx;
+					margin-right: 40rpx;
 				}
 			}
-
 			.quotaList{
 				.listCon{
-					padding: 20rpx 30rpx 0 80rpx;
+					padding: 20rpx 30rpx 0 60rpx;
 					display: flex;
 					justify-content: space-between;
 					// height: 120rpx;
 					// padding: 32rpx 0 28rpx 0;
 					border-bottom: 1px solid #302F35;
-	
 					.collectIcon, .listLft, .listMid, .listRgt{
 						margin: 32rpx 0 28rpx 0;
 					}
@@ -277,6 +268,8 @@
 							margin-top: 10rpx;
 							font-size: 24rpx;
 							line-height: 24rpx;
+							white-space: nowrap;
+							width: 320rpx;
 						}
 					}
 					.listMid{
@@ -284,9 +277,9 @@
 						display: flex;
 						flex-direction: column;
 						justify-content: center;
+						width: 320rpx;
 						.midNewPrice{
 							font-size: 28rpx;
-							line-height: 28rpx;
 							color: #BD3A3B;
 						}
 						.midNewCny{
@@ -294,8 +287,8 @@
 							font-size: 24rpx;
 							line-height: 24rpx;
 							color: #8C8B91;
-						}
-						
+							white-space: nowrap;
+						}		
 					}
 					.listRgt{
 						width: 160rpx;

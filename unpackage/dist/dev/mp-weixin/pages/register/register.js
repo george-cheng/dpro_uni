@@ -371,43 +371,59 @@ var _index = _interopRequireDefault(__webpack_require__(/*! ../../js_sdk/gangdie
 //
 //
 //
-var _default = { data: function data() {return { isEmail: true, isPhone: false, isEmailActive: true, isPoneActive: false, isAreaList: false, areaName: '中国', areaList: [], phoneUser: '', emailUser: '', confirmPwd: '', phonePwd: '', msgCode: '', verCode: '', invateCode: '', verImage: '', phUser: '', phPwd: '', conPwd: '', msgPhCode: '', invatePhCode: '', isPassword: true, isPhPassword: true, isConfirmPassword: true, isConfirmPhPassword: true, isCheck: false, prePhoneNum: '86', countryId: '37', isValidator: false, isClick: true, verTxt: '获取验证码' };}, onLoad: function onLoad() {}, methods: { emailEvent: function emailEvent() {this.verCode = '';this.isPhone = false;this.isEmail = true;this.isEmailActive = true;this.isPoneActive = false;this.isCheck = false;this.phUser = '';this.phPwd = '';this.conPwd = '';this.msgPhCode = '';this.invatePhCode = '';}, phoneEvent: function phoneEvent() {this.verCode = '';this.isPhone = true;this.isEmail = false;this.isEmailActive = false;this.isPoneActive = true;this.isCheck = false;this.phoneUser = '';this.emailUser = '';this.confirmPwd = '';this.phonePwd = '';this.msgCode = '';this.invateCode = '';}, switchAreaEvent: function switchAreaEvent() {this.isAreaList = !this.isAreaList;}, choiceArea: function choiceArea(item) {this.areaName = item.name_cn;this.prePhoneNum = item.area_code;this.countryId = item.country_id;this.isAreaList = false;}, pwdEvent: function pwdEvent() {if (this.phonePwd) {this.isPassword = !this.isPassword;}}, confirmPwdEvent: function confirmPwdEvent() {if (this.confirmPwd) {this.isConfirmPassword = !this.isConfirmPassword;}}, confirmPhPwdEvent: function confirmPhPwdEvent() {if (this.conPwd) {this.isConfirmPhPassword = !this.isConfirmPhPassword;}}, pwdPhEvent: function pwdPhEvent() {if (this.phPwd) {this.isPhPassword = !this.isPhPassword;}}, getSecVerCode: function getSecVerCode() {if (this.verTxt == '获取验证码') {this.getSendVerCode();}}, /* 获取验证码 */getSendVerCode: function getSendVerCode() {this.getMsg();var params = { // code: this.verCode,
-        name: this.emailUser || this.phUser, areaCode: this.prePhoneNum };this.ajaxJson({ url: '/api/v1/sendRegCode', method: 'POST', data: params,
-        call: function call(data) {
-          if (data.code == 200) {
-            uni.showToast({
-              title: data.msg });
+var _default = { data: function data() {return { isEmail: true, isPhone: false, isEmailActive: true, isPoneActive: false, isAreaList: false, areaName: '中国', areaList: [], phoneUser: '', emailUser: '', confirmPwd: '', phonePwd: '', msgCode: '', verCode: '', invateCode: '', verImage: '', phUser: '', phPwd: '', conPwd: '', msgPhCode: '', invatePhCode: '', isPassword: true, isPhPassword: true, isConfirmPassword: true, isConfirmPhPassword: true, isCheck: false, prePhoneNum: '86', countryId: '37', isValidator: false, isClick: true, verTxt: '获取验证码', flag: true, isSendSuccess: false };}, onLoad: function onLoad() {}, methods: { emailEvent: function emailEvent() {this.verCode = '';this.isPhone = false;this.isEmail = true;this.isEmailActive = true;this.isPoneActive = false;this.isCheck = false;this.phUser = '';this.phPwd = '';this.conPwd = '';this.msgPhCode = '';this.invatePhCode = '';}, phoneEvent: function phoneEvent() {this.verCode = '';this.isPhone = true;this.isEmail = false;this.isEmailActive = false;this.isPoneActive = true;this.isCheck = false;this.phoneUser = '';this.emailUser = '';this.confirmPwd = '';this.phonePwd = '';this.msgCode = '';this.invateCode = '';}, switchAreaEvent: function switchAreaEvent() {this.isAreaList = !this.isAreaList;}, choiceArea: function choiceArea(item) {this.areaName = item.name_cn;this.prePhoneNum = item.area_code;this.countryId = item.country_id;this.isAreaList = false;}, pwdEvent: function pwdEvent() {if (this.phonePwd) {this.isPassword = !this.isPassword;}}, confirmPwdEvent: function confirmPwdEvent() {if (this.confirmPwd) {this.isConfirmPassword = !this.isConfirmPassword;}}, confirmPhPwdEvent: function confirmPhPwdEvent() {if (this.conPwd) {this.isConfirmPhPassword = !this.isConfirmPhPassword;}}, pwdPhEvent: function pwdPhEvent() {if (this.phPwd) {this.isPhPassword = !this.isPhPassword;}}, getSecVerCode: function getSecVerCode() {if (this.verTxt == '获取验证码') {this.getSendVerCode();}}, /* 获取验证码 */getSendVerCode: function getSendVerCode() {var _this = this;var params = { // code: this.verCode,
+        name: this.emailUser || this.phUser, areaCode: this.prePhoneNum };if (this.emailUser || this.phUser) {
+        this.getMsg();
+        this.ajaxJson({
+          url: '/api/v1/sendRegCode',
+          method: 'POST',
+          data: params,
+          call: function call(data) {
+            if (data.code == 200) {
+              _this.isSendSuccess = true;
+              uni.showToast({
+                title: data.msg });
 
-          } else {
-            uni.showToast({
-              image: '../../static/images/wrong.png',
-              title: data.msg });
+            } else {
+              uni.showToast({
+                image: '../../static/images/wrong.png',
+                title: data.msg });
 
-          }
-        } });
+            }
+          } });
 
+      } else {
+        uni.showToast({
+          image: '/static/images/wrong.png',
+          title: '请输入用户名' });
+
+      }
     },
-    getMsg: function getMsg() {var _this = this;
-
+    getMsg: function getMsg() {var _this2 = this;
       var count = 60;
+      var timer;
       clearInterval(timer);
-      var timer = setInterval(function () {
-        count--;
-        if (count < 10) {
-          count = '0' + count;
-        }
-        _this.verTxt = count + 's后重新获取';
-        if (count == 0) {
-          clearInterval(timer);
-          _this.verTxt = '获取验证码';
-        }
-      }, 1000);
+      if (this.flag || this.isSendSuccess) {
+        timer = setInterval(function () {
+          count--;
+          _this2.flag = false;
+          if (count < 10) {
+            count = '0' + count;
+          }
+          _this2.verTxt = count + 's后重新获取';
+          if (count == 0) {
+            clearInterval(timer);
+            _this2.verTxt = '获取验证码';
+            _this2.flag = true;
+          }
+        }, 1000);
+      }
     },
     /* 短信验证码粘贴 */
-    pasteEvent: function pasteEvent() {var _this2 = this;
+    pasteEvent: function pasteEvent() {var _this3 = this;
       uni.getClipboardData({
         success: function success(res) {
-          _this2.msgCode = res.data;
+          _this3.msgCode = res.data;
         } });
 
     },
@@ -463,17 +479,17 @@ var _default = { data: function data() {return { isEmail: true, isPhone: false, 
 
     /* 获取国家id和国家区号  */
 
-    getCountry: function getCountry() {var _this3 = this;
+    getCountry: function getCountry() {var _this4 = this;
       this.ajaxJson({
         url: '/api/v1/config/countryCode',
         call: function call(res) {
-          _this3.areaList = res.data.oftenUseList;
+          _this4.areaList = res.data.oftenUseList;
         } });
 
     },
 
     /* 获取图形验证码 */
-    getVerCode: function getVerCode() {var _this4 = this;
+    getVerCode: function getVerCode() {var _this5 = this;
       this.verCode = '';
       _index.default.get('/api/v1/servlet/ImageCode', {
         responseType: "arraybuffer" }).
@@ -490,7 +506,7 @@ var _default = { data: function data() {return { isEmail: true, isPhone: false, 
         var uint = new Uint8Array(response.data);
         var base = uni.arrayBufferToBase64(uint);
         var unit8Array = base || codeImg;
-        _this4.verImage = "data:image/png;base64," + unit8Array;
+        _this5.verImage = "data:image/png;base64," + unit8Array;
       });
     },
 

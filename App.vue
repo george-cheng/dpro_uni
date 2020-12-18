@@ -39,15 +39,17 @@
 		font-display: block;
 	}
 	
-	.uni-tabbar__item:nth-child(5) .uni-tabbar__bd .uni-tabbar__icon img{
+	.uni-tabbar{
+		z-index: 9 !important;
+		background-color: #282828 !important;
+	}
+	
+	.uni-tabbar .uni-tabbar__icon{
 		width: 38rpx;
 		height: 38rpx;
 	}
-
-	
-	.uni-tabbar{
-		z-index: 9 !important;
-		background-color: #303030 !important;
+	.uni-tabbar .uni-tabbar__label{
+		line-height: 1.4;
 	}
 	
 </style>

@@ -102,7 +102,7 @@
 					}
 					this.verTxt = count + 's后重新发送'
 					if(count == 0){
-						clearInterval(timer)
+						clearInterval(this.timer)
 						this.verTxt = '重新获取验证码'
 					}
 				}, 1000)

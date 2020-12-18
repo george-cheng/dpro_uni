@@ -253,6 +253,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 {
   components: { uniPopup: uniPopup, uniPopupDialog: uniPopupDialog },
   data: function data() {
@@ -267,13 +268,18 @@ __webpack_require__.r(__webpack_exports__);
 
       version: [],
       androidVersion: [],
+      iosVersion: [],
       versionCode: '',
       editionNum: '',
+      iosEditionNum: '',
       updatetips: '',
+      iosUpdatetips: '',
       updataUrl: '',
+      iosUpdataUrl: '',
       isCancel: true,
       progressFile: '0',
-      isProgressFile: false };
+      isProgressFile: false,
+      platform: '' };
 
   },
 
@@ -344,25 +350,19 @@ __webpack_require__.r(__webpack_exports__);
 
     },
     moneyDataEvent: function moneyDataEvent(item) {
+      uni.setStorageSync('moneyDataName', item.fname_sn);
+      uni.setStorageSync('moneyDataFid', item.fid);
       uni.switchTab({
         url: '/pages/transac/transacMain',
         success: function success() {
-          uni.setStorage({
-            key: 'moneyData',
-            data: item });
-
+          uni.setStorageSync('tranAssetsMain', '0');
         } });
 
     },
-    quickEvent: function quickEvent() {
+    tranAssetsMain: function tranAssetsMain(index) {
+      uni.setStorageSync('tranAssetsMain', index);
       uni.switchTab({
-        url: '../transac/transacMain',
-        success: function success() {
-          uni.setStorage({
-            key: 'quickIndex',
-            data: 2 });
-
-        } });
+        url: '../transac/transacMain' });
 
     },
     getVersion: function getVersion() {var _this6 = this;
@@ -371,20 +371,37 @@ __webpack_require__.r(__webpack_exports__);
         call: function call(data) {
           if (data.code == 200) {
             _this6.version = data.data;
-            for (var i in _this6.version) {
-              if (_this6.version[i].type === 'android') {
-                _this6.androidVersion = _this6.version[i];
+            if (_this6.platform == 'ios') {
+              for (var i in _this6.version) {
+                if (_this6.version[i].type == _this6.platform) {
+                  _this6.iosVersion = _this6.version[i];
+                  _this6.iosEditionNum = _this6.iosVersion.edition; //140
+                  if (_this6.versionCode < _this6.iosEditionNum) {
+                    _this6.$refs.popup.open();
+                    _this6.iosUpdatetips = _this6.iosVersion.updatetips;
+                    _this6.updataUrl = _this6.iosVersion.downurl;
+                    uni.hideTabBar({});
+                    if (_this6.iosVersion.forceupdate == 1) {//强制更新
+                      _this6.isCancel = false;
+                    }
+                  }
+                }
               }
-            }
-            _this6.editionNum = _this6.androidVersion.edition; //140
-
-            if (_this6.editionNum > _this6.versionCode) {
-              _this6.$refs.popup.open();
-              _this6.updatetips = _this6.androidVersion.updatetips;
-              _this6.updataUrl = _this6.androidVersion.downurl;
-              uni.hideTabBar({});
-              if (_this6.androidVersion.forceupdate == 1) {//强制更新
-                _this6.isCancel = false;
+            } else {
+              for (var _i in _this6.version) {
+                if (_this6.version[_i].type == _this6.platform) {
+                  _this6.androidVersion = _this6.version[_i];
+                  _this6.editionNum = _this6.androidVersion.edition; //140
+                  if (_this6.versionCode < _this6.editionNum) {
+                    _this6.$refs.popup.open();
+                    _this6.updatetips = _this6.androidVersion.updatetips;
+                    _this6.updataUrl = _this6.androidVersion.downurl;
+                    uni.hideTabBar({});
+                    if (_this6.androidVersion.forceupdate == 1) {//强制更新
+                      _this6.isCancel = false;
+                    }
+                  }
+                }
               }
             }
           }
@@ -411,7 +428,6 @@ __webpack_require__.r(__webpack_exports__);
           uni.showToast({
             title: '下载完成' });
 
-
         } });
 
       var progress;
@@ -429,15 +445,21 @@ __webpack_require__.r(__webpack_exports__);
           clearInterval(downLoadTime);
         }
       }, 1000);
+    },
+    getSystemInfo: function getSystemInfo() {var _this8 = this;
+      uni.getSystemInfo({
+        success: function success(res) {
+          _this8.platform = res.platform;
+        } });
+
     } },
 
-  created: function created() {var _this8 = this;
-    this.getVersion();
-
+  created: function created() {var _this9 = this;
+    this.getSystemInfo();
     plus.runtime.getProperty(plus.runtime.appid, function (wgtinfo) {
-      _this8.versionCode = wgtinfo.versionCode;
+      _this9.versionCode = wgtinfo.versionCode;
     });
-
+    this.getVersion();
     this.getExchangeRate();
     this.getMsg();
     this.getImg();

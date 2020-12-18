@@ -1,21 +1,20 @@
 <template>
 	<view class="tranLegOrderToPay">
-		<view class="toPayTit" v-if="isCancel">
-			<view class="toPayClock">
+		<view class="toPayTit">
+			<view class="toPayClock" v-if="!this.isOrderCancel && !this.isCollect">
 				<view class="clock">
 					<image src="/static/images/clock.png" mode=""></image>
-					<text v-if="!isProce">{{isCancel ? clockTime : '00:00'}}</text>
-					<text v-if="isProce">{{isProce ? proceCount : '00:00'}}</text>
+					<text v-if="this.isConOrder">{{clockTime}}</text>
+					<text v-if="this.isConPay">{{proceCount}}</text>
 				</view>
-				<text class="clockTip" v-if="!isProce">请在15分钟内向商家付款，否则订单将会自动取消</text>
-				<text class="clockTip" v-if="isProce">商家将会在48小时钟内进行处理，请耐心等待</text>
+				<text class="clockTip" v-if="this.isConOrder">请在30分钟内向商家付款，否则订单将会自动取消</text>
+				<text class="clockTip" v-if="this.isConPay">商家将会在48小时钟内进行处理，请耐心等待</text>
 			</view>
 		</view>
 		<view class="orderDetail">
 			<view class="detailTit">订单明细</view>
 			<view class="orderNum">
 				<view>订单号：{{fotcOrder.order_id}}</view>
-				<!-- <view>账号：28928390@qq.com</view> -->
 			</view>
 			<view class="orderDetailInfo">
 				<view><text> ¥ {{fotcOrder.price}} </text><text> 单价 </text></view>
@@ -23,7 +22,10 @@
 				<view><text> ¥ {{fotcOrder.total}} </text><text>总额</text></view>
 			</view>
 			<view class="orderDetailBtm">
-				<view class="orderDetailState">待支付</view>
+				<view class="orderDetailState" v-if="isConOrder">待支付</view>
+				<view class="orderDetailState" v-if="isConPay">待确认</view>
+				<view class="orderDetailState" v-if="isCollect">已付款</view>
+				<view class="orderDetailState" v-if="isOrderCancel">已撤销</view>
 				<view class="orderDetailMoney">
 					<text> ¥ {{fotcOrder.total}}</text>
 					<view class="copy" @click="copyEvent(fotcOrder.total)">复制</view>
@@ -31,7 +33,7 @@
 			</view>
 		</view>
 		
-		<view class="bussinessDetail" v-if="isCancel && !isProce">
+		<view class="bussinessDetail"  v-if="!this.isOrderCancel && !this.isCollect">
 			<view class="bussTit">商家信息</view>
 			<view class="bussDetailInfo">
 				<view class="payMethod">
@@ -84,7 +86,7 @@
 							</view>
 							<view class="payName">
 								<view class="nameLft">备注：</view>
-								<view class="infoRgt"><text>{{fbuinessAccount.falipayRemarks}}</text><view ></view></view>
+								<view class="infoRgt"><text>{{fbuinessAccount.falipayRemarks}}</text><view></view></view>
 							</view>
 						</view>
 					</view>
@@ -92,7 +94,7 @@
 			</view>
 		</view>
 		
-		<view class="confirmPay" @click="confirmPayEvent" v-if="isCancel && !isProce">
+		<view class="confirmPay" @click="confirmPayEvent" v-if="this.isConOrder">
 			<button type="default">确认付款</button>
 		</view>
 		
@@ -100,12 +102,12 @@
 </template>
 
 <script>
-	import { accAdd } from '../../../utils/common.js'
+	import { accAdd, getLocalTime } from '../../../utils/common.js'
 	export default {
 		data(){
 			return{
-				fbuinessAccount: {},
-				fotcOrder: {},
+				fbuinessAccount: [],
+				fotcOrder: [],
 				isWxMethod: false,
 				isZfbMethod: false,
 				isWxCheck: false,
@@ -113,24 +115,62 @@
 				placeTime: '',
 				clockTime: '',
 				proceCount: '',
-				isCancel: true,
 				isProce: false,
 				timer: '',
+				orderTime: '',
+				orderId: '',
+				orderStatus: '',
 				flagProce: true,
 				flagCount: true,
+				
+				
+				isConOrder: false,   //确认下单
+				isConPay: false,   //确认付款
+				isCollect: false,   //确认收款
+				isOrderCancel: false,   //取消
+				
 				urlImg: 'https://dpro-main.oss-cn-hongkong.aliyuncs.com/',
 			}
 		},
 		onLoad(options) {
-			this.fbuinessAccount = JSON.parse(decodeURIComponent(options.fbuinessAccount));
-			this.fotcOrder = JSON.parse(decodeURIComponent(options.fotcOrder));
-			this.countTime()
+			if(options.orderId){
+				this.orderId = options.orderId
+				this.orderStatus = options.orderStatus
+				this.getPayInfoEvent()
+				if(this.orderStatus == 1){
+					this.isConOrder = true
+					uni.setNavigationBarTitle({
+						title: '确认下单',
+					})
+				}else if(this.orderStatus == 2){
+					this.isConPay = true
+					uni.setNavigationBarTitle({
+						title: '订单处理中...',
+					})
+				}else if(this.orderStatus == 3){
+					this.isCollect = true
+					uni.setNavigationBarTitle({
+						title: '确认收款',
+					})
+				}else if(this.orderStatus == 4){
+					this.isOrderCancel = true
+					uni.setNavigationBarTitle({
+						title: '订单已撤销',
+					})
+				}
+			}else{
+				this.fbuinessAccount = JSON.parse(decodeURIComponent(options.fbuinessAccount));
+				this.fotcOrder = JSON.parse(decodeURIComponent(options.fotcOrder));
+				this.countTime(this.fotcOrder.place_time)
+				this.orderId = this.fotcOrder.order_id
+				this.isConOrder = true
+			}
 		},
 		methods: {
 			/* 复制 */
 			copyEvent(data){
 				uni.setClipboardData({
-					data: data
+					data: data.toString()
 				})
 			},
 			/* 保存图片 */
@@ -138,23 +178,30 @@
 				uni.saveImageToPhotosAlbum({
 					filePath: urlQrcode,
 					success: ()=>{
+						uni.showToast({
+							title: '保存成功'
+						})
 					}
 				});
 			},
 			/* 确认付款 */
 			confirmPayEvent(){
+				let params = {
+					order_id: this.orderId
+				}
 				this.ajaxJson({
 					url: '/api/v1/otcOrder/userEnterPay',
 					method: 'POST',
-					data: {order_id: this.fotcOrder.order_id},
+					data: params,
 					call: (data)=>{
 						if(data.code == 200){
+							this.isConPay = true
+							this.isConOrder = false
+							this.orderTime = getLocalTime(new Date())
+							this.countProceTime(this.orderTime)
 							uni.showToast({
 								title: data.msg,
 								success: () => {
-									let orderTime = new Date()
-									this.isProce = true
-									this.countProceTime(orderTime)
 									uni.setNavigationBarTitle({
 										title: '订单处理中......',
 										success: () => {
@@ -175,6 +222,25 @@
 					}
 				})
 			},
+			getPayInfoEvent(){
+				this.ajaxJson({
+					url: '/api/v1/otcOrder/findByOrderId',
+					data: {order_id: this.orderId },
+					call: (data)=>{
+						if(data.data.fotcOrder.length !=0){
+							this.fotcOrder = data.data.fotcOrder
+							if(this.fotcOrder.order_status == 1){
+								this.countTime()
+							}
+						}
+						this.fbuinessAccount = data.data.fbuinessAccount
+						let placeTime = this.fotcOrder.place_time
+						this.countProceTime(this.fotcOrder.pay_time)
+						this.countProceTime(this.fotcOrder.pay_time)
+						
+					}
+				})
+			},
 			/* 微信 */
 			wxMethodEvent(){
 				this.isWxMethod = !this.isWxMethod
@@ -191,7 +257,7 @@
 			},
 			onNavigationBarButtonTap(e) {
 				if (e.float == 'right') {
-					if(this.isCancel && !this.isProce){
+					if(this.isConOrder){
 						this.ajaxJson({
 							url: '/api/v1/otcOrder/revokeOrder',
 							method: 'POST',
@@ -204,20 +270,8 @@
 											uni.setNavigationBarTitle({
 												title: '订单已撤销',
 												success: () => {
-													
-												}
-											});
-										}
-									})
-								}else{
-									uni.showToast({
-										image: '/static/images/wrong.png',
-										title: data.msg,
-										success: () => {
-											uni.setNavigationBarTitle({
-												title: '订单已撤销',
-												success: () => {
 													this.isCancel = false
+													uni.navigateTo({})
 												}
 											});
 										}
@@ -229,28 +283,28 @@
 				}
 			},
 			countProceTime(orderTime){
-				if(this.isProce && this.flagProce){
 					clearInterval(this.timer)
 					let timerProce
 					this.flagProce = false
 					timerProce = setInterval(()=>{
-						let newTime = orderTime.getTime() +  2880*60*1000
+						let newDataTime = orderTime.replace(/-/g, '/')
+						let newTime = new Date(newDataTime).getTime() + 2*24*60*60*1000
 						let nowTime = new Date().getTime()
 						let timeProce = newTime - nowTime
 						let day = parseInt(timeProce / 1000 / 60 / 60 / 24)
 						let hours = parseInt(timeProce / 1000 / 60 / 60 % 24)
 						let min = parseInt(timeProce / 1000 / 60 % 60 )
-						let sec = parseInt(timeProce %  60 )
+						let sec = parseInt(timeProce / 1000 %  60 )
 						this.proceCount = day.toString().padStart(2 ,0) + ':' + hours.toString().padStart(2 ,0) + ':' + min.toString().padStart(2 ,0) + ':' + sec.toString().padStart(2 ,0)
 						if(timeProce <= 1000){
 							clearInterval(timerProce)
 						}
 					}, 1000)
-				}
 			},
 			countTime(){
 				this.timer = setInterval(()=>{
-					let newTime = new Date(this.fotcOrder.place_time).getTime() + 30*60*1000
+					let newDataTime = this.fotcOrder.place_time.replace(/-/g, '/')
+					let newTime = new Date(newDataTime).getTime() + 30*60*1000
 					let nowTime = new Date().getTime()
 					let countTime =  newTime - nowTime
 					let min = parseInt(countTime / 1000 / 60 % 60 )
@@ -258,7 +312,6 @@
 					this.clockTime = min.toString().padStart(2 ,0) + ':' + sec.toString().padStart(2 ,0)
 					if(countTime <= 1000){
 						clearInterval(this.timer)
-						this.isCancel = false
 						uni.setNavigationBarTitle({
 							title: '订单已撤销',
 							success: () => {

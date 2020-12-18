@@ -139,6 +139,7 @@
   padding: 5rpx 12rpx;
   -webkit-border-radius: 4rpx;
           border-radius: 4rpx;
+  white-space: nowrap;
 }
 .transAssetsShare .close.data-v-d7d5c5d0 {
   color: #f00 !important;

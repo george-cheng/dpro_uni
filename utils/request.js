@@ -100,7 +100,7 @@ AjaxRequest.prototype.request = function () {
 			success: (res) => {
 				if (ajaxRequest.successCall) {
 					if(res.data.code == 401){
-						uni.navigateTo({
+						uni.redirectTo({
 							url: '/pages/loginIn/loginIn'
 						})
 					}

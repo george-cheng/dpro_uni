@@ -420,7 +420,7 @@
 					method: 'POST',
 					data: params,
 					call: (data)=>{
-						if(data.data.fbalance){
+						if(data.data){
 							this.legAcc = data.data.fbalance
 						}
 					}

@@ -160,6 +160,7 @@
 					margin: 0 14rpx;
 					padding: 5rpx 12rpx;
 					border-radius: 4rpx;
+					white-space: nowrap;
 				}
 			}
 		}

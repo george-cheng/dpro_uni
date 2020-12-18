@@ -67,17 +67,17 @@
 				this.choiceOn = index
 				if(this.choiceOn == 0){
 					uni.setNavigationBarTitle({
-							title: '充值记录',
-							success: () => {
-								this.getAssRecord()
-							}
+						title: '充值记录',
+						success: () => {
+							this.getAssRecord()
+						}
 					});
 				}else{
 					uni.setNavigationBarTitle({
-							title: '提币记录',
-							success: () => {
-								this.getAssRecord()
-							}
+						title: '提币记录',
+						success: () => {
+							this.getAssRecord()
+						}
 					});
 				}
 			},

@@ -31,6 +31,9 @@
   height: 170rpx;
   padding: 0 40rpx;
   background-color: #303030;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
 }
 .my .perInfo .lft.data-v-0be17cc6 {
   float: left;
@@ -65,18 +68,42 @@
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  font-size: 24rpx;
+}
+.my .perInfo .rgt .rgtTop .rgtTopName.data-v-0be17cc6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  color: #fff;
 }
 .my .perInfo .rgt .rgtTop .userName.data-v-0be17cc6 {
   color: #fff;
   font-size: 30rpx;
   line-height: 30rpx;
+  margin-top: 10rpx;
 }
 .my .perInfo .rgt .rgtTop .userEdit.data-v-0be17cc6 {
   margin-left: 10rpx;
   color: #fff;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: nowrap;
+          flex-wrap: nowrap;
 }
 .my .perInfo .rgt .rgtBtm.data-v-0be17cc6 {
-  margin-top: 30rpx;
+  margin-top: 20rpx;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;

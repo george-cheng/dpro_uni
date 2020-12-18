@@ -15,7 +15,7 @@
 			</view>
 			<view>
 				<view class="payMethodRemark">收款二维码</view>
-				<image :src="url + payQrCode" mode="" v-if="isPayQrCode"></image>
+				<image :src="url + payQrCode" mode="aspectFit" v-if="isPayQrCode"></image>
 			</view>
 		</view>
 		<view class="payMethodBtn" @click="payMethodBtnEvent">

@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0e2269ba-9bb6-460a-b705-2c065416b31c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/uni-popup/uni-popup-share.vue" beforeDir="false" afterPath="$PROJECT_DIR$/components/uni-popup/uni-popup-share.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/uni-popup/uni-popup.vue" beforeDir="false" afterPath="$PROJECT_DIR$/components/uni-popup/uni-popup.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages.json" beforeDir="false" afterPath="$PROJECT_DIR$/pages.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/assets/assRecord.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/assets/assRecord.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/assets/assets.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/assets/assets.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/assets/orderRecord.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/assets/orderRecord.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/index/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/my/authName/authDeepComplete.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/my/authName/authDeepComplete.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/my/authName/authDeepName.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/my/authName/authDeepName.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/my/my.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/my/my.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/my/mySetting/bindPayMethod.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/my/mySetting/bindPayMethod.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/my/mySetting/unBindPayMethod.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/my/mySetting/unBindPayMethod.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/personal/safeCenter/safePwd.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/personal/safeCenter/safePwd.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/quotation/quotation.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/quotation/quotation.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/register/register.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/register/register.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/transac/tranContract/tranContract.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/transac/tranContract/tranContract.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/transac/tranContract/transAssetsShare.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/transac/tranContract/transAssetsShare.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/transac/tranLegal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/transac/tranLegal.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/transac/tranLegal/tranLegOrderToPay.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/transac/tranLegal/tranLegOrderToPay.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/transac/transac.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/transac/transac.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/transac/transacMain.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/transac/transacMain.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/icon/assets.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/icon/assets.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/icon/assetsSelect.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/icon/assetsSelect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/icon/home.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/icon/home.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/icon/homeSelect.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/icon/homeSelect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/icon/my.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/icon/my.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/icon/mySelect.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/icon/mySelect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/icon/quotation.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/icon/quotation.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/icon/quotationSelect.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/icon/quotationSelect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/icon/transac.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/icon/transac.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/icon/transacSelect.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/icon/transacSelect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/iconfont/fonts/icomoon.eot" beforeDir="false" afterPath="$PROJECT_DIR$/static/iconfont/fonts/icomoon.eot" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/iconfont/fonts/icomoon.svg" beforeDir="false" afterPath="$PROJECT_DIR$/static/iconfont/fonts/icomoon.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/iconfont/fonts/icomoon.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/static/iconfont/fonts/icomoon.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/iconfont/fonts/icomoon.woff" beforeDir="false" afterPath="$PROJECT_DIR$/static/iconfont/fonts/icomoon.woff" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/iconfont/selection.json" beforeDir="false" afterPath="$PROJECT_DIR$/static/iconfont/selection.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/iconfont/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/iconfont/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/logo1.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/logo1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/build/app-plus/app-config-service.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/build/app-plus/app-config-service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/build/app-plus/app-service.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/build/app-plus/app-service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/build/app-plus/app-view.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/build/app-plus/app-view.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/build/app-plus/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/build/app-plus/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/build/app-plus/static/icon/assets.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/build/app-plus/static/icon/assets.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/build/app-plus/static/icon/assetsSelect.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/build/app-plus/static/icon/assetsSelect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/build/app-plus/static/icon/home.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/build/app-plus/static/icon/home.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/build/app-plus/static/icon/homeSelect.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/build/app-plus/static/icon/homeSelect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/build/app-plus/static/icon/my.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/build/app-plus/static/icon/my.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/build/app-plus/static/icon/mySelect.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/build/app-plus/static/icon/mySelect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/build/app-plus/static/icon/quotation.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/build/app-plus/static/icon/quotation.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/build/app-plus/static/icon/quotationSelect.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/build/app-plus/static/icon/quotationSelect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/build/app-plus/static/icon/transac.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/build/app-plus/static/icon/transac.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/build/app-plus/static/icon/transacSelect.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/build/app-plus/static/icon/transacSelect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/build/app-plus/static/iconfont/fonts/icomoon.eot" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/build/app-plus/static/iconfont/fonts/icomoon.eot" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/build/app-plus/static/iconfont/fonts/icomoon.svg" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/build/app-plus/static/iconfont/fonts/icomoon.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/build/app-plus/static/iconfont/fonts/icomoon.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/build/app-plus/static/iconfont/fonts/icomoon.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/build/app-plus/static/iconfont/fonts/icomoon.woff" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/build/app-plus/static/iconfont/fonts/icomoon.woff" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/build/app-plus/static/iconfont/selection.json" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/build/app-plus/static/iconfont/selection.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/build/app-plus/static/iconfont/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/build/app-plus/static/iconfont/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/build/app-plus/static/img/icomoon.5bfb26bb.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/build/app-plus/static/logo1.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/build/app-plus/static/logo1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/common/main.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/common/main.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/common/runtime.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/common/runtime.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/common/vendor.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/common/vendor.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/components/uni-drawer/uni-drawer.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/components/uni-drawer/uni-drawer.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/components/uni-popup/uni-popup-dialog.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/components/uni-popup/uni-popup-dialog.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/components/uni-popup/uni-popup-share.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/components/uni-popup/uni-popup-share.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/components/uni-popup/uni-popup.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/components/uni-popup/uni-popup.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/components/uni-transition/uni-transition.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/components/uni-transition/uni-transition.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/assets/assRecord.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/assets/assRecord.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/assets/assTranRecord.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/assets/assTranRecord.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/assets/assTransfer.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/assets/assTransfer.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/assets/assWithDraw.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/assets/assWithDraw.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/assets/assets.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/assets/assets.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/assets/orderRecord.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/assets/orderRecord.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/assets/orderRecordDetail.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/assets/orderRecordDetail.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/assets/rechAddress.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/assets/rechAddress.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/assets/selectLetter.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/assets/selectLetter.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/index/index.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/index/index.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/loginIn/loginIn.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/loginIn/loginIn.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/my/authName/authDeepComplete.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/my/authName/authDeepComplete.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/my/authName/authDeepLoad.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/my/authName/authDeepLoad.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/my/authName/authDeepName.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/my/authName/authDeepName.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/my/authName/authName.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/my/authName/authName.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/my/invitaIncome/invitaIncome.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/my/invitaIncome/invitaIncome.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/my/my.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/my/my.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/my/mySetting.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/my/mySetting.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/my/mySetting/bindPayMethod.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/my/mySetting/bindPayMethod.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/my/mySetting/payMethod.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/my/mySetting/payMethod.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/my/mySetting/unBindPayMethod.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/my/mySetting/unBindPayMethod.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/personal/safeCenter/safeCenter.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/personal/safeCenter/safeCenter.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/personal/safeCenter/safePwd.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/personal/safeCenter/safePwd.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/quotation/quotation.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/quotation/quotation.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/register/register.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/register/register.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/sundry/serviceAgreement.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/sundry/serviceAgreement.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/transac/tranContract/tranAssets.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/transac/tranContract/tranAssets.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/transac/tranContract/tranAssetsDetail.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/transac/tranContract/tranAssetsDetail.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/transac/tranContract/tranAssetsFailPurchase.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/transac/tranContract/tranAssetsFailPurchase.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/transac/tranContract/tranAssetsFailPurchaseDetail.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/transac/tranContract/tranAssetsFailPurchaseDetail.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/transac/tranContract/tranContract.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/transac/tranContract/tranContract.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/transac/tranContract/transAssetsShare.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/transac/tranContract/transAssetsShare.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/transac/tranLegal.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/transac/tranLegal.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/transac/tranLegal/tranLegOrderToPay.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/transac/tranLegal/tranLegOrderToPay.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/transac/transac.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/transac/transac.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/transac/transacMain.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/transac/transacMain.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/verifica/verifica.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/.sourcemap/mp-weixin/pages/verifica/verifica.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/app-config-service.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/app-config-service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/app-service.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/app-service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/app-view.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/app-view.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/static/icon/assets.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/static/icon/assets.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/static/icon/assetsSelect.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/static/icon/assetsSelect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/static/icon/home.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/static/icon/home.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/static/icon/homeSelect.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/static/icon/homeSelect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/static/icon/my.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/static/icon/my.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/static/icon/mySelect.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/static/icon/mySelect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/static/icon/quotation.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/static/icon/quotation.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/static/icon/quotationSelect.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/static/icon/quotationSelect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/static/icon/transac.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/static/icon/transac.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/static/icon/transacSelect.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/static/icon/transacSelect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/static/iconfont/fonts/icomoon.eot" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/static/iconfont/fonts/icomoon.eot" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/static/iconfont/fonts/icomoon.svg" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/static/iconfont/fonts/icomoon.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/static/iconfont/fonts/icomoon.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/static/iconfont/fonts/icomoon.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/static/iconfont/fonts/icomoon.woff" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/static/iconfont/fonts/icomoon.woff" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/static/iconfont/selection.json" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/static/iconfont/selection.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/static/iconfont/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/static/iconfont/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/static/img/icomoon.5bfb26bb.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/static/logo1.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/app-plus/static/logo1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/common/main.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/common/main.wxss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/common/runtime.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/common/runtime.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/common/vendor.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/common/vendor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/components/uni-popup/uni-popup-share.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/components/uni-popup/uni-popup-share.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/components/uni-popup/uni-popup.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/components/uni-popup/uni-popup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/components/uni-popup/uni-popup.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/components/uni-popup/uni-popup.wxss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/components/uni-transition/uni-transition.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/components/uni-transition/uni-transition.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/assets/assRecharge.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/assets/assRecharge.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/assets/assRecord.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/assets/assRecord.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/assets/assTranRecord.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/assets/assTranRecord.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/assets/assTransfer.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/assets/assTransfer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/assets/assWithDraw.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/assets/assWithDraw.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/assets/assets.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/assets/assets.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/assets/orderRecord.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/assets/orderRecord.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/assets/orderRecordDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/assets/orderRecordDetail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/assets/rechAddress.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/assets/rechAddress.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/assets/selectLetter.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/assets/selectLetter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/index/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/index/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/index/index.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/index/index.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/klineQuota/klineQuota.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/klineQuota/klineQuota.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/my/authName/authDeepComplete.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/my/authName/authDeepComplete.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/my/authName/authDeepLoad.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/my/authName/authDeepLoad.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/my/authName/authDeepName.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/my/authName/authDeepName.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/my/authName/authDeepName.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/my/authName/authDeepName.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/my/authName/authName.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/my/authName/authName.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/my/invitaIncome/invitaIncome.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/my/invitaIncome/invitaIncome.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/my/my.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/my/my.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/my/my.json" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/my/my.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/my/my.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/my/my.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/my/my.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/my/my.wxss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/my/mySetting.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/my/mySetting.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/my/mySetting/bindPayMethod.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/my/mySetting/bindPayMethod.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/my/mySetting/bindPayMethod.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/my/mySetting/bindPayMethod.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/my/mySetting/unBindPayMethod.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/my/mySetting/unBindPayMethod.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/my/mySetting/unBindPayMethod.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/my/mySetting/unBindPayMethod.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/personal/safeCenter/safeCenter.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/personal/safeCenter/safeCenter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/personal/safeCenter/safePwd.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/personal/safeCenter/safePwd.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/quotation/quotation.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/quotation/quotation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/quotation/quotation.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/quotation/quotation.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/quotation/quotation.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/quotation/quotation.wxss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/register/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/register/register.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/sundry/serviceAgreement.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/sundry/serviceAgreement.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/transac/tranContract/tranAssets.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/transac/tranContract/tranAssets.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/transac/tranContract/tranAssetsDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/transac/tranContract/tranAssetsDetail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/transac/tranContract/tranAssetsFailPurchase.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/transac/tranContract/tranAssetsFailPurchase.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/transac/tranContract/tranAssetsFailPurchaseDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/transac/tranContract/tranAssetsFailPurchaseDetail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/transac/tranContract/tranContract.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/transac/tranContract/tranContract.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/transac/tranContract/tranContract.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/transac/tranContract/tranContract.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/transac/tranContract/tranContract.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/transac/tranContract/tranContract.wxss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/transac/tranContract/transAssetsShare.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/transac/tranContract/transAssetsShare.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/transac/tranContract/transAssetsShare.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/transac/tranContract/transAssetsShare.wxss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/transac/tranLegal.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/transac/tranLegal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/transac/tranLegal.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/transac/tranLegal.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/transac/tranLegal.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/transac/tranLegal.wxss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/transac/tranLegal/tranLegOrderToPay.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/transac/tranLegal/tranLegOrderToPay.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/transac/tranLegal/tranLegOrderToPay.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/transac/tranLegal/tranLegOrderToPay.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/transac/transac.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/transac/transac.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/transac/transac.json" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/transac/transac.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/transac/transac.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/transac/transac.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/transac/transacMain.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/transac/transacMain.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/transac/transacMain.json" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/transac/transacMain.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/transac/transacMain.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/transac/transacMain.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/transac/transacMain.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/transac/transacMain.wxss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/static/icon/assets.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/static/icon/assets.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/static/icon/assetsSelect.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/static/icon/assetsSelect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/static/icon/home.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/static/icon/home.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/static/icon/homeSelect.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/static/icon/homeSelect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/static/icon/my.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/static/icon/my.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/static/icon/mySelect.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/static/icon/mySelect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/static/icon/quotation.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/static/icon/quotation.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/static/icon/quotationSelect.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/static/icon/quotationSelect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/static/icon/transac.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/static/icon/transac.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/static/icon/transacSelect.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/static/icon/transacSelect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/static/iconfont/fonts/icomoon.eot" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/static/iconfont/fonts/icomoon.eot" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/static/iconfont/fonts/icomoon.svg" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/static/iconfont/fonts/icomoon.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/static/iconfont/fonts/icomoon.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/static/iconfont/fonts/icomoon.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/static/iconfont/fonts/icomoon.woff" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/static/iconfont/fonts/icomoon.woff" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/static/iconfont/selection.json" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/static/iconfont/selection.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/static/iconfont/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/static/iconfont/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/static/img/icomoon.5bfb26bb.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/static/logo1.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/static/logo1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/res/icons/1024x1024.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/res/icons/1024x1024.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/res/icons/120x120.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/res/icons/120x120.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/res/icons/144x144.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/res/icons/144x144.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/res/icons/152x152.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/res/icons/152x152.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/res/icons/167x167.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/res/icons/167x167.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/res/icons/180x180.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/res/icons/180x180.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/res/icons/192x192.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/res/icons/192x192.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/res/icons/20x20.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/res/icons/20x20.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/res/icons/29x29.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/res/icons/29x29.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/res/icons/40x40.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/res/icons/40x40.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/res/icons/58x58.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/res/icons/58x58.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/res/icons/60x60.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/res/icons/60x60.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/res/icons/72x72.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/res/icons/72x72.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/res/icons/76x76.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/res/icons/76x76.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/res/icons/80x80.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/res/icons/80x80.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/res/icons/87x87.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/res/icons/87x87.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/res/icons/96x96.png" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/res/icons/96x96.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/common.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/common.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/request.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1llyEy5hpi1pwuUJmvyjB14VBML" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../dpro_web" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0e2269ba-9bb6-460a-b705-2c065416b31c" name="Default Changelist" comment="" />
+      <created>1608185864816</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1608185864816</updated>
+      <workItem from="1608185866256" duration="1116000" />
+      <workItem from="1608274942054" duration="36000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/js_sdk/jwt/weapp-jwt.js" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1608274976723">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1608274976723" />
+  </component>
+</project>

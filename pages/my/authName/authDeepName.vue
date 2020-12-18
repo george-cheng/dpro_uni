@@ -6,13 +6,13 @@
 		<view class="upIdImg">
 			<view class="idPositive" @click="positiveChooseImg">
 				<view class="upImg">
-					<image :src="reserveImg" mode=""></image>
+					<image :src="reserveImg" mode="aspectFit"></image>
 				</view>
 				<text>上传正面</text>
 			</view>
 			<view class="idReverse" @click="reverseChooseImg">
 				<view class="upImg">
-					<image :src="positiveImg" mode=""></image>
+					<image :src="positiveImg" mode="aspectFit"></image>
 				</view>
 				<text>上传反面</text>
 			</view>
@@ -20,7 +20,7 @@
 		
 		<view class="upPersonImg" @click="personChooseImg">
 			<view class="idPerson">
-				<image :src="idPersonImg" mode=""></image>
+				<image :src="idPersonImg" mode="aspectFit"></image>
 			</view>
 			<text>· 手持证件照</text>
 		</view>

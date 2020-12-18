@@ -81,7 +81,9 @@
 				page: 1,
 				pageSize: 10,
 				pageNum: 0,
-				pageTotal: 0
+				pageTotal: 0,
+				
+				orderStatus: ''
 			}
 		},
 		onLoad() {
@@ -99,7 +101,7 @@
 		methods: {
 			orderDetail(item){
 				uni.navigateTo({
-					url: './orderRecordDetail?orderId=' + item.order_id
+					url: '/pages/transac/tranLegal/tranLegOrderToPay?orderId=' + item.order_id + '&orderStatus=' + item.order_status
 				})
 			},
 			drawerReset(){

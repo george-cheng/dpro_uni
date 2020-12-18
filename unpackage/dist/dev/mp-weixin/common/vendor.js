@@ -904,7 +904,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_NAME":"Dpro","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"Dpro","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -2836,7 +2836,7 @@ AjaxRequest.prototype.request = function () {var _this = this;
       success: function success(res) {
         if (ajaxRequest.successCall) {
           if (res.data.code == 401) {
-            uni.navigateTo({
+            uni.redirectTo({
               url: '/pages/loginIn/loginIn' });
 
           }
@@ -2961,71 +2961,7 @@ module.exports = __webpack_require__(/*! ./lib/axios */ 19);
 
 /***/ }),
 
-/***/ 19:
-/*!********************************************************************!*\
-  !*** E:/gitwork/dpro_uni/dpro_uni/node_modules/axios/lib/axios.js ***!
-  \********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var utils = __webpack_require__(/*! ./utils */ 20);
-var bind = __webpack_require__(/*! ./helpers/bind */ 21);
-var Axios = __webpack_require__(/*! ./core/Axios */ 23);
-var mergeConfig = __webpack_require__(/*! ./core/mergeConfig */ 42);
-var defaults = __webpack_require__(/*! ./defaults */ 29);
-
-/**
-                                       * Create an instance of Axios
-                                       *
-                                       * @param {Object} defaultConfig The default config for the instance
-                                       * @return {Axios} A new instance of Axios
-                                       */
-function createInstance(defaultConfig) {
-  var context = new Axios(defaultConfig);
-  var instance = bind(Axios.prototype.request, context);
-
-  // Copy axios.prototype to instance
-  utils.extend(instance, Axios.prototype, context);
-
-  // Copy context to instance
-  utils.extend(instance, context);
-
-  return instance;
-}
-
-// Create the default instance to be exported
-var axios = createInstance(defaults);
-
-// Expose Axios class to allow class inheritance
-axios.Axios = Axios;
-
-// Factory for creating new instances
-axios.create = function create(instanceConfig) {
-  return createInstance(mergeConfig(axios.defaults, instanceConfig));
-};
-
-// Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(/*! ./cancel/Cancel */ 43);
-axios.CancelToken = __webpack_require__(/*! ./cancel/CancelToken */ 44);
-axios.isCancel = __webpack_require__(/*! ./cancel/isCancel */ 28);
-
-// Expose all/spread
-axios.all = function all(promises) {
-  return Promise.all(promises);
-};
-axios.spread = __webpack_require__(/*! ./helpers/spread */ 45);
-
-module.exports = axios;
-
-// Allow use of default import syntax in TypeScript
-module.exports.default = axios;
-
-/***/ }),
-
-/***/ 190:
+/***/ 182:
 /*!*********************************************************************!*\
   !*** E:/gitwork/dpro_uni/dpro_uni/js_sdk/Sansnn-uQRCode/uqrcode.js ***!
   \*********************************************************************/
@@ -4472,6 +4408,70 @@ var uQRCode = {};
 
 uQRCode;exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 19:
+/*!********************************************************************!*\
+  !*** E:/gitwork/dpro_uni/dpro_uni/node_modules/axios/lib/axios.js ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(/*! ./utils */ 20);
+var bind = __webpack_require__(/*! ./helpers/bind */ 21);
+var Axios = __webpack_require__(/*! ./core/Axios */ 23);
+var mergeConfig = __webpack_require__(/*! ./core/mergeConfig */ 42);
+var defaults = __webpack_require__(/*! ./defaults */ 29);
+
+/**
+                                       * Create an instance of Axios
+                                       *
+                                       * @param {Object} defaultConfig The default config for the instance
+                                       * @return {Axios} A new instance of Axios
+                                       */
+function createInstance(defaultConfig) {
+  var context = new Axios(defaultConfig);
+  var instance = bind(Axios.prototype.request, context);
+
+  // Copy axios.prototype to instance
+  utils.extend(instance, Axios.prototype, context);
+
+  // Copy context to instance
+  utils.extend(instance, context);
+
+  return instance;
+}
+
+// Create the default instance to be exported
+var axios = createInstance(defaults);
+
+// Expose Axios class to allow class inheritance
+axios.Axios = Axios;
+
+// Factory for creating new instances
+axios.create = function create(instanceConfig) {
+  return createInstance(mergeConfig(axios.defaults, instanceConfig));
+};
+
+// Expose Cancel & CancelToken
+axios.Cancel = __webpack_require__(/*! ./cancel/Cancel */ 43);
+axios.CancelToken = __webpack_require__(/*! ./cancel/CancelToken */ 44);
+axios.isCancel = __webpack_require__(/*! ./cancel/isCancel */ 28);
+
+// Expose all/spread
+axios.all = function all(promises) {
+  return Promise.all(promises);
+};
+axios.spread = __webpack_require__(/*! ./helpers/spread */ 45);
+
+module.exports = axios;
+
+// Allow use of default import syntax in TypeScript
+module.exports.default = axios;
 
 /***/ }),
 
@@ -10001,7 +10001,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_NAME":"Dpro","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_NAME":"Dpro","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -10022,14 +10022,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_NAME":"Dpro","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_NAME":"Dpro","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_NAME":"Dpro","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_NAME":"Dpro","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -10115,7 +10115,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_NAME":"Dpro","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"Dpro","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -17047,13 +17047,9 @@ function arrayBufferToBase64(buffer) {
 
 function base64ToUint8Array(base64String) {
   var padding = '='.repeat((4 - base64String.length % 4) % 4);
-  var base64 = (base64String + padding).
-  replace(/\-/g, '+').
-  replace(/_/g, '/');
-
+  var base64 = (base64String + padding).replace(/\-/g, '+').replace(/_/g, '/');
   var rawData = window.atob(base64);
   var outputArray = new Uint8Array(rawData.length);
-
   for (var i = 0; i < rawData.length; ++i) {
     outputArray[i] = rawData.charCodeAt(i);
   }
@@ -17061,15 +17057,9 @@ function base64ToUint8Array(base64String) {
 }
 
 function transformImgData(data) {
-
   return new Promise(function (resolve) {
-    // 填充进缓冲区 通过第二个参数告知函数这是一个二进制的数据
     var buffer = new Buffer(data, 'binary');
-
-    // 构造一个blob对象 通过type 告诉blob buffer中的数据其实是jpeg图片的数据
     var blob = new Blob([buffer], { type: 'image/jpeg' });
-
-    // 通过FileReader转为base64
     var fr = new FileReader();
     fr.onload = function (e) {
       resolve(e.target.result);
@@ -19221,7 +19211,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationBarTitleText": "Dpro" }, "pages/assets/assets": { "navigationBarTitleText": "资产", "enablePullDownRefresh": false }, "pages/my/mySetting/payMethod": { "navigationBarTitleText": "收款方式", "enablePullDownRefresh": false }, "pages/my/mySetting/bindPayMethod": { "navigationBarTitleText": "绑定", "enablePullDownRefresh": false }, "pages/loginIn/loginIn": { "navigationBarTitleText": "登录", "enablePullDownRefresh": false }, "pages/quotation/quotation": { "navigationBarTitleText": "市场行情", "enablePullDownRefresh": false }, "pages/verifica/verifica": { "navigationBarTitleText": "手机验证", "enablePullDownRefresh": false }, "pages/register/register": { "navigationBarTitleText": "注册" }, "pages/test/test": { "navigationBarTitleText": "测试", "enablePullDownRefresh": false }, "pages/transac/transac": { "navigationBarTitleText": "交易", "enablePullDownRefresh": false }, "pages/transac/tranLegal": { "navigationBarTitleText": "法币交易", "enablePullDownRefresh": false }, "pages/my/my": { "navigationBarTitleText": "我的", "enablePullDownRefresh": false }, "pages/klineQuota/klineQuota": { "navigationBarTitleText": "K线图", "enablePullDownRefresh": false }, "pages/assets/assRecharge": { "navigationBarTitleText": "", "enablePullDownRefresh": true }, "pages/assets/selectLetter": { "navigationBarTitleText": "选择币种", "enablePullDownRefresh": false }, "pages/assets/assRecord": { "navigationBarTitleText": "充值记录", "enablePullDownRefresh": false }, "pages/assets/rechAddress": { "navigationBarTitleText": "充值地址", "enablePullDownRefresh": false }, "pages/assets/assWithDraw": { "navigationBarTitleText": "提现", "enablePullDownRefresh": false }, "pages/personal/safeCenter/safeCenter": { "navigationBarTitleText": "安全中心", "enablePullDownRefresh": false }, "pages/personal/safeCenter/safePwd": { "navigationBarTitleText": "设置交易密码", "enablePullDownRefresh": false }, "pages/assets/orderRecord": { "navigationBarTitleText": "订单记录", "enablePullDownRefresh": false }, "pages/assets/orderRecordDetail": { "navigationBarTitleText": "订单详情", "enablePullDownRefresh": false }, "pages/assets/assTranRecord": { "navigationBarTitleText": "划转记录", "enablePullDownRefresh": false }, "pages/my/mySetting": { "navigationBarTitleText": "设置", "enablePullDownRefresh": false }, "pages/my/mySetting/unBindPayMethod": { "navigationBarTitleText": "解绑", "enablePullDownRefresh": false }, "pages/transac/transacMain": { "navigationBarTitleText": "交易", "enablePullDownRefresh": false }, "pages/sundry/serviceAgreement": { "navigationBarTitleText": "服务协议", "enablePullDownRefresh": false }, "pages/my/invitaIncome/invitaIncome": { "navigationBarTitleText": "邀请收益", "enablePullDownRefresh": false }, "pages/assets/assTransfer": { "navigationBarTitleText": "划转", "enablePullDownRefresh": false }, "pages/transac/tranContract/tranContract": { "navigationBarTitleText": "", "enablePullDownRefresh": false }, "pages/transac/tranContract/tranAssets": { "navigationBarTitleText": "合约资产", "enablePullDownRefresh": false }, "pages/transac/tranContract/tranAssetsDetail": { "navigationBarTitleText": "合约返还统计", "enablePullDownRefresh": false }, "pages/transac/tranContract/tranAssetsFailPurchase": { "navigationBarTitleText": "抢购收益", "enablePullDownRefresh": false }, "pages/transac/tranContract/tranAssetsFailPurchaseDetail": { "navigationBarTitleText": "失败收益详情", "enablePullDownRefresh": false }, "pages/transac/tranContract/transAssetsShare": { "navigationBarTitleText": "分享收益", "enablePullDownRefresh": false }, "pages/my/authName/authDeepName": { "navigationBarTitleText": "高级实名认证", "enablePullDownRefresh": false }, "pages/my/authName/authName": { "navigationBarTitleText": "初级认证", "enablePullDownRefresh": false }, "pages/my/authName/authDeepLoad": { "navigationBarTitleText": "身份认证", "enablePullDownRefresh": false }, "pages/my/authName/authDeepComplete": { "navigationBarTitleText": "身份认证", "enablePullDownRefresh": false }, "pages/transac/tranLegal/tranLegOrderToPay": { "navigationBarTitleText": "订单待支付", "enablePullDownRefresh": false } }, "globalStyle": { "navigationBarTextStyle": "white", "navigationBarTitleText": "Dpro", "navigationBarBackgroundColor": "#282828", "backgroundColor": "#282828" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationBarTitleText": "Dpro" }, "pages/assets/assets": { "navigationBarTitleText": "资产", "enablePullDownRefresh": false }, "pages/my/mySetting/payMethod": { "navigationBarTitleText": "收款方式", "enablePullDownRefresh": false }, "pages/my/mySetting/bindPayMethod": { "navigationBarTitleText": "绑定", "enablePullDownRefresh": false }, "pages/loginIn/loginIn": { "navigationBarTitleText": "登录", "enablePullDownRefresh": false }, "pages/quotation/quotation": { "navigationBarTitleText": "市场行情", "enablePullDownRefresh": false }, "pages/verifica/verifica": { "navigationBarTitleText": "手机验证", "enablePullDownRefresh": false }, "pages/register/register": { "navigationBarTitleText": "注册" }, "pages/test/test": { "navigationBarTitleText": "测试", "enablePullDownRefresh": false }, "pages/transac/tranLegal": { "navigationBarTitleText": "法币交易", "enablePullDownRefresh": false }, "pages/my/my": { "navigationBarTitleText": "我的", "enablePullDownRefresh": false }, "pages/klineQuota/klineQuota": { "navigationBarTitleText": "K线图", "enablePullDownRefresh": false }, "pages/assets/assRecharge": { "navigationBarTitleText": "", "enablePullDownRefresh": true }, "pages/assets/selectLetter": { "navigationBarTitleText": "选择币种", "enablePullDownRefresh": false }, "pages/assets/assRecord": { "navigationBarTitleText": "充值记录", "enablePullDownRefresh": false }, "pages/assets/rechAddress": { "navigationBarTitleText": "充值地址", "enablePullDownRefresh": false }, "pages/assets/assWithDraw": { "navigationBarTitleText": "提现", "enablePullDownRefresh": false }, "pages/personal/safeCenter/safeCenter": { "navigationBarTitleText": "安全中心", "enablePullDownRefresh": false }, "pages/personal/safeCenter/safePwd": { "navigationBarTitleText": "设置交易密码", "enablePullDownRefresh": false }, "pages/assets/orderRecord": { "navigationBarTitleText": "订单记录", "enablePullDownRefresh": false }, "pages/assets/orderRecordDetail": { "navigationBarTitleText": "订单详情", "enablePullDownRefresh": false }, "pages/assets/assTranRecord": { "navigationBarTitleText": "划转记录", "enablePullDownRefresh": false }, "pages/my/mySetting": { "navigationBarTitleText": "设置", "enablePullDownRefresh": false }, "pages/my/mySetting/unBindPayMethod": { "navigationBarTitleText": "解绑", "enablePullDownRefresh": false }, "pages/transac/transacMain": { "navigationBarTitleText": "交易", "enablePullDownRefresh": false }, "pages/sundry/serviceAgreement": { "navigationBarTitleText": "服务协议", "enablePullDownRefresh": false }, "pages/my/invitaIncome/invitaIncome": { "navigationBarTitleText": "邀请收益", "enablePullDownRefresh": false }, "pages/assets/assTransfer": { "navigationBarTitleText": "划转", "enablePullDownRefresh": false }, "pages/transac/tranContract/tranContract": { "navigationBarTitleText": "", "enablePullDownRefresh": false }, "pages/transac/tranContract/tranAssets": { "navigationBarTitleText": "合约资产", "enablePullDownRefresh": false }, "pages/transac/tranContract/tranAssetsDetail": { "navigationBarTitleText": "合约返还统计", "enablePullDownRefresh": false }, "pages/transac/tranContract/tranAssetsFailPurchase": { "navigationBarTitleText": "抢购收益", "enablePullDownRefresh": false }, "pages/transac/tranContract/tranAssetsFailPurchaseDetail": { "navigationBarTitleText": "失败收益详情", "enablePullDownRefresh": false }, "pages/transac/tranContract/transAssetsShare": { "navigationBarTitleText": "分享收益", "enablePullDownRefresh": false }, "pages/my/authName/authDeepName": { "navigationBarTitleText": "高级实名认证", "enablePullDownRefresh": false }, "pages/my/authName/authName": { "navigationBarTitleText": "初级认证", "enablePullDownRefresh": false }, "pages/my/authName/authDeepLoad": { "navigationBarTitleText": "身份认证", "enablePullDownRefresh": false }, "pages/my/authName/authDeepComplete": { "navigationBarTitleText": "身份认证", "enablePullDownRefresh": false }, "pages/transac/tranLegal/tranLegOrderToPay": { "navigationBarTitleText": "订单待支付", "enablePullDownRefresh": false }, "pages/transac/transacOrder/transacHistoryOrder": { "navigationBarTitleText": "交易记录", "enablePullDownRefresh": false } }, "globalStyle": { "navigationBarTextStyle": "white", "navigationBarTitleText": "Dpro", "navigationBarBackgroundColor": "#282828", "backgroundColor": "#282828" } };exports.default = _default;
 
 /***/ })
 

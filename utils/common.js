@@ -39,41 +39,31 @@ function accAdd(arg1, arg2) {
 
 
 function arrayBufferToBase64(buffer) {
-         var binary = '';
-         var bytes = new Uint8Array(buffer);
-         var len = bytes.byteLength;
-         for (var i = 0; i < len; i++) {
-               binary += String.fromCharCode(bytes[i]);
-         }
-         return window.btoa(binary);
+	 var binary = '';
+	 var bytes = new Uint8Array(buffer);
+	 var len = bytes.byteLength;
+	 for (var i = 0; i < len; i++) {
+		 binary += String.fromCharCode(bytes[i]);
+	 }
+	 return window.btoa(binary);
 }
 
 
 function base64ToUint8Array(base64String) {
-　　　　const padding = '='.repeat((4 - base64String.length % 4) % 4);
-       const base64 = (base64String + padding)
-                    .replace(/\-/g, '+')
-                    .replace(/_/g, '/');
-
-       const rawData = window.atob(base64);
-       const outputArray = new Uint8Array(rawData.length);
-
-       for (let i = 0; i < rawData.length; ++i) {
-            outputArray[i] = rawData.charCodeAt(i);
-       }
-       return outputArray;
+	const padding = '='.repeat((4 - base64String.length % 4) % 4);
+	const base64 = (base64String + padding).replace(/\-/g, '+').replace(/_/g, '/');
+	const rawData = window.atob(base64);
+	const outputArray = new Uint8Array(rawData.length);
+	for (let i = 0; i < rawData.length; ++i) {
+		outputArray[i] = rawData.charCodeAt(i);
+	}
+	return outputArray;
 }
 
 function transformImgData(data) {
-  
   return new Promise((resolve) => {
-    // 填充进缓冲区 通过第二个参数告知函数这是一个二进制的数据
     let buffer = new Buffer(data, 'binary')  
-
-    // 构造一个blob对象 通过type 告诉blob buffer中的数据其实是jpeg图片的数据
     let blob = new Blob([buffer], {type: 'image/jpeg'})
-
-    // 通过FileReader转为base64
     const fr = new FileReader()
     fr.onload = (e) => {
       resolve(e.target.result)
@@ -87,19 +77,19 @@ function transformImgData(data) {
 
 
 function uint8arrayToBase64(u8Arr) {
-    let CHUNK_SIZE = 0x8000; //arbitrary number
-    let index = 0;
-    let length = u8Arr.length;
-    let result = '';
-    let slice;
-    while (index < length) {
-        slice = u8Arr.subarray(index, Math.min(index + CHUNK_SIZE, length));
-        result += String.fromCharCode.apply(null, slice);
-        index += CHUNK_SIZE;
-    }
-    // web image base64图片格式: "data:image/png;base64," + b64encoded;
-    // return  "data:image/png;base64," + btoa(result);
-    return btoa(result);
+	let CHUNK_SIZE = 0x8000; //arbitrary number
+	let index = 0;
+	let length = u8Arr.length;
+	let result = '';
+	let slice;
+	while (index < length) {
+			slice = u8Arr.subarray(index, Math.min(index + CHUNK_SIZE, length));
+			result += String.fromCharCode.apply(null, slice);
+			index += CHUNK_SIZE;
+	}
+	// web image base64图片格式: "data:image/png;base64," + b64encoded;
+	// return  "data:image/png;base64," + btoa(result);
+	return btoa(result);
 }
 
 function getLocalTime(time) {
@@ -113,7 +103,6 @@ function getLocalTime(time) {
 	
 	return year+"-"+month+"-"+date+" "+hour+":"+minute+":"+second;
 }
-
 
 export{
 	checkEmail, checkPhone, checkPwd, checkNum, checkId, accMul, accAdd, arrayBufferToBase64, transformImgData, uint8arrayToBase64, getLocalTime

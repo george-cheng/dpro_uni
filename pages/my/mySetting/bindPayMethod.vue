@@ -19,7 +19,7 @@
 				
 				<view class="upLoadImg" v-if="!isPayQrCode">
 					<view class="upLoadImgBtn" @click="chooseUpLoadImg">上传图片</view>
-					<image class="previewImg" :src="previewImgUrl" mode=""></image>
+					<image class="previewImg" :src="previewImgUrl" mode="aspectFit"></image>
 				</view>
 				
 				<image :src="payQrCodeImg" mode="" v-if="isPayQrCode"></image>
@@ -123,7 +123,6 @@
 						falipayRemarks: this.payRemark,
 					}
 				}
-				
 				this.validator()
 				
 				if(this.isValidator){

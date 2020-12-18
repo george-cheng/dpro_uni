@@ -158,6 +158,8 @@
 				isValidator: false,
 				isClick: true,
 				verTxt: '获取验证码',
+				flag: true,
+				isSendSuccess: false
 			}
 		},
 		onLoad() {
@@ -223,6 +225,8 @@
 					this.isPhPassword = !this.isPhPassword
 				}
 			},
+			
+			
 			getSecVerCode(){
 				if(this.verTxt == '获取验证码'){
 					this.getSendVerCode()
@@ -230,46 +234,58 @@
 			},
 			/* 获取验证码 */
 			getSendVerCode(){
-				this.getMsg()
 				let params = {
 					// code: this.verCode,
 					name:  this.emailUser || this.phUser,
 					areaCode: this.prePhoneNum
 				}
 				
-				this.ajaxJson({
-					url: '/api/v1/sendRegCode',
-					method: 'POST',
-					data: params,
-					call: (data)=>{
-						if(data.code == 200){
-							uni.showToast({
-								title: data.msg
-							})
-						}else{
-							uni.showToast({
-								image: '../../static/images/wrong.png',
-								title: data.msg
-							})
+				if(this.emailUser || this.phUser){
+					this.getMsg()
+					this.ajaxJson({
+						url: '/api/v1/sendRegCode',
+						method: 'POST',
+						data: params,
+						call: (data)=>{
+							if(data.code == 200){
+								this.isSendSuccess = true
+								uni.showToast({
+									title: data.msg,
+								})
+							}else{
+								uni.showToast({
+									image: '../../static/images/wrong.png',
+									title: data.msg
+								})
+							}
 						}
-					}
-				})
+					})
+				}else{
+					uni.showToast({
+						image: '/static/images/wrong.png',
+						title: '请输入用户名'
+					})
+				}
 			},
 			getMsg(){
-				
 				let count = 60
+				let timer
 				clearInterval(timer)
-				let timer = setInterval(()=>{
-					count--;
-					if(count < 10){
-						count = '0' + count
-					}
-					this.verTxt = count + 's后重新获取'
-					if(count == 0){
-						clearInterval(timer)
-						this.verTxt = '获取验证码'
-					}
-				}, 1000)
+				if(this.flag || this.isSendSuccess){
+					timer = setInterval(()=>{
+						count--;
+						this.flag = false
+						if(count < 10){
+							count = '0' + count
+						}
+						this.verTxt = count + 's后重新获取'
+						if(count == 0){
+							clearInterval(timer)
+							this.verTxt = '获取验证码'
+							this.flag = true
+						}
+					}, 1000)
+				}
 			},
 			/* 短信验证码粘贴 */
 			pasteEvent(){

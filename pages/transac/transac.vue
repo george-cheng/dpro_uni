@@ -1,5 +1,5 @@
 <template>
-	<view class="transac mainBox">
+<view class="transac mainBox">
 
 		<view class="sacCon">
 			<view class="sacTit">
@@ -111,6 +111,8 @@
 					</view>
 				</view>
 			</view>
+			
+			
 			<view class="reminder">
 				<view class="remTit">
 					<span class="remIco i-warn"></span>
@@ -126,7 +128,7 @@
 				<view class="entrustTit">
 					<view>
 						<text>限价委托</text>
-						<view class="record" v-if="false">
+						<view class="record" @click="orderHistoryEvent">
 							<span class="recordIco i-record"></span>
 							<text>交易记录</text>
 						</view>
@@ -135,11 +137,11 @@
 			</view>
 			<view class="entrustSwitch">
 				<view :class="{'enChoice': enOn !== 1}" @click="enSwitchEvent(0)">限价委托</view>
-				<!-- <view :class="{'enChoice': enOn === 1}" @click="enSwitchEvent(1)">计划委托</view> -->
+				<view :class="{'enChoice': enOn === 1}" @click="enSwitchEvent(1)" v-if="false">计划委托</view>
 			</view>
 			<view class="enConTit">
 				<view>{{titMenu}}</view>
-				<!-- <view>撤单</view> -->
+				<view  v-if="false">撤单</view>
 			</view>
 			<view class="enConList">
 				<view class="enList" v-for="(item, index) in entrustList" :key="item.id">
@@ -155,6 +157,9 @@
 		<uni-popup ref="popup" type="dialog">
 		    <uni-popup-dialog iptType="password" title="交易密码" :duration="2000" mode="input" placeholder="请输入交易密码" :before-close="true" @close="close" @confirm="confirm"></uni-popup-dialog>
 		</uni-popup>
+		
+		<input type="text" v-model="moneyDataName" v-show="true">
+		<input type="text" v-model="moneyDataFid" v-show="true">
 	</view>
 </template>
 
@@ -164,6 +169,7 @@
 	import uniPopupDialog from '../../components/uni-popup/uni-popup-dialog.vue'
 	export default{
 		components: { uniPopup, uniPopupDialog },
+		props: ['moneyDataName', 'moneyDataFid'],
 		data(){
 			return{
 				sacOn: 0,
@@ -195,31 +201,28 @@
 				
 				symbolID: '1',
 				
-				isTitMenu: false
+				isTitMenu: false,
+
 			}
 		},
-		onLoad() {
-			
-		},
-		onHide() {
-			
-		},
-
-		props: ['moneyData', 'quotatList'],
-		onShow() {
-			
-		},
 		methods:{
+			/* 交易记录  */
+			orderHistoryEvent(){
+				uni.navigateTo({
+					url: '/pages/transac/transacOrder/transacHistoryOrder?symbol=' + this.symbolID
+				})
+			},
 			titMenuEvent(){
 				this.isTitMenu = !this.isTitMenu
 			},
-			getSocket(fid){
+			getSocket(moneyDataFid){
 				let symbol = ''
-				if(fid === undefined){
+				if(moneyDataFid === undefined){
 					symbol = 1
 				}else{
-					symbol = fid
+					symbol = moneyDataFid
 				}
+				console.log(this.moneyData)
 				let isScoket = false
 				uni.closeSocket()
 				uni.connectSocket({
@@ -573,6 +576,9 @@
 		computed: {
 			reverseTopList() {
 				return this.topList.reverse();
+			},
+			getMoneyData(){
+				return this.moneyData
 			}
 		},
 		created() {
@@ -581,13 +587,10 @@
 			this.getSocket()
 			this.getRate()
 			this.getTotal()
-			
 			this.initTitBuyMenuListEvent()
-			
 			this.getEntrustList()
-		
 		},
-		watch: {
+		/* watch: {
 			moneyData:{
 				handler(newValue, oldValue) {
 					if(this.moneyData.length !== 0){
@@ -608,7 +611,7 @@
 				},
 				deep: true
 			}
-		}
+		} */
 	}
 </script>
 

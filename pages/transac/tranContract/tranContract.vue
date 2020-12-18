@@ -17,8 +17,8 @@
 				<view @click="tranctBtnEvent(0)">立即抢购</view>
 				<view @click="tranctBtnEvent(1)">委托抢购</view>
 				<view @click="tranctBtnEvent(2)">合约资产</view>
-				<view @click="tranctBtnEvent(3)">抢购收益</view>
-				<view @click="tranctBtnEvent(4)">分享收益</view>
+<!-- 				<view @click="tranctBtnEvent(3)">抢购收益</view>
+				<view @click="tranctBtnEvent(4)">分享收益</view> -->
 			</view>
 			
 		</view>
@@ -34,7 +34,8 @@
 				page: 1,
 				pageSize: 10,
 				pageNum: 0,
-				pageTotal: 0
+				pageTotal: 0,
+				isFlag: true
 			}
 		},
 		onLoad() {
@@ -49,18 +50,22 @@
 				this.getContractList()
 			}
 		},
+
 		methods: {
 			tranctBtnEvent(index){
 				if(index === 0){
 					this.rushPurchaseNowEvent()
 				}else if(index === 1){
+					this.isFlag = true
 					let count = 0
 					if(this.flag){
 						this.flag = false
 						clearInterval(timer)
 						let timer = setInterval(()=>{
 							count ++ 
-							this.rushPurchaseNowEvent()
+							if(this.isFlag){
+								this.rushPurchaseNowEvent()
+							}
 							if(count >= 10){
 								clearInterval(timer)
 								count = 10
@@ -71,7 +76,12 @@
 					uni.navigateTo({
 						url: '/pages/transac/tranContract/tranAssets'
 					})
-				}else if(index === 3){
+				}
+				
+				
+				
+				
+				/* else if(index === 3){
 					uni.navigateTo({
 						url: '/pages/transac/tranContract/tranAssetsFailPurchase'
 					})
@@ -79,7 +89,7 @@
 					uni.navigateTo({
 						url: '/pages/transac/tranContract/transAssetsShare'
 					})
-				}
+				} */
 			},
 			rushPurchaseNowEvent(){
 				this.ajaxJson({
@@ -87,15 +97,13 @@
 					method: 'POST',
 					call: (data)=>{
 						if(data.code == 200){
+							this.isFlag = true
 							uni.showToast({
 								title: data.msg
 							})
-						}else if(data.code == 500){
-							uni.showToast({
-								image: '/static/images/wrong.png',
-								title: data.msg
-							})
-						}else{
+						}else if(data.code != 500){
+							this.isFlag = false
+						} else{
 							uni.showToast({
 								image: '/static/images/wrong.png',
 								title: data.msg
@@ -209,9 +217,10 @@
 				display: flex;
 				flex-wrap: nowrap;
 				font-size: 26rpx;
-				margin: 0 14rpx;
+				margin: 0 60rpx;
 				padding: 5rpx 12rpx;
 				border-radius: 4rpx;
+				white-space: nowrap;
 			}
 
 		}

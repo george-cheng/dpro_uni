@@ -208,7 +208,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 var _default =
 {
   data: function data() {
@@ -249,14 +248,6 @@ var _default =
   methods: {
     /* 行情跳转K线图 */
     listConEvent: function listConEvent(item) {
-      uni.switchTab({
-        url: '/pages/transac/transacMain',
-        success: function success() {
-          uni.setStorage({
-            key: 'quotatList',
-            data: item });
-
-        } });
 
     },
     /* 顶部切换 */
@@ -282,8 +273,7 @@ var _default =
           newQuotaList.push(this.quotaList[this.starIndex[i]]);
         }
         this.newQuotaList = newQuotaList;
-      } else
-      {
+      } else {
         this.newQuotaList.splice(index, 1);
         this.starIndex.splice(index, 1);
       }

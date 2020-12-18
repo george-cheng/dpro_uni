@@ -1,3 +1,4 @@
+
 [class^="icon-"], [class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'icomoon' !important;
@@ -13,6 +14,14 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-menu:before {
+  content: "\e92d";
+  color: #fff;
+}
+.icon-uniE92C:before {
+  content: "\e92c";
+  color: #fff;
+}
 .icon-yooxi:before {
   content: "\e92a";
   color: #fff;
@@ -130,7 +139,7 @@
   content: "\e900";
   color: #707070;
 }
-.icon--1:before {
+.icon--11:before {
   content: "\e911";
   color: #fff;
 }

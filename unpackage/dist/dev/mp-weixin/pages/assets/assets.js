@@ -586,7 +586,7 @@ var _common = __webpack_require__(/*! ../../utils/common.js */ 54);var uniPopup 
         method: 'POST',
         data: params,
         call: function call(data) {
-          if (data.data.fbalance) {
+          if (data.data) {
             _this6.legAcc = data.data.fbalance;
           }
         } });

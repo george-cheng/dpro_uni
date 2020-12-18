@@ -8,8 +8,11 @@
 			</view>
 			<view class="rgt">
 				<view class="rgtTop">
+					<view class="rgtTopName">
+						<text>昵称：{{userInfo.nick}}</text>
+						<view class="userEdit i-edit" @click="changeNickName"></view>
+					</view>
 					<text class="userName">{{userInfo.loginName}}</text>
-					<view class="userEdit i-edit"></view>
 				</view>
 				<view class="rgtBtm">
 					<view class="userAuthen userBtm">
@@ -105,15 +108,24 @@
 				</view>
 			</view>
 		</view>
+		
+		<uni-popup ref="popup" type="dialog">
+		    <uni-popup-dialog title="修改昵称" :duration="2000" mode="input" placeholder="请输入昵称" :before-close="true" @close="close" @confirm="confirm"></uni-popup-dialog>
+		</uni-popup>
+		
 	</view>
 </template>
 
 <script>
+	import uniPopup from '../../components/uni-popup/uni-popup.vue'
+	import uniPopupDialog from '../../components/uni-popup/uni-popup-dialog.vue'
 	export default {
+		components: { uniPopup, uniPopupDialog },
 		data(){
 			return {
 				name: '',
 				userInfo: '',
+				nickIpt: '',
 				authTxt: '未认证'
 			}
 		},
@@ -124,10 +136,40 @@
 			this.infoEvent()
 		},
 		methods: {
+			changeNickName(){
+				this.$refs.popup.open()
+			},
+			close(){
+				this.$refs.popup.close()
+			},
+			confirm(done, value){
+				if(!value){
+
+				}else{
+					this.ajaxJson({
+						url: '/api/v1/account/modNickName',
+						method: 'POST',
+						data: { nickName: value },
+						call: (data)=>{
+							if(data.code == 200){
+								this.$refs.popup.close()
+								uni.showToast({
+									title: '修改成功',
+									success: () => {
+										this.infoEvent()
+									}
+								})
+							}else{
+								uni.showToast({
+									title: '修改失败',
+								})
+							}
+						}
+					})
+				}
+			},
 			myArrowEvent(index){
 				if(index == 0){
-					
-					
 					if(this.userInfo.authDeep){
 						uni.navigateTo({
 							url: '/pages/my/authName/authDeepComplete'
@@ -213,6 +255,7 @@
 		height: 170rpx;
 		padding: 0 40rpx;
 		background-color: #303030;
+		display: flex;
 		.lft{
 			float: left;
 			.userImg{
@@ -236,18 +279,29 @@
 			float: left;
 			.rgtTop{
 				display: flex;
+				flex-direction: column;
+				font-size: 24rpx;
+				.rgtTopName{
+					display: flex;
+					flex-direction: row;
+					align-items: center;
+					color: #fff;
+				}
 				.userName{
 					color: #fff;
 					font-size: 30rpx;
 					line-height: 30rpx;
+					margin-top: 10rpx;
 				}
 				.userEdit{
 					margin-left: 10rpx;
 					color: #fff;
+					display: flex;
+					flex-wrap: nowrap;
 				}
 			}
 			.rgtBtm{
-				margin-top: 30rpx;
+				margin-top: 20rpx;
 				display: flex;
 				.userBtm{
 					color: #676869;

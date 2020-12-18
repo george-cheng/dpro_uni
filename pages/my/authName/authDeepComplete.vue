@@ -100,7 +100,6 @@
 				display: flex;
 				flex-direction: column;
 				justify-content: center;
-
 				text{
 					color: #fff;
 					display: flex;

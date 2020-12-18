@@ -119,10 +119,10 @@
 		</view>
 		
 		<uni-popup ref="popup" type="bottom" >
-			<uni-popup-share title="购买" @comfirm="comfirm">
+			<uni-popup-share title="购买" @comfirm="comfirm" style="background-color: #282828;">
 				<view class="popupCon">
 					<view class="popupPrice">单价：¥{{popupPrice}}</view>
-					<input class="popupQuantity" type="text" v-model="popupQuantity" @blur="calcTotal" placeholder="请输入数量">
+					<input class="popupQuantity" type="text" v-model="popupQuantity" @input="calcTotalIptEvent" @blur="calcTotalEvent"  placeholder="请输入数量">
 					<view class="popupQuota">限额：¥ {{minQuota}} - ¥ {{maxQuota}}</view>
 					<view class="popupPay">实付款：¥ {{payMoney}}</view>
 				</view>
@@ -169,10 +169,12 @@
 				maxQuota: '',
 				payMoney: '0',
 				market_id: '0',
+				isVerifica: false
 			}
 		},
 		components: { uniPopup, uniPopupShare },
 		onLoad() {
+
 		},
 		onShow() {
 			
@@ -187,28 +189,33 @@
 			}
 		},
 		methods: {
-			calcTotal(){
+			calcTotalEvent(){
 				if(parseInt(this.popupQuantity) > this.maxQuota){
-					this.popupQuantity = this.maxQuota
 					uni.showToast({
 						image: '/static/images/wrong.png',
 						title: '数量不能大于' + this.maxQuota,
 						success: () => {
+							this.popupQuantity = ''
 							this.payMoney = '0'
+							this.isVerifica = false 
 						}
 					})
 				}else if(parseInt(this.popupQuantity) < this.minQuota){
-					this.popupQuantity = this.minQuota
 					uni.showToast({
 						image: '/static/images/wrong.png',
 						title: '数量不能小于' + this.minQuota,
 						success: () => {
+							this.popupQuantity = ''
 							this.payMoney = '0'
+							this.isVerifica = false
 						}
 					})
 				}else{
-					this.payMoney = accMul(this.popupPrice, this.popupQuantity)
+					this.isVerifica = true
 				}
+			},
+			calcTotalIptEvent(){
+				this.payMoney = accMul(this.popupPrice, this.popupQuantity)
 			},
 			comfirm(){
 				if(!this.popupQuantity){
@@ -217,43 +224,43 @@
 						title: '数量不能为空'
 					})
 				}else{
-					this.$refs.popup.close()
 					
-					let params = {
-						market_id: this.market_id,
-						price: this.popupPrice,
-						amount: this.popupQuantity,
-						type: '1'
-					}
-					this.ajaxJson({
-						url: '/api/v1/otcOrder/enterOrder',
-						method: 'POST',
-						data: params,
-						call: (data)=>{
-							if(data.code == 200){
-								uni.showToast({ 
-									title: data.msg,
-									success: () => {
-										uni.navigateTo({
-											url: '/pages/transac/tranLegal/tranLegOrderToPay?fbuinessAccount=' + encodeURIComponent(JSON.stringify(data.data.fbuinessAccount)) + '&fotcOrder=' + encodeURIComponent(JSON.stringify(data.data.fotcOrder))
-										})
-									}
-								})
-							}else{
-								uni.showToast({
-									image: '/static/images/wrong.png',
-									title: data.msg
-								})
-							}
+					if(this.isVerifica){
+						let params = {
+							market_id: this.market_id,
+							price: this.popupPrice,
+							amount: this.popupQuantity,
+							type: '1'
 						}
-					})
-					
-					
+						this.ajaxJson({
+							url: '/api/v1/otcOrder/enterOrder',
+							method: 'POST',
+							data: params,
+							call: (data)=>{
+								if(data.code == 200){
+									uni.showToast({ 
+										title: data.msg,
+										success: () => {
+											this.$refs.popup.close()
+											uni.navigateTo({
+												url: '/pages/transac/tranLegal/tranLegOrderToPay?fbuinessAccount=' + encodeURIComponent(JSON.stringify(data.data.fbuinessAccount)) + '&fotcOrder=' + encodeURIComponent(JSON.stringify(data.data.fotcOrder))
+											})
+										}
+									})
+								}else{
+									uni.showToast({
+										image: '/static/images/wrong.png',
+										title: data.msg
+									})
+								}
+							}
+						})
+					}
 				}
 			},
 			orderListEvent(item){
 				this.popupQuantity = ''
-				this.calcTotal()
+				this.calcTotalIptEvent()
 				this.$refs.popup.open()
 				this.popupPrice = item.price
 				this.minQuota = this.kindList[0].min_trans
@@ -409,6 +416,8 @@
 			this.getUserInfo()
 			this.getLegalKind()
 			this.getOrderList()
+			
+
 		}
 	}
 </script>
@@ -417,13 +426,13 @@
 	.tranLegal{
 		
 		.popupCon{
+			color: #fff;
 			.popupQuantity{
 				border: 1px solid #676869;
 				width: 640rpx;
 				height: 60rpx !important;
 				border-radius: 4rpx;
 				margin-top: 20rpx;
-				color: #000;
 			}
 			.popupQuota, .popupPay{
 				margin-top: 20rpx;

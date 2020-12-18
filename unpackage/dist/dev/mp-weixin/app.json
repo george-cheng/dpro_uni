@@ -9,7 +9,6 @@
     "pages/verifica/verifica",
     "pages/register/register",
     "pages/test/test",
-    "pages/transac/transac",
     "pages/transac/tranLegal",
     "pages/my/my",
     "pages/klineQuota/klineQuota",
@@ -39,7 +38,8 @@
     "pages/my/authName/authName",
     "pages/my/authName/authDeepLoad",
     "pages/my/authName/authDeepComplete",
-    "pages/transac/tranLegal/tranLegOrderToPay"
+    "pages/transac/tranLegal/tranLegOrderToPay",
+    "pages/transac/transacOrder/transacHistoryOrder"
   ],
   "subPackages": [],
   "window": {
@@ -51,6 +51,7 @@
   "tabBar": {
     "selectedColor": "#BD3A3B",
     "color": "#999999",
+    "backgroundColor": "#282828",
     "list": [
       {
         "text": "首页",

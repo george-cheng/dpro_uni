@@ -255,7 +255,6 @@ var _default = { data: function data() {return { data: {}, payName: '', payAcc: 
           falipayRemarks: this.payRemark };
 
       }
-
       this.validator();
 
       if (this.isValidator) {

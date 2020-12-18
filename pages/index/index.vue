@@ -24,7 +24,7 @@
 		
 		<view class="info">
 			<!-- <navigator url="../transac/transac?num=1" open-type="switchTab"> -->
-				<view class="quickMoney" @click="quickEvent">
+				<view class="quickMoney" @click="tranAssetsMain('2')">
 					<text>快捷买币</text>
 					<text>支持btc/usdt/eth等</text>
 					<view class="image">
@@ -33,13 +33,13 @@
 				</view>
 			<!-- </navigator> -->
 			<view class="rgt">
-				<view class="cooTran">
+				<view class="cooTran" @click="tranAssetsMain('1')">
 					<image src="../../static/images/cooTran.png"></image>
 					<text>合约交易</text>
 				</view>
 				<view class="helpCen">
 					<image src="../../static/images/helpCen.png"></image>
-					<text>帮助中心</text>
+					<text>红包</text>
 				</view>
 			</view>
 		</view>
@@ -79,6 +79,7 @@
 				</uni-popup-dialog>
 		</uni-popup>
 		
+		
 	</view>
 </template>
 
@@ -99,18 +100,32 @@
 				
 				version: [],
 				androidVersion: [],
+				iosVersion: [],
 				versionCode: '',
 				editionNum: '',
+				iosEditionNum: '',
 				updatetips: '',
+				iosUpdatetips: '',
 				updataUrl: '',
+				iosUpdataUrl: '',
 				isCancel: true,
 				progressFile: '0',
-				isProgressFile: false
+				isProgressFile: false,
+				platform: '',
+				
+				isIos: false
 			}
 		},
 		
 		onLoad() {
 			
+		},
+		onShow() {
+			this.getSystemInfo()
+			plus.runtime.getProperty(plus.runtime.appid,(wgtinfo)=>{
+				this.versionCode = wgtinfo.versionCode
+			})
+			this.getVersion()
 		},
 		onHide() {
 			this.$refs.popup.close()
@@ -176,25 +191,19 @@
 				})
 			},
 			moneyDataEvent(item){
+				uni.setStorageSync('moneyDataName', item.fname_sn)
+				uni.setStorageSync('moneyDataFid', item.fid)
 				uni.switchTab({
 					url: '/pages/transac/transacMain',
 					success: () => {
-						uni.setStorage({
-							key: 'moneyData',
-							data: item
-						})
+						uni.setStorageSync('tranAssetsMain', '0')
 					}
 				})
 			},
-			quickEvent(){
+			tranAssetsMain(index){
+				uni.setStorageSync('tranAssetsMain', index)
 				uni.switchTab({
 					url: '../transac/transacMain',
-					success: () => {
-						uni.setStorage({
-							key: 'quickIndex',
-							data: 2
-						})
-					}
 				})
 			},
 			getVersion(){
@@ -203,20 +212,38 @@
 					call: (data)=>{
 						if(data.code == 200){
 							this.version = data.data
-							for(let i in this.version){
-								if(this.version[i].type === 'android'){
-									this.androidVersion = this.version[i]
+							if(this.platform == 'ios'){
+								for(let i in this.version){
+									if(this.version[i].type == this.platform){
+										this.iosVersion = this.version[i]
+										this.iosEditionNum = this.iosVersion.edition  //140
+										if(this.versionCode < this.iosEditionNum){
+											this.$refs.popup.open()
+											this.updatetips = this.iosVersion.updatetips
+											this.updataUrl = this.iosVersion.downurl
+											uni.hideTabBar({})
+											this.isIos = true
+											if(this.iosVersion.forceupdate == 1){    //强制更新
+												this.isCancel = false
+											}
+										}
+									}
 								}
-							}
-							this.editionNum = this.androidVersion.edition  //140
-							
-							if(this.editionNum > this.versionCode){
-								this.$refs.popup.open()
-								this.updatetips = this.androidVersion.updatetips
-								this.updataUrl = this.androidVersion.downurl
-								uni.hideTabBar({})
-								if(this.androidVersion.forceupdate == 1){    //强制更新
-									this.isCancel = false
+							}else{
+								for(let i in this.version){
+									if(this.version[i].type == this.platform){
+										this.androidVersion = this.version[i]
+										this.editionNum = this.androidVersion.edition  //140
+										if(this.versionCode < this.editionNum){
+											this.$refs.popup.open()
+											this.updatetips = this.androidVersion.updatetips
+											this.updataUrl = this.androidVersion.downurl
+											uni.hideTabBar({})
+											if(this.androidVersion.forceupdate == 1){    //强制更新
+												this.isCancel = false
+											}
+										}
+									}
 								}
 							}
 						}
@@ -228,53 +255,60 @@
 				this.$refs.popup.close()
 			},
 			upDateConfirm(){
-				this.isProgressFile = true
-				const downloadTask  =  uni.downloadFile({
-					url: this.updataUrl,
+				
+				if(this.isIos){
+					plus.runtime.openURL('https://testflight.apple.com/join/kwKrlMr4')
+				}else{
+					this.isProgressFile = true
+					const downloadTask  =  uni.downloadFile({
+						url: this.updataUrl,
+						success: (res) => {
+							uni.saveFile({
+								tempFilePath: res.tempFilePath,
+								success: (res) => {
+									uni.openDocument({
+										filePath: res.savedFilePath,
+									})
+								}
+							})
+							uni.showToast({
+								title: '下载完成',
+							})
+						}
+					})
+					let progress
+					let totalBytesWritten
+					let totalBytesExpectedToWrite
+					downloadTask.onProgressUpdate((res)=>{
+						progress = res.progress
+						totalBytesWritten = res.totalBytesWritten
+						totalBytesExpectedToWrite = res.totalBytesExpectedToWrite
+					})
+					let downLoadTime
+					downLoadTime = setInterval(()=>{
+						this.progressFile = parseInt((totalBytesWritten/totalBytesExpectedToWrite) * 100)
+						if(this.progressFile >= 100){
+							clearInterval(downLoadTime)
+						}
+					}, 1000)
+				}
+			},
+			getSystemInfo(){
+				uni.getSystemInfo({
 					success: (res) => {
-						uni.saveFile({
-							tempFilePath: res.tempFilePath,
-							success: (res) => {
-								uni.openDocument({
-									filePath: res.savedFilePath,
-								})
-							}
-						})
-						uni.showToast({
-							title: '下载完成',
-							
-						})
+						this.platform = res.platform
 					}
 				})
-				let progress
-				let totalBytesWritten
-				let totalBytesExpectedToWrite
-				downloadTask.onProgressUpdate((res)=>{
-					progress = res.progress
-					totalBytesWritten = res.totalBytesWritten
-					totalBytesExpectedToWrite = res.totalBytesExpectedToWrite
-				})
-				let downLoadTime
-				downLoadTime = setInterval(()=>{
-					this.progressFile = parseInt((totalBytesWritten/totalBytesExpectedToWrite) * 100)
-					if(this.progressFile >= 100){
-						clearInterval(downLoadTime)
-					}
-				}, 1000)
 			}
 		},
 		created() {
-			this.getVersion()
-			
-			plus.runtime.getProperty(plus.runtime.appid,(wgtinfo)=>{
-				this.versionCode = wgtinfo.versionCode
-			})
 			
 			this.getExchangeRate()
 			this.getMsg()
 			this.getImg()
 			this.getMarket()
 			this.getMoneyData()
+				
 		}
 	}
 </script>
