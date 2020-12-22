@@ -21,7 +21,7 @@
 		</view>
 		<view class="drawIpt">
 			<view class="amountIpt">
-				<input type="text" v-model="amount" @blur="amountNum" placeholder="请输入提现数量">
+				<input type="text" v-model="amount" @input="amountNum" placeholder="请输入提现数量">
 				<view>
 					<text>{{iptTxt}}</text>
 					<text @click="withDrawAll">全部</text>
@@ -29,7 +29,7 @@
 			</view>
 			<view class="amountTip">
 				<text>实际到账: {{actuTotal}}</text>
-				<text>手续费: 固定{{feeAmount}} + {{accMul(feeRatio, 100)}} %</text>
+				<text>手续费: 固定 {{feeAmount}} + {{accMul(feeRatio, 100)}} %</text>
 			</view>
 			<view v-if="addresses.length != 0">
 				<input type="text" v-model="flag" placeholder="已设置的提币地址">
@@ -254,15 +254,7 @@
 			amountNum(){
 				if(this.max >= parseFloat(this.amount) && parseFloat(this.amount) >= this.min){
 					this.isAmount = true
-					this.actuTotal = accAdd(accAdd(this.amount, this.accMul(0.5, -1)), accMul(accMul(this.amount, this.feeRatio), -1))
-				}else{												
-					uni.showToast({
-						image: '../../static/images/wrong.png',
-						title: '提现数量必须在规定范围之内',
-						success: () => {
-							this.amount = ''
-						}
-					})
+					this.actuTotal = accAdd(accAdd(this.amount, this.accMul(this.feeAmount, -1)), accMul(accMul(this.amount, this.feeRatio), -1))
 				}
 			},
 			withDrawAll(){

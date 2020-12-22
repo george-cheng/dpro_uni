@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App'
 import { AjaxJson, UploadRequest} from './utils/request.js'
-import { accMul, accAdd, getLocalTime} from './utils/common.js'
+import { accMul, accAdd, getLocalTime, toDecimal} from './utils/common.js'
 
 Vue.prototype.ajaxJson = AjaxJson
 Vue.prototype.ajaxUpload = UploadRequest
@@ -9,6 +9,7 @@ Vue.prototype.ajaxUpload = UploadRequest
 Vue.prototype.accMul = accMul
 Vue.prototype.accAdd = accAdd
 Vue.prototype.getLocalTime = getLocalTime
+Vue.prototype.toDecimal = toDecimal
 
 Vue.config.productionTip = false
 

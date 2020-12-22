@@ -104,6 +104,17 @@ function getLocalTime(time) {
 	return year+"-"+month+"-"+date+" "+hour+":"+minute+":"+second;
 }
 
+function toDecimal(data, decimal){
+	return Number(data).toFixed(Number(decimal))
+}
+
+function isObject(object){
+	for(let key in object){
+		return false
+	}
+	return true
+}
+
 export{
-	checkEmail, checkPhone, checkPwd, checkNum, checkId, accMul, accAdd, arrayBufferToBase64, transformImgData, uint8arrayToBase64, getLocalTime
+	checkEmail, checkPhone, checkPwd, checkNum, checkId, accMul, accAdd, arrayBufferToBase64, transformImgData, uint8arrayToBase64, getLocalTime, toDecimal, isObject
 }

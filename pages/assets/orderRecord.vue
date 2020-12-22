@@ -10,8 +10,8 @@
 					</view>
 					<view class="topRgt">
 						<text v-if="item.order_status == 1" class="i-rgtArrowAfter">确认下单</text>
-						<text v-if="item.order_status == 2" class="i-rgtArrowAfter">确认付款</text>
-						<text v-if="item.order_status == 3" class="i-rgtArrowAfter">确认收款</text>
+						<text v-if="item.order_status == 2" class="i-rgtArrowAfter">确认已付款</text>
+						<text v-if="item.order_status == 3" class="i-rgtArrowAfter">确认已收款</text>
 						<text v-if="item.order_status == 4" class="i-rgtArrowAfter">已撤销</text>
 					</view>
 				</view>

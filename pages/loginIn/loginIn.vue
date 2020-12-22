@@ -1,7 +1,7 @@
 <template>
 	<view class="mainBox loginIn">
 		<view class="logo">
-			<image src="../../static/logoIn.png" mode=""></image>
+			<image src="../../static/logo.jpg" mode="aspectFit"></image>
 		</view>
 		<view class="loginSwitch">
 			<text :class="[isEmailActive?'textLine' : '']" @click="emailEvent">邮箱登录</text>
@@ -251,6 +251,7 @@
 			height: 152rpx;
 			margin: 0 auto;
 			padding: 110rpx 0 150rpx 0;
+			border-radius: 4rpx;
 			image{
 				width: 100%;
 				height: 100%;

@@ -1,22 +1,22 @@
 <template>
-	<view>
+	<view class="mainBox" >
 		<view class="navBarCon" v-if="isNavBar">
 			<view @click="navBarEvent(0)">抢购收益</view>
 			<view @click="navBarEvent(1)">分享收益</view>
 		</view>
 		
-		<view class="transacMain mainBox">
+		<view class="transacMain">
 			<view class="tranTit">
 				<view class="" v-for="(item, index) in tranNavList" :key="index" @click="tranNavEvent(item, index)" :class="{choiceTran: choiceOn == index}">{{item.name}}</view>
 			</view>
 		</view>
 		
 		<template v-if="choiceOn == 0">
-			<view class="transac mainBox">
+			<view class="transac" @touchmove="touchMove" @touchend="touchEnd" :style="{paddingTop: paddingTop + 'rpx'}">
 				<view class="sacCon">
 					<view class="sacTit">
 						<view class="titLft">
-							<view @click="titMenuEvent">
+							<view @click.stop="titMenuEvent">
 								<span class="titMenu i-menu" ></span>
 								<text>{{titMenu}}</text>
 							</view>
@@ -42,7 +42,7 @@
                 <view v-if="sacOn !== 1">
                   <view class="priceIpt" >
                     <text class="iptPlus">+</text>
-                    <input class="ipt" v-model="iptPrice" type="text" placeholder="价位" disabled>
+                    <input class="ipt" v-model="iptPrice" type="text" placeholder="价位">
                     <text class="iptReduce">-</text>
                   </view>
                   <view class="quantityIpt priceIpt">
@@ -58,7 +58,7 @@
                 <view v-if="sacOn === 1">
                   <view class="priceIpt" >
                     <text class="iptPlus">+</text>
-                    <input class="ipt" v-model="iptPrice" type="text" placeholder="价位" disabled>
+                    <input class="ipt" v-model="iptPrice" type="text" placeholder="价位">
                     <text class="iptReduce">-</text>
                   </view>
                   <view class="quantityIpt priceIpt">
@@ -98,8 +98,8 @@
 								<view class="listTop">
 									<view v-for="(item, index) in reverseTopList" @click="priceEvent(item)" :key="index" v-if="index < 6">
 										<view style="z-index: 9;">
-											<text>{{item.price}}</text>
-											<text>{{item.quantity}}</text>
+											<text>{{toDecimal(item.price, priceDecimals)}}</text>
+											<text>{{toDecimal(item.quantity, amountDecimals)}}</text>
 										</view>
 										<view class="perLine" :style="{width: lineArr[index] + 'rpx'}"></view>
 									</view>
@@ -114,8 +114,8 @@
 								<view class="listTop listBtm">
 									<view v-for="(item, index) in btmList" @click="priceEvent(item)" :key="index" v-if="index < 6">
 										<view style="z-index: 9;">
-											<text>{{item.price}}</text>
-											<text>{{item.quantity}}</text>
+											<text>{{toDecimal(item.price, priceDecimals)}}</text>
+											<text>{{toDecimal(item.quantity, amountDecimals)}}</text>
 										</view>
 										<view class="perLine" :style="{width: btmLineArr[index] + 'rpx'}"></view>
 									</view>
@@ -130,7 +130,7 @@
             </view>
             <view class="remTxt">
               <text>
-                交易前请注意查看净值价格，该产品在极端行情下会存在价格趋近于归零的风险，请投资者注意控制风险。
+								交易前请注意查看净值价格，请正确输入交易数量。
               </text>
             </view>
           </view>
@@ -155,12 +155,17 @@
           </view>
           <view class="enConList">
             <view class="enList" v-for="(item, index) in entrustList" :key="item.id">
-              <view><text>时间</text><text>{{getLocalTime(item.time)}}</text></view>
-              <view><text>价格({{item.buyName}})</text><text>{{item.price}}</text></view>
-              <view><text>数量({{item.sellName}})</text><text>{{item.count}}</text></view>
-              <view><text>成交总额({{item.sellName}})</text><text>{{item.count}}</text></view>
-              <view><text>成交均价</text><text>{{item.avgPrice}}</text></view>
-              <view><text>成交量({{item.buyName}})</text><text>{{item.successAmount}}</text></view>
+							<view class="viewEnList">
+								<view><text>时间</text><text>{{getLocalTime(item.time)}}</text></view>
+								<view><text>价格({{item.buyName}})</text><text>{{item.price}}</text></view>
+								<view><text>数量({{item.sellName}})</text><text>{{item.count}}</text></view>
+								<view><text>成交总额({{item.sellName}})</text><text>{{item.count}}</text></view>
+								<view><text>成交均价</text><text>{{item.avgPrice}}</text></view>
+								<view><text>成交量({{item.buyName}})</text><text>{{item.successAmount}}</text></view>
+							</view>
+							<view class="viewOpera" @click="enCancelEvent(item)">
+								<view>撤单</view>
+							</view>
             </view>
           </view>
 				</view>
@@ -176,6 +181,8 @@
 		<template v-if="choiceOn == 2">
 			<tranLegal />
 		</template>
+		
+		<unitabbar :switchOn = "2"></unitabbar>
 	</view>
 </template>
 <script>
@@ -184,20 +191,22 @@
 	import tranContract from './tranContract/tranContract'
 	import tranLegal from './tranLegal'
 
-  import  { accMul, accAdd, checkNum } from '../../utils/common.js'
+  import  { accMul, accAdd, checkNum, isObject } from '../../utils/common.js'
+	import { unimixin } from '../../utils/unimixin.js'
   import uniPopup from '../../components/uni-popup/uni-popup.vue'
   import uniPopupDialog from '../../components/uni-popup/uni-popup-dialog.vue'
+	
+	import unitabbar from '../../components/uni-tarbar/tarBar.vue'
 
 	export default {
-		components: { transac, tranLegal, tranContract, uniPopup, uniPopupDialog},
+		components: { transac, tranLegal, tranContract, uniPopup, uniPopupDialog, unitabbar},
+		mixins: [ unimixin ],
 		data(){
 			return{
-				choiceOn: 0,
 				tranNavList: [{name: '币币交易'},{name: '合约交易'},{name: '法币交易'}],
 				quotatList: [],
 				isNavBar: false,
-
-
+				choiceOn: 0,
         sacOn: 0,
         enOn: 0,
         last: 0,
@@ -208,7 +217,7 @@
         ffrozen: '0',
         iptQuantity: '',
         totalNum: '',
-        titMenu: 'BTC / USDT',
+        titMenu: 'DPC / USDT',
         lineArr: [],
         btmLineArr: [],
         enConList: [],
@@ -230,27 +239,37 @@
         isTitMenu: false,
         isScoket: false,
 				
-				socketTask: null
+				socketTask: null,
 				
+				priceDecimals: '',
+				amountDecimals: '',
+				
+				isCreated: true,
+				getSocketId: ''
 			}
 		},
 		onLoad(options) {
-			
-		},
-		onShow(){
-			this.choiceOn = uni.getStorageSync('tranAssetsMain')
-			this.titMenu = uni.getStorageSync('moneyDataName')
-			this.moneyDataFid = uni.getStorageSync('moneyDataFid')
-			this.symbolID = this.moneyDataFid
-			this.getEntrustList()
-			this.getSocket(this.moneyDataFid)
-			
-			uni.getStorage({
-				key: 'quotatList',
-				success: (data) => {
-					this.quotatList = data.data
+			if(options.choiceOn == 0){
+				if(options.transacInfo){
+					const transacInfo = JSON.parse(decodeURIComponent(options.transacInfo));
+					if(transacInfo){
+						this.titMenu = transacInfo.fname_sn
+						this.moneyDataFid = this.getSocketId =  transacInfo.fid
+						this.amountDecimals = transacInfo.amountDecimals
+						this.priceDecimals = transacInfo.priceDecimals
+						this.getSocket(this.moneyDataFid)
+						this.choiceOn = options.choiceOn
+						this.isCreated = false
+					}
 				}
-			})
+			}else if(options.choiceOn != 0){
+				this.choiceOn = options.choiceOn
+			}else{
+			}
+		},
+
+		onShow(){
+
 		},
 		onHide() {
 			this.isNavBar = false
@@ -260,15 +279,65 @@
 				key: 'quotatList'
 			})
 		},
-		onTabItemTap(e) {
-			if(e.index == 2){
-				this.choiceOn = 0
-				// this.titMenu = 'BTC / USDT'
-				// this.getSocket('1')
-				// this.getEntrustList('1')
-			}
-		},
 		methods: {
+			touchEnd(){
+				if(this.scrollTop > 0){
+					this.paddingTop = 0
+				}else{
+					if(this.paddingTop > 0){
+						this.paddingTop = 0
+						
+						console.log(this.getSocketId)
+						this.getSocket(this.getSocketId)
+							/* this.getSocket('3')
+							this.priceDecimals = '6'
+							this.amountDecimals = '2' */
+						this.getTitMenuList()
+						this.getEnConList()
+						this.getRate()
+						this.getTotal()
+						this.initTitBuyMenuListEvent()
+						this.getEntrustList()
+					}
+				}
+			},
+			/* 委托撤销 */
+			enCancelEvent(item){
+				this.ajaxJson({
+					url: '/api/v2/market/cancelEntrust',
+					method: 'POST',
+					data: {id: item.id},
+					call: (data)=>{
+						if(data.code == 200){
+							uni.showToast({
+								title: data.msg,
+								success: () => {
+									this.getEntrustList()
+								}
+							})
+						}else{
+							uni.showToast({
+								image: '/static/images/wrong.png',
+								title: data.msg
+							})
+						}
+					}
+				})
+			},
+			getTranMain(moneyDataFid){
+				return
+				this.symbolID = moneyDataFid
+				this.getEntrustList()
+				this.closeWebsocket()
+				this.getSocket(this.symbolID)
+			},
+			
+			// closeWebsocket(){
+			// 	if(this.socketTask != null){
+			// 		this.socketTask.close()
+			// 	}
+			// },
+			
       /* 交易记录  */
       orderHistoryEvent(){
         uni.navigateTo({
@@ -278,27 +347,25 @@
       titMenuEvent(){
         this.isTitMenu = !this.isTitMenu
       },
-			
       getSocket(moneyDataFid){
-				console.log(moneyDataFid)
         this.socketTask = uni.connectSocket({
           url: 'wss://www.dpro.ltd/socket.io/?deep=4&token=dev&symbol=' + moneyDataFid + '&EIO=3&transport=websocket',
           method: 'POST',
           success: (res)=>{
-            console.log('链接成功');
+            console.log('WebSocket连接成功...');
           }
         })
 				
 				this.socketTask.onOpen((res)=>{
-					console.log('WebSocket链接正常打开中....')
+					console.log('WebSocket连接正常打开中...')
 					this.socketTask.send({
 						data: '40/trade',
 						async success(){
-							console.log('消息发送成功')
+							console.log('WebSocket消息发送成功')
 						}
 					})
 					this.socketTask.onMessage((res)=>{
-						console.log('收到服务器内容')
+						console.log('WebSocket接受服务器数据...')
 						let data = res.data.replace("42/trade,","")
 						if(data.indexOf('entrust-buy') !== -1){
 							let obj = []
@@ -307,6 +374,7 @@
 							for(let i in json){
 								obj.push(json[i].replace('[','').replace(']',''))
 							}
+							
 							this.btmList = []
 							for(let i of obj){
 								this.btmList.push({price: i.split(',')[0] , quantity: i.split(',')[1]})
@@ -319,7 +387,7 @@
 							for(let i in json){
 								obj.push(json[i].replace('[','').replace(']',''))
 							}
-							this.topList = []
+							this.topList= []
 							for(let i of obj){
 								this.topList.push({price: i.split(',')[0] , quantity: i.split(',')[1]})
 							}
@@ -447,6 +515,8 @@
                 title: data.msg,
                 success: () => {
                   this.$refs.popup.close()
+									this.getEntrustList()
+									this.titMenuListEvent()
                   uni.setStorage({
                     key: 'tradePwd',
                     data: value,
@@ -537,8 +607,8 @@
       enSwitchEvent(index){
         this.enOn = index
       },
-      async getEnConList(){
-        let params = {id: '48',page: '1',pageSize: '1'}
+      getEnConList(){
+        let params = {id: this.symbolID, page: '1',pageSize: '10'}
 
         this.ajaxJson({
           url: '/api/v1/account/opening',
@@ -574,8 +644,11 @@
         })
       },
       titMenuListEvent(item){
-				uni.setStorageSync('moneyDataName', item.fname_sn)
-				uni.setStorageSync('moneyDataFid', item.fid)
+				this.amountDecimals = item.amountDecimals
+				this.priceDecimals = item.priceDecimals
+				
+				this.getSocketId = item.fid
+				this.socketTask.close()
         this.getSocket(item.fid)
         this.symbolID = item.fid
         let params = {}
@@ -625,13 +698,9 @@
       getEntrustList(index){
 				let params = {}
 				if(!index){
-					params = {
-					  id: this.symbolID
-					}
+					params = {id: this.symbolID}
 				}else{
-					params = {
-					  id: index
-					}
+					params = {id: index}
 				}
         this.ajaxJson({
           url: '/api/v1/account/opening',
@@ -642,13 +711,16 @@
           }
         })
       },
-			
-			
-			
 
 			tranNavEvent(item, index){
 				this.choiceOn = index
 				this.isNavBar = false
+				if(this.choiceOn != 1){
+					let webView = this.$mp.page.$getAppWebview();
+					webView.setTitleNViewButtonStyle(0,{  
+						text: ' ',  
+					})
+				}
 			},
 			navBarEvent(index){
 				if(index == 0){
@@ -664,6 +736,7 @@
 			}
 		},
 		onNavigationBarButtonTap(e) {
+
 			if (e.float == 'right') {
 				if(this.choiceOn == 1){
 					this.isNavBar = !this.isNavBar
@@ -676,21 +749,40 @@
       },
     },
 		created() {
+			console.log(this.isCreated)
+			
+			if(this.isCreated){
+				this.getSocket('3')
+				this.priceDecimals = '6'
+				this.amountDecimals = '2'
+			}
       this.getTitMenuList()
       this.getEnConList()
       this.getRate()
       this.getTotal()
       this.initTitBuyMenuListEvent()
       this.getEntrustList()
-			this.getSocket(1)
 			
-			uni.setStorageSync('moneyDataName', 'BTC / USDT')
-			uni.setStorageSync('moneyDataId', '1')
+			let webView = this.$mp.page.$getAppWebview();
+			webView.setTitleNViewButtonStyle(0,{  
+				text: ' ',  
+			})
 		}
 	}
 </script>
 
 <style scoped lang="scss">
+	.viewOpera{
+		margin-top: 0;
+		display: flex;
+		justify-content: flex-end;
+		view{
+			color: #fff;
+			border: 2px solid #303030;
+			padding: 3rpx 20rpx;
+			border-radius: 8rpx;
+		}
+	}
 	.navBarCon{
 		position: fixed;
 		top: 0;
@@ -1057,61 +1149,61 @@
 			.enConList{
 				margin: 45rpx 30rpx 0;
 				border-top: 2px solid #303030;
-				.enList:last-child{
+				.enList>.viewEnList:last-child{
 					border-bottom: none;
 				}
 				.enList{
-					display: flex;
-					justify-content: space-between;
-					flex-wrap: wrap;
-					border-bottom: 2px solid #303030;
-					view{
+					padding-bottom: 15rpx;
+					.viewEnList{
 						display: flex;
+						justify-content: space-between;
 						flex-wrap: wrap;
-						flex-direction: column;
-						margin-top: 45rpx;
-						
-						padding-bottom: 20rpx;
-						text{
-							font-size: 24rpx;
-							white-space: nowrap;
+						view{
+							display: flex;
+							flex-wrap: wrap;
+							flex-direction: column;
+							margin-top: 15rpx;
+							
+							padding-bottom: 15rpx;
+							text{
+								font-size: 24rpx;
+								white-space: nowrap;
+							}
+							text:nth-of-type(1){
+								font-size: 26rpx;
+								line-height: 26rpx;
+								color: #676869;
+							}
+							text:nth-of-type(2){
+								margin-top: 20rpx;
+								font-size: 24rpx;
+								line-height: 24rpx;
+								color: #fff;
+							}
 						}
-						text:nth-of-type(1){
-							font-size: 26rpx;
-							line-height: 26rpx;
-							color: #676869;
+						view:nth-child(1){
+							width: 270rpx;
 						}
-						text:nth-of-type(2){
-							margin-top: 20rpx;
-							font-size: 24rpx;
-							line-height: 24rpx;
-							color: #fff;
+						view:nth-child(4){
+							width: 270rpx;
 						}
-					}
-					view:nth-child(1){
-						width: 270rpx;
-					}
-					view:nth-child(4){
-						width: 270rpx;
-					}
-					view:nth-child(2){
-						width: 260rpx;
-					}
-					view:nth-child(5){
-						width: 260rpx;
-					}
-					view:nth-child(3){
-						width: 140rpx;
-					}
-					view:nth-child(6){
-						width: 140rpx;
+						view:nth-child(2){
+							width: 260rpx;
+						}
+						view:nth-child(5){
+							width: 260rpx;
+						}
+						view:nth-child(3){
+							width: 140rpx;
+						}
+						view:nth-child(6){
+							width: 140rpx;
+						}
 					}
 				}
 			}
 		}
 	}
-
-
 
 
 </style>

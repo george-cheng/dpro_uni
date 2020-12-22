@@ -89,7 +89,7 @@
 								uni.showToast({
 									title: data.msg,
 									success: () => {
-										uni.switchTab({
+										uni.reLaunch({
 											url: '/pages/my/my'
 										})
 									}

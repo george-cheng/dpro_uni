@@ -4,7 +4,8 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "Dpro"
+				"navigationBarTitleText": "Dpro",
+				"enablePullDownRefresh": false
 			}
 		},
 		{
@@ -162,7 +163,7 @@
 			"style" :                                                                                    
 			{
 				"navigationBarTitleText": "",
-				"enablePullDownRefresh": true
+				"enablePullDownRefresh": false
 			}
 		}
 		,{
@@ -299,7 +300,7 @@
 			"path" : "pages/assets/assTransfer",
 			"style" :                                                                                    
 			{
-				"navigationBarTitleText": "划转",
+				"navigationBarTitleText": "兑换",
 				"enablePullDownRefresh": false
 			}
 		}
@@ -412,7 +413,15 @@
 				"navigationBarTitleText": "交易记录",
 				"enablePullDownRefresh": false
 			}
+		}
+		,{
+			"path" : "pages/my/personal/personal",
+			"style" :                                                                                    
+			{
+					"navigationBarTitleText": "个人中心",
+					"enablePullDownRefresh": false
 			}
+		}
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
@@ -420,43 +429,43 @@
 		"navigationBarBackgroundColor": "#282828",
 		"backgroundColor": "#282828"
 	},
-	"tabBar": {
-		"selectedColor": "#BD3A3B",
-		"color": "#999999",
-		"backgroundColor": "#282828",
-		"list": [
-			{
-				"text": "首页",
-				"pagePath": "pages/index/index",
-				"iconPath": "static/icon/home.png",
-				"selectedIconPath": "static/icon/homeSelect.png"
-			},
-			{
-				"text": "行情",
-				"pagePath": "pages/quotation/quotation",
-				"iconPath": "static/icon/quotation.png",
-				"selectedIconPath": "static/icon/quotationSelect.png"
-			},
-			{
-				"text": "交易",
-				"pagePath": "pages/transac/transacMain",
-				"iconPath": "static/icon/transac.png",
-				"selectedIconPath": "static/icon/transacSelect.png"
-			},
-			{
-				"text": "资产",
-				"pagePath": "pages/assets/assets",
-				"iconPath": "static/icon/assets.png",
-				"selectedIconPath": "static/icon/assetsSelect.png"
-			},
-			{
-				"text": "我的",
-				"pagePath": "pages/my/my",
-				"iconPath": "static/icon/my.png",
-				"selectedIconPath": "static/icon/mySelect.png"
-			}
-		]
-	},
+	// "tabBar": {
+	// 	"selectedColor": "#BD3A3B",
+	// 	"color": "#999999",
+	// 	"backgroundColor": "#282828",
+	// 	"list": [
+	// 		{
+	// 			"text": "首页",
+	// 			"pagePath": "pages/index/index",
+	// 			"iconPath": "static/icon/home.png",
+	// 			"selectedIconPath": "static/icon/homeSelect.png"
+	// 		},
+	// 		{
+	// 			"text": "行情",
+	// 			"pagePath": "pages/quotation/quotation",
+	// 			"iconPath": "static/icon/quotation.png",
+	// 			"selectedIconPath": "static/icon/quotationSelect.png"
+	// 		},
+	// 		{
+	// 			"text": "交易",
+	// 			"pagePath": "pages/transac/transacMain",
+	// 			"iconPath": "static/icon/transac.png",
+	// 			"selectedIconPath": "static/icon/transacSelect.png"
+	// 		},
+	// 		{
+	// 			"text": "资产",
+	// 			"pagePath": "pages/assets/assets",
+	// 			"iconPath": "static/icon/assets.png",
+	// 			"selectedIconPath": "static/icon/assetsSelect.png"
+	// 		},
+	// 		{
+	// 			"text": "我的",
+	// 			"pagePath": "pages/my/my",
+	// 			"iconPath": "static/icon/my.png",
+	// 			"selectedIconPath": "static/icon/mySelect.png"
+	// 		}
+	// 	]
+	// },
 	"condition" : { //模式配置，仅开发期间生效
 		"current": 0, //当前激活的模式(list 的索引项)
 		"list": [

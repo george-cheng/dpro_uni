@@ -6,13 +6,13 @@
 		</view>
 		<view class="assRecordTit">
 			<view>币种</view>
-			<view>时间</view>
+			<view style="margin-right: 20rpx;">时间</view>
 			<view>金额</view>
 		</view>
 		<view class="assRecordList">
 			<view v-for="(item, index) in assRecordList" :key="index">
 				<view class="kind">{{item.name}}</view>
-				<view class="time">getLocalTime(1590044400)</view>
+				<view class="time">{{getLocalTime(item.time)}}</view>
 				<view class="money">{{item.amount}}</view>
 			</view>
 		</view>
@@ -82,6 +82,7 @@
 				}
 			},
 			getAssRecord(){
+				this.assRecordList = []
 				let params = {
 					symbol: this.symbol,
 					page: this.page, 
@@ -96,6 +97,7 @@
 					data: params,
 					method: "POST",
 					call: (res)=>{
+						
 						this.pageTotal = res.data.total
 						this.assRecordList = [...this.assRecordList, ...res.data.rows]
 					}
@@ -158,7 +160,7 @@
 					font-size: 26rpx;
 				}
 				.time{
-					margin-left: 40rpx;
+					white-space: nowrap;
 				}
 				.money{
 					font-size: 30rpx;

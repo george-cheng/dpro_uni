@@ -1,5 +1,5 @@
 <template>
-	<view class="tranContract mainBox">
+	<view class="tranContract mainBox" @touchmove="touchMove" @touchend="touchEnd" :style="{paddingTop: paddingTop + 'rpx'}">
 		<view class="tractCon">
 			<view class="enConList">
 				<view class="enList" v-for="(item, index) in contractList" :key="item.id">
@@ -14,7 +14,7 @@
 			</view>
 			
 			<view class="tractBtn">
-				<view @click="tranctBtnEvent(0)">立即抢购</view>
+				<view @click="tranctBtnEvent(0)">抢1单</view>
 				<view @click="tranctBtnEvent(1)">委托抢购</view>
 				<view @click="tranctBtnEvent(2)">合约资产</view>
 <!-- 				<view @click="tranctBtnEvent(3)">抢购收益</view>
@@ -26,7 +26,9 @@
 </template>
 
 <script>
+	import {unimixin} from '../../../utils/unimixin.js'
 	export default {
+		mixins: [unimixin],
 		data(){
 			return{
 				contractList: [],
@@ -35,7 +37,8 @@
 				pageSize: 10,
 				pageNum: 0,
 				pageTotal: 0,
-				isFlag: true
+				isFlag: true,
+				
 			}
 		},
 		onLoad() {
@@ -52,6 +55,17 @@
 		},
 
 		methods: {
+			touchEnd(){
+				if(this.scrollTop > 0){
+					this.paddingTop = 0
+				}else{
+					if(this.paddingTop > 0){
+					this.getContractList()
+						this.paddingTop = 0
+					}
+				}
+			},
+
 			tranctBtnEvent(index){
 				if(index === 0){
 					this.rushPurchaseNowEvent()
@@ -63,12 +77,11 @@
 						clearInterval(timer)
 						let timer = setInterval(()=>{
 							count ++ 
-							if(this.isFlag){
-								this.rushPurchaseNowEvent()
-							}
 							if(count >= 10){
 								clearInterval(timer)
-								count = 10
+							}
+							if(this.isFlag){
+								this.rushPurchaseNowEvent()
 							}
 						}, 3000)
 					}
@@ -77,9 +90,7 @@
 						url: '/pages/transac/tranContract/tranAssets'
 					})
 				}
-				
-				
-				
+
 				
 				/* else if(index === 3){
 					uni.navigateTo({
@@ -101,9 +112,10 @@
 							uni.showToast({
 								title: data.msg
 							})
-						}else if(data.code != 500){
-							this.isFlag = false
+						}else if(data.code == 500){
+							this.isFlag = true
 						} else{
+							this.isFlag = false
 							uni.showToast({
 								image: '/static/images/wrong.png',
 								title: data.msg
@@ -127,6 +139,10 @@
 		},
 		created() {
 			this.getContractList()
+			let webView = this.$mp.page.$getAppWebview();
+			webView.setTitleNViewButtonStyle(0,{  
+				text: '\ue91d',  
+			})
 		}
 	}
 </script>
@@ -138,7 +154,6 @@
 		.tractCon{
 			.enConList{
 				padding: 45rpx 30rpx 0;
-				border-top: 2px solid #303030;
 				.enList:last-child{
 					border-bottom: none;
 				}

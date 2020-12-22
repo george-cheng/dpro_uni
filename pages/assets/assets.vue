@@ -1,5 +1,5 @@
 <template>
-	<view class="assets mainBox">
+	<view class="assets mainBox" @touchmove="touchMove" @touchend="touchEnd" :style="{paddingTop: paddingTop + 'rpx'}">
 		<view class="navBarCon" v-if="isNavBar">
 			<view @click="navBarEvent(0)">充值记录</view>
 			<view  @click="navBarEvent(1)">提币记录</view>
@@ -74,11 +74,11 @@
 			</view>
 			<view class="tranQuantity">
 				<view>
-					<input type="text" v-model="accQuantity" placeholder="请输入划入数量(USDT)">
+					<input class="tranQuantityIpt" type="text" v-model="accQuantity" placeholder="请输入划入数量(USDT)">
 					<view class="quantityInfo">
-						<text @click="transferEvent(0)">划转</text>
-						<span class="verLine"></span>
-						<text @click="transferEvent(1)">全部划转</text>
+						<text class="tranQuantityBtn" @click="transferEvent(0)">划转</text>
+						<span v-if="false" class="verLine"></span>
+						<text v-if="false" @click="transferEvent(1)">全部划转</text>
 					</view>
 				</view>
 			</view>
@@ -106,7 +106,6 @@
 					</view>
 					<view class="lftInfo">
 						<text class="infoTit">{{item.name}}</text>
-						<text class="infoIntro">{{item.lastDealPrize}}</text>
 						<text class="infoIntro">{{item.allName}}</text>
 					</view>
 				</view>
@@ -123,17 +122,22 @@
 			<view class="popupCon">
 				<view @click="popupEvent(0)" v-if="isPopupRecharge">充值</view>
 				<view @click="popupEvent(1)" v-if="isPopupWithDraw">提币</view>
-				<view @click="popupEvent(2)" v-if="isPopupTransfer">划转</view>
+				<view @click="popupEvent(2)" v-if="isPopupTransfer">兑换</view>
 			</view>
 		</uni-popup>
+		
+		<unitabbar :switchOn = "3"></unitabbar>
 	</view>
 </template>
 
 <script>
-	import uniPopup from '@/components/uni-popup/uni-popup.vue'
 	import { accAdd, accMul } from '../../utils/common.js'
+	import uniPopup from '@/components/uni-popup/uni-popup.vue'
+	import unitabbar from '../../components/uni-tarbar/tarBar.vue'
+	import { unimixin } from '../../utils/unimixin.js'
 	export default{
-		components: {uniPopup},
+		components: {uniPopup, unitabbar},
+		mixins: [unimixin],
 		data(){
 			return{
 				totalMoney: '9807',
@@ -148,7 +152,6 @@
 				searchIpt: '',
 				conList: ['法币账户1','法币账户2','法币账户3','法币账户4','法币账户5','法币账户6'],
 				isNavBar: false,
-				url: 'https://dpro-main.oss-cn-hongkong.aliyuncs.com/',
 				isPopupRecharge: false,
 				isPopupWithDraw: false,
 				isPopupTransfer: false,
@@ -164,12 +167,14 @@
 				legAcc: '0',
 				
 				isTranAcc: true,
-				isVerificat: false
+				isVerificat: false,
+				
+				DPCTotal: '',
+				DPCLastDealPrize: '',
 				
 			}
 		},
 		onLoad() {
-			uni.startPullDownRefresh();
 		},
 		onNavigationBarButtonTap(e) {
 			if (e.float == 'right') {
@@ -177,9 +182,26 @@
 			}
 		},
 		onShow(){
-			this.getAssetsList()
+			
 		},
 		methods:{
+			touchEnd(){
+				if(this.scrollTop > 0){
+					this.paddingTop = 0
+				}else{
+					if(this.paddingTop > 0){
+						this.moneyAdd = 0
+						this.usdtMoneyAdd = 0
+						this.legAcc = 0
+						this.getAssetsList()
+						this.getLegAcc()
+						this.getRage()
+						this.assetsTranInfo()
+						this.paddingTop = 0
+					}
+				}
+			},
+
 			/* 资产划转 */
 			assetsTranInfo(){
 				this.ajaxJson({
@@ -242,6 +264,13 @@
 				this.isPopupTransfer = false
 				if(item.name === 'DPC'){
 					this.isPopupTransfer = true
+					this.DPCTotal = item.total
+					for(let i in this.usdtList){
+						if(this.usdtList[i].fShortName == 'DPC'){
+							this.DPCLastDealPrize = this.usdtList[i].lastDealPrize
+						}
+					}
+					
 				}
 				this.assetsId = item.id
 				this.imgUrl = item.url
@@ -267,7 +296,7 @@
 					})
 				}else if(index == 2){
 					uni.navigateTo({
-						url: './assTransfer?id=' + this.assetsId,
+						url: './assTransfer?id=' + this.assetsId + '&total=' + this.DPCTotal + '&lastDealPrize=' + this.DPCLastDealPrize,
 						success: () => {
 							this.$refs.popup.close()
 						}
@@ -321,7 +350,7 @@
 						this.isVerificat = true
 					}else{
 						uni.showToast({
-							image: '../../static/images/wrong.png',
+							icon: 'none',
 							title: '划转数量不在范围内或不能为空,请重新输入',
 							success: () => {
 								this.isVerificat = false
@@ -561,7 +590,7 @@
 		.assetsTran{
 			margin: 60rpx 80rpx 0;
 			.tranAcc{
-				height: 80rpx;
+				height: 70rpx;
 				border: 1px solid #676869;
 				border-radius: 8rpx;
 				display: flex;
@@ -602,19 +631,26 @@
 			}
 			.tranQuantity{
 				margin-top: 26rpx;
-				height: 80rpx;
-				border: 1px solid #676869;
-				border-radius: 8rpx;
+				height: 70rpx;
+
 				position: relative;
 				view{
 					display: flex;
 					align-items: center;
 					input{
-						height: 80rpx;
+						height: 70rpx;
+						width: 450rpx;
+						border: 1px solid #676869;
+						border-radius: 8rpx;
 					}
 					.quantityInfo{
+						.tranQuantityBtn{
+							border: 1px solid #676869;
+							padding: 22rpx 25rpx;
+							border-radius: 8rpx;
+						}
 						position: absolute;
-						right: 10rpx;
+						right: 5rpx;
 						text{
 							font-size: 26rpx;
 							line-height: 26rpx;
@@ -712,11 +748,17 @@
 							font-size: 26rpx;
 							line-height: 26rpx;
 							color: #fff;
+							width: 100rpx;
+							display: flex;
+							justify-content: flex-start;
 						}
 						.infoIntro{
 							font-size: 22rpx;
 							line-height: 22rpx;
 							color: #676869;
+							width: 100rpx;
+							display: flex;
+							justify-content: flex-start;
 						}
 					}
 				}

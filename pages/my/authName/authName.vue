@@ -61,7 +61,7 @@
 		methods: {
 			cancel(){
 				this.$refs.popup.close()
-				uni.switchTab({
+				uni.reLaunch({
 					url: '/pages/my/my'
 				})
 			},

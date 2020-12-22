@@ -1,5 +1,5 @@
 <template>
-	<view class="tranLegal mainBox">
+	<view class="tranLegal mainBox" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd" :style="{paddingTop: paddingTop + 'rpx'}">
 		<view class="tranCon">
 			<view class="realName"  @click="nameRgtEvent(userInfo.authDeep)">
 				<view class="nameLft">
@@ -110,7 +110,7 @@
 							<text>1400</text>
 						</view> -->
 						<view class="orderStatus">
-							<text>{{item.status === 1 ? '发布中' : '已撤销'}}</text>
+							<text>{{item.status === 1 ? '购买' : '已撤销'}}</text>
 							<span class="statusIco i-lftArrow"></span>
 						</view>
 					</view>
@@ -129,8 +129,6 @@
 			</uni-popup-share>
 		</uni-popup>
 
-		
-		
 	</view>
 </template>
 
@@ -138,8 +136,10 @@
 	import uniPopup from '@/components/uni-popup/uni-popup.vue'
 	import uniPopupShare from '../../components/uni-popup/uni-popup-share.vue'
 	import { accMul } from '../../utils/common.js'
+	import { unimixin } from '../../utils/unimixin.js'
 	export default {
 		name: 'tranLegal',
+		mixins: [ unimixin ],
 		data(){
 			return{
 				tranOn: 0,
@@ -169,7 +169,10 @@
 				maxQuota: '',
 				payMoney: '0',
 				market_id: '0',
-				isVerifica: false
+				trans_id: '',
+				isVerifica: false,
+				
+				
 			}
 		},
 		components: { uniPopup, uniPopupShare },
@@ -189,6 +192,19 @@
 			}
 		},
 		methods: {
+			touchEnd(){
+				if(this.scrollTop > 0){
+					this.paddingTop = 0
+				}else{
+					if(this.paddingTop > 0){
+						this.getUserInfo()
+						this.getLegalKind()
+						this.getOrderList()
+						this.paddingTop = 0
+					}
+				}
+			},
+
 			calcTotalEvent(){
 				if(parseInt(this.popupQuantity) > this.maxQuota){
 					uni.showToast({
@@ -224,16 +240,14 @@
 						title: '数量不能为空'
 					})
 				}else{
-					
 					if(this.isVerifica){
 						let params = {
-							market_id: this.market_id,
+							trans_id: this.trans_id,
 							price: this.popupPrice,
 							amount: this.popupQuantity,
-							type: '1'
 						}
 						this.ajaxJson({
-							url: '/api/v1/otcOrder/enterOrder',
+							url: '/api/v1/otcOrder/enterOrderByTrans',
 							method: 'POST',
 							data: params,
 							call: (data)=>{
@@ -266,6 +280,7 @@
 				this.minQuota = this.kindList[0].min_trans
 				this.maxQuota = item.amount
 				this.market_id = item.market_id
+				this.trans_id = item.trans_id
 			},
 			tranBuyEvent(){
 				this.tranOn = 0
@@ -417,7 +432,10 @@
 			this.getLegalKind()
 			this.getOrderList()
 			
-
+			let webView = this.$mp.page.$getAppWebview();
+			webView.setTitleNViewButtonStyle(0,{  
+				text: ' ',  
+			})
 		}
 	}
 </script>

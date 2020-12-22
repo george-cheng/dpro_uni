@@ -1,32 +1,46 @@
 <template>
 	<view class="transfer mainBox">
+		<view class="transferTotal">可用余额：{{total}} DPC</view>
 		<view class="transferIpt">
-			<input type="number" v-model="amount" placeholder="请输入划转数量">
+			<input type="number" v-model="amount" placeholder="请输入兑换数量" @input="amountCalc">
+		</view>
+		<view class="transferRate">
+			<view class="transferExchange">DPC：{{lastDealPrize}}</view>
+			<view class="transferResult" v-if="amount">≈ {{transferResult}}</view>
 		</view>
 		<view class="transferBtn">
-			<button type="default" @click="transferEvent">划转</button>
+			<button type="default" @click="transferEvent">兑换</button>
 		</view>
+		
 	</view>
 </template>
 
 <script>
-	import { checkNum } from '../../utils/common.js'
+	import { checkNum, accMul } from '../../utils/common.js'
 	export default {
 		data(){
 			return{
 				amount: '',
 				id: '',
+				total: '',
+				lastDealPrize: '',
+				transferResult: '0',
 			}
 		},
 		onLoad(options) {
 			this.id = options.id
+			this.total = options.total
+			this.lastDealPrize = options.lastDealPrize
 		},
 		methods: {
+			amountCalc(){
+				this.transferResult = accMul(this.lastDealPrize, this.amount).toFixed(2)
+			},
 			transferEvent(){
 				if(checkNum(this.amount)){
 					uni.showToast({
 						image: '../../static/images/wrong.png',
-						title: '划转数量输入不正确，请重新输入',
+						title: '兑换数量输入不正确，请重新输入',
 						success: () => {
 							this.amount = ''
 						}
@@ -41,7 +55,7 @@
 								uni.showToast({
 									title: data.msg,
 									success: () => {
-										uni.switchTab({
+										uni.reLaunch({
 											url: '/pages/assets/assets'
 										})
 									}
@@ -65,6 +79,20 @@
 
 <style scoped lang="scss">
 	.transfer{
+		
+		.transferTotal{
+			margin: 20rpx 50rpx;
+			color: #fff;
+			font-size: 24rpx;
+		}
+		
+		.transferRate{
+			display: flex;
+			justify-content: space-between;
+			margin: 20rpx 50rpx;
+			color: #fff;
+			font-size: 24rpx;
+		}
 		.transferIpt{
 			input{
 				margin: 20rpx auto 0;

@@ -5,8 +5,8 @@
 		</view>
 		<text class="loadTip">正在审核</text>
 		<text class="loadTxt">请您耐心等待...</text>
-		<view class="loginBtn">
-			<button @click="authBack" type="default">返回</button>
+		<view class="loginBtn" @click="authBack">
+			<button type="default">返回</button>
 		</view>
 	</view>
 </template>
@@ -23,7 +23,7 @@
 		},
 		methods: {
 			authBack(){
-				uni.switchTab({
+				uni.reLaunch({
 					url: '/pages/my/my'
 				})
 			}

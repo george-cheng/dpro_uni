@@ -3,7 +3,7 @@
 		<view class="perInfo">
 			<view class="lft">
 				<view class="userImg">
-					<image src="../../static/logo.png" mode=""></image>
+					<image src="../../static/logo.jpg" mode=""></image>
 				</view>
 			</view>
 			<view class="rgt">
@@ -11,6 +11,7 @@
 					<view class="rgtTopName">
 						<text>昵称：{{userInfo.nick}}</text>
 						<view class="userEdit i-edit" @click="changeNickName"></view>
+						<view class="rgtTopId">UID：{{userInfo.id}}</view>
 					</view>
 					<text class="userName">{{userInfo.loginName}}</text>
 				</view>
@@ -47,6 +48,16 @@
 					<view class="conIcon i-rgtArrow"></view>
 				</view>
 			</view>
+			<view  @click="myArrowEvent(8)">
+				<view class="conLft">
+					<view class="conIcon i-security"></view>
+					<text class="lftTit">个人中心</text>
+				</view>
+				<view class="conRgt">
+					<text class="rgtInfo"></text>
+					<view class="conIcon i-rgtArrow"></view>
+				</view>
+			</view>
 			<view  @click="myArrowEvent(2)">
 				<view class="conLft">
 					<view class="conIcon i-invita"></view>
@@ -60,24 +71,24 @@
 			<view  @click="myArrowEvent(3)">
 				<view class="conLft">
 					<view class="conIcon i-tran"></view>
-					<text class="lftTit">交易挖矿</text>
+					<text class="lftTit">收款方式</text>
 				</view>
 				<view class="conRgt">
 					<text class="rgtInfo"></text>
-					<view class="conIcon"></view>
+					<view class="conIcon i-rgtArrow"></view>
 				</view>
 			</view>
 			<view  @click="myArrowEvent(4)">
 				<view class="conLft">
 					<view class="conIcon i-order"></view>
-					<text class="lftTit">我的订单</text>
+					<text class="lftTit">申请商家</text>
 				</view>
 				<view class="conRgt">
 					<text class="rgtInfo"></text>
-					<view class="conIcon"></view>
+					<view class="conIcon i-rgtArrow"></view>
 				</view>
 			</view>
-			<view  @click="myArrowEvent(5)">
+			<view  @click="myArrowEvent(5)" v-if="false">
 				<view class="conLft">
 					<view class="conIcon i-language"></view>
 					<text class="lftTit">语言设置</text>
@@ -87,7 +98,7 @@
 					<view class="conIcon i-rgtArrow"></view>
 				</view>
 			</view>
-			<view  @click="myArrowEvent(6)">
+			<view  @click="myArrowEvent(6)" v-if="false">
 				<view class="conLft">
 					<view class="conIcon i-about"></view>
 					<text class="lftTit">关于我们</text>
@@ -104,28 +115,31 @@
 				</view>
 				<view class="conRgt">
 					<text class="rgtInfo"></text>
-					<view class="conIcon"></view>
+					<view class="conIcon i-rgtArrow"></view>
 				</view>
 			</view>
 		</view>
 		
 		<uni-popup ref="popup" type="dialog">
-		    <uni-popup-dialog title="修改昵称" :duration="2000" mode="input" placeholder="请输入昵称" :before-close="true" @close="close" @confirm="confirm"></uni-popup-dialog>
+			<uni-popup-dialog title="修改昵称" :duration="2000" mode="input" placeholder="请输入昵称" :before-close="true" @close="close" @confirm="confirm"></uni-popup-dialog>
 		</uni-popup>
 		
+		<unitabbar :switchOn = "4"></unitabbar>
 	</view>
 </template>
 
 <script>
 	import uniPopup from '../../components/uni-popup/uni-popup.vue'
 	import uniPopupDialog from '../../components/uni-popup/uni-popup-dialog.vue'
+	import unitabbar from '../../components/uni-tarbar/tarBar.vue'
 	export default {
-		components: { uniPopup, uniPopupDialog },
+		components: { uniPopup, uniPopupDialog, unitabbar},
 		data(){
 			return {
 				name: '',
 				userInfo: '',
 				nickIpt: '',
+				qq: '2562095187',
 				authTxt: '未认证'
 			}
 		},
@@ -195,12 +209,27 @@
 					uni.navigateTo({
 						url: '../personal/safeCenter/safeCenter',
 						success: () => {
-							
 						}
 					})
 				}else if(index == 2){
 					uni.navigateTo({
 						url: './invitaIncome/invitaIncome'
+					})
+				}else if(index == 3){
+					uni.navigateTo({
+						url: '/pages/my/mySetting/payMethod',
+						success: () => {
+							
+						}
+					})
+				}else if(index == 7){
+					plus.runtime.openURL('mqq://im/chat?chat_type=wpa&uin=' + this.qq + '&version=1&src_type=web ');
+				}else if(index == 8){
+					uni.navigateTo({
+						url: '/pages/my/personal/personal',
+						success: () => {
+							
+						}
 					})
 				}
 			},
@@ -268,8 +297,8 @@
 				height: 110rpx;
 				background-color: #303030;
 				image{
-					width: 50%;
-					height: 50%;
+					width: 80%;
+					height: 80%;
 					border-radius: 50%;
 				}
 			}
@@ -298,6 +327,9 @@
 					color: #fff;
 					display: flex;
 					flex-wrap: nowrap;
+				}
+				.rgtTopId{
+					margin-left: 20rpx;
 				}
 			}
 			.rgtBtm{
@@ -330,15 +362,14 @@
 			align-items: center;
 			justify-content: space-between;
 			margin: 0 10rpx;
-			color: #fff;
+			color: #f2f2f2;
 			border-top: 1px solid #383838;
 			.conLft{
 				
 			}
 			.conRgt{
 				.conIcon{
-					
-				color: #676869;
+					color: #676869;
 				}
 			}
 		}

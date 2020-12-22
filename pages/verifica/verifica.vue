@@ -77,7 +77,7 @@
 							uni.showToast({
 								title: '登录成功',
 								success: () => {
-									uni.switchTab({
+									uni.reLaunch({
 										url: '../index/index'
 									})
 								}

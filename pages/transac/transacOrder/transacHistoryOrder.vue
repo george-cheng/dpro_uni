@@ -11,10 +11,10 @@
 					<view><text>手续费</text><text>{{item.fee}}</text></view>
 					<view class="state">
 						<text>状态</text>
-						<text v-if="item.status == 0">未成交</text>
-						<text v-if="item.status == 1">部分成交</text>
-						<text v-if="item.status == 2">完全成交</text>
-						<text v-if="item.status == 3">取消</text>
+						<text v-if="item.status == 1">未成交</text>
+						<text v-if="item.status == 2">部分成交</text>
+						<text v-if="item.status == 3">完全成交</text>
+						<text v-if="item.status == 4">取消</text>
 					</view>
 				</view>
 			</view>
@@ -95,7 +95,7 @@
 						margin-top: 0;
 						text:nth-of-type(2){
 							margin-top: 0;
-							margin-right: 70rpx;
+							margin-right: 50rpx;
 						}
 					}
 					view{

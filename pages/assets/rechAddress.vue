@@ -1,7 +1,7 @@
 <template>
 	<view class="rechAdd mainBox">
 		<view class="rechTit">
-				<view>{{name}}</view>
+				<view>{{rechInfo.name}}</view>
 				<view>
 				</view>
 		</view>
@@ -9,10 +9,10 @@
 			<canvas @click="downloadQrcode" canvas-id="qrcode" style="width: 225px; height: 225px;"></canvas>
 		</view>
 		<view class="saveQrcode">长按保存相册</view>
-		<view class="addresTxt">BTC充值地址</view>
+		<view class="addresTxt">{{rechInfo.name}}充值地址</view>
 		<view class="addIpt">
-			<input type="text" v-model="address" disabled>
-			<span class="copy" @click="copyEvent(address)">复制</span>
+			<input type="text" v-model="rechInfo.address" disabled>
+			<span class="copy" @click="copyEvent(rechInfo.address)">复制</span>
 		</view>
 		<view class="addTip">
 			<view> · 禁止向地址充值当前之外的资产，任何冲入当前币种地址的非当 前币种资产将不可找回</view>
@@ -30,8 +30,10 @@
 			return{
 				addressId: '',
 				name: '',
+				nameAddress: '',
 				qrcodeUrl: '',
-				address: ''
+				address: '',
+				rechInfo: []
 			}
 		},
 		onLoad(options) {
@@ -59,14 +61,13 @@
 			getInfoAddress(){
 				let params = {
 					symbol: this.addressId,
-					create: false
+					create: true
 				}
 				this.ajaxJson({
 					url: '/api/v1/account/getCoinAddress',
 					data: params,
 					call: (data)=>{
-						this.name = data.data.name
-						this.address = data.data.address
+						this.rechInfo = data.data
 						this.make()
 					}
 				})

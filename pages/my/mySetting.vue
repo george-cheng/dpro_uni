@@ -4,11 +4,11 @@
 			<view  @click="myArrowEvent(0)">
 				<view class="conLft">
 					<view class="conIcon"></view>
-					<text class="lftTit">收款方式</text>
+					<text class="lftTit">语言设置</text>
 				</view>
 				<view class="conRgt">
-					<text class="rgtInfo"></text>
-					<view class="conIcon i-rgtArrow"></view>
+					<text class="rgtInfo">简体中文</text>
+					<view class="conIcon"></view>
 				</view>
 			</view>
 		</view>
@@ -30,11 +30,7 @@
 		},
 		methods: {
 			myArrowEvent(index){
-				if(index == 0){
-					uni.navigateTo({
-						url: './mySetting/payMethod'
-					})
-				}
+				
 			},
 			layoutEvent(){
 				this.ajaxJson({

@@ -1,5 +1,5 @@
 <template>
-	<view class="home mainBox">
+	<view class="home mainBox" @touchmove="touchMove" @touchend="touchEnd" :style="{paddingTop: paddingTop + 'rpx'}">
 		<swiper indicator-dots circular autoplay interval="3000">
 			<swiper-item v-for="item in swipers" :key="item.id">
 				<image :src="url + item.image_url"></image>
@@ -13,42 +13,40 @@
 		</swiper>
 
 		<view class="content">
-			<view v-for="(item, index) in moneyData" :key="item.fid" v-if="index < 3" @click="moneyDataEvent(item)">
-				<image class="image" :src="url + item.furl"></image>
+			<view v-for="(item, index) in moneyDataList" :key="item.fid" v-if="index < 3" @click="moneyDataEvent(item)">
+				<image class="image" :src="url + item.furl" v-if="false"></image>
 				<text class="kind">{{item.fShortName}} / {{item.group}}</text>
 				<text class="money">{{item.lastDealPrize}}</text>
-				<text class="per" :style="{color: parseFloat(item.fupanddown) > 0 ? '#3ba987' : '#bd3a3b'}">{{item.fupanddown}}%</text>
+				<text class="per" :style="{color: parseFloat(item.fupanddown) > 0 ? '#3ba987' : '#bd3a3b'}">{{parseFloat(item.fupanddown) > 0 ?  '+' + item.fupanddown : item.fupanddown}}%</text>
 				<text class="cny"> ≈ {{accMul(item.lastDealPrize, usdtRate).toFixed(2)}} CNY</text>
 			</view>
 		</view>
 		
 		<view class="info">
-			<!-- <navigator url="../transac/transac?num=1" open-type="switchTab"> -->
-				<view class="quickMoney" @click="tranAssetsMain('2')">
-					<text>快捷买币</text>
-					<text>支持btc/usdt/eth等</text>
-					<view class="image">
-						<image src="../../static/images/quickMoney.png"></image>
-					</view>
+			<view class="quickMoney" @click="tranAssetsMain('2')">
+				<text class="colorRed">快捷买币</text>
+				<text>支持USDT</text>
+				<view class="image">
+					<image src="../../static/images/payMethod.png" mode="aspectFit"></image>
 				</view>
-			<!-- </navigator> -->
+			</view>
 			<view class="rgt">
 				<view class="cooTran" @click="tranAssetsMain('1')">
 					<image src="../../static/images/cooTran.png"></image>
-					<text>合约交易</text>
+					<text class="colorRed">合约交易</text>
 				</view>
-				<view class="helpCen">
-					<image src="../../static/images/helpCen.png"></image>
-					<text>红包</text>
+				<view class="redPackage">
+					<image src="../../static/images/redPackage.png" mode="aspectFit"></image>
+					<text class="colorRed">红包</text>
 				</view>
 			</view>
 		</view>
 		
-		<view class="invita">
+		<view class="invita" @click="invitaEvent">
 			<view class="invitaCon">
 				<view class="lft">
-					<image src="../../static/icon/assets.png"></image>
-					<text>邀请好友注册即送10 USTD</text>
+					<image src="../../static/images/invita.png" mode="aspectFit"></image>
+					<text class="colorRed">邀请好友送红包</text>
 				</view>
 				<view class="invitaBtn" v-if="false">
 					<button class="btnTxt">去邀请</button>
@@ -65,7 +63,7 @@
 						<text>{{item.fShortName}} / {{item.group}}</text>
 					</view>
 					<text class="money">{{item.lastDealPrize}}</text>
-					<text :style="{color: parseFloat(item.fupanddown)>0?'#3ba987':'#bd3a3b'}">{{item.fupanddown}}%</text>
+					<text :style="{color: parseFloat(item.fupanddown)>0?'#3ba987':'#bd3a3b'}">{{parseFloat(item.fupanddown) > 0 ?  '+' + item.fupanddown : item.fupanddown}}%</text>
 				</view>
 			</view>
 		</view>
@@ -79,6 +77,9 @@
 				</uni-popup-dialog>
 		</uni-popup>
 		
+		<view>{{moneyDataList}}</view>
+		
+		<unitabbar :switchOn = "0"></unitabbar>
 		
 	</view>
 </template>
@@ -86,12 +87,17 @@
 <script>
 	import uniPopup from '@/components/uni-popup/uni-popup.vue'
 	import uniPopupDialog from '@/components/uni-popup/uni-popup-dialog.vue'
+	import unitabbar from '../../components/uni-tarbar/tarBar.vue'
+	
+	import { unimixin } from '../../utils/unimixin.js'
+	
 	export default {
-	components: { uniPopup, uniPopupDialog },
+	components: { uniPopup, uniPopupDialog, unitabbar },
+	mixins: [ unimixin ],
 		data() {
 			return {
 				swipers: [],
-				url: 'https://dpro-main.oss-cn-hongkong.aliyuncs.com/',
+				
 				msg: [],
 				market: [],
 				rate: [],
@@ -113,7 +119,8 @@
 				isProgressFile: false,
 				platform: '',
 				
-				isIos: false
+				isIos: false,
+	
 			}
 		},
 		
@@ -130,7 +137,29 @@
 		onHide() {
 			this.$refs.popup.close()
 		},
+
 		methods: {
+			
+			touchEnd(){
+				if(this.scrollTop > 0){
+					this.paddingTop = 0
+				}else{
+					if(this.paddingTop > 0){
+						this.getExchangeRate()
+						this.getMsg()
+						this.getImg()
+						this.getMarket()
+						this.getMoneyData()
+						this.paddingTop = 0
+					}
+				}
+			},
+			/* 邀请好友 */
+			invitaEvent(){
+				uni.navigateTo({
+					url: '/pages/my/invitaIncome/invitaIncome'
+				})
+			},
 			getMsg(){
 				let data = {page: 1,pageSize: 1,type: 1,}
 				this.ajaxJson({
@@ -191,19 +220,17 @@
 				})
 			},
 			moneyDataEvent(item){
-				uni.setStorageSync('moneyDataName', item.fname_sn)
-				uni.setStorageSync('moneyDataFid', item.fid)
-				uni.switchTab({
-					url: '/pages/transac/transacMain',
+				uni.reLaunch({
+					url: '/pages/transac/transacMain?transacInfo=' + encodeURIComponent(JSON.stringify(item)) + '&choiceOn=0',
 					success: () => {
-						uni.setStorageSync('tranAssetsMain', '0')
 					}
 				})
 			},
 			tranAssetsMain(index){
-				uni.setStorageSync('tranAssetsMain', index)
-				uni.switchTab({
-					url: '../transac/transacMain',
+				uni.reLaunch({
+					url: '../transac/transacMain?choiceOn=' + index,
+					success: () => {
+					}
 				})
 			},
 			getVersion(){
@@ -299,21 +326,30 @@
 						this.platform = res.platform
 					}
 				})
+			},
+			moneyDataSord(a,b){
+				return a.fid - b.fid
+			}
+		},
+		computed:{
+			moneyDataList() {
+				return this.moneyData.sort(this.moneyDataSord)
 			}
 		},
 		created() {
-			
 			this.getExchangeRate()
 			this.getMsg()
 			this.getImg()
 			this.getMarket()
 			this.getMoneyData()
-				
 		}
 	}
 </script>
 
 <style lang="scss">
+	.colorRed{
+		color: #b8393c !important;
+	}
 	.home {
 		.upDate{
 			margin: 0 20rpx;
@@ -356,7 +392,7 @@
 				flex-direction: column;
 				text-align: center;
 				justify-content: center;
-				padding-top: 50rpx;
+				padding-top: 30rpx;
 				.image {
 					margin: 0 auto;
 					width: 56rpx;
@@ -369,13 +405,13 @@
 					line-height: 24rpx;
 				}
 				.money{
-					margin-top: 30rpx;
+					margin-top: 20rpx;
 					color: #BD3A3B;
 					font-size: 28rpx;
 					line-height: 28rpx;
 				}
 				.per{
-					margin-top: 20rpx;
+					margin-top: 15rpx;
 					color: #13134A;
 					font-size: 24rpx;
 					line-height: 24rpx;
@@ -418,8 +454,9 @@
 				}
 				.image{
 					margin-left: 232rpx;
+					margin-top: 30rpx;
 					width: 110rpx;
-					height: 82rpx;
+					height: 110rpx;
 					image{
 						width: 100%;
 						height: 100%;
@@ -447,7 +484,7 @@
 						height: 69rpx;
 					}
 				}
-				.helpCen{
+				.redPackage{
 					width: 370rpx;
 					height: 113rpx;
 					background-color: #303030;
@@ -461,10 +498,10 @@
 						color: #ccc;
 					}
 					image{
-						margin-left: 42rpx;
-						margin-right: 45rpx;
-						width: 59rpx;
-						height: 65rpx;
+						margin-left: 50rpx;
+						margin-right: 54rpx;
+						width: 48rpx;
+						height: 53rpx;
 					}
 				}
 			}

@@ -14,8 +14,8 @@
 				<text>{{userInfo.no.toString().replace(/^(\d{6})(\d{8})(\d{4})/g , '$1********$3')}}</text>
 			</view>
 		</view>
-		<view class="loginBtn">
-			<button @click="authBack" type="default">返回</button>
+		<view class="loginBtn" @click="authBack">
+			<button type="default">返回</button>
 		</view>
 	</view>
 </template>
@@ -35,23 +35,23 @@
 			authBack(){
 				let url = '/pages/my/my'
 				if(this.category){
-					url = '/pages/transac/transacMain'
+					url = '/pages/transac/transacMain?choiceOn=2'
 				}
-				uni.switchTab({
+				uni.reLaunch({
 					url: url
 				})
 			},
-			getUserInfoStroage(){
-				uni.getStorage({
-					key: 'userSession',
-					success: (data)=>{
+			getUserSession(){
+				this.ajaxJson({
+					url: '/api/v1/frontSession',
+					call: (data)=>{
 						this.userInfo = data.data
 					}
 				})
 			}
 		},
 		created() {
-			this.getUserInfoStroage()
+			this.getUserSession()
 		}
 	}
 </script>

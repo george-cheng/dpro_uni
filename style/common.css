@@ -4,7 +4,8 @@ body{
 }
 .mainBox{
 	background-color: #282828;
-	/* padding-bottom: 30rpx; */
+	height: 100vh;
+	padding-bottom: 120rpx;
 }
 text{
 	font-weight: 400;

@@ -1,5 +1,5 @@
 <template>
-	<view class="quota mainBox">
+	<view class="quota mainBox" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd" :style="{paddingTop: paddingTop + 'rpx'}">
 		<view class="topSwitch">
 			<view :class="switchOn === index ? 'choice' : ''" @click="switchEvent(index)" v-for="(item, index) in switchList" :key="item.id">{{item.name}}</view>
 		</view>
@@ -24,7 +24,7 @@
 						<text class="midNewCny">¥{{accMul(item.lastDealPrize, usdtRate).toFixed(2)}} CNY</text>
 					</view>
 					<view class="listRgt">
-						<view class="rgtIncre" :style="{color: parseFloat(item.fupanddown)>0?'#3ba987':'#bd3a3b'}">{{item.fupanddown}}%</view>
+						<view class="rgtIncre" :style="{color: parseFloat(item.fupanddown)>0?'#3ba987':'#bd3a3b'}">{{parseFloat(item.fupanddown) > 0 ?  '+' + item.fupanddown : item.fupanddown}}%</view>
 					</view>
 				</view>
 			</view>
@@ -41,37 +41,27 @@
 						<text class="midNewCny">¥ {{accMul(item.lastDealPrize, usdtRate).toFixed(2)}} CNY</text>
 					</view>
 					<view class="listRgt">
-						<view class="rgtIncre" :style="{color: parseFloat(item.fupanddown)>0?'#3ba987':'#bd3a3b'}">{{item.fupanddown}}%</view>
+						<view class="rgtIncre" :style="{color: parseFloat(item.fupanddown)>0?'#3ba987':'#bd3a3b'}">{{parseFloat(item.fupanddown) > 0 ?  '+' + item.fupanddown : item.fupanddown}}%</view>
 					</view>
 				</view>
 			</view>
-			
-			
 		</view>
+		
+		<unitabbar :switchOn = "1"></unitabbar>
 	</view>
 </template>
 
 <script>
+	import unitabbar from '../../components/uni-tarbar/tarBar.vue'
+	import { unimixin } from '../../utils/unimixin.js'
 	export default{
+		components: { unitabbar },
+		mixins: [ unimixin ],
 		data(){
 			return{
-				switchList: [
-					{
-						name: '自选',
-						id: '1'
-					},
-					{
-						name: '全部',
-						id: '2'
-					}
-				],
+				switchList: [{name: '自选',id: '1'},{name: '全部',id: '2'}],
 				switchOn: 1,
-				kindList: [
-					{
-						name: 'USDT',
-						id: '1'
-					}
-				],
+				kindList: [{name: 'USDT',id: '1'}],
 				kindOn: 0,
 				usdtRate: '',
 				quotaList: [],
@@ -89,6 +79,18 @@
 			
 		},
 		methods:{
+			touchEnd(){
+				if(this.scrollTop > 0){
+					this.paddingTop = 0
+				}else{
+					if(this.paddingTop > 0){
+						this.paddingTop = 0
+						this.getQuotaList()
+						this.initQuotalist()
+					}
+				}
+			},
+
 			/* 行情跳转K线图 */
 			listConEvent(item){
 				
@@ -167,6 +169,7 @@
 		created() {
 			this.getQuotaList()
 			this.initQuotalist()
+			
 		}
 	}
 </script>
@@ -246,6 +249,7 @@
 					// height: 120rpx;
 					// padding: 32rpx 0 28rpx 0;
 					border-bottom: 1px solid #302F35;
+					
 					.collectIcon, .listLft, .listMid, .listRgt{
 						margin: 32rpx 0 28rpx 0;
 					}
@@ -293,7 +297,6 @@
 					.listRgt{
 						width: 160rpx;
 						height: 60rpx;
-						background-color: #4A2934;
 						display: flex;
 						align-items: center;
 						justify-content: center;

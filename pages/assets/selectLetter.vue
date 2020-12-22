@@ -12,7 +12,7 @@
 			<view>
 				<!-- <view class="letterTit">A</view> -->
 				<view class="letterList" v-for="(item, index) in balanceList" :key="item.id">
-					<view v-if="  category ==  1 ? item.isRecharge : item.isWithDraw" @click="letterListEvent(item)">{{item.allName}}</view>
+					<view v-if="  category ==  1 ? item.isRecharge : item.isWithDraw" @click="letterListEvent(item)">{{item.name}}</view>
 				</view>
 			</view>
 		</view>
