@@ -85,11 +85,11 @@
 			</view>
 			<view class="orderList">
 				<view v-for="(item, index) in orderList" :key="item.trans_id" @click="orderListEvent(item)">
-					<view class="orderTime"><text>{{item.create_time}}</text></view>
+					<view class="orderTime"><text>商家：{{item.buiness_name}}</text></view>
 					<view class="orderInfo">
 						<view class="orderDetail">
 							<text class="orderType">{{item.type === 1 ? '买入 ' : '卖出 '}}</text>
-							<text class="orderKind">USDT</text>
+							<text class="orderKind">{{coinName}}</text>
 						</view>
 						<view class="orderUnitPrice">
 							<text>单价：</text>
@@ -102,8 +102,8 @@
 					</view>
 					<view class="orderState">
 						<view class="orderPay">
-							<text>商家：</text>
-							<text>{{item.buiness_name}}</text>
+							<text>时间：</text>
+							<text>{{item.create_time}}</text>
 						</view>
 						<!-- <view class="orderPay">
 							<text>已付款：</text>
@@ -123,7 +123,7 @@
 				<view class="popupCon">
 					<view class="popupPrice">单价：¥{{popupPrice}}</view>
 					<input class="popupQuantity" type="text" v-model="popupQuantity" @input="calcTotalIptEvent" @blur="calcTotalEvent"  placeholder="请输入数量">
-					<view class="popupQuota">限额：¥ {{minQuota}} - ¥ {{maxQuota}}</view>
+					<view class="popupQuota">限额： {{minQuota}} - {{maxQuota}} {{coinName}}</view>
 					<view class="popupPay">实付款：¥ {{payMoney}}</view>
 				</view>
 			</uni-popup-share>
@@ -157,12 +157,7 @@
 				buyPrice: '',
 				sellPrice: '',
 				tranType: '1',
-				
-				page: 1,
-				pageSize: 10,
-				pageNum: 0,
-				pageTotal: 0,
-				
+
 				popupPrice: '',
 				popupQuantity: '',
 				minQuota: '',
@@ -172,7 +167,7 @@
 				trans_id: '',
 				isVerifica: false,
 				
-				
+				coinName: 'USDT'
 			}
 		},
 		components: { uniPopup, uniPopupShare },
@@ -183,7 +178,6 @@
 			
 		},
 		onReachBottom(){
-			this.pageNum = Math.ceil( this.pageTotal / this.pageSize)
 			if(this.page >= this.pageNum){
 				this.page = this.pageNum
 			}else{
@@ -192,16 +186,13 @@
 			}
 		},
 		methods: {
-			touchEnd(){
-				if(this.scrollTop > 0){
+
+			touchEnd(e){
+				if(this.changeY > 50){
 					this.paddingTop = 0
-				}else{
-					if(this.paddingTop > 0){
-						this.getUserInfo()
-						this.getLegalKind()
-						this.getOrderList()
-						this.paddingTop = 0
-					}
+					this.getUserInfo()
+					this.getLegalKind()
+					this.getOrderList()
 				}
 			},
 
@@ -442,7 +433,6 @@
 
 <style lang="scss">
 	.tranLegal{
-		
 		.popupCon{
 			color: #fff;
 			.popupQuantity{

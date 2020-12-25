@@ -48,7 +48,7 @@
 					<view class="conIcon i-rgtArrow"></view>
 				</view>
 			</view>
-			<view  @click="myArrowEvent(8)">
+			<view  @click="myArrowEvent(8)" v-if="false">
 				<view class="conLft">
 					<view class="conIcon i-security"></view>
 					<text class="lftTit">个人中心</text>
@@ -224,13 +224,6 @@
 					})
 				}else if(index == 7){
 					plus.runtime.openURL('mqq://im/chat?chat_type=wpa&uin=' + this.qq + '&version=1&src_type=web ');
-				}else if(index == 8){
-					uni.navigateTo({
-						url: '/pages/my/personal/personal',
-						success: () => {
-							
-						}
-					})
 				}
 			},
 			infoEvent(){
@@ -238,26 +231,25 @@
 					url: '/api/v1/session',
 					call: (data)=>{
 						if(data.code == 200){
-							this.name = data.data.loginName
-							this.userInfo = data.data
-							
-							if(this.userInfo.authDeep){
-								this.authTxt = '已高级认证'
-							}else{
-								if(this.userInfo.authDeepPost){
-									this.authTxt = '已提交高级实名认证'
-								}else{
-									if(this.userInfo.post){
-										this.authTxt = '初级认证'
+							uni.getStorage({
+								key: 'userInfo',
+								success: (data) => {
+									this.name = data.data.loginName
+									this.userInfo = data.data
+									if(this.userInfo.authDeep){
+										this.authTxt = '已高级认证'
 									}else{
-										this.authTxt = '未认证'
+										if(this.userInfo.authDeepPost){
+											this.authTxt = '已提交高级实名认证'
+										}else{
+											if(this.userInfo.post){
+												this.authTxt = '初级认证'
+											}else{
+												this.authTxt = '未认证'
+											}
+										}
 									}
 								}
-							}
-							
-							uni.setStorage({
-								key: 'userInfo',
-								data: data.data
 							})
 						}
 					}

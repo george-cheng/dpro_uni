@@ -1,8 +1,8 @@
 <template>
-	<view class="tranContract mainBox" @touchmove="touchMove" @touchend="touchEnd" :style="{paddingTop: paddingTop + 'rpx'}">
+	<view class="tranContract mainBox" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd" :style="{paddingTop: paddingTop + 'rpx'}">
 		<view class="tractCon">
 			<view class="enConList">
-				<view class="enList" v-for="(item, index) in contractList" :key="item.id">
+				<view class="enList" v-for="(item, index) in contractList" :key="index">
 					<view><text>合约名称</text><text>{{item.name}}</text></view>
 					<view><text>抢购币种名称</text><text>{{item.coin_name}}</text></view>
 					<view><text>抢购标准</text><text>{{item.ded_amount}}</text></view>
@@ -27,6 +27,7 @@
 
 <script>
 	import {unimixin} from '../../../utils/unimixin.js'
+	import { accMul, accAdd} from '../../../utils/common.js'
 	export default {
 		mixins: [unimixin],
 		data(){
@@ -45,7 +46,6 @@
 
 		},
 		onReachBottom(){
-			this.pageNum = Math.ceil( this.pageTotal / this.pageSize)
 			if(this.page>=this.pageNum){
 				this.page = this.pageNum
 			}else{
@@ -55,17 +55,14 @@
 		},
 
 		methods: {
-			touchEnd(){
-				if(this.scrollTop > 0){
-					this.paddingTop = 0
-				}else{
-					if(this.paddingTop > 0){
+			touchEnd(e){
+				if(this.changeY > 50){
+					this.page = 1
 					this.getContractList()
-						this.paddingTop = 0
-					}
+					this.paddingTop = 0
 				}
 			},
-
+	
 			tranctBtnEvent(index){
 				if(index === 0){
 					this.rushPurchaseNowEvent()
@@ -114,6 +111,10 @@
 							})
 						}else if(data.code == 500){
 							this.isFlag = true
+							uni.showToast({
+								image: '/static/images/wrong.png',
+								title: data.msg
+							})
 						} else{
 							this.isFlag = false
 							uni.showToast({
@@ -132,6 +133,7 @@
 					data: {page: this.page, pageSize: this.pageSize },
 					call: (data)=>{
 						this.pageTotal = data.data.total
+						this.contractList = []
 						this.contractList = [...this.contractList, ...data.data.rows]
 					}
 				})

@@ -422,6 +422,68 @@
 					"enablePullDownRefresh": false
 			}
 		}
+		,{
+			"path" : "pages/assets/assTranAcc/assTranAcc",
+			"style" :                                                                                    
+			{
+					"navigationBarTitleText": "转账",
+					"enablePullDownRefresh": false,
+					"app-plus": {
+						"titleNView": {
+							"buttons": [
+								{
+									"color": "#fff",
+									"colorPressed": "#fff",
+									"float": "right",
+									"fontSize": "36rpx",
+									// "fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
+									"text": "记录" // 字体图标\u 开头，加上字体图标unicode后面四位
+								}
+							]
+						}
+					}
+			}
+		}
+		,{
+			"path" : "pages/assets/assTranAcc/assTranAccOrder",
+			"style" :                                                                                    
+				{
+					"navigationBarTitleText": "转账记录",
+					"enablePullDownRefresh": false
+				}
+			}
+		,{
+			"path" : "pages/holeRedPackage/holeRedPackage",
+			"style" :                                                                                    
+			{
+				"navigationBarTitleText": "虫洞红包",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"titleNView": {
+						"buttons": [
+							{
+								"color": "#fff",
+								"colorPressed": "#fff",
+								"float": "right",
+								"fontSize": "36rpx",
+								// "fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
+								"text": "记录" // 字体图标\u 开头，加上字体图标unicode后面四位
+							}
+						]
+					}
+				}
+				
+			}
+		}
+		,{
+			"path" : "pages/holeRedPackage/holeRedPackageRecord",
+			"style" :                                                                                    
+			{
+				"navigationBarTitleText": "红包记录",
+				"enablePullDownRefresh": false
+			}
+				
+		}
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

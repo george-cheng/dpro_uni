@@ -1,5 +1,5 @@
 <template>
-	<view class="assets mainBox" @touchmove="touchMove" @touchend="touchEnd" :style="{paddingTop: paddingTop + 'rpx'}">
+	<view class="assets mainBox" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd" :style="{paddingTop: paddingTop + 'rpx'}">
 		<view class="navBarCon" v-if="isNavBar">
 			<view @click="navBarEvent(0)">充值记录</view>
 			<view  @click="navBarEvent(1)">提币记录</view>
@@ -123,6 +123,7 @@
 				<view @click="popupEvent(0)" v-if="isPopupRecharge">充值</view>
 				<view @click="popupEvent(1)" v-if="isPopupWithDraw">提币</view>
 				<view @click="popupEvent(2)" v-if="isPopupTransfer">兑换</view>
+				<view @click="popupEvent(3)" v-if="isPopupTranAcc">转账</view>
 			</view>
 		</uni-popup>
 		
@@ -155,6 +156,7 @@
 				isPopupRecharge: false,
 				isPopupWithDraw: false,
 				isPopupTransfer: false,
+				isPopupTranAcc: false,
 				assetsId: '',
 				imgUrl: '',
 				fuId: '',
@@ -172,6 +174,8 @@
 				DPCTotal: '',
 				DPCLastDealPrize: '',
 				
+				USDTTotal: '',
+				
 			}
 		},
 		onLoad() {
@@ -185,20 +189,16 @@
 			
 		},
 		methods:{
-			touchEnd(){
-				if(this.scrollTop > 0){
+			touchEnd(e){
+				if(this.changeY > 50){
+					this.moneyAdd = 0
+					this.usdtMoneyAdd = 0
+					this.legAcc = 0
+					this.getAssetsList()
+					this.getLegAcc()
+					this.getRage()
+					this.assetsTranInfo()
 					this.paddingTop = 0
-				}else{
-					if(this.paddingTop > 0){
-						this.moneyAdd = 0
-						this.usdtMoneyAdd = 0
-						this.legAcc = 0
-						this.getAssetsList()
-						this.getLegAcc()
-						this.getRage()
-						this.assetsTranInfo()
-						this.paddingTop = 0
-					}
 				}
 			},
 
@@ -262,6 +262,7 @@
 				this.isPopupRecharge = item.isRecharge
 				this.isPopupWithDraw = item.isWithDraw
 				this.isPopupTransfer = false
+				this.isPopupTranAcc = false
 				if(item.name === 'DPC'){
 					this.isPopupTransfer = true
 					this.DPCTotal = item.total
@@ -270,7 +271,9 @@
 							this.DPCLastDealPrize = this.usdtList[i].lastDealPrize
 						}
 					}
-					
+				}else if(item.name === 'USDT'){
+					this.isPopupTranAcc = true
+					this.USDTTotal = item.total
 				}
 				this.assetsId = item.id
 				this.imgUrl = item.url
@@ -297,6 +300,13 @@
 				}else if(index == 2){
 					uni.navigateTo({
 						url: './assTransfer?id=' + this.assetsId + '&total=' + this.DPCTotal + '&lastDealPrize=' + this.DPCLastDealPrize,
+						success: () => {
+							this.$refs.popup.close()
+						}
+					})
+				}else if(index == 3){
+					uni.navigateTo({
+						url: '/pages/assets/assTranAcc/assTranAcc?total=' + this.USDTTotal,
 						success: () => {
 							this.$refs.popup.close()
 						}

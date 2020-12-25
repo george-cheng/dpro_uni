@@ -1,8 +1,8 @@
 <template>
-	<view class="tranAssetsFailPurchase mainBox">
+	<view class="tranAssetsFailPurchase mainBox" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd" :style="{paddingTop: paddingTop + 'rpx'}">
 		<view class="tractCon">
 			<view class="enConList">
-				<view class="enList" @click="tranAssetsFailEvent(item)" v-for="(item, index) in tranAssetsFailList" :key="item.id">
+				<view class="enList" @click="tranAssetsFailEvent(item)" v-for="(item, index) in tranAssetsFailList" :key="index">
 					<view><text>合约名称</text><text>{{item.treaty_name}}</text></view>
 					<view><text>抢购标准</text><text>{{item.ded_amount}}</text></view>
 					<view><text>纯收益</text><text>{{item.reward_amount}}</text></view>
@@ -16,21 +16,19 @@
 </template>
 
 <script>
+	import {unimixin} from '../../../utils/unimixin.js'
 	export default {
+		mixins: [unimixin],
 		data(){
 			return{
 				tranAssetsFailList: [],
-				page: 1,
-				pageSize: 10,
-				pageNum: 0,
-				pageTotal: 0
+				isFresh: false
 			}
 		},
 		onLoad() {
 
 		},
 		onReachBottom(){
-			this.pageNum = Math.ceil( this.pageTotal / this.pageSize)
 			if(this.page>=this.pageNum){
 				this.page = this.pageNum
 			}else{
@@ -39,6 +37,14 @@
 			}
 		},
 		methods: {
+			touchEnd(e){
+				if(this.changeY > 50){
+					this.page = 1
+					this.tranAssetsFailList = []
+					this.getTranAssetsFailPurchase()
+					this.paddingTop = 0
+				}
+			},
 			getTranAssetsFailPurchase(){
 				this.ajaxJson({
 					url: '/api/v1/purchTreatyFailLog/list',

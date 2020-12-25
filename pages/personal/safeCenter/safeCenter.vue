@@ -21,7 +21,7 @@
 		
 		<view>
 			<view class="mainTit">
-				<text>法币交易设置</text>
+				<text>交易设置</text>
 			</view>
 			<view class="perCon">
 				<view @click="safeEvent(1)">

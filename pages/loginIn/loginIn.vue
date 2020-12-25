@@ -11,7 +11,7 @@
 			<view class="loginEmail loginIpt" v-if="isEmail">
 				<view>
 					<input type="text" v-model="emailUser" placeholder="请输入邮箱地址">
-					<span @click="downArrowEvent" class="iconLogin i-downArrow"></span>
+					<span @click="downArrowEvent" class="iconLogin i-downArrow" v-if="false"></span>
 					<view class="dropDownCOn" v-if="isDropdown">
 						<text @click="historyEvent(item)" v-for="(item, index) in historyEmailArr" :key="index">{{item}}</text>
 					</view>
@@ -28,7 +28,7 @@
 			<view class="loginPhone loginIpt" v-if="isPhone">
 				<view>
 					<input type="text" v-model="phoneUser" placeholder="请输入手机号码">
-					<span @click="downArrowPhoneEvent" class="iconLogin i-downArrow"></span>
+					<span @click="downArrowPhoneEvent" class="iconLogin i-downArrow" v-if="false"></span>
 					<view class="dropDownCOn" v-if="isDropdown">
 						<text @click="historyPhoneEvent(item)" v-for="(item, index) in historyPhoneArr" :key="index">{{item}}</text>
 					</view>
@@ -43,7 +43,7 @@
 			<button @click="loginBtnEvent" type="default">登录</button>
 		</view>
 		<view class="loginBtm">
-			<view @click="forgetPwdEvent">您忘记了密码？</view>
+			<view @click="forgetPwdEvent">忘记密码？</view>
 			<view @click="registerEvent">还没有账号，<span>去注册</span></view>
 		</view>
 	</view>
@@ -84,12 +84,14 @@
 				this.isEmail = true
 				this.isEmailActive = true
 				this.isPoneActive = false
+				this.getUserPhone()
 			},
 			phoneEvent(){
 				this.isPhone = true;
 				this.isEmail = false
 				this.isEmailActive = false
 				this.isPoneActive = true
+				this.getUserPhone()
 			},
 			downArrowEvent(){
 				uni.getStorage({
@@ -132,14 +134,8 @@
 					if(checkEmail(this.emailUser) && checkPwd(this.emailPwd)){						
 						if(this.emailUser){
 							this.isValidator = true
-							this.emailUserArr.push(this.emailUser)
-							uni.setStorage({
-								key: 'emailUser',
-								data: this.emailUserArr,
-								success: function () {
-									
-								}
-							})
+							uni.setStorageSync('emailUser', this.emailUser);
+							uni.setStorageSync('emailPwd', this.emailPwd);
 						}
 					}else{
 						uni.showToast({
@@ -153,14 +149,9 @@
 				}else{ 
 					if(checkPhone(this.phoneUser) && checkPwd(this.phonePwd)){
 						if(this.phoneUser){
-							this.phoneUserArr.push(this.phoneUser)
 							this.isValidator = true
-							uni.setStorage({
-								key: 'phoneUser',
-								data: this.phoneUserArr,
-								success: () => {
-								}
-							})
+							uni.setStorageSync('phoneUser', this.phoneUser);
+							uni.setStorageSync('phonePwd', this.phonePwd);
 						}
 					}else{
 						uni.showToast({
@@ -174,10 +165,20 @@
 				}
 			},
 			loginBtnEvent(){
-				let params = {
-					name: this.emailUser || this.phoneUser,
-					pwd: this.emailPwd || this.phonePwd,
+		
+				let params = {}
+				if(this.isEmail){
+					params = {
+						name: this.emailUser.toString(),
+						pwd: this.emailPwd.toString(),
+					}
+				}else{
+					 params = {
+						name: this.phoneUser.toString(),
+						pwd: this.phonePwd.toString(),
+					}
 				}
+				
 				this.validator()
 				if(this.isValidator){
 					let category = '1'
@@ -235,11 +236,21 @@
 				})
 			},
 			
+			getUserPhone(){
+				if(this.isEmail){
+					this.emailUser = uni.getStorageSync('emailUser')
+					this.emailPwd = uni.getStorageSync('emailPwd')
+				}else{
+					this.phoneUser = uni.getStorageSync('phoneUser')
+					this.phonePwd = uni.getStorageSync('phonePwd')
+				}
+			}
 		},
 		mounted() {
+			
 		},
 		created() {
-			
+			this.getUserPhone()
 		}
 	}
 </script>

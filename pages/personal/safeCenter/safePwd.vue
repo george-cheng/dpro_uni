@@ -1,9 +1,10 @@
 <template>
 	<view class="tranPwd mainBox">
-		<view>
+		<view style="margin-bottom: 10rpx;">
 			<input v-model="pwd" :password="isPwd" placeholder="请输入交易密码密码">
 			<span @click="pwdEvent(0)" class="iconLogin i-eye"></span>
 		</view>
+			<text class="pwdTip">提示：8位字符及以上</text>
 		<view>
 			<input v-model="conPwd" :password="isConPwd" placeholder="请确认交易密码">
 			<span @click="pwdEvent(1)" class="iconLogin i-eye"></span>
@@ -72,7 +73,10 @@
 								uni.showToast({
 									title: data.msg,
 									success: () => {
-										
+										uni.navigateTo({
+											url: '/pages/personal/safeCenter/safeCenter',
+											success: () => {}
+										})
 									}
 								})
 							}else{
@@ -155,11 +159,16 @@
 </script>
 
 <style scoped lang="scss">
+	.pwdTip{
+		margin: 0 80rpx;
+		color: #fff;
+		font-size: 22rpx;
+	}
 	.tranPwd{
 		view{
 			position: relative;
 			input{
-				margin: 68rpx auto 0;
+				margin: 34rpx auto 0;
 				width: 584rpx;
 				height: 80rpx;
 				border: 1px solid #676869;

@@ -3,7 +3,7 @@ function checkEmail(email){
 }
 
 function checkPhone(phone){
-	return RegExp(/^1[34578]\d{9}$/).test(phone);
+	return RegExp(/^1[3456789]\d{9}$/).test(phone);
 }
 
 function checkPwd(pwd){
@@ -16,6 +16,10 @@ function checkNum(num){
 
 function checkId(id){
 	return RegExp(/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/).test(id)
+}
+
+function checkHz(name){
+	return RegExp(/^[0-9\u4e00-\u9fa5]+$/).test(name)
 }
 
 //乘法
@@ -115,6 +119,14 @@ function isObject(object){
 	return true
 }
 
+
+function getRandom(start, end, fixed=0) {
+	let differ = end - start
+	let random = Math.random()
+	return (start + differ * random).toFixed(fixed)
+}
+
+
 export{
-	checkEmail, checkPhone, checkPwd, checkNum, checkId, accMul, accAdd, arrayBufferToBase64, transformImgData, uint8arrayToBase64, getLocalTime, toDecimal, isObject
+	checkEmail, checkPhone, checkPwd, checkNum, checkId, accMul, accAdd, arrayBufferToBase64, transformImgData, uint8arrayToBase64, getLocalTime, toDecimal, isObject, getRandom, checkHz
 }

@@ -1,8 +1,8 @@
 <template>
-	<view class="historyOrder mainBox">
+	<view class="historyOrder mainBox" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd" :style="{paddingTop: paddingTop + 'rpx'}">
 		<view class="tractCon">
 			<view class="enConList">
-				<view class="enList" v-for="(item, index) in historyOrderList" :key="item.id">
+				<view class="enList" v-for="(item, index) in historyOrderList" :key="index">
 					<view><text>委托时间</text><text>{{getLocalTime(item.time)}}</text></view>
 					<view><text>类型</text><text>{{item.type == 0 ? '买入' : '卖出'}}</text></view>
 					<view><text>委托价格</text><text>{{item.price}}</text></view>
@@ -23,22 +23,19 @@
 </template>
 
 <script>
+	import { unimixin } from '../../../utils/unimixin.js'
 	export default {
+		mixins: [unimixin],
 		data(){
 			return{
 				symbol: '',
 				historyOrderList: [],
-				page: 1,
-				pageSize: 10,
-				pageNum: 0,
-				pageTotal: 0
 			}
 		},
 		onLoad(options) {
 			this.symbol = options.symbol
 		},
 		onReachBottom(){
-			this.pageNum = Math.ceil( this.pageTotal / this.pageSize)
 			if(this.page>=this.pageNum){
 				this.page = this.pageNum
 			}else{
@@ -47,6 +44,14 @@
 			}
 		},
 		methods: {
+			touchEnd(e){
+				if(this.changeY > 50){
+					this.page = 1
+					this.historyOrderList = []
+					this.getHistroyOrderList()
+					this.paddingTop = 0
+				}
+			},
 			getHistroyOrderList(){
 				let params = {
 					id: this.symbol,

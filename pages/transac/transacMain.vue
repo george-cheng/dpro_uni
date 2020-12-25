@@ -12,7 +12,7 @@
 		</view>
 		
 		<template v-if="choiceOn == 0">
-			<view class="transac" @touchmove="touchMove" @touchend="touchEnd" :style="{paddingTop: paddingTop + 'rpx'}">
+			<view class="transac mainBox" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd" :style="{paddingTop: paddingTop + 'rpx'}">
 				<view class="sacCon">
 					<view class="sacTit">
 						<view class="titLft">
@@ -245,7 +245,7 @@
 				amountDecimals: '',
 				
 				isCreated: true,
-				getSocketId: ''
+				getSocketId: '3'
 			}
 		},
 		onLoad(options) {
@@ -274,33 +274,27 @@
 		onHide() {
 			this.isNavBar = false
 			uni.removeStorageSync('tranAssetsMain')
-			
 			uni.removeStorage({
 				key: 'quotatList'
 			})
 		},
 		methods: {
-			touchEnd(){
-				if(this.scrollTop > 0){
+			touchEnd(e){
+				if(this.changeY > 50){
 					this.paddingTop = 0
-				}else{
-					if(this.paddingTop > 0){
-						this.paddingTop = 0
-						
-						console.log(this.getSocketId)
-						this.getSocket(this.getSocketId)
-							/* this.getSocket('3')
-							this.priceDecimals = '6'
-							this.amountDecimals = '2' */
-						this.getTitMenuList()
-						this.getEnConList()
-						this.getRate()
-						this.getTotal()
-						this.initTitBuyMenuListEvent()
-						this.getEntrustList()
-					}
+					this.getSocket(this.getSocketId)
+						/* this.getSocket('3')
+						this.priceDecimals = '6'
+						this.amountDecimals = '2' */
+					this.getTitMenuList()
+					this.getEnConList()
+					this.getRate()
+					this.getTotal()
+					this.initTitBuyMenuListEvent()
 				}
 			},
+				
+			
 			/* 委托撤销 */
 			enCancelEvent(item){
 				this.ajaxJson({
@@ -312,7 +306,7 @@
 							uni.showToast({
 								title: data.msg,
 								success: () => {
-									this.getEntrustList()
+									this.getEnConList()
 								}
 							})
 						}else{
@@ -327,7 +321,7 @@
 			getTranMain(moneyDataFid){
 				return
 				this.symbolID = moneyDataFid
-				this.getEntrustList()
+				this.getEnConList()
 				this.closeWebsocket()
 				this.getSocket(this.symbolID)
 			},
@@ -498,13 +492,12 @@
         }
 
         let params = {
-          symbol: this.symbolID,
+          symbol: this.getSocketId,
           tradeAmount: this.iptQuantity,
           tradeCnyPrice: this.iptPrice,
           type: type,
           tradePwd: value
         }
-
         this.ajaxJson({
           url: url,
           data: params,
@@ -515,7 +508,7 @@
                 title: data.msg,
                 success: () => {
                   this.$refs.popup.close()
-									this.getEntrustList()
+									this.getEnConList()
 									this.titMenuListEvent()
                   uni.setStorage({
                     key: 'tradePwd',
@@ -608,14 +601,14 @@
         this.enOn = index
       },
       getEnConList(){
-        let params = {id: this.symbolID, page: '1',pageSize: '10'}
+        let params = {id: this.getSocketId, page: '1',pageSize: '10'}
 
         this.ajaxJson({
           url: '/api/v1/account/opening',
           data: params,
           method: 'POST',
           call: (data)=>{
-            this.enConList = data.data.rows
+            this.entrustList = data.data.rows
           }
         })
       },
@@ -663,7 +656,7 @@
           }
           this.unitKind = item.fShortName
         }
-        this.getEntrustList()
+        this.getEnConList()
         this.isTitMenu = false
         this.titMenu = item.fname_sn
         this.ajaxJson({
@@ -692,22 +685,6 @@
           call: (data)=>{
             this.ftotal = data.data.ftotal
             this.ffrozen = data.data.ffrozen
-          }
-        })
-      },
-      getEntrustList(index){
-				let params = {}
-				if(!index){
-					params = {id: this.symbolID}
-				}else{
-					params = {id: index}
-				}
-        this.ajaxJson({
-          url: '/api/v1/account/opening',
-          method: 'POST',
-          data: params,
-          call: (data)=>{
-            this.entrustList = data.data.rows
           }
         })
       },
@@ -749,7 +726,6 @@
       },
     },
 		created() {
-			console.log(this.isCreated)
 			
 			if(this.isCreated){
 				this.getSocket('3')
@@ -761,7 +737,6 @@
       this.getRate()
       this.getTotal()
       this.initTitBuyMenuListEvent()
-      this.getEntrustList()
 			
 			let webView = this.$mp.page.$getAppWebview();
 			webView.setTitleNViewButtonStyle(0,{  

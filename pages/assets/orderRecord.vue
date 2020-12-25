@@ -1,5 +1,5 @@
 <template>
-	<view class="orderRecord mainBox">
+	<view class="orderRecord mainBox" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd" :style="{paddingTop: paddingTop + 'rpx'}">
 		<view class="orderScreen" @click="showDrawer" v-if="false">筛选</view>
 		<view v-for="(item, index) in orderList" :key="index" @click="orderDetail(item)" v-if="isOrderList">
 			<view>
@@ -65,8 +65,10 @@
 
 <script>
 	import uniDrawer from '../../components/uni-drawer/uni-drawer.vue'
+	import {unimixin} from '../../utils/unimixin.js'
 	export default {
 		components: { uniDrawer },
+		mixins: [unimixin],
 		data(){
 			return{
 				fuld: '',
@@ -78,10 +80,6 @@
 				orderList: [],
 				typeList: [{type: '1', name: '买入'},{type: '2', name: '卖出'}],
 				statusList: [{status: '1',name: '确认下单'},{status: '2',name: '确认付款'},{status: '3',name: '确认收款'},{status: '4',name: '已撤销'}],
-				page: 1,
-				pageSize: 10,
-				pageNum: 0,
-				pageTotal: 0,
 				
 				orderStatus: ''
 			}
@@ -90,7 +88,6 @@
 
 		},
 		onReachBottom(){
-			this.pageNum = Math.ceil( this.pageTotal / this.pageSize)
 			if(this.page>=this.pageNum){
 				this.page = this.pageNum
 			}else{
@@ -99,6 +96,14 @@
 			}
 		},
 		methods: {
+			touchEnd(e){
+				if(this.changeY > 50){
+					this.page = 1
+					this.orderList = []
+					this.getOrderList()
+					this.paddingTop = 0
+				}
+			},
 			orderDetail(item){
 				uni.navigateTo({
 					url: '/pages/transac/tranLegal/tranLegOrderToPay?orderId=' + item.order_id + '&orderStatus=' + item.order_status

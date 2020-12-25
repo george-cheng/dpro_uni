@@ -1,5 +1,5 @@
 <template>
-	<view class="orderRecord mainBox">
+	<view class="orderRecord mainBox" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd" :style="{paddingTop: paddingTop + 'rpx'}">
 		<view class="orderScreen" @click="showDrawer" v-if="false">筛选</view>
 
 		<view v-for="(item, index) in orderList" :key="item.order_id" v-if="isOrderList">
@@ -26,7 +26,6 @@
 			</view>
 		</view>
 
-
 		<uni-drawer ref="uniDrawer" mode="right">
 			<view style="padding:30rpx;">
 				<view>
@@ -46,10 +45,10 @@
 
 <script>
 	import uniDrawer from '../../components/uni-drawer/uni-drawer.vue'
+	import {unimixin} from '../../utils/unimixin.js'
 	export default {
-		components: {
-			uniDrawer
-		},
+		components: {uniDrawer},
+		mixins: [unimixin],
 		data() {
 			return {
 				choiceTypeOn: 1,
@@ -57,10 +56,6 @@
 				isOrderList: false,
 				orderList: [],
 				typeList: [{type: '1', name: '资金到法币'},{type: '2', name: '法币到资金'}],
-				page: 1,
-				pageSize: 10,
-				pageNum: 0,
-				pageTotal: 0
 			}
 		},
 		onLoad() {
@@ -76,6 +71,17 @@
 			}
 		},
 		methods: {
+			
+			touchEnd(e){
+				if(this.changeY > 50){
+					this.page = 1
+					this.orderList = []
+					this.getOrderList()
+					this.paddingTop = 0
+				}
+			},
+			
+			
 			drawerReset(){
 				this.choiceTypeOn = 0
 				this.type = 1
@@ -132,7 +138,6 @@
 						if(data.code == 200){
 							if(data.data.rows){
 								this.pageTotal = data.data.total
-								this.orderList = []
 								this.orderList = [...this.orderList, ...data.data.rows]
 								this.isOrderList = true
 							}

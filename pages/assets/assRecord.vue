@@ -1,5 +1,5 @@
 <template>
-	<view class="assRecord mainBox">
+	<view class="assRecord mainBox vheight" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd" :style="{paddingTop: paddingTop + 'rpx'}">
 		<view class="assRecordSwitch">
 			<view :class="{'choice': choiceOn == 0}" @click="switchEvent(0)">充值记录</view>
 			<view :class="{'choice': choiceOn != 0}" @click="switchEvent(1)">提币记录</view>
@@ -21,7 +21,9 @@
 
 <script>
 	import { getLocalTime } from '../../utils/common.js'
+	import { unimixin } from '../../utils/unimixin.js'
 	export default {
+		mixins: [unimixin],
 		data(){
 			return{
 				category: '',
@@ -29,10 +31,7 @@
 				choiceOn: -1,
 				recordList: '',
 				assRecordList: [],
-				page: 1,
-				pageSize: 10,
-				pageNum: 0,
-				pageTotal: 0
+
 			}
 		},
 		onLoad(options) {
@@ -43,18 +42,17 @@
 				uni.setNavigationBarTitle({
 						title: '充值记录',
 						success: () => {
-						}
+					}
 				});
 			}else{
 				uni.setNavigationBarTitle({
 						title: '提币记录',
 						success: () => {
-						}
+					}
 				});
 			}
 		},
 		onReachBottom(){
-			this.pageNum = Math.ceil( this.pageTotal / this.pageSize)
 			if(this.page>=this.pageNum){
 				this.page = this.pageNum
 			}else{
@@ -63,6 +61,14 @@
 			}
 		},
 		methods: {
+			touchEnd(e){
+				if(this.changeY > 50){
+					this.page = 1
+					this.assRecordList = []
+					this.getAssRecord()
+					this.paddingTop = 0
+				}
+			},
 			switchEvent(index){
 				this.choiceOn = index
 				if(this.choiceOn == 0){

@@ -78,7 +78,6 @@
 		width: 100%;
 		position: fixed;
 		bottom: 0;
-		height: rpx;
 		background-color: #282828;
 		display: flex;
 		border-top: 2px solid #333;

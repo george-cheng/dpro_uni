@@ -6,16 +6,15 @@
 				<text :class="[isPoneActive?'textLine' : '']" @click="phoneEvent">手机注册</text>
 			</view>
 			<view class="loginArea">
-					<view class="areaSwitch" @click="switchAreaEvent">
-						<text>{{areaName}}</text>
-						<text class="areaIcon i-downArrow"></text>
-					</view>
-					<view class="areaList" v-if="isAreaList">
-						<text @click="choiceArea(item)" v-for="(item, index) in areaList" :key="index">{{item.name_cn}}</text>
-						<text v-show="false">{{countryId}} </text>
-					</view>
+				<view class="areaSwitch" @click="switchAreaEvent">
+					<text>{{areaName}}</text>
+					<text class="areaIcon i-downArrow"></text>
+				</view>
+				<view class="areaList" v-if="isAreaList">
+					<text @click="choiceArea(item)" v-for="(item, index) in areaList" :key="index">{{item.name_cn}}</text>
+					<text v-show="false">{{countryId}} </text>
+				</view>
 			</view>
-			
 		</view>
 		<view class="regBox">
 			<view class="regEmail loginIpt" v-if="isEmail">
@@ -33,6 +32,7 @@
 					<input v-model="phonePwd" :password="isPassword" placeholder="请设置登陆密码">
 					<span @click="pwdEvent" class="iconLogin i-eye"></span>
 				</view>
+				<text class="pwdTip">提示：8位字符及以上</text>
 				<view>
 					<input v-model="confirmPwd" :password="isConfirmPassword" placeholder="请确认登录密码">
 					<span @click="confirmPwdEvent" class="iconLogin i-eye"></span>
@@ -71,6 +71,7 @@
 					<input v-model="phPwd" :password="isPhPassword" placeholder="请设置登陆密码">
 					<span @click="pwdPhEvent" class="iconLogin i-eye"></span>
 				</view>
+				<text class="pwdTip">提示：8位字符及以上</text>
 				<view>
 					<input v-model="conPwd" :password="isConfirmPhPassword" placeholder="请确认登录密码">
 					<span @click="confirmPhPwdEvent" class="iconLogin i-eye"></span>
@@ -338,8 +339,6 @@
 						}
 					})
 				}
-		
-				
 			},
 			blurEvent(){
 				this.validator()
@@ -470,6 +469,11 @@
 	}
 </script>
 <style scoped lang="scss">
+	.pwdTip{
+		color: #fff;
+		font-size: 22rpx;
+		margin: 0 80rpx;
+	}
 	.register{
 		padding-bottom: 45rpx;
 		.loginSwitch{
@@ -497,14 +501,13 @@
 				background-color: #fff;
 			}
 		}
-		
 		 .regBox{
 			.loginIpt{
 				view{
 					position: relative;
 
 					input{
-						margin: 68rpx auto 0;
+						margin: 34rpx auto 0;
 						width: 584rpx;
 						height: 80rpx;
 						border: 1px solid #676869;
@@ -520,7 +523,7 @@
 						.preIptConID{
 							width: 120rpx;
 							height: 80rpx;
-							margin: 68rpx 20rpx 20rpx 68rpx;
+							margin: 34rpx 25rpx 20rpx 80rpx;
 							border: 1px solid #676869;
 							border-radius: 6px;
 							display: flex;
@@ -530,11 +533,11 @@
 						}
 						.preIpt{
 							width: 110rpx;
-							margin: 68rpx 20rpx 20rpx 68rpx;
+							margin: 34rpx 20rpx 20rpx 68rpx;
 						}
 						.phoneIpt{
-							width: 454rpx;
-							margin: 68rpx 68rpx 20rpx 0;
+							width: 434rpx;
+							margin: 34rpx 68rpx 20rpx 0;
 						}
 					}
 					.dropDownCOn{
@@ -608,13 +611,13 @@
 					.megBox{
 						position: relative;
 						input{
-							margin: 68rpx 30rpx 0 78rpx;
+							margin: 34rpx 30rpx 0 78rpx;
 							width: 390rpx;
 							text-align: left;
 						}
 						span{
 							position: absolute;
-							top: 102rpx;
+							top: 70rpx;
 							right: 50rpx;
 							color: #BD3A3B;
 							font-size: 24rpx;
@@ -624,7 +627,7 @@
 					}
 					.msgBtn{
 						width: 165rpx;
-						margin-top: 68rpx;
+						margin-top: 34rpx;
 						button{
 							font-size: 24rpx;
 							height: 80rpx;

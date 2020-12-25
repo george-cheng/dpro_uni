@@ -1,5 +1,5 @@
 <template>
-	<view class="home mainBox" @touchmove="touchMove" @touchend="touchEnd" :style="{paddingTop: paddingTop + 'rpx'}">
+	<view class="home mainBox" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd" :style="{paddingTop: paddingTop + 'rpx'}">
 		<swiper indicator-dots circular autoplay interval="3000">
 			<swiper-item v-for="item in swipers" :key="item.id">
 				<image :src="url + item.image_url"></image>
@@ -35,7 +35,7 @@
 					<image src="../../static/images/cooTran.png"></image>
 					<text class="colorRed">合约交易</text>
 				</view>
-				<view class="redPackage">
+				<view class="redPackage" @click="redPackageEvent">
 					<image src="../../static/images/redPackage.png" mode="aspectFit"></image>
 					<text class="colorRed">红包</text>
 				</view>
@@ -76,9 +76,7 @@
 					</view>
 				</uni-popup-dialog>
 		</uni-popup>
-		
-		<view>{{moneyDataList}}</view>
-		
+
 		<unitabbar :switchOn = "0"></unitabbar>
 		
 	</view>
@@ -90,7 +88,7 @@
 	import unitabbar from '../../components/uni-tarbar/tarBar.vue'
 	
 	import { unimixin } from '../../utils/unimixin.js'
-	
+	import { accAdd, accMul, getRandom } from '@/utils/common.js'
 	export default {
 	components: { uniPopup, uniPopupDialog, unitabbar },
 	mixins: [ unimixin ],
@@ -120,7 +118,6 @@
 				platform: '',
 				
 				isIos: false,
-	
 			}
 		},
 		
@@ -139,25 +136,29 @@
 		},
 
 		methods: {
-			
-			touchEnd(){
-				if(this.scrollTop > 0){
+			touchEnd(e){
+				if(this.changeY > 50){
+					this.getExchangeRate()
+					this.getMsg()
+					this.getImg()
+					this.getMarket()
+					this.getMoneyData()
+					
 					this.paddingTop = 0
-				}else{
-					if(this.paddingTop > 0){
-						this.getExchangeRate()
-						this.getMsg()
-						this.getImg()
-						this.getMarket()
-						this.getMoneyData()
-						this.paddingTop = 0
-					}
 				}
+			},
+			/* 虫洞红包 */
+			redPackageEvent(){
+				uni.navigateTo({
+					url: '/pages/holeRedPackage/holeRedPackage',
+					success: () => {}
+				})
 			},
 			/* 邀请好友 */
 			invitaEvent(){
 				uni.navigateTo({
-					url: '/pages/my/invitaIncome/invitaIncome'
+					url: '/pages/my/invitaIncome/invitaIncome',
+					success: () => {}
 				})
 			},
 			getMsg(){
@@ -222,15 +223,14 @@
 			moneyDataEvent(item){
 				uni.reLaunch({
 					url: '/pages/transac/transacMain?transacInfo=' + encodeURIComponent(JSON.stringify(item)) + '&choiceOn=0',
-					success: () => {
-					}
+					success: () => {}
 				})
 			},
+
 			tranAssetsMain(index){
 				uni.reLaunch({
 					url: '../transac/transacMain?choiceOn=' + index,
-					success: () => {
-					}
+					success: () => {}
 				})
 			},
 			getVersion(){
@@ -329,6 +329,19 @@
 			},
 			moneyDataSord(a,b){
 				return a.fid - b.fid
+			},
+			getUserInfo(){
+				this.ajaxJson({
+					url: '/api/v1/session',
+					call: (data)=>{
+						if(data.code == 200){
+							uni.setStorage({
+								key: 'userInfo',
+								data: data.data
+							})
+						}
+					}
+				})
 			}
 		},
 		computed:{
@@ -337,6 +350,7 @@
 			}
 		},
 		created() {
+			this.getUserInfo()
 			this.getExchangeRate()
 			this.getMsg()
 			this.getImg()
@@ -593,5 +607,6 @@
 				}
 			}
 		}
+
 	}
 </style>

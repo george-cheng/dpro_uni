@@ -199,3 +199,8 @@
 	font-family: 'icomoon' !important;
 	content: "\e92b";
 }
+
+.i-closeRgt::before{
+	font-family: 'icomoon' !important;
+	content: "\e92e";
+}

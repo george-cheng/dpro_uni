@@ -1,9 +1,9 @@
 <template>
-	<view class="transAssetsShare mainBox">
+	<view class="transAssetsShare mainBox" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd" :style="{paddingTop: paddingTop + 'rpx'}">
 		<view class="tractCon">
 			<view class="enConList">
 				<view class="enList" v-for="(item, index) in tranAssetsShareList" :key="item.id">
-					<view><text>下级用户ID</text><text>{{item.uid}}</text></view>
+					<view><text>下级用户账户</text><text>{{item.loginName}}</text></view>
 					<view><text>抢购次数</text><text>{{item.purchTimes}}</text></view>
 					<view><text>释放收益</text><text>{{item.releaseProfit}}</text></view>
 					<view><text>抢购收益</text><text>{{item.purchProfit}}</text></view>
@@ -16,22 +16,20 @@
 </template>
 
 <script>
+	import { unimixin } from '../../../utils/unimixin.js'
 	export default {
+		mixins: [unimixin],
 		data(){
 			return{
 				tranAssetsShareList: [],
 				localTime: '',
-				page: 1,
-				pageSize: 10,
-				pageNum: 0,
-				pageTotal: 0
+
 			}
 		},
 		onLoad() {
 
 		},
 		onReachBottom(){
-			this.pageNum = Math.ceil( this.pageTotal / this.pageSize)
 			if(this.page>=this.pageNum){
 				this.page = this.pageNum
 			}else{
@@ -40,6 +38,15 @@
 			}
 		},
 		methods: {
+			touchEnd(e){
+				if(this.changeY > 50){
+					this.page = 1
+					this.tranAssetsShareList = []
+					this.getTranAssetsShare()
+					this.paddingTop = 0
+				}
+			},
+			
 			getTranAssetsShare(){
 				this.ajaxJson({
 					url: '/api/v1/suborTreatyProfit',

@@ -17,7 +17,7 @@
 					<view @click.stop="collectEvent(item, index, switchOn)" class="collectIcon i-star" :class="{'i-stared': starIndex.indexOf(index)>-1}"></view>
 					<view class="listLft">
 						<text class="lftName">{{item.fShortName}} / {{item.group}}</text>
-						<text class="lftMoney">成交额：{{item.volumn}}</text>
+						<text class="lftMoney">成交额：{{item.fentrustValue}}</text>
 					</view>
 					<view class="listMid">
 						<text class="midNewPrice">{{item.lastDealPrize}}</text>
@@ -34,7 +34,7 @@
 					<view @click.stop="collectEvent(item, index, switchOn)" class="collectIcon i-stared" :class="{'i-star': !starIndex.indexOf(index)>-1}"></view>
 					<view class="listLft">
 						<text class="lftName">{{item.fShortName}} / {{item.group}}</text>
-						<text class="lftMoney">成交额：{{item.volumn}}</text>
+						<text class="lftMoney">成交额：{{item.fentrustValue}}</text>
 					</view>
 					<view class="listMid">
 						<text class="midNewPrice">{{item.lastDealPrize}}</text>
@@ -79,15 +79,11 @@
 			
 		},
 		methods:{
-			touchEnd(){
-				if(this.scrollTop > 0){
+			touchEnd(e){
+				if(this.changeY > 50){
 					this.paddingTop = 0
-				}else{
-					if(this.paddingTop > 0){
-						this.paddingTop = 0
-						this.getQuotaList()
-						this.initQuotalist()
-					}
+					this.getQuotaList()
+					this.initQuotalist()
 				}
 			},
 
@@ -287,7 +283,6 @@
 							color: #BD3A3B;
 						}
 						.midNewCny{
-							margin-top: 10rpx;
 							font-size: 24rpx;
 							line-height: 24rpx;
 							color: #8C8B91;

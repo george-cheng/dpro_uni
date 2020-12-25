@@ -1,8 +1,8 @@
 <template>
-	<view class="tranContract mainBox">
+	<view class="tranContract mainBox" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd" :style="{paddingTop: paddingTop + 'rpx'}">
 		<view class="tractCon">
 			<view class="enConList">
-				<view class="enList" v-for="(item, index) in recordList" :key="item.id" @click="tranAssetsEvent(item)">
+				<view class="enList" v-for="(item, index) in recordList" :key="index" @click="tranAssetsEvent(item)">
 					<view><text>合约名称</text><text>{{item.treaty_name}}</text></view>
 					<view><text>抢购标准</text><text>{{item.ded_amount}}</text></view>
 					<view><text>总产量</text><text>{{item.ded_amount * item.out_mult}}</text></view>
@@ -17,18 +17,13 @@
 </template>
 
 <script>
+	import { unimixin } from '@/utils/unimixin.js'
 	export default {
+		mixins: [unimixin],
 		data(){
 			return{
 				recordList: [],
-				page: 1,
-				pageSize: 10,
-				pageNum: 0,
-				pageTotal: 0
 			}
-		},
-		onLoad() {
-
 		},
 		onReachBottom(){
 			this.pageNum = Math.ceil( this.pageTotal / this.pageSize)
@@ -40,6 +35,15 @@
 			}
 		},
 		methods: {
+			
+			touchEnd(e){
+				if(this.changeY > 50){
+					this.paddingTop = 0
+					this.recordList = []
+					this.getRecordList()
+				}
+			},
+			
 			deactivaEvent(item){
 				if(item.activate_state === 0){
 					this.ajaxJson({
@@ -51,6 +55,7 @@
 								uni.showToast({
 									title: data.msg,
 									success: () => {
+										this.recordList = []
 										this.getRecordList()
 									}
 								})
