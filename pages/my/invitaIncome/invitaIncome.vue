@@ -1,5 +1,20 @@
 <template>
 	<view class="invita mainBox">
+		<view class="personInfo">
+			<view class="infoTit">个人信息</view>
+			<view class="infoCon">
+				<view>
+					<view>登录名：{{userInfo.loginName}}</view>
+					<view v-if="userInfo.grade === 0">等级：普通用户</view>
+					<view v-if="userInfo.grade === 1">等级：VIP</view>
+					<view v-if="userInfo.grade !== 0 && userInfo.grade !== 1">等级：VIP{{ parseInt( userInfo.grade ) -1 }}</view>
+				</view>
+				<view>
+					<view>直推人数：{{userInfo.introCount}}</view>
+					<view>团队人数：{{userInfo.introTeamTotal}}</view>
+				</view>
+			</view>
+		</view>
 		<view class="invitaTit">扫码推荐</view>
 		<image :src="qrCode" mode="" @longtap="downLoad(qrCode)"></image>
 		<view @click="linkCopy">
@@ -15,11 +30,20 @@
 		data(){
 			return{
 				qrCode: '',
+				userInfo: '',
 				invitaLink: '',
 			}
 		},
 		onLoad() {
 
+		},
+		onNavigationBarButtonTap(e) {
+			if(e.float == 'right') {
+				uni.navigateTo({
+					url: '/pages/my/invitaIncome/invitaIncomRecord',
+					success: () => {}
+				})
+			}
 		},
 		methods: {
 			downLoad(url){
@@ -77,6 +101,7 @@
 				uni.getStorage({
 					key: 'userInfo',
 					success: (data) => {
+						this.userInfo = data.data
 						this.invitaLink = 'http://www.dproltd.show/test.html?introId=' + data.data.id
 					}
 				})
@@ -91,6 +116,24 @@
 
 <style scoped lang="scss">
 	.invita{
+		.personInfo{
+			margin: 0 80rpx;
+			color: #fff;
+			.infoTit{
+				display: flex;
+				justify-content: center;
+				font-size: 24rpx;
+				margin-bottom: 30rpx;
+			}
+			.infoCon{
+				view{
+					display: flex;
+					justify-content: space-between;
+					margin-bottom: 10rpx;
+					font-size: 26rpx;
+				}
+			}
+		}
 		.invitaTit{
 			margin: 20rpx 30rpx 0;
 			display: flex;

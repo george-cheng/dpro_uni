@@ -16,13 +16,15 @@
 					<text class="userName">{{userInfo.loginName}}</text>
 				</view>
 				<view class="rgtBtm">
-					<view class="userAuthen userBtm">
+					<view class="userAuthen userBtm" v-if="false">
 						<view class="authenIcon i-excla"></view>
 						<text>{{authTxt}}</text>
 					</view>
 					<view class="userGrade userBtm">
 						<view class="gradeIcon i-grade"></view>
-						<text>MXC大客户</text>
+						<text v-if="userInfo.grade === 0">普通用户</text>
+						<text v-if="userInfo.grade === 1">VIP</text>
+						<text v-if="userInfo.grade !== 0 && userInfo.grade !== 1">VIP{{ parseInt( userInfo.grade ) -1 }}</text>
 					</view>
 				</view>
 			</view>
@@ -339,8 +341,12 @@
 					display: flex;
 				}
 				.userGrade{
-					margin-left: 20rpx;
+					// margin-left: 20rpx;
 					display: flex;
+					font-size: 28rpx;
+					.gradeIcon{
+						margin-right: 10rpx;
+					}
 				}
 			}
 		}

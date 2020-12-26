@@ -7,8 +7,10 @@
 			<view class="redTxtNum">{{wormHoleInfo.total_quantity}}</view>
 		</view>
 		<view class="holeRed">
-			<view class="holeRedArea" v-for="(item, index) in packagePos" v-if="index < numSize" :key="index">
-				<image @click="redPackageEvent(item, index)" :style="{top: item.top + 'rpx', left: item.left + 'rpx'}" src="../../static/images/redPackage.png" mode="aspectFit"></image>
+			<view class="holeRedArea" v-for="(item, index) in packagePos" v-if="index < dayReceive" :key="index">
+				<view :animation="animationData">
+					<image  @click="redPackageEvent(item, index)" :style="{top: item.top + 'rpx', left: item.left + 'rpx'}" src="../../static/images/redPackage.png" mode="aspectFit"></image>
+				</view>
 			</view>
 			<view class="holeRedInfo">
 				<view class="holeInfoTotal">
@@ -54,7 +56,6 @@
 				<image src="../../static/images/redInvitaBtn.png" mode="aspectFit"></image>
 			</view>
 		</view>
-		
 	</view>
 
 </template>
@@ -74,15 +75,47 @@
 				isRedInfoShow: false,
 				isRedInvitaArea: false,
 				packageLen: 0,
+				dayReceive: 10,
 				frequency: '',
+				redBag: '',
 				numSize: '',
 				packagePos: [
-					
-				]
+					{top: '42',left: '102'},{top: '73',left: '327'},{top: '74',left: '534'},
+					{top: '217',left: '29'},{top: '197',left: '180'},{top: '217',left: '414'},
+					{top: '259',left: '562'},{top: '380',left: '65'},{top: '432',left: '339'},
+					{top: '385',left: '487'},
+				],
+				animationData: {},
+				isStop: true,
+				timer: null,
+				soundUrl: '../../static/redSound.mp3'
 			}
 		},
 		onLoad() {
-
+			this.animation = uni.createAnimation()
+			this.timer = setInterval(()=>{
+				if(this.isStop){
+				this.initAnimationImg()
+				this.isStop = false
+				}else{
+					this.noInitAnimationImg()
+					this.isStop = true
+				}
+			}, 1200)
+		},
+		onShow() {
+			
+		},
+		onUnload() {
+			this.animationData = {}
+			if(this.timer){
+				clearInterval(this.timer)
+			}
+		},
+		onHide() {
+			if(this.timer){
+				clearInterval(this.timer)
+			}
 		},
 		onNavigationBarButtonTap(e){
 			if(e.float == 'right'){
@@ -93,6 +126,15 @@
 			}
 		},
 		methods: {
+			initAnimationImg(){
+				this.animation.translateY(10).step({duration: 1000})
+				this.animationData = this.animation.export()
+			},
+			noInitAnimationImg(){
+				this.animation.translateY(-10).step({duration: 1000})
+				this.animationData = this.animation.export()
+			},
+
 			touchEnd(e){
 				if(this.changeY > 50){
 					this.initImgSize()
@@ -122,21 +164,26 @@
 					url: '/pages/my/invitaIncome/invitaIncome'
 				})
 			},
+			redPackageSound(){
+				const innerAudioContext = uni.createInnerAudioContext();
+				innerAudioContext.autoplay = true;
+				innerAudioContext.src = this.soundUrl;
+
+			},
 			redPackageEvent(item, index){
 				this.ajaxJson({
 					url: '/api/v1/wormhole/openRedBag',
 					method: 'POST',
 					call: (data)=>{
 						if(data.code == 200){
+							this.redPackageSound()
 							this.redBag = data.data
+							this.initGetWormHole()
+							this.initWormHole()
 							this.isRedInfoShow = true
 							this.packagePos.splice(index, 1)
-							this.initGetWormHole()
 						}else if(data.code == 1041){
-							uni.showToast({
-								image: '/static/images/wrong.png',
-								title: data.msg
-							})
+							this.isRedInvitaArea = true
 						}else{
 							uni.showToast({
 								image: '/static/images/wrong.png',
@@ -151,28 +198,16 @@
 					url: '/api/v1/wormhole/wallet',
 					call: (data)=>{
 						if(data.code == 200){
-							this.packageLen = data.data.day_receive 
-							this.frequency = parseInt(this.packageLen / 10)
-							this.numSize = parseInt(this.packageLen) % 10
-							if(this.frequency != 0){
-								if(this.numSize == 0){
-									this.numSize = 10
-									this.packagePos = [{top: '18',left: '150'},{top: '18',left: '396'},{top: '54',left: '320'},{top: '157',left: '76'},{top: '165',left: '258'},{top: '157',left: '486'},{top: '273',left: '137'},{top: '308',left: '290'},{top: '308',left: '557'},{top: '236',left: '372'}]
-								}else{
-									this.packagePos = [{top: '18',left: '150'},{top: '18',left: '396'},{top: '54',left: '320'},{top: '157',left: '76'},{top: '165',left: '258'},{top: '157',left: '486'},{top: '273',left: '137'},{top: '308',left: '290'},{top: '308',left: '557'},{top: '236',left: '372'}]
-								}
-							}
 							this.redWallet = data.data
-							let surplus = accAdd(this.redWallet.total_receive, accMul(this.redWallet.day_receive, -1))
-							if(surplus >= this.redWallet.total_receive){
-								this.initGetWormHole()
-								this.isRedInvitaArea = true
-							}
-							if(surplus >= 30){
-								uni.showToast({
-									icon: 'none',
-									title: '已达到当日30次上限'
-								})
+							this.dayReceive = data.data.day_receive
+							if(this.dayReceive == 0){
+								this.dayReceive = 10
+								this.packagePos = [
+									{top: '63',left: '65'},{top: '41',left: '318'},{top: '77',left: '587'},
+									{top: '162',left: '211'},{top: '123',left: '431'},{top: '244',left: '414'},
+									{top: '295',left: '293'},{top: '332',left: '52'},{top: '385',left: '211'},
+									{top: '368',left: '562'},
+								]
 							}
 						}else{
 							uni.showToast({
@@ -206,6 +241,7 @@
 			this.initImgSize()
 			this.initWormHole()
 			this.initGetWormHole()
+			this.initAnimationImg()
 		}
 	}
 </script>
@@ -240,7 +276,7 @@
 			}
 		}
 		.holeRedPackageBg{
-			background-image: url('/static/images/holeRedBg.jpg');
+			background-image: url('/static/images/holeRedBg.gif');
 			background-size: cover;
 			background-position: center center;
 			background-repeat: no-repeat;
@@ -254,12 +290,14 @@
 			width: 660rpx;
 			height: 510rpx;
 			.holeRedArea{
+				view{
 				width: 50rpx;
 				height: 66rpx;
 				position: absolute;
 				image{
 					width: 100%;
 					height: 100%;
+				}
 				}
 			}
 			.holeRedInfo{
@@ -310,7 +348,7 @@
 			}
 			.redShowTxt{
 				position: absolute;
-				top: 140rpx;
+				top: 160rpx;
 				left: 0;
 				right: 0;
 				margin: auto;
@@ -329,7 +367,7 @@
 					}
 				}
 				.redShowRecord{
-					margin-top: 30rpx;
+					margin-top: 50rpx;
 					font-size: 24rpx;
 				}
 			}
