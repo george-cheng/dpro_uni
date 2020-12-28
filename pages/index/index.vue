@@ -149,7 +149,7 @@
 			},
 			/* 虫洞红包 */
 			redPackageEvent(){
-				uni.navigateTo({
+				uni.reLaunch({
 					url: '/pages/holeRedPackage/holeRedPackage',
 					success: () => {}
 				})

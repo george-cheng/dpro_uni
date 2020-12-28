@@ -3,7 +3,7 @@ function checkEmail(email){
 }
 
 function checkPhone(phone){
-	return RegExp(/^1[3456789]\d{9}$/).test(phone);
+	return RegExp(/^1[23456789]\d{9}$/).test(phone);
 }
 
 function checkPwd(pwd){

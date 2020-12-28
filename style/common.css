@@ -10,6 +10,9 @@ body{
 	background-color: #282828;
 	padding-bottom: 120rpx !important;
 }
+.noNavMainBox{
+	background-color: #282828;
+}
 .vheight{
 
 }

@@ -1,5 +1,5 @@
 <template>
-	<view class="mainBox register">
+	<view class="noNavMainBox register">
 		<view class="registerTop">
 			<view class="loginSwitch">
 				<text :class="[isEmailActive?'textLine' : '']" @click="emailEvent">邮箱注册</text>
@@ -21,7 +21,7 @@
 				<view>
 					<input v-model="emailUser" type="text" placeholder="请设置邮箱地址">
 				</view>
-				<view>
+				<view v-if="false">
 					<view class="phoneBox">
 						<text class="preIptConID"> + {{prePhoneNum}}</text>
 						<input class="phoneIpt" v-model="phoneUser" type="text" placeholder="请输入您的手机号">
@@ -55,7 +55,7 @@
 					</view>
 				</view>
 				<view>
-					<input v-model="invateCode" placeholder="请输入邀请码(选填，区分大小写)">
+					<input v-model="invateCode" placeholder="请输入邀请码(区分大小写)">
 					<span @click="invateCodeEvent" class=""></span>
 				</view>
 			</view>
@@ -94,7 +94,7 @@
 					</view>
 				</view>
 				<view>
-					<input v-model="invatePhCode" placeholder="请输入邀请码(选填，区分大小写)">
+					<input v-model="invatePhCode" placeholder="请输入邀请码(区分大小写)">
 					<span @click="invateCodeEvent" class=""></span>
 				</view>
 			</view>
@@ -107,14 +107,15 @@
 			<view class="regBox">
 				<button @click="registerBtn" type="default">注册</button>
 			</view>
-			<view class="loginBox" @click="loginBtn">
-				<button type="default">登录</button>
-			</view>
+			
 		</view>
 		<view class="regTip" >
 			<span class="checkIcon" @click="checkTipEvent" :class="[isCheck?'i-checked':'i-check']"></span>
 			<text>我已阅读并同意</text> 
 			<text class="agreement" @click="serviceAgreementEvent">《用户注册及隐私协议》</text>
+		</view>
+		<view class="loginBtm">
+			<view @click="loginEvent">已有帐号，<span>去登陆</span></view>
 		</view>
 	</view>
 </template>
@@ -226,7 +227,12 @@
 					this.isPhPassword = !this.isPhPassword
 				}
 			},
-			
+			loginEvent(){
+				uni.navigateTo({
+					url: '../loginIn/loginIn',
+					success: () => {}
+				})
+			},
 			
 			getSecVerCode(){
 				if(this.verTxt == '获取验证码'){
@@ -306,12 +312,12 @@
 			/* 跳转登录 */
 			loginBtn(){
 				uni.navigateTo({
-					url: '../loginIn/loginIn'
+					url: '../loginIn/loginIn',
+					success: () => {}
 				})
 			},
 			/* 注册提交按钮 */
 			registerBtn(){
-				
 				this.validator()
 				if(this.isValidator){
 					let params = {
@@ -326,13 +332,22 @@
 						url: '/api/v1/register',
 						data: params,
 						method: 'POST',
-						call: (res)=>{
-							if(res.flag){
-								uni.navigateTo({
-									url: '../loginIn/loginIn'
+						call: (data)=>{
+							if(data.code == 200){
+								uni.showToast({
+									title: '注册成功',
+									success: () => {
+										setTimeout(()=>{
+											uni.navigateTo({
+												url: '/pages/loginIn/loginIn',
+												success: () => {}
+											})
+										},1000)
+									},
 								})
 							}else{
 								uni.showToast({
+									image: '/static/images/wrong.png',
 									title: '注册失败'
 								})
 							}
@@ -345,7 +360,6 @@
 			},
 			
 			/* 获取国家id和国家区号  */
-	
 			getCountry(){
 				this.ajaxJson({
 					url: '/api/v1/config/countryCode',
@@ -380,13 +394,7 @@
 			
 			validator(){
 				if(this.isEmail){
-					if(!checkPhone(this.phoneUser) || !this.phoneUser){
-						uni.showToast({
-							icon: 'none',
-							title: '手机号码为空或错误，请重新输入'
-						})
-						this.isValidator = false
-					}else if(!checkEmail(this.emailUser) || !this.emailUser){
+					if(!checkEmail(this.emailUser) || !this.emailUser){
 						uni.showToast({
 							icon: 'none',
 							title: '邮箱地址为空或错误，请重新输入'
@@ -410,6 +418,11 @@
 							title: '请输入短信验证码'
 						})
 						this.isValidator = false
+					}else if(!this.invateCode){
+						uni.showToast({
+							icon: 'none',
+							title: '请输入邀请码'
+						})
 					}else if(!this.isCheck){
 						uni.showToast({
 							icon: 'none',
@@ -445,6 +458,11 @@
 							title: '请输入短信验证码'
 						})
 						this.isValidator = false
+					}else if(!this.invatePhCode){
+						uni.showToast({
+							icon: 'none',
+							title: '请输入邀请码'
+						})
 					}else if(!this.isCheck){
 						uni.showToast({
 							icon: 'none',
@@ -648,7 +666,7 @@
 			}
 		}
 		.btnBox{
-			margin: 90rpx auto 0;
+			margin: 30rpx auto 0;
 			width: 594rpx;
 			.regBox{
 				button{
@@ -657,16 +675,7 @@
 					font-size: 28rpx;
 				}
 			}
-			.loginBox{
-				margin-top: 20rpx;
-				button{
-					background-color: #282828;
-					color: #BD3A3B;
-					font-size: 28rpx;
-					border: 1px solid #EBA8AD;
-					border-radius: 4rpx;
-				}
-			}
+			
 		}
 		.regTip{
 			margin: 50rpx auto 0;
@@ -699,6 +708,20 @@
 			}
 			.i-excla:before{
 				color: #99403d;
+			}
+		}
+		.loginBtm{
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			width: 100%;
+			text-align: center;
+			margin: 40rpx auto 0;
+			color: #999999;
+			view:nth-child(1){
+				span{
+					color: #BD3A3B;
+				}
 			}
 		}
 	}

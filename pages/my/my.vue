@@ -214,8 +214,8 @@
 						}
 					})
 				}else if(index == 2){
-					uni.navigateTo({
-						url: './invitaIncome/invitaIncome'
+					uni.reLaunch({
+						url: './invitaIncome/invitaIncome?category=1'
 					})
 				}else if(index == 3){
 					uni.navigateTo({

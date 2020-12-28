@@ -73,10 +73,12 @@
 								uni.showToast({
 									title: data.msg,
 									success: () => {
-										uni.navigateTo({
-											url: '/pages/personal/safeCenter/safeCenter',
-											success: () => {}
-										})
+										setTimeout(()=>{
+											uni.navigateTo({
+												url: '/pages/personal/safeCenter/safeCenter',
+												success: () => {}
+											})
+										},1000)
 									}
 								})
 							}else{

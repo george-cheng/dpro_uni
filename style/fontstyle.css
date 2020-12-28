@@ -183,7 +183,7 @@
 /* 向右 --- 转账 */
 .i-tranAcc::before{
 	font-family: 'icomoon' !important;
-	content: "\e927";
+	content: "\e930";
 }
 /* 向下箭头 */
 .i-dwArrow::before{
@@ -203,4 +203,9 @@
 .i-closeRgt::before{
 	font-family: 'icomoon' !important;
 	content: "\e92e";
+}
+
+.i-lftArrow::before{
+	font-family: 'icomoon' !important;
+	content: "\e92f";
 }

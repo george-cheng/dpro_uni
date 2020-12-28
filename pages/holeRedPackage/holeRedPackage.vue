@@ -123,6 +123,11 @@
 					url: '/pages/holeRedPackage/holeRedPackageRecord',
 					success: () => {}
 				})
+			}else{
+				uni.reLaunch({
+					url: '../index/index',
+					success: () => {}
+				})
 			}
 		},
 		methods: {
@@ -160,7 +165,7 @@
 			},
 			/* 邀请 */
 			invitaBtnEvent(){
-				uni.navigateTo({
+				uni.reLaunch({
 					url: '/pages/my/invitaIncome/invitaIncome'
 				})
 			},
@@ -168,7 +173,6 @@
 				const innerAudioContext = uni.createInnerAudioContext();
 				innerAudioContext.autoplay = true;
 				innerAudioContext.src = this.soundUrl;
-
 			},
 			redPackageEvent(item, index){
 				this.ajaxJson({

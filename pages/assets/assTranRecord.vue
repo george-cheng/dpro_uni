@@ -15,7 +15,10 @@
 						<text>划转数量</text>
 					</view>
 					<view class="price">
-						<text>{{item.type == '1' ? '资金到法币' : '法币到资金'}}</text>
+						<text v-if="item.type == '1'">币币到法币</text>
+						<text v-if="item.type == '2'">法币到币币</text>
+						<text v-if="item.type == '3'">币币到合约</text>
+						<text v-if="item.type == '4'">合约到币币</text>
 						<text>类型</text>
 					</view>
 					<view class="price">

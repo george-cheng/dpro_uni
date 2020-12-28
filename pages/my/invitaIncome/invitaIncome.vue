@@ -32,16 +32,28 @@
 				qrCode: '',
 				userInfo: '',
 				invitaLink: '',
+				category: '',
 			}
 		},
-		onLoad() {
-
+		onLoad(options) {
+			this.category = options.category
 		},
 		onNavigationBarButtonTap(e) {
 			if(e.float == 'right') {
 				uni.navigateTo({
 					url: '/pages/my/invitaIncome/invitaIncomRecord',
 					success: () => {}
+				})
+			}else{
+				let url = ''
+				if(this.category == 1){
+					url = '/pages/my/my'
+				}else{
+					url = '/pages/holeRedPackage/holeRedPackage'
+				}
+				uni.reLaunch({
+					url: url,
+					success() {}
 				})
 			}
 		},

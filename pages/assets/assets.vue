@@ -2,122 +2,171 @@
 	<view class="assets mainBox" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd" :style="{paddingTop: paddingTop + 'rpx'}">
 		<view class="navBarCon" v-if="isNavBar">
 			<view @click="navBarEvent(0)">充值记录</view>
-			<view  @click="navBarEvent(1)">提币记录</view>
-			<view  @click="navBarEvent(2)">法币OTC记录</view>
+			<view @click="navBarEvent(1)">提币记录</view>
+			<view @click="navBarEvent(2)">法币OTC记录</view>
 		</view>
-		<view class="assetsTit">
-			<view class="assetsTotal">
-				<text class="totalTit">总资产</text>
-				<text class="totalMoney">{{isShow ? accAdd(accAdd( moneyAdd, usdtMoneyAdd ), legAcc).toFixed(2) : '******'}}</text>
-				<text class="totalCny">≈ {{isShow ? accMul(accAdd(accAdd( moneyAdd, usdtMoneyAdd ), legAcc), cny).toFixed(2) : '******'}} CNY</text>
-			</view>
-			<view class="totalShow" @click="showEvent">
-				<span class="showIco i-eye"></span>
-			</view>
+		
+		<view class="switchNav">
+			<view :class="{switchChoice: switchOn == index}" @click="switchNavEvent(item, index)" v-for="(item, index) in switchNavList" :key="index">{{item}}</view>
 		</view>
-		<!-- <view class="assetsOpera">
-			<view>
-				<view class="operaList" @click="operaEvent(0)">
-					<span class="rechargeIco i-recharge"></span>
-					<text>充值</text>
+		
+		<view v-if="switchOn == 0">
+			<view class="assetsTit">
+				<view class="assetsTotal">
+					<text class="totalTit">总资产</text>
+					<text class="totalMoney">{{isShow ? accAdd(accAdd( moneyAdd, usdtMoneyAdd ), legAcc).toFixed(2) : '******'}}</text>
+					<text class="totalCny">≈ {{isShow ? accMul(accAdd(accAdd( moneyAdd, usdtMoneyAdd ), legAcc), cny).toFixed(2) : '******'}} CNY</text>
 				</view>
-				<view class="operaList" @click="operaEvent(1)">
-					<span class="wdrawalIco i-wdrawal"></span>
-					<text>提现</text>
-				</view>
-				<view class="operaList" @click="operaEvent(2)">
-					<span class="reRecorIco i-reRecord"></span>
-					<text>充值记录</text>
-				</view>
-				<view class="operaList" @click="operaEvent(3)">
-					<span class="legalCurrRecordIco i-legalCurrRecord"></span>
-					<text>法币记录</text>
+				<view class="totalShow" @click="showEvent">
+					<span class="showIco i-eye"></span>
 				</view>
 			</view>
-		</view> -->
+			<!-- <view class="assetsOpera">
+				<view>
+					<view class="operaList" @click="operaEvent(0)">
+						<span class="rechargeIco i-recharge"></span>
+						<text>充值</text>
+					</view>
+					<view class="operaList" @click="operaEvent(1)">
+						<span class="wdrawalIco i-wdrawal"></span>
+						<text>提现</text>
+					</view>
+					<view class="operaList" @click="operaEvent(2)">
+						<span class="reRecorIco i-reRecord"></span>
+						<text>充值记录</text>
+					</view>
+					<view class="operaList" @click="operaEvent(3)">
+						<span class="legalCurrRecordIco i-legalCurrRecord"></span>
+						<text>法币记录</text>
+					</view>
+				</view>
+			</view> -->
 
-		<view class="assetsAcc">
-			<view class="accList">
-				<view>
-					<text class="accTit">币币账户(USDT)</text>
-					<text class="accMoney"> {{ accAdd( moneyAdd, usdtMoneyAdd ).toFixed(2)}} </text>
-					<text class="assCny">≈ {{ accMul( accAdd( moneyAdd, usdtMoneyAdd ) , cny).toFixed(2) }} CNY</text>
-				</view>
-				<view>
-					<text class="accTit">法币账户(USDT)</text>
-					<text class="accMoney">{{legAcc}}</text>
-					<text class="assCny">≈ {{accMul(legAcc, cny).toFixed(2)}} CNY</text>
-				</view>
-				<view>
-					<text class="accTit">合约账户(USDT)</text>
-					<text class="accMoney">0.00</text>
-					<text class="assCny">≈ 0.00 CNY</text>
+			<view class="assetsAcc">
+				<view class="accList">
+					<view>
+						<text class="accTit">币币账户(USDT)</text>
+						<text class="accMoney"> {{ accAdd( moneyAdd, usdtMoneyAdd ).toFixed(2)}} </text>
+						<text class="assCny">≈ {{ accMul( accAdd( moneyAdd, usdtMoneyAdd ) , cny).toFixed(2) }} CNY</text>
+					</view>
+					<view>
+						<text class="accTit">法币账户(USDT)</text>
+						<text class="accMoney">{{legAcc}}</text>
+						<text class="assCny">≈ {{accMul(legAcc, cny).toFixed(2)}} CNY</text>
+					</view>
+					<view>
+						<text class="accTit">合约账户(USDT)</text>
+						<text class="accMoney">0.00</text>
+						<text class="assCny">≈ 0.00 CNY</text>
+					</view>
 				</view>
 			</view>
-		</view>
-		<view class="assetsTran">
-			<view class="tranAcc">
-				<view class="accRgt">
-					<text> {{ isTranAcc ? '币币账户' : '法币账户' }}</text>
-				</view>
-				<span class="tranAccIco i-tranAcc" @click="tranSwitch"></span>
-				<view class="accRgt">
-					<view class="rgtCon">
-						<view>
-							<text>{{ isTranAcc ? '法币账户' : '币币账户' }}</text>
+			<view class="assetsTran" v-if="false">
+				<view class="tranAcc">
+					<view class="accRgt">
+						<text> {{ isTranAcc ? '币币账户' : '法币账户' }}</text>
+					</view>
+					<span class="tranAccIco i-tranAcc" @click="tranSwitch"></span>
+					<view class="accRgt">
+						<view class="rgtCon">
+							<view>
+								<text>{{ isTranAcc ? '法币账户' : '币币账户' }}</text>
+							</view>
+							<view class="rgtConList" v-if="isConList">
+								<text @click="conListEvent(item, index)" v-for="(item, index) in conList" :key="index">{{item}}</text>
+							</view>
 						</view>
-						<view class="rgtConList" v-if="isConList">
-							<text @click="conListEvent(item, index)" v-for="(item, index) in conList" :key="index">{{item}}</text>
+					</view>
+				</view>
+				<view class="tranQuantity">
+					<view>
+						<input class="tranQuantityIpt" type="text" v-model="accQuantity" placeholder="请输入划入数量(USDT)">
+						<view class="quantityInfo">
+							<text class="tranQuantityBtn" @click="transferEvent(0)">划转</text>
+							<span v-if="false" class="verLine"></span>
+							<text v-if="false" @click="transferEvent(1)">全部划转</text>
 						</view>
 					</view>
 				</view>
 			</view>
-			<view class="tranQuantity">
-				<view>
-					<input class="tranQuantityIpt" type="text" v-model="accQuantity" placeholder="请输入划入数量(USDT)">
-					<view class="quantityInfo">
-						<text class="tranQuantityBtn" @click="transferEvent(0)">划转</text>
-						<span v-if="false" class="verLine"></span>
-						<text v-if="false" @click="transferEvent(1)">全部划转</text>
+			<view class="tranDetail" v-if="false">
+				<text @click="tranDetailEvent">划转明细</text>
+			</view>
+			<view class="assetsTip" style="margin-top: 50rpx;">
+				<view class="tipLft">
+					<span class="tipCheck" :class="[isCheck?'i-checked':'i-check']" @click="checkEvent"></span>
+					<text>隐藏小额资产</text>
+				</view>
+				<view class="tipRgt">
+					<view class="rgtIptCon">
+						<span class="rgtIptIco i-search"></span>
+						<input type="text" v-model="searchIpt">
+					</view>
+				</view>
+			</view>
+			<view class="assetsList">
+				<view @click="assetsEvent(item)" v-for="(item, index) in assetsList" :key="item.id">
+					<view class="listLft">
+						<view class="lftImg">
+							<image :src="url + item.url" mode=""></image>
+						</view>
+						<view class="lftInfo">
+							<text class="infoTit">{{item.name}}</text>
+							<text class="infoIntro">{{item.allName}}</text>
+						</view>
+					</view>
+					<view class="listRgt">
+						<view class="rgtMoney">{{item.total}}</view>
+						<view class="rgtFrozen">
+							<text>冻结： {{item.frozen}}</text>
+						</view>
 					</view>
 				</view>
 			</view>
 		</view>
-		<view class="tranDetail">
-			<text @click="tranDetailEvent">划转明细</text>
-		</view>
-		<view class="assetsTip">
-			<view class="tipLft">
-				<span class="tipCheck" :class="[isCheck?'i-checked':'i-check']" @click="checkEvent"></span>
-				<text>隐藏小额资产</text>
-			</view>
-			<view class="tipRgt">
-				<view class="rgtIptCon">
-					<span class="rgtIptIco i-search"></span>
-					<input type="text" v-model="searchIpt">
+		<view v-if="switchOn == 1">
+			<view class="tranName">
+				<view class="tranNameTxt">币种</view>
+				<view class="tranNameIpt">
+					<input type="text" v-model="tranName" disabled>
+					<view class="tranIcon i-rgtArrow"></view>
 				</view>
 			</view>
-		</view>
-		<view class="assetsList">
-			<view @click="assetsEvent(item)" v-for="(item, index) in assetsList" :key="item.id">
-				<view class="listLft">
-					<view class="lftImg">
-						<image :src="url + item.url" mode=""></image>
-					</view>
-					<view class="lftInfo">
-						<text class="infoTit">{{item.name}}</text>
-						<text class="infoIntro">{{item.allName}}</text>
+			
+			<view class="tranArea">
+				
+				<view class="tranAreaLft">
+					<view class="areaLftName">{{lftName}}</view>
+				</view>
+				<view class="tranAreaIcon i-tranAcc" @click="tranIconEvent"></view>
+				<view class="tranAreaRgt" @click="areaRgtDownEvent">
+					<view class="areaRgtName">{{rgtName}}</view>
+					<view class="areaRgtDown i-dwArrow"></view>
+					<view class="areaRgtDownList" v-if="isAreaRgtDown">
+						<view @click.stop="areaRgtDownListEvent(item, index)" v-for="(item, index) in areaRgtDownList" :key="index">{{item}}</view>
 					</view>
 				</view>
-				<view class="listRgt">
-					<view class="rgtMoney">{{item.total}}</view>
-					<view class="rgtFrozen">
-						<text>冻结： {{item.frozen}}</text>
-					</view>
-				</view>
+				
 			</view>
+			<view class="tranUse">可用余额：{{useTotal}} {{tranName}}</view>
+			<view class="tranAmount">
+				<input type="text" v-model="tranAmount" placeholder="请输入划转数量">
+				<view class="amountName">{{tranName}}</view>
+			</view>
+			
+			<view class="tranConfirm" @click="tranConfirmEvent">
+				<button type="default">确认划转</button>
+			</view>
+			
+			
+			
+			
+			
+			
+			
+			
+			
 		</view>
-
 		<uni-popup ref="popup" type="bottom">
 			<view class="popupCon">
 				<view @click="popupEvent(0)" v-if="isPopupRecharge">充值</view>
@@ -152,7 +201,12 @@
 				accQuantity: '',
 				searchIpt: '',
 				conList: ['法币账户1','法币账户2','法币账户3','法币账户4','法币账户5','法币账户6'],
+				switchNavList: ['资产','划转'],
+				areaRgtDownList: ['法币交易','合约交易'],
+				switchOn: 0,
+				isHeyt: true,
 				isNavBar: false,
+				isAreaRgtDown: false,
 				isPopupRecharge: false,
 				isPopupWithDraw: false,
 				isPopupTransfer: false,
@@ -176,28 +230,182 @@
 				
 				USDTTotal: '',
 				
+				
+				
+				tranName: 'USDT',
+				lftName: '币币交易',
+				rgtName: '法币交易',
+				rgtSaveName: '',
+				type: '1',
+				useTotal: '',
+				tranAmount: '',
+				
 			}
 		},
 		onLoad() {
 		},
 		onNavigationBarButtonTap(e) {
 			if (e.float == 'right') {
-				this.isNavBar = !this.isNavBar
+				if(this.switchOn == 0){
+					this.isNavBar = !this.isNavBar
+				}else{
+					uni.navigateTo({
+						url: './assTranRecord',
+						success: () => {}
+					})
+				}
 			}
 		},
 		onShow(){
 			
 		},
 		methods:{
+			/* 资产 -- 划转 切换 */
+			switchNavEvent(item, index){
+				this.switchOn = index
+				this.isNavBar = false
+				let webView = this.$mp.page.$getAppWebview();
+				if(this.switchOn == 1){
+					webView.setTitleNViewButtonStyle(0,{
+						text: '记录',
+					})
+				}else{
+					webView.setTitleNViewButtonStyle(0,{
+						text: '明细',
+					})
+				}
+				
+			},
+			/* 划转切换 */
+			tranIconEvent(){
+				let saveRgt = this.rgtName
+				let saveLft = this.lftName
+				this.lftName = saveRgt
+				this.rgtName = saveLft
+				
+				if(this.lftName == '法币交易'){
+					this.isHeyt = false
+				}else if(this.lftName == '合约交易'){
+					this.isHeyt = false
+				}else{
+					this.isHeyt = true
+				}
+				this.tranType()
+			},
+			areaRgtDownEvent(){
+				if(this.isHeyt){
+					this.isAreaRgtDown = !this.isAreaRgtDown
+				}
+			},
+			areaRgtDownListEvent(item, index){
+				this.isAreaRgtDown = false
+				this.rgtSaveName = this.rgtName = item
+				this.tranType()
+			},
+			initTranType(){
+				this.ajaxJson({
+					url: '/api/v1/account/balances/byFvid',
+					data: {fvid: '50'},
+					call: (data)=>{
+						if(data.code == 200){
+							this.useTotal = data.data.ftotal
+						}
+					}
+				})
+			},
+			tranType(){
+				if(this.lftName == '币币交易' && this.rgtName == '法币交易'){
+					this.type = '1'
+					this.ajaxJson({
+						url: '/api/v1/account/balances/byFvid',
+						data: {fvid: '50'},
+						call: (data)=>{
+							if(data.code == 200){
+								this.useTotal = data.data.ftotal
+							}
+						}
+					})
+				}else if(this.lftName == '法币交易' && this.rgtName == '币币交易'){
+					this.type = '2'
+					this.ajaxJson({
+						url: '/api/v1/findUsdtBuinessByFuId',
+						method: 'POST',
+						data: {fvId: '50'},
+						call: (data)=>{
+							if(data.code == 200){
+								this.useTotal = data.data.fbalance
+							}
+						}
+					})
+				}else if(this.lftName == '币币交易' && this.rgtName == '合约交易'){
+					this.type = '3'
+					this.ajaxJson({
+						url: '/api/v1/account/balances/byFvid',
+						data: {fvid: '50'},
+						call: (data)=>{
+							if(data.code == 200){
+								this.useTotal = data.data.ftotal
+							}
+						}
+					})
+				}else if(this.lftName == '合约交易' && this.rgtName == '币币交易'){
+					this.type = '4'
+					this.ajaxJson({
+						url: '/api/v1/treatyWallet/getByUidAndCoinId',
+						data: {fvId: '50'},
+						call: (data)=>{
+							if(data.code == 200){
+								this.useTotal = data.data.total
+							}
+						}
+					})
+				}
+			},
+			tranConfirmEvent(){
+				if(!this.tranAmount){
+					uni.showToast({
+						icon: 'none',
+						title: '请输入数量'
+					})
+				}else{
+					this.ajaxJson({
+						url: '/api/v1/capitalTransfer',
+						method: 'POST',
+						data: {type: this.type,fvid: '50',amount: this.tranAmount},
+						call: (data)=>{
+							if(data.code == 200){
+								uni.showToast({
+									title: data.msg,
+									success: () => {
+										this.initTranType()
+										this.tranType()
+										this.tranAmount = ''
+									}
+								})
+							}else{
+								uni.showToast({
+									image: '/static/images/wrong.png',
+									title: data.msg
+								})
+							}
+						}
+					})
+				}
+			},
 			touchEnd(e){
 				if(this.changeY > 50){
-					this.moneyAdd = 0
-					this.usdtMoneyAdd = 0
-					this.legAcc = 0
-					this.getAssetsList()
-					this.getLegAcc()
-					this.getRage()
-					this.assetsTranInfo()
+					
+					if(this.switchOn == 0){
+						this.moneyAdd = 0
+						this.usdtMoneyAdd = 0
+						this.legAcc = 0
+						this.getAssetsList()
+						this.getLegAcc()
+						this.getRage()
+						this.assetsTranInfo()
+					}else{
+						this.initTranType()
+					}
 					this.paddingTop = 0
 				}
 			},
@@ -278,7 +486,7 @@
 				this.assetsId = item.id
 				this.imgUrl = item.url
 				if(this.isPopupRecharge || this.isPopupWithDraw){
-						this.$refs.popup.open()
+					this.$refs.popup.open()
 				}
 			},
 			/* 充值和提币功能按钮 */
@@ -319,13 +527,12 @@
 				if(index == 0 || index == 1){
 					uni.navigateTo({
 						url: './selectLetter?category=' + index,
-						success: () => {
-
-						}
+						success: () => {}
 					})
 				}else if(index == 2){
 					uni.navigateTo({
-						url: './orderRecord'
+						url: './orderRecord',
+						success: () => {}
 					})
 				}
 			},
@@ -417,7 +624,6 @@
 											this.getAssetsList()
 										}
 									})
-									
 								}else{
 									uni.showToast({
 										image: '../../static/images/wrong.png',
@@ -436,7 +642,8 @@
 			/* 划转明细 */
 			tranDetailEvent(){
 				uni.navigateTo({
-					url: './assTranRecord'
+					url: './assTranRecord',
+					success: () => {}
 				})
 			},
 			/* 显示小额资产 */
@@ -479,6 +686,8 @@
 			this.getLegAcc()
 			this.getRage()
 			this.assetsTranInfo()
+			
+			this.initTranType()
 		}
 	}
 </script>
@@ -496,6 +705,21 @@
 			display: flex;
 			flex-wrap: nowrap;
 			padding: 10rpx;
+			color: #fff;
+		}
+	}
+	.switchNav{
+		display: flex;
+		justify-content: space-between;
+		margin: 0 118rpx;
+		view{
+			padding: 12rpx 46rpx;
+			background-color: #f7f7f7;
+			border-radius: 6rpx;
+			color: #999;
+		}
+		.switchChoice{
+			background-color: #b8393c;
 			color: #fff;
 		}
 	}
@@ -792,6 +1016,92 @@
 					}
 				}
 			}
+		}
+	}
+	.tranName{
+		border: 1px solid #999;
+		margin: 60rpx 40rpx 0;
+		border-radius: 6rpx;
+		.tranNameTxt{
+			padding: 24rpx 0 0 24rpx;
+			font-size: 24rpx;
+			color: #999;
+		}
+		.tranNameIpt{
+			padding: 10rpx 12rpx 10rpx;
+			display: flex;
+			justify-content: space-between;
+			font-size: 28rpx;
+			.tranIcon:before{
+				color: #999;
+			}
+		}
+	}
+	.tranArea{
+		margin: 70rpx 40rpx 0;
+		display: flex;
+		justify-content: space-between;
+		.tranAreaLft, .tranAreaRgt{
+			position: relative;
+			.areaLftName, .areaRgtName{
+				border: 1px solid #999;
+				border-radius: 6rpx;
+				color: #999;
+				padding: 22rpx 80rpx;
+			}
+			.areaRgtDown{
+				position: absolute;
+				right: 20rpx;
+				top: 24rpx;
+			}
+			.areaRgtDown:before{
+				color: #999;
+			}
+			.areaRgtDownList{
+				border: 1px solid #999;
+				background-color: #282828;
+				position: absolute;
+				width: 100%;
+				top: 95rpx;
+				z-index: 9;
+				view{
+					color: #999;
+					margin: 10rpx 15rpx;
+				}
+			}
+		}
+		
+		.tranAreaIcon{
+			display: flex;
+			align-items: center;
+		}
+		.tranAreaIcon:before{
+			color: #999;
+			font-size: 48rpx;
+		}
+	}
+	.tranUse{
+		margin: 10rpx 40rpx 0;
+		color: #999;
+	}
+	.tranAmount{
+		margin: 30rpx 40rpx 0;
+		border: 1px solid #999;
+		border-radius: 6rpx;
+		padding: 20rpx 0;
+		position: relative;
+		.amountName{
+			position: absolute;
+			right: 30rpx;
+			top: 25rpx;
+			color: #999;
+		}
+	}
+	.tranConfirm{
+		margin: 80rpx 40rpx 0;
+		button{
+			background-color: #b8393c;
+			color: #fff;
 		}
 	}
 </style>
