@@ -198,15 +198,6 @@
 								uni.showToast({
 									title: data.msg,
 									success: () => {
-										this.ajaxJson({
-											url: '/api/v1/frontSession',
-											call: (data)=>{
-												uni.setStorage({
-													key: 'userSession',
-													data: data.data
-												})
-											}
-										})
 										uni.reLaunch({
 											url: '../index/index',
 										})

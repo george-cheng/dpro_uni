@@ -737,11 +737,10 @@
       this.getRate()
       this.getTotal()
       this.initTitBuyMenuListEvent()
-			
-			let webView = this.$mp.page.$getAppWebview();
-			webView.setTitleNViewButtonStyle(0,{  
-				text: ' ',  
-			})
+				let webView = this.$mp.page.$getAppWebview();
+				webView.setTitleNViewButtonStyle(0,{
+					text: ' ',  
+				})
 		}
 	}
 </script>

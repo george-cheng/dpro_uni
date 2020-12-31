@@ -95,7 +95,7 @@
 			pasteEvent(){
 				uni.getClipboardData({
 					success: (res) => {
-						this.verTxt = res.data
+						this.code = res.data
 					}
 				});
 			},

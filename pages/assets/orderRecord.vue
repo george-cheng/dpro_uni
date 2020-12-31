@@ -5,7 +5,7 @@
 			<view>
 				<view class="orderTop">
 					<view class="topLft">
-						<text class="ftransType">{{item.order_type === 1 ? '买入' : '卖出'}}</text>
+						<text class="ftransType" :style="{color: item.order_type === 1 ? '#f00':'#3ba987'}">{{item.order_type === 1 ? '买入' : '卖出'}}</text>
 						<text class="fvShortName">USDT</text>
 					</view>
 					<view class="topRgt">
@@ -93,6 +93,13 @@
 			}else{
 				this.page += 1
 				this.getOrderList()
+			}
+		},
+		onNavigationBarButtonTap(e){
+			if(e.float == 'left'){
+				uni.reLaunch({
+					url: '/pages/transac/transacMain?choiceOn=2'
+				})
 			}
 		},
 		methods: {
@@ -195,6 +202,7 @@
 </script>
 
 <style scoped lang="scss">
+	
 	.orderScreen{
 		padding: 0 !important;
 		margin-bottom: 20rpx !important;

@@ -110,8 +110,8 @@
 							<text>1400</text>
 						</view> -->
 						<view class="orderStatus">
-							<text>{{item.status === 1 ? '购买' : '已撤销'}}</text>
-							<span class="statusIco i-lftArrow"></span>
+							<text>{{item.type === 1 ? '购买' : '出售'}}</text>
+							<span class="statusIco i-rgtArrow"></span>
 						</view>
 					</view>
 				</view>
@@ -278,17 +278,18 @@
 				this.isTranSaleIpt = true
 				this.isTranIpt = false
 				this.btnTxt = '立即买入'
+				this.buyPrice = ''
 				this.sellPrice = this.kindList[0].sell_price
 				this.quantity = ''
 				this.tranType = '1'
 				this.getOrderList()
 			},
 			tranSaleEvent(){
-				return
 				this.tranOn = 1
 				this.isTranSaleIpt = false
 				this.isTranIpt = true
 				this.btnTxt = '立即卖出'
+				this.sellPrice = ''
 				this.buyPrice = this.kindList[0].buy_price
 				this.quantity = ''
 				this.tranType = '2'
@@ -413,8 +414,9 @@
 				}
 			},
 			historyOrderEvent(){
-				uni.navigateTo({
-					url: '/pages/assets/orderRecord'
+				uni.reLaunch({
+					url: '/pages/assets/orderRecord',
+					success: () => {}
 				})
 			},
 		},
@@ -422,9 +424,8 @@
 			this.getUserInfo()
 			this.getLegalKind()
 			this.getOrderList()
-			
 			let webView = this.$mp.page.$getAppWebview();
-			webView.setTitleNViewButtonStyle(0,{  
+			webView.setTitleNViewButtonStyle(0,{
 				text: ' ',  
 			})
 		}

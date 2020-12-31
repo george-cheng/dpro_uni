@@ -209,3 +209,13 @@
 	font-family: 'icomoon' !important;
 	content: "\e92f";
 }
+
+/* 删除 */
+.i-delete::before{
+	font-family: 'icomoon' !important;
+	content: "\e931";
+}
+.i-bussManager::before{
+	font-family: 'icomoon' !important;
+	content: "\e932";
+}

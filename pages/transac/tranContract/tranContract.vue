@@ -141,7 +141,7 @@
 		},
 		created() {
 			this.getContractList()
-			let webView = this.$mp.page.$getAppWebview();
+			let webView = this.$mp.page.$getAppWebview()
 			webView.setTitleNViewButtonStyle(0,{  
 				text: '\ue91d',  
 			})

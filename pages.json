@@ -20,7 +20,7 @@
 								"color": "#fff",
 								"colorPressed": "#fff",
 								"float": "right",
-								"fontSize": "36rpx",
+								"fontSize": "30rpx",
 								// "fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
 								"text": "明细" // 字体图标\u 开头，加上字体图标unicode后面四位
 							}
@@ -66,7 +66,7 @@
 								"color": "#fff",
 								"colorPressed": "#fff",
 								"float": "right",
-								"fontSize": "36rpx",
+								"fontSize": "30rpx",
 								"fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
 								"text": "\ue918" // 字体图标\u 开头，加上字体图标unicode后面四位
 							}
@@ -95,7 +95,7 @@
 								"color": "#fff",
 								"colorPressed": "#fff",
 								"float": "right",
-								"fontSize": "36rpx",
+								"fontSize": "30rpx",
 								"fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
 								"text": "\ue913" // 字体图标\u 开头，加上字体图标unicode后面四位
 							}
@@ -201,7 +201,7 @@
 			}
 		}
 		,{
-				"path" : "pages/personal/safeCenter/safeCenter",
+				"path" : "pages/my/safeCenter/safeCenter",
 				"style" :                                                                                    
 				{
 						"navigationBarTitleText": "安全中心",
@@ -210,7 +210,7 @@
 				
 		}
 		,{
-				"path" : "pages/personal/safeCenter/safePwd",
+				"path" : "pages/my/safeCenter/safePwd",
 				"style" :                                                                                    
 				{
 						"navigationBarTitleText": "设置交易密码",
@@ -223,7 +223,21 @@
 			"style" :                                                                                    
 			{
 				"navigationBarTitleText": "订单记录",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"titleNView": {
+						"buttons": [
+							{
+								"color": "#fff",
+								"colorPressed": "#fff",
+								"float": "left",
+								"fontSize": "30rpx",
+								"fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
+								"text": "\ue92f" // 字体图标\u 开头，加上字体图标unicode后面四位
+							}
+						]
+					}
+				}
 			}
 		}
 		,{
@@ -301,7 +315,7 @@
 								"color": "#fff",
 								"colorPressed": "#fff",
 								"float": "right",
-								"fontSize": "36rpx",
+								"fontSize": "30rpx",
 								// "fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
 								"text": "记录" // 字体图标\u 开头，加上字体图标unicode后面四位
 							},
@@ -309,7 +323,7 @@
 								"color": "#fff",
 								"colorPressed": "#fff",
 								"float": "left",
-								"fontSize": "36rpx",
+								"fontSize": "30rpx",
 								"fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
 								"text": "\ue92f" // 字体图标\u 开头，加上字体图标unicode后面四位
 							}
@@ -427,7 +441,7 @@
 								"color": "#fff",
 								"colorPressed": "#fff",
 								"float": "right",
-								"fontSize": "36rpx",
+								"fontSize": "30rpx",
 								// "fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
 								"text": "撤单" // 字体图标\u 开头，加上字体图标unicode后面四位
 							}
@@ -465,7 +479,7 @@
 								"color": "#fff",
 								"colorPressed": "#fff",
 								"float": "right",
-								"fontSize": "36rpx",
+								"fontSize": "30rpx",
 								// "fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
 								"text": "记录" // 字体图标\u 开头，加上字体图标unicode后面四位
 							}
@@ -495,7 +509,7 @@
 								"color": "#fff",
 								"colorPressed": "#fff",
 								"float": "right",
-								"fontSize": "36rpx",
+								"fontSize": "30rpx",
 								// "fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
 								"text": "记录" // 字体图标\u 开头，加上字体图标unicode后面四位
 							},
@@ -503,7 +517,7 @@
 								"color": "#fff",
 								"colorPressed": "#fff",
 								"float": "left",
-								"fontSize": "36rpx",
+								"fontSize": "30rpx",
 								"fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
 								"text": "\ue92f" // 字体图标\u 开头，加上字体图标unicode后面四位
 							}
@@ -519,8 +533,104 @@
 				"navigationBarTitleText": "红包记录",
 				"enablePullDownRefresh": false
 			}
+		},
+		{
+			"path" : "pages/my/applicant/applicant",
+			"style" :                                                                                    
+			{
+				"navigationBarTitleText": "申请商家",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"titleNView": {
+						"buttons": [
+							{
+								"color": "#fff",
+								"colorPressed": "#fff",
+								"float": "left",
+								"fontSize": "30rpx",
+								"fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
+								"text": "\ue92f" // 字体图标\u 开头，加上字体图标unicode后面四位
+							}
+						]
+					}
+				}
+			}
 		}
-       
+		,{
+			"path" : "pages/my/bussManager/bussManager",
+			"style" :                                                                                    
+				{
+					"navigationBarTitleText": "商家管理",
+					"enablePullDownRefresh": false,
+					"app-plus": {
+						"titleNView": {
+							"buttons": [
+								{
+									"color": "#fff",
+									"colorPressed": "#fff",
+									"float": "right",
+									"fontSize": "30rpx",
+									// "fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
+									"text": "记录" // 字体图标\u 开头，加上字体图标unicode后面四位
+								},
+								{
+									"color": "#fff",
+									"colorPressed": "#fff",
+									"float": "left",
+									"fontSize": "30rpx",
+									"fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
+									"text": "\ue92f" // 字体图标\u 开头，加上字体图标unicode后面四位
+								}
+							]
+						}
+					}
+				}
+			}
+		,{
+			"path" : "pages/my/bussManager/bussManagerOrder",
+			"style" :                                                                                    
+			{
+				"navigationBarTitleText": "订单记录",
+				"enablePullDownRefresh": false,
+				"disableScroll":true,
+				"app-plus": {
+					"titleNView": {
+						"buttons": [
+							{
+								"color": "#fff",
+								"colorPressed": "#fff",
+								"float": "left",
+								"fontSize": "30rpx",
+								"fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
+								"text": "\ue92f" // 字体图标\u 开头，加上字体图标unicode后面四位
+							}
+						]
+					}
+				}
+			}
+		}
+		,{
+			"path" : "pages/my/bussManager/bussManagerOrderToPay",
+			"style" :                                                                                    
+				{
+					"navigationBarTitleText": "确认订单",
+					"enablePullDownRefresh": false,
+					"app-plus": {
+						"titleNView": {
+							"buttons": [
+								{
+									"color": "#fff",
+									"colorPressed": "#fff",
+									"float": "left",
+									"fontSize": "30rpx",
+									"fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
+									"text": "\ue92f" // 字体图标\u 开头，加上字体图标unicode后面四位
+								}
+							]
+						}
+					}
+				}
+			}
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

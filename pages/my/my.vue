@@ -90,6 +90,16 @@
 					<view class="conIcon i-rgtArrow"></view>
 				</view>
 			</view>
+			<view  @click="myArrowEvent(8)" v-if="isBussManager">
+				<view class="conLft">
+					<view class="conIcon i-bussManager"></view>
+					<text class="lftTit">商家管理</text>
+				</view>
+				<view class="conRgt">
+					<text class="rgtInfo"></text>
+					<view class="conIcon i-rgtArrow"></view>
+				</view>
+			</view>
 			<view  @click="myArrowEvent(5)" v-if="false">
 				<view class="conLft">
 					<view class="conIcon i-language"></view>
@@ -142,11 +152,13 @@
 				userInfo: '',
 				nickIpt: '',
 				qq: '2562095187',
-				authTxt: '未认证'
+				authTxt: '未认证',
+				userSession: '',
+				isBussManager: false
 			}
 		},
 		onLoad() {
-
+			
 		},
 		onShow() {
 			this.infoEvent()
@@ -209,7 +221,7 @@
 					}
 				}else if(index == 1){
 					uni.navigateTo({
-						url: '../personal/safeCenter/safeCenter',
+						url: '/pages/my/safeCenter/safeCenter',
 						success: () => {
 						}
 					})
@@ -220,12 +232,21 @@
 				}else if(index == 3){
 					uni.navigateTo({
 						url: '/pages/my/mySetting/payMethod',
-						success: () => {
-							
-						}
+						success: () => {}
 					})
-				}else if(index == 7){
+				}else if(index == 4){
+					uni.reLaunch({
+						url: '/pages/my/applicant/applicant',
+						success: () => {}
+					})
+				}
+				else if(index == 7){
 					plus.runtime.openURL('mqq://im/chat?chat_type=wpa&uin=' + this.qq + '&version=1&src_type=web ');
+				}else if(index == 8){
+					uni.reLaunch({
+						url: '/pages/my/bussManager/bussManager',
+						success: () => {}
+					})
 				}
 			},
 			infoEvent(){
@@ -257,6 +278,24 @@
 					}
 				})
 			},
+			upDateSessionFront(){
+				this.ajaxJson({
+					url: '/api/v1/frontSession',
+					call: (data)=>{
+						this.userSession = data.data
+						if(this.userSession.otcType == 1){
+							this.isBussManager = true
+						}else{
+							this.isBussManager = false
+						}
+						uni.setStorage({
+							key: 'userSession',
+							data: data.data
+						})
+					}
+				})
+			}
+				
 		},
 		onNavigationBarButtonTap(e) {
 			if (e.float == 'right') {
@@ -267,6 +306,7 @@
 		},
 		created() {
 			this.infoEvent()
+			this.upDateSessionFront()
 		}
 	}
 </script>

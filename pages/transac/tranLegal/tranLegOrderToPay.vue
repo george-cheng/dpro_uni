@@ -1,14 +1,14 @@
 <template>
 	<view class="tranLegOrderToPay">
 		<view class="toPayTit">
-			<view class="toPayClock" v-if="!this.isOrderCancel && !this.isCollect">
+			<view class="toPayClock" v-if="!isOrderCancel && !isCollect">
 				<view class="clock">
 					<image src="/static/images/clock.png" mode=""></image>
-					<text v-if="this.isConOrder">{{clockTime}}</text>
-					<text v-if="this.isConPay">{{proceCount}}</text>
+					<text v-if="isConOrder">{{clockTime}}</text>
+					<text v-if="isConPay">{{proceCount}}</text>
 				</view>
-				<text class="clockTip" v-if="this.isConOrder">请在30分钟内向商家付款，否则订单将会自动取消</text>
-				<text class="clockTip" v-if="this.isConPay">商家将会在48小时钟内进行处理，请耐心等待</text>
+				<text class="clockTip" v-if="isConOrder">请在30分钟内向商家付款，否则订单将会自动取消</text>
+				<text class="clockTip" v-if="isConPay">商家将会在48小时钟内进行处理，请耐心等待</text>
 			</view>
 		</view>
 		<view class="orderDetail">
@@ -33,7 +33,7 @@
 			</view>
 		</view>
 		
-		<view class="bussinessDetail"  v-if="!this.isOrderCancel && !this.isCollect">
+		<view class="bussinessDetail"  v-if="!isOrderCancel && !isCollect">
 			<view class="bussTit">商家信息</view>
 			<view class="bussDetailInfo">
 				<view class="payMethod">
@@ -94,10 +94,10 @@
 			</view>
 		</view>
 		
-		<view class="confirmPay" @click="confirmPayEvent" v-if="this.isConOrder">
-			<button type="default">确认付款</button>
+		<view class="confirmPay" @click="confirmPayEvent(confirmTxt)" v-if="isConfirmBtn">
+			<button type="default">  {{confirmTxt}} </button>
 		</view>
-		
+		 <!-- v-if="isConOrder && isOrderType" -->
 	</view>
 </template>
 
@@ -122,12 +122,16 @@
 				orderStatus: '',
 				flagProce: true,
 				flagCount: true,
+				orderType: '',
+				isOrderType: true,
+				isConfirmBtn: false,
 				
-				
+				isClock: false,
 				isConOrder: false,   //确认下单
 				isConPay: false,   //确认付款
 				isCollect: false,   //确认收款
 				isOrderCancel: false,   //取消
+				confirmTxt: '确认付款',
 				
 				urlImg: 'https://dpro-main.oss-cn-hongkong.aliyuncs.com/',
 			}
@@ -139,6 +143,7 @@
 				this.getPayInfoEvent()
 				if(this.orderStatus == 1){
 					this.isConOrder = true
+					this.isConfirmBtn = true
 					uni.setNavigationBarTitle({
 						title: '确认下单',
 					})
@@ -161,9 +166,21 @@
 			}else{
 				this.fbuinessAccount = JSON.parse(decodeURIComponent(options.fbuinessAccount));
 				this.fotcOrder = JSON.parse(decodeURIComponent(options.fotcOrder));
+				this.orderType = this.fotcOrder.order_type
+				console.log(this.orderType)
+				
+				
+				this.isConOrder = true
+				this.isConfirmBtn = true
 				this.countTime(this.fotcOrder.place_time)
 				this.orderId = this.fotcOrder.order_id
-				this.isConOrder = true
+				if(this.orderType == 2){
+					uni.setNavigationBarTitle({
+						title: '等待商家付款',
+					})
+					this.isOrderType = false
+					this.isConfirmBtn = false
+				}
 			}
 		},
 		methods: {
@@ -185,10 +202,36 @@
 				});
 			},
 			/* 确认付款 */
-			confirmPayEvent(){
+			confirmPayEvent(confirmTxt){
 				let params = {
 					order_id: this.orderId
 				}
+				if(this.confirmTxt == '确认收款'){
+					this.ajaxJson({
+						url: '/api/v1/otcOrder/userEnterColl',
+						data: params,
+						method: 'POST',
+						call: (data)=>{
+							if(data.code == 200){
+								uni.showToast({
+									title: data.msg
+								})
+								setTimeout(()=>{
+									uni.reLaunch({
+										url: '/pages/assets/orderRecord',
+										success: () => {}
+									})
+								})
+							}else{
+								uni.showToast({
+									image: '/static/images/wrong.png',
+									title: data.msg
+								})
+							}
+						}
+					})
+				}
+				
 				this.ajaxJson({
 					url: '/api/v1/otcOrder/userEnterPay',
 					method: 'POST',
@@ -197,6 +240,7 @@
 						if(data.code == 200){
 							this.isConPay = true
 							this.isConOrder = false
+							this.isConfirmBtn = false
 							this.orderTime = getLocalTime(new Date())
 							this.countProceTime(this.orderTime)
 							uni.showToast({
@@ -229,15 +273,41 @@
 					call: (data)=>{
 						if(data.data.fotcOrder.length !=0){
 							this.fotcOrder = data.data.fotcOrder
+							this.orderType = data.data.fotcOrder.order_type
+							if( this.fotcOrder.order_status == 2 && this.fotcOrder.order_type == 2){
+								this.isConfirmBtn = true
+								this.confirmTxt = '确认收款'
+								uni.setNavigationBarTitle({
+									title: '等待确认收款',
+								})
+								const webView = this.$scope.$getAppWebview()
+								webView.setTitleNViewButtonStyle(0, {
+									text: ' ',    
+								});
+							}
+							
+							
 							if(this.fotcOrder.order_status == 1){
 								this.countTime()
+							}
+							if(this.fotcOrder.order_type == 2 && this.fotcOrder.order_status == 1){
+								uni.setNavigationBarTitle({
+									title: '等待商家付款',
+								})
+								const webView = this.$scope.$getAppWebview()
+								webView.setTitleNViewButtonStyle(0, {
+									text: ' ',    
+								});
+								this.isOrderType = false
+								this.isConfirmBtn = false
+								
 							}
 						}
 						this.fbuinessAccount = data.data.fbuinessAccount
 						let placeTime = this.fotcOrder.place_time
-						this.countProceTime(this.fotcOrder.pay_time)
-						this.countProceTime(this.fotcOrder.pay_time)
-						
+						if(this.fotcOrder.pay_time){
+							this.countProceTime(this.fotcOrder.pay_time)
+						}
 					}
 				})
 			},

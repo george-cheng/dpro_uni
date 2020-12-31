@@ -13,6 +13,14 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon--12:before {
+  content: "\e931";
+  color: #fff;
+}
+.icon--21:before {
+  content: "\e932";
+  color: #fff;
+}
 .icon--111:before {
   content: "\e930";
   color: #fff;

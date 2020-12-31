@@ -213,9 +213,7 @@
 						uni.setStorage({
 							key: 'rate',
 							data: this.rate,
-							success: function () {
-								
-							}
+							success: function () {}
 						})
 					}
 				})
@@ -342,6 +340,17 @@
 						}
 					}
 				})
+			},
+			getFrontSession(){
+				this.ajaxJson({
+					url: '/api/v1/frontSession',
+					call: (data)=>{
+						uni.setStorage({
+							key: 'userSession',
+							data: data.data
+						})
+					}
+				})
 			}
 		},
 		computed:{
@@ -356,6 +365,7 @@
 			this.getImg()
 			this.getMarket()
 			this.getMoneyData()
+			this.getFrontSession()
 		}
 	}
 </script>

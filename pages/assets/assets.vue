@@ -14,8 +14,8 @@
 			<view class="assetsTit">
 				<view class="assetsTotal">
 					<text class="totalTit">总资产</text>
-					<text class="totalMoney">{{isShow ? accAdd(accAdd( moneyAdd, usdtMoneyAdd ), legAcc).toFixed(2) : '******'}}</text>
-					<text class="totalCny">≈ {{isShow ? accMul(accAdd(accAdd( moneyAdd, usdtMoneyAdd ), legAcc), cny).toFixed(2) : '******'}} CNY</text>
+					<text class="totalMoney">{{isShow ? accAdd(accAdd(accAdd( moneyAdd, usdtMoneyAdd ), legAcc), contractAcc).toFixed(2) : '******'}}</text>
+					<text class="totalCny">≈ {{isShow ? accMul(accAdd(accAdd(accAdd( moneyAdd, usdtMoneyAdd ), legAcc), contractAcc), cny).toFixed(2) : '******'}} CNY</text>
 				</view>
 				<view class="totalShow" @click="showEvent">
 					<span class="showIco i-eye"></span>
@@ -56,8 +56,8 @@
 					</view>
 					<view>
 						<text class="accTit">合约账户(USDT)</text>
-						<text class="accMoney">0.00</text>
-						<text class="assCny">≈ 0.00 CNY</text>
+						<text class="accMoney">{{contractAcc}}</text>
+						<text class="assCny">≈ {{accMul(contractAcc, cny).toFixed(2)}} CNY</text>
 					</view>
 				</view>
 			</view>
@@ -157,15 +157,7 @@
 			<view class="tranConfirm" @click="tranConfirmEvent">
 				<button type="default">确认划转</button>
 			</view>
-			
-			
-			
-			
-			
-			
-			
-			
-			
+
 		</view>
 		<uni-popup ref="popup" type="bottom">
 			<view class="popupCon">
@@ -221,6 +213,7 @@
 				cny: '',
 				fvid: '',
 				legAcc: '0',
+				contractAcc: '0',
 				
 				isTranAcc: true,
 				isVerificat: false,
@@ -229,9 +222,7 @@
 				DPCLastDealPrize: '',
 				
 				USDTTotal: '',
-				
-				
-				
+
 				tranName: 'USDT',
 				lftName: '币币交易',
 				rgtName: '法币交易',
@@ -264,7 +255,7 @@
 			switchNavEvent(item, index){
 				this.switchOn = index
 				this.isNavBar = false
-				let webView = this.$mp.page.$getAppWebview();
+				let webView = this.$scope.$getAppWebview()
 				if(this.switchOn == 1){
 					webView.setTitleNViewButtonStyle(0,{
 						text: '记录',
@@ -401,6 +392,7 @@
 						this.legAcc = 0
 						this.getAssetsList()
 						this.getLegAcc()
+						this.getContractAcc()
 						this.getRage()
 						this.assetsTranInfo()
 					}else{
@@ -650,6 +642,17 @@
 			checkEvent(){
 				this.isCheck = !this.isCheck
 			},
+			getContractAcc(){
+				this.ajaxJson({
+					url: '/api/v1/treatyWallet/getByUidAndCoinId',
+					data: {fvId: '50'},
+					call: (data)=>{
+						if(data.code == 200){
+							this.contractAcc = data.data.total
+						}
+					}
+				})
+			},
 			getLegAcc(){
 				uni.getStorage({
 					key: 'userInfo',
@@ -684,6 +687,7 @@
 		created() {
 			this.getAssetsList()
 			this.getLegAcc()
+			this.getContractAcc()
 			this.getRage()
 			this.assetsTranInfo()
 			
@@ -710,13 +714,19 @@
 	}
 	.switchNav{
 		display: flex;
-		justify-content: space-between;
-		margin: 0 118rpx;
+		justify-content: space-around;
+		margin: 0 24rpx;
+		padding-top: 20rpx;
 		view{
-			padding: 12rpx 46rpx;
+			// padding: 12rpx 46rpx;
+			width: 156rpx;
+			height: 56rpx;
 			background-color: #f7f7f7;
 			border-radius: 6rpx;
 			color: #999;
+			display: flex;
+			justify-content: center;
+			align-items: center;
 		}
 		.switchChoice{
 			background-color: #b8393c;
@@ -742,7 +752,7 @@
 		.assetsTit{
 			display: flex;
 			justify-content: space-between;
-			margin: 0 46rpx 30rpx;
+			margin: 30rpx 46rpx 30rpx;
 			padding-top: 20rpx;
 			align-items: center;
 			.assetsTotal{
