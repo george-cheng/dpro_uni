@@ -181,7 +181,6 @@
 					call: (data)=>{
 						if(data.code == 200){
 							this.bussManagerList = data.data.rows
-							console.log(this.bussManagerList)
 						}
 					}
 				})

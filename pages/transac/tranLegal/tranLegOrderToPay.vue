@@ -129,7 +129,7 @@
 				isClock: false,
 				isConOrder: false,   //确认下单
 				isConPay: false,   //确认付款
-				isCollect: false,   //确认收款
+				isCollect: false,   //确认放币
 				isOrderCancel: false,   //取消
 				confirmTxt: '确认付款',
 				
@@ -155,7 +155,7 @@
 				}else if(this.orderStatus == 3){
 					this.isCollect = true
 					uni.setNavigationBarTitle({
-						title: '确认收款',
+						title: '确认放币',
 					})
 				}else if(this.orderStatus == 4){
 					this.isOrderCancel = true
@@ -206,7 +206,7 @@
 				let params = {
 					order_id: this.orderId
 				}
-				if(this.confirmTxt == '确认收款'){
+				if(this.confirmTxt == '确认放币'){
 					this.ajaxJson({
 						url: '/api/v1/otcOrder/userEnterColl',
 						data: params,
@@ -276,9 +276,9 @@
 							this.orderType = data.data.fotcOrder.order_type
 							if( this.fotcOrder.order_status == 2 && this.fotcOrder.order_type == 2){
 								this.isConfirmBtn = true
-								this.confirmTxt = '确认收款'
+								this.confirmTxt = '确认放币'
 								uni.setNavigationBarTitle({
-									title: '等待确认收款',
+									title: '等待确认放币',
 								})
 								const webView = this.$scope.$getAppWebview()
 								webView.setTitleNViewButtonStyle(0, {
@@ -358,7 +358,7 @@
 					this.flagProce = false
 					timerProce = setInterval(()=>{
 						let newDataTime = orderTime.replace(/-/g, '/')
-						let newTime = new Date(newDataTime).getTime() + 2*24*60*60*1000
+						let newTime = new Date(newDataTime).getTime() + 60*60*1000
 						let nowTime = new Date().getTime()
 						let timeProce = newTime - nowTime
 						let day = parseInt(timeProce / 1000 / 60 / 60 / 24)

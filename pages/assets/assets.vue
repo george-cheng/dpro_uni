@@ -151,7 +151,11 @@
 			<view class="tranUse">可用余额：{{useTotal}} {{tranName}}</view>
 			<view class="tranAmount">
 				<input type="text" v-model="tranAmount" placeholder="请输入划转数量">
-				<view class="amountName">{{tranName}}</view>
+				<view class="amountName">
+					<view class="tranKindName">{{tranName}}</view>
+					<view class="tranLine"></view>
+					<view class="tranAll" @click="tranAllEvent">全部</view>
+				</view>
 			</view>
 			
 			<view class="tranConfirm" @click="tranConfirmEvent">
@@ -251,6 +255,9 @@
 			
 		},
 		methods:{
+			tranAllEvent(){
+				this.tranAmount = this.useTotal
+			},
 			/* 资产 -- 划转 切换 */
 			switchNavEvent(item, index){
 				this.switchOn = index
@@ -721,12 +728,13 @@
 			// padding: 12rpx 46rpx;
 			width: 156rpx;
 			height: 56rpx;
-			background-color: #f7f7f7;
+			background-color: #303030;
 			border-radius: 6rpx;
 			color: #999;
 			display: flex;
 			justify-content: center;
 			align-items: center;
+			font-size: 28rpx;
 		}
 		.switchChoice{
 			background-color: #b8393c;
@@ -1105,6 +1113,23 @@
 			right: 30rpx;
 			top: 25rpx;
 			color: #999;
+			display: flex;
+			view{
+				margin: 0 8rpx;
+			}
+			.tranKindName{
+				
+			}
+			.tranLine{
+				background-color: #f7f7f7;
+				width: 1px;
+				height: 35rpx;
+				display: flex;
+				align-items: center;
+			}
+			.tranAll{
+				
+			}
 		}
 	}
 	.tranConfirm{

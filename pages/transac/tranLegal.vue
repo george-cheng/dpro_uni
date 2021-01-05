@@ -119,7 +119,7 @@
 		</view>
 		
 		<uni-popup ref="popup" type="bottom" >
-			<uni-popup-share title="购买" @comfirm="comfirm" style="background-color: #282828;">
+			<uni-popup-share :title="operaMethod" @comfirm="comfirm" style="background-color: #282828;">
 				<view class="popupCon">
 					<view class="popupPrice">单价：¥{{popupPrice}}</view>
 					<input class="popupQuantity" type="text" v-model="popupQuantity" @input="calcTotalIptEvent" @blur="calcTotalEvent"  placeholder="请输入数量">
@@ -167,7 +167,8 @@
 				trans_id: '',
 				isVerifica: false,
 				
-				coinName: 'USDT'
+				coinName: 'USDT',
+				operaMethod: '购买'
 			}
 		},
 		components: { uniPopup, uniPopupShare },
@@ -283,6 +284,7 @@
 				this.quantity = ''
 				this.tranType = '1'
 				this.getOrderList()
+				this.operaMethod = '购买'
 			},
 			tranSaleEvent(){
 				this.tranOn = 1
@@ -294,6 +296,7 @@
 				this.quantity = ''
 				this.tranType = '2'
 				this.getOrderList()
+				this.operaMethod = '出售'
 			},
 			/* 币种选择  */
 			kindListEvent(){

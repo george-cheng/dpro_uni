@@ -166,7 +166,31 @@
 										url: '/pages/my/bussManager/bussManager',
 										success: () => {}
 									})
+								}, 1000)
+							}else{
+								uni.showToast({
+									image: '/static/images/wrong.png',
+									title: data.msg
 								})
+							}
+						}
+					})
+				}else if(confirmTxt === '确认放币'){
+					this.ajaxJson({
+						url: '/api/v1/otcOrder/buinessEnterColl',
+						method: 'POST',
+						data: {order_id: this.orderId},
+						call: (data)=>{
+							if(data.code == 200){
+								uni.showToast({
+									title: data.msg
+								})
+								setTimeout(()=>{
+									uni.reLaunch({
+										url: '/pages/my/bussManager/bussManager',
+										success: () => {}
+									})
+								}, 1000)
 							}else{
 								uni.showToast({
 									image: '/static/images/wrong.png',
@@ -225,7 +249,7 @@
 								this.isConfirmBtn = true
 							}
 							
-							if(this.fotcOrder.order_status == '2'){
+							if(this.fotcOrder.order_status == '2' && this.fotcOrder.order_type == '2'){
 								// 确认付款按钮
 								this.isConfirmBtn = false
 								this.isBussDetail = true
@@ -234,6 +258,12 @@
 									title: '等待用户收款',
 									success: () => {}
 								});
+							}
+							
+							
+							if(this.fotcOrder.order_status == '2' && this.fotcOrder.order_type == '1'){
+								this.isConfirmBtn = true
+								this.confirmTxt = '确认放币'
 							}
 							
 							if(this.fotcOrder.order_status == '3'){

@@ -73,7 +73,6 @@
 					url: '/api/v1/otcOrder/buinessOrderList',
 					data: params,
 					call: (data)=>{
-						console.log(data)
 						if(data.code == 200){
 							this.pageTotal = data.data.total
 							this.bussManagerOrderList = [...this.bussManagerOrderList, ...data.data.rows]

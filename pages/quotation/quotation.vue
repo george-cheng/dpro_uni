@@ -89,7 +89,10 @@
 
 			/* 行情跳转K线图 */
 			listConEvent(item){
-				
+				uni.reLaunch({
+					url: '/pages/klineDiagram/klineDiagram?symbol=' + item.fid + '&category=0',
+					success: () => {}
+				})
 			},
 			/* 顶部切换 */
 			switchEvent(index){

@@ -48,6 +48,8 @@
 				let url = ''
 				if(this.category == 1){
 					url = '/pages/my/my'
+				}else if(this.category == 2){
+					url = '/pages/index/index'
 				}else{
 					url = '/pages/holeRedPackage/holeRedPackage'
 				}

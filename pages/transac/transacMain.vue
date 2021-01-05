@@ -25,8 +25,8 @@
 							</view>
 						</view>
 						<view class="titRgt">
-							<span class="titQuota i-quota"></span>
-							<span class="titStar i-star"></span>
+							<view @click="klineDiagramEvent" class="titQuota i-quota"></view>
+							<view class="titStar i-star"></view>
 						</view>
 					</view>
           <view class="sacBody">
@@ -245,27 +245,54 @@
 				amountDecimals: '',
 				
 				isCreated: true,
-				getSocketId: '3'
+				getSocketId: '3',
+				
+				initCoinSellType: '',
+				initCoinTradeType: '',
+				initCoinSellTypeOnLoad: '',
+				
+				klineId: '3',
+				klineSymbolId: ''
 			}
 		},
 		onLoad(options) {
-			if(options.choiceOn == 0){
-				if(options.transacInfo){
-					const transacInfo = JSON.parse(decodeURIComponent(options.transacInfo));
-					if(transacInfo){
-						this.titMenu = transacInfo.fname_sn
-						this.moneyDataFid = this.getSocketId =  transacInfo.fid
-						this.amountDecimals = transacInfo.amountDecimals
-						this.priceDecimals = transacInfo.priceDecimals
-						this.getSocket(this.moneyDataFid)
-						this.choiceOn = options.choiceOn
-						this.isCreated = false
+			if(options.symbol){
+				this.klineSymbolId = options.symbol
+				this.getSocket(this.klineSymbolId)
+				this.isCreated = false
+				
+				setTimeout(()=>{
+					for(let i in this.titMenuList){
+						if(this.titMenuList[i].fid == this.klineSymbolId){
+							this.titMenu = this.titMenuList[i].fname_sn
+							this.amountDecimals = this.titMenuList[i].amountDecimals
+							this.priceDecimals = this.titMenuList[i].priceDecimals
+							this.initCoinSellTypeOnLoad = this.titMenuList[i].coinSellType
+						}
 					}
-				}
-			}else if(options.choiceOn != 0){
-				this.choiceOn = options.choiceOn
+				},500)
 			}else{
+				if(options.choiceOn == 0){
+					if(options.transacInfo){
+						const transacInfo = JSON.parse(decodeURIComponent(options.transacInfo));
+						
+						this.initCoinSellTypeOnLoad = transacInfo.coinSellType
+						if(transacInfo){
+							this.titMenu = transacInfo.fname_sn
+							this.klineId = this.moneyDataFid = this.getSocketId =  transacInfo.fid
+							this.amountDecimals = transacInfo.amountDecimals
+							this.priceDecimals = transacInfo.priceDecimals
+							this.getSocket(this.moneyDataFid)
+							this.choiceOn = options.choiceOn
+							this.isCreated = false
+						}
+					}
+				}else if(options.choiceOn != 0){
+					this.choiceOn = options.choiceOn
+				}else{
+				}
 			}
+			
 		},
 
 		onShow(){
@@ -293,7 +320,12 @@
 					this.initTitBuyMenuListEvent()
 				}
 			},
-				
+			klineDiagramEvent(){
+				uni.reLaunch({
+					url: '/pages/klineDiagram/klineDiagram?symbol=' + this.klineId + '&category=1',
+					success: () => {}
+				})
+			},
 			
 			/* 委托撤销 */
 			enCancelEvent(item){
@@ -408,21 +440,22 @@
         this.sacOn = 0
         this.operaStatus = '买入'
         this.unitKind = 'USDT'
-        this.titMenu = 'BTC / USDT'
+        // this.titMenu = 'BTC / USDT'
         this.initTitBuyMenuListEvent()
 				this.iptQuantity = ''
 				this.iptPrice = ''
 				this.totalNum = ''
+				
       },
       /* 卖出切换 */
       sacSaleEvent(){
         this.sacOn = 1
         this.operaStatus = '卖出'
-        this.unitKind = 'BTC'
-        this.initTitSellMenuListEvent()
+        this.initTitSellMenuListEvent(this.initCoinSellTypeOnLoad)
 				this.iptQuantity = ''
 				this.iptPrice = ''
 				this.totalNum = ''
+				// this.unitKind = 'DPC'
       },
       confirm(done, value){
         if(!value){
@@ -633,28 +666,30 @@
           url: '/api/v2/market/coins',
           call: (data)=>{
             this.titMenuList = data.dataMap.USDT
+						this.initCoinSellType = this.titMenuList[0].coinSellType
           }
         })
       },
       titMenuListEvent(item){
+				this.initCoinSellTypeOnLoad = ''
 				this.amountDecimals = item.amountDecimals
 				this.priceDecimals = item.priceDecimals
-				
-				this.getSocketId = item.fid
+				this.initCoinSellType = item.coinSellType
+				this.klineId = this.getSocketId = item.fid
 				this.socketTask.close()
         this.getSocket(item.fid)
         this.symbolID = item.fid
         let params = {}
         if(this.sacOn == 0){
           params = {
-            fvid: item.coinTradeType,
+            fvid: '50',
           }
           this.unitKind = 'USDT'
         }else{
           params = {
             fvid: item.coinSellType
           }
-          this.unitKind = item.fShortName
+					this.unitKind = item.fShortName
         }
         this.getEnConList()
         this.isTitMenu = false
@@ -678,13 +713,14 @@
           }
         })
       },
-      initTitSellMenuListEvent(){
+      initTitSellMenuListEvent(initCoinSellTypeOnLoad){
         this.ajaxJson({
           url: '/api/v1/account/balances/byFvid',
-          data: {fvid: '51'},
+          data: {fvid: initCoinSellTypeOnLoad || this.initCoinSellType},
           call: (data)=>{
             this.ftotal = data.data.ftotal
             this.ffrozen = data.data.ffrozen
+						this.unitKind = data.data.fvirtualcointype.fShortName
           }
         })
       },
@@ -830,6 +866,8 @@
 					}
 				}
 				.titRgt{
+					display: flex;
+					flex-direction: row;
 					.titQuota:before{
 						color: #BD3A3B;
 					}

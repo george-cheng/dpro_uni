@@ -156,13 +156,13 @@
 			},
 			/* 邀请好友 */
 			invitaEvent(){
-				uni.navigateTo({
-					url: '/pages/my/invitaIncome/invitaIncome',
+				uni.reLaunch({
+					url: '/pages/my/invitaIncome/invitaIncome?category=2',
 					success: () => {}
 				})
 			},
 			getMsg(){
-				let data = {page: 1,pageSize: 1,type: 1,}
+				let data = {type: '1',}
 				this.ajaxJson({
 					url: '/api/v1/articleList',
 					method: 'POST',

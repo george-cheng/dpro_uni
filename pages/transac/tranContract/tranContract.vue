@@ -2,7 +2,7 @@
 	<view class="tranContract mainBox" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd" :style="{paddingTop: paddingTop + 'rpx'}">
 		<view class="tractCon">
 			<view class="enConList">
-				<view class="enList" v-for="(item, index) in contractList" :key="index">
+				<view class="enList" v-for="(item, index) in contractList" :key="index" v-if="false">
 					<view><text>合约名称</text><text>{{item.name}}</text></view>
 					<view><text>抢购币种名称</text><text>{{item.coin_name}}</text></view>
 					<view><text>抢购标准</text><text>{{item.ded_amount}}</text></view>
@@ -13,9 +13,31 @@
 				</view>
 			</view>
 			
+			
+			<view class="cardEnConList">
+				<view class="enList" v-for="(item, index) in contractList" :key="index">
+					<view class="enListTit">
+						<view class="enListTitImg"><image :src="url + item.logo" mode=""></image></view>
+						<view class="enListTitName"><text>合约名称</text><text>{{item.name}}</text></view>
+						<view class="enListTitState"><text>状态</text><text :class="item.state === 0 ? 'close' : 'open'">{{item.state === 0 ? '关闭' : '开启'}}</text></view>
+					</view>
+					<view class="enListArea">
+						<view><text>抢购币种名称</text><text>{{item.coin_name}}</text></view>
+						<view><text>抢购标准</text><text>{{item.ded_amount}}</text></view>
+						<view><text>释放周期</text><text>{{item.return_days}}</text></view>
+						<view><text>总产量</text><text>{{item.ded_amount*item.out_mult}}</text></view>
+					</view>
+					<view class="enListOpera">
+						<view @click="snapUpEvent(item)">抢购</view>
+					</view>
+				</view>
+			</view>
+			
+			
+			
 			<view class="tractBtn">
-				<view @click="tranctBtnEvent(0)">抢1单</view>
-				<view @click="tranctBtnEvent(1)">委托抢购</view>
+				<view @click="tranctBtnEvent(0)" v-if="false">抢1单</view>
+				<view @click="tranctBtnEvent(1)" v-if="false">委托抢购</view>
 				<view @click="tranctBtnEvent(2)">合约资产</view>
 <!-- 				<view @click="tranctBtnEvent(3)">抢购收益</view>
 				<view @click="tranctBtnEvent(4)">分享收益</view> -->
@@ -62,7 +84,29 @@
 					this.paddingTop = 0
 				}
 			},
-	
+			snapUpEvent(item){
+				this.ajaxJson({
+					url: '/api/v1/treatyType/buyByType',
+					data: {typeId: item.id},
+					method: 'POST',
+					call: (data)=>{
+						if(data.code == 200){
+							uni.showToast({
+								title: data.msg,
+								success: () => {
+									this.getContractList()
+								}
+							})
+						}else{
+							uni.showToast({
+								image: '/static/images/wrong.png',
+								title: data.msg,
+								success: () => {}
+							})
+						}
+					}
+				})
+			},
 			tranctBtnEvent(index){
 				if(index === 0){
 					this.rushPurchaseNowEvent()
@@ -155,7 +199,7 @@
 		padding-bottom: 140rpx;
 		.tractCon{
 			.enConList{
-				padding: 45rpx 30rpx 0;
+				padding: 10rpx 30rpx 0;
 				.enList:last-child{
 					border-bottom: none;
 				}
@@ -219,23 +263,103 @@
 					}
 				}
 			}
+			.cardEnConList{
+				margin: 0 30rpx;
+				display: flex;
+				justify-content: space-between;
+				flex-wrap: wrap;
+				.enList{
+					margin-top: 20rpx;
+					width: 340rpx;
+					// height: 270rpx;
+					background-color: #353535;
+					.enListTit{
+						margin: 25rpx 30rpx 0;
+						display: flex;
+						flex-direction: row;
+						font-size: 24rpx;
+						.enListTitImg{
+							width: 60rpx;
+							height: 60rpx;
+							margin-right: 30rpx;
+							image{
+								width: 100%;
+								height: 100%;
+							}
+						}
+						.enListTitName{
+							display: flex;
+							flex-direction: column;
+							margin-right: 30rpx;
+							text:nth-of-type(1){
+								color: #999;
+							}
+							text:nth-of-type(2){
+								margin-top: 10rpx;
+								color: #fff;
+							}
+						}
+						.enListTitState{
+							display: flex;
+							flex-direction: column;
+							text:nth-of-type(1){
+								color: #999;
+							}
+							text:nth-of-type(2){
+								margin-top: 10rpx;
+							}
+						}
+					}
+					.enListArea{
+						margin: 0 30rpx;
+						view{
+							display: flex;
+							justify-content: space-between;
+							margin-top: 10rpx;
+							font-size: 24rpx;
+							text:nth-of-type(1){
+								color: #999;
+							}
+							text:nth-of-type(2){
+								color: #fff;
+							}
+						}
+					}
+					.enListOpera{
+						margin: 10rpx 30rpx 0;
+						padding-bottom: 20rpx;
+						color: #fff;
+						view{
+							background-color: #BD3A3B;
+							line-height: 42rpx;
+							border-radius: 4rpx;
+							display: flex;
+							align-items: center;
+							justify-content: center;
+						}
+					}
+				}
+				
+			}
 		}
 		.tractBtn{
 			position: fixed;
 			z-index: 9;
 			bottom: 120rpx;
 			display: flex;
-			justify-content: space-between;
+			justify-content: center;
 			width: 100%;
 			font-size: 20rpx;
 			view{
 				background-color: #BD3A3B;
 				color: #fff;
 				display: flex;
+				width: 100%;
+				margin: 0 30rpx;
 				flex-wrap: nowrap;
+				justify-content: center;
 				font-size: 26rpx;
-				margin: 0 60rpx;
-				padding: 5rpx 12rpx;
+				padding: 15rpx 12rpx;
 				border-radius: 4rpx;
 				white-space: nowrap;
 			}
