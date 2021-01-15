@@ -5,7 +5,7 @@
 			<view class="sacTit">
 				<view class="titLft">
 					<view @click="titMenuEvent">
-						<span class="titMenu i-menu" ></span>
+						<span class="titMenu i-menu"></span>
 						<text>{{titMenu}}</text>
 					</view>
 					<view class="titMenuList" v-if="isTitMenu">

@@ -1,5 +1,5 @@
 <template>
-	<view class="service mainBox">
+	<view class="service noNavMainBox">
 			<view class="serviceTit">服务协议</view>
 			<view class="serviceCon">
 				<view class="s_title">DPRO特别声明</view>
@@ -109,17 +109,17 @@ DPRO将在DPRO站公布并不定时修订隐私权政策，隐私权政策构成
 <style scoped lang="scss">
 	.service{
 		.serviceTit{
-			background-color: #302828;
-			color: #fff;
-			padding: 20rpx 20rpx;
-			margin:  30rpx 0;
+			background-color: #fff;
+			color: #999;
+			padding: 0 20rpx;
+			margin: 30rpx 0;
 			font-size: 26rpx;
 		}
 		.serviceCon{
 			margin: 20rpx 0;
-			padding: 30rpx 20rpx;
-			background-color: #302828;
-			color: #fff;
+			padding: 0 20rpx;
+			background-color: #fff;
+			color: #999;
 			.s_title{
 				font-size: 28rpx;
 			}

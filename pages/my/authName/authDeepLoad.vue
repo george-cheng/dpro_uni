@@ -47,14 +47,14 @@
 		}
 		.loadTip{
 			margin-top: 60rpx;
-			color: #fff;
+			color: #999;
 			font-size: 32rpx;
 			display: flex;
 			justify-content: center;
 		}
 		.loadTxt{
 			margin-top: 30rpx;
-			color: #fff;
+			color: #999;
 			font-size: 26rpx;
 			display: flex;
 			justify-content: center;

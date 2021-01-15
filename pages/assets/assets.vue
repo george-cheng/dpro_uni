@@ -529,7 +529,7 @@
 						success: () => {}
 					})
 				}else if(index == 2){
-					uni.navigateTo({
+					uni.reLaunch({
 						url: './orderRecord',
 						success: () => {}
 					})
@@ -708,15 +708,15 @@
 		position: fixed;
 		top: 0;
 		right: 20rpx;
-		border: 1px solid #676869;
-		background-color: #303030;
+		border: 1px solid #f2f2f2;
+		background-color: #fff;
 		z-index: 9;
 		view{
 			font-size: 28rpx;
 			display: flex;
 			flex-wrap: nowrap;
 			padding: 10rpx;
-			color: #fff;
+			color: #999;
 		}
 	}
 	.switchNav{
@@ -728,7 +728,7 @@
 			// padding: 12rpx 46rpx;
 			width: 156rpx;
 			height: 56rpx;
-			background-color: #303030;
+			background-color: #f2f2f2;
 			border-radius: 6rpx;
 			color: #999;
 			display: flex;
@@ -749,10 +749,10 @@
 			display: flex;
 			justify-content: center;
 			line-height: 70rpx;
-			color: #fff;
+			color: #999;
 			margin: 10rpx 30rpx;
-			border: 1px solid #676869;
-			background-color: #303030;
+			border: 1px solid #f2f2f2;
+			background-color: #f2f2f2;
 			border-radius: 10rpx;
 		}
 	}
@@ -774,7 +774,7 @@
 				.totalMoney{
 					font-size: 48rpx;
 					line-height: 48rpx;
-					color: #fff;
+					color: #999;
 					margin-top: 20rpx;
 				}
 				.totalCny{
@@ -802,12 +802,12 @@
 					flex-direction: column;
 					text-align: center;
 					span:before{
-						color: #fff;
+						color: #999;
 						font-size: 48rpx;
 					}
 					text{
 						margin-top: 20rpx;
-						color: #fff;
+						color: #999;
 						font-size: 24rpx;
 						line-height: 24rpx;
 					}
@@ -816,7 +816,7 @@
 		}
 		.assetsAcc{
 			padding-top: 40rpx;
-			border-top: 1px solid #303030;
+			border-top: 1px solid #f2f2f2;
 			.accList{
 				display: flex;
 				justify-content: space-between;
@@ -830,7 +830,7 @@
 						line-height: 24rpx;
 					}
 					.accMoney{
-						color: #fff;
+						color: #999;
 						font-size: 42rpx;
 						line-height: 42rpx;
 						margin-top: 25rpx;
@@ -850,7 +850,7 @@
 				align-items: center;
 				padding: 0 88rpx;
 				.accRgt{
-					color: #fff;
+					color: #999;
 					font-size: 28rpx;
 					line-height: 28rpx;
 					.rgtCon{
@@ -878,7 +878,7 @@
 				}
 				.tranAccIco:before{
 					font-size: 48rpx;
-					color: #fff;
+					color: #999;
 				}
 			}
 			.tranQuantity{
@@ -906,7 +906,7 @@
 						text{
 							font-size: 26rpx;
 							line-height: 26rpx;
-							color: #fff;
+							color: #999;
 						}
 						.verLine{
 							margin: 0 15rpx;
@@ -951,7 +951,7 @@
 				.rgtIptCon{
 					width: 450rpx;
 					height: 60rpx;
-					background-color: #383838;
+					background-color: #f2f2f2;
 					display: flex;
 					flex-direction: row;
 					border-radius: 10rpx;
@@ -975,7 +975,7 @@
 		.assetsList>view{
 			height: 62rpx;
 			padding: 35rpx 32rpx 35rpx;
-			border-top: 1px solid #383838;
+			border-top: 1px solid #f2f2f2;
 		}
 		.assetsList{
 			padding: 35rpx 0 0;
@@ -999,7 +999,7 @@
 						.infoTit{
 							font-size: 26rpx;
 							line-height: 26rpx;
-							color: #fff;
+							color: #999;
 							width: 100rpx;
 							display: flex;
 							justify-content: flex-start;
@@ -1021,7 +1021,7 @@
 					.rgtMoney{
 						font-size: 26rpx;
 						line-height: 26rpx;
-						color: #fff;
+						color: #999;
 						display: flex;
 						justify-content: flex-end;
 					}
@@ -1077,7 +1077,7 @@
 			}
 			.areaRgtDownList{
 				border: 1px solid #999;
-				background-color: #282828;
+				background-color: #fff;
 				position: absolute;
 				width: 100%;
 				top: 95rpx;

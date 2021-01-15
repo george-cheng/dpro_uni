@@ -12,12 +12,12 @@
 			<div class="head">
 				<div class="price">
 					<span class="price-label">{{txData.lastPrice || 0}}</span>
-					<span class="price-value">≈ ${{txData.lastPrice || 0}}</span>
+					<span class="price-value">≈ ¥ {{ (txData.lastPrice  * txData.cnyRate).toFixed(2) || 0}} CNY </span>
 				</div>
 				<div class="head-item">
 					<div class="head-item-cell">
 						<span class="hic-label">涨跌幅</span>
-						<span class="hic-value" :class="txData.upFlag==1?'price-green':'price-red'">{{txData.upRate || 0}}</span>
+						<span class="hic-value" :class="txData.upRate>0?'price-green':'price-red'">{{txData.upRate || 0}}</span>
 					</div>
 					<div class="head-item-cell">
 						<span class="hic-label">高</span>
@@ -66,32 +66,32 @@
 					<div class="depth-head">
 						<div class="depth-head-left">
 							<div class="depth-head-label depth-head-left-index">买盘</div>
-							<div class="depth-head-label">数量(XRD)</div>
+							<div class="depth-head-label">数量</div>
 						</div>
 						<div class="depth-head-center">
-							<div class="depth-head-label">价格(USDT)</div>
+							<div class="depth-head-label">价格</div>
 						</div>
 						<div class="depth-head-right">
-							<div class="depth-head-label">数量(XRD)</div>
+							<div class="depth-head-label">数量</div>
 							<div class="depth-head-label depth-head-right-index">卖盘</div>
 						</div>
 					</div>
 					<div class="depth-main">
 						<div class="depth-main-item">
-							<div class="dmi-cell" style="justify-content: flex-end;" v-for="(item,index) in buyList" :key="index">
+							<div class="dmi-cell" style="justify-content: flex-end;" v-for="(item,index) in buyList" :key="index"  v-if="index < 10">
 								<div class="dmi-cell-bg" :style="{'width': `${item.width}%`,'backgroundColor':'#303f38'}"></div>
 								<div class="dmi-cell-item">
 									<div class="dmi-cell-index">{{index+1}}</div>
 									<div class="dmi-cell-num">{{item.amount || '--'}}</div>
-									<div class="dmi-cell-price" style="padding-right: 5px;">{{item.price || '--'}}</div>
+									<div class="dmi-cell-price" style="padding-right: 5px; color: #38ad70;">{{item.price || '--'}}</div>
 								</div>
 							</div>
 						</div>
 						<div class="depth-main-item">
-							<div class="dmi-cell" v-for="(item,index) in sellList || 10" :key="index">
+							<div class="dmi-cell" v-for="(item,index) in sellList" :key="index">
 								<div class="dmi-cell-bg" :style="{'width': `${item.width}%`,'backgroundColor':'#3c2a2e'}"></div>
 								<div class="dmi-cell-item">
-									<div class="dmi-cell-price" style="padding-left: 5px;">{{item.price || '--'}}</div>
+									<div class="dmi-cell-price" style="padding-left: 5px; color: #fe5c57;">{{item.price || '--'}}</div>
 									<div class="dmi-cell-num" style="text-align: right;">{{item.amount || '--'}}</div>
 									<div class="dmi-cell-index" style="text-align: right;">{{index+1}}</div>
 								</div>
@@ -102,7 +102,7 @@
 				<div v-else-if="category==2" class="transaction">
 					<div class="transaction-head">
 						<div class="transaction-head-item tmc-time">时间</div>
-						<div class="transaction-head-item tmc-type">方向</div>
+						<div class="transaction-head-item tmc-type">类型</div>
 						<div class="transaction-head-item tmc-price">价格</div>
 						<div class="transaction-head-item tmc-num">数量</div>
 					</div>
@@ -110,50 +110,50 @@
 						<div class="transaction-main-cell" v-for="(item,index) in dealHis || 10" :key="index">
 							<span class="tmc-label tmc-time">{{item.date || '--'}}</span>
 							<span class="tmc-label tmc-type" :style="{color:item.takerFlag==1?'#38ad70':'#fe5c57'}">{{item.takerFlag==1?'买入':'卖出'}}</span>
-							<span class="tmc-label tmc-price">{{item.price || '--'}}</span>
+							<span class="tmc-label tmc-price" :style="{color:item.takerFlag==1?'#38ad70':'#fe5c57'}">{{item.price || '--'}}</span>
 							<span class="tmc-label tmc-num">{{item.amount || '--'}}</span>
 						</div>
 					</div>
 				</div>
 				<div v-else="category==3" class="introduction">
-					<div class="introduction-name">{{tokenInfo.tokenName || '--'}}</div>
-					<div class="introduction-cell">
+					<div class="introduction-name">{{tokenInfo.fShortName || '--'}}</div>
+					<div class="introduction-cell" v-if="false">
 						<span class="introduction-cell-label">发行时间</span>
 						<span class="introduction-cell-value">{{tokenInfo.issueDate || '--'}}</span>
 					</div>
-					<div class="introduction-cell">
+					<div class="introduction-cell" v-if="false">
 						<span class="introduction-cell-label">发行总量</span>
 						<span class="introduction-cell-value">{{tokenInfo.totalSupply || '--'}}</span>
 					</div>
-					<div class="introduction-cell">
+					<div class="introduction-cell" v-if="false">
 						<span class="introduction-cell-label">流通总量</span>
 						<span class="introduction-cell-value">{{tokenInfo.nowSupply || '--'}}</span>
 					</div>
 					
-					<div class="introduction-cell">
+					<div class="introduction-cell" v-if="false">
 						<span class="introduction-cell-label">众筹价格</span>
 						<span class="introduction-cell-value">{{tokenInfo.price || '--'}}</span>
 					</div>
 					<div class="introduction-cell">
 						<span class="introduction-cell-label">白皮书</span>
-						<span class="introduction-cell-value">{{tokenInfo.whitePaper || '--'}}</span>
+						<span class="introduction-cell-value">{{tokenInfo.fwhitepaper || '--'}}</span>
 					</div>
 					<div class="introduction-cell">
 						<span class="introduction-cell-label">官网</span>
-						<span class="introduction-cell-value">{{tokenInfo.webSite || '--'}}</span>
+						<span class="introduction-cell-value">{{tokenInfo.fofficialwebsite || '--'}}</span>
 					</div>
-					<div class="introduction-cell">
+					<div class="introduction-cell" v-if="false">
 						<span class="introduction-cell-label">区块查询</span>
 						<span class="introduction-cell-value">{{tokenInfo.exploereSite || '--'}}</span>
 					</div>
 					<div class="introduction-label">简介</div>
-					<div class="introduction-value">{{tokenInfo.remark || '--'}}</div>
+					<div class="introduction-value">{{tokenInfo.fdescription || '--'}}</div>
 				</div>
 			</div>
 			<div style="height:80px"></div>
 			<div class="btns">
-				<div @click="back" class="btn btn-green">买入</div>
-				<div @click="back" class="btn btn-red">卖出</div>
+				<div @click="buyEvent" class="btn btn-green">买入</div>
+				<div @click="sellEvent" class="btn btn-red">卖出</div>
 			</div>
 			
 			
@@ -163,7 +163,7 @@
 		<script type="text/javascript" src="js/qs.js"></script>
 		<script type="text/javascript" src="js/axios.js"></script>
 		<script type="text/javascript" src="js/vue.js"></script>
-		<script type="text/javascript" src="js/mock.js"></script>
+		<!-- <script type="text/javascript" src="js/mock.js"></script> -->
 		<script type="text/javascript" src="js/kline.js"></script>
 	</body>
 	<script>

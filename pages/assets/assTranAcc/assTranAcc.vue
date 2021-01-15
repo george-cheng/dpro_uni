@@ -175,7 +175,7 @@
 			}
 			.tranAccCon{
 				padding: 30rpx 0;
-				border-bottom: 1px solid #383838;
+				border-bottom: 1px solid #f2f2f2;
 			}
 			.tranAccCon:last-child{
 				border-bottom: none;
@@ -187,11 +187,11 @@
 				display: flex;
 				justify-content: space-between;
 				.accLft{
-					color: #fff;
+					color: #999;
 				}
 				.accRgt{
 					width: 490rpx;
-					color: #fff;
+					color: #999;
 					display: flex;
 					justify-content: space-between;
 					.accAll{

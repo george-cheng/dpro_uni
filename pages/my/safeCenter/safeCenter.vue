@@ -86,7 +86,7 @@
 				}
 			}
 			.perCon>view{
-				border-top: 1px solid #383838;
+				border-top: 1px solid #f2f2f2;
 			}
 			.perCon{
 				margin-top: 12rpx;
@@ -96,11 +96,12 @@
 					align-items: center;
 					justify-content: space-between;
 					font-size: 26rpx;
-					color: #fff;
+					color: #999;
 					.conRgt{
 						.conIcon{
 						color: #676869;
 						}
+						
 					}
 				}
 				view:first-child{

@@ -145,7 +145,7 @@
 			padding: 0 63rpx;
 			display: flex;
 			justify-content: space-between;
-			background-color: #1C1C1C;
+			background-color: #f2f2f2;
 			view{
 				line-height: 90rpx;
 				color: #676869;
@@ -156,13 +156,13 @@
 			view{
 				display: flex;
 				justify-content: space-between;
-				border-bottom: 1px solid #383838;
+				border-bottom: 1px solid #f2f2f2;
 				view{
 					padding: 0 56rpx;
 					height: 90rpx;
 					display: flex;
 					align-items: center;
-					color: #fff;
+					color: #999;
 					font-size: 26rpx;
 				}
 				.time{

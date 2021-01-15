@@ -2,7 +2,7 @@
 	<view class="bussManagerOrder mainBox" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd" :style="{paddingTop: paddingTop + 'rpx'}">
 		<view v-for="(item, index) in bussManagerOrderList" :key="index" @click="bussManagerOrderEvent(item, index)">
 			<view class="orderTop">
-				<view :style="{color: item.order_type == '1' ? '#b8393c' : '#3ba987'}">{{item.order_type == '1' ? '买入' : '卖出'}}USDT</view>
+				<view :style="{color: item.order_type == '1' ? '#38ad70' : '#fe5c57'}">{{item.order_type == '1' ? '买入' : '卖出'}}USDT</view>
 				<view style="color: #b8393c;" v-if="item.order_status == 1">待付款></view>
 				<view style="color: #b8393c;" v-if="item.order_status == 2">待用户收款></view>
 				<view style="color: #b8393c;" v-if="item.order_status == 3">已完成></view>
@@ -92,9 +92,12 @@
 		
 	}
 	.bussManagerOrder>view{
-		margin: 0 30rpx;
+		background-color: #f2f2f2;
+		padding: 10rpx 30rpx 10rpx;
+		font-size: 24rpx;
+		margin-top: 20rpx;
 		.orderTop{
-			margin-top: 30rpx;
+			margin-top: 10rpx;
 		}
 		.orderTop, .orderBtm{
 			display: flex;
@@ -102,7 +105,7 @@
 			color: #999;
 		}
 		.orderMid{
-			margin-top: 30rpx;
+			margin-top: 15rpx;
 			display: flex;
 			justify-content: space-between;
 			view{
@@ -113,7 +116,7 @@
 			}
 		}
 		.orderBtm{
-			margin-top: 30rpx;
+			margin-top: 15rpx;
 		}
 	}
 </style>

@@ -1,11 +1,11 @@
 <template>
-	<view class="mainBox loginIn">
+	<view class="noNavMainBox loginIn">
 		<view class="logo">
 			<image src="../../static/logo.jpg" mode="aspectFit"></image>
 		</view>
 		<view class="loginSwitch">
-			<text :class="[isEmailActive?'textLine' : '']" @click="emailEvent">邮箱登录</text>
 			<text :class="[isPoneActive?'textLine' : '']" @click="phoneEvent">手机登录</text>
+			<text :class="[isEmailActive?'textLine' : '']" @click="emailEvent">邮箱登录</text>
 		</view>
 		<view class="loginBox">
 			<view class="loginEmail loginIpt" v-if="isEmail">
@@ -55,8 +55,8 @@
 	export default{
 		data(){
 			return{
-				isEmail: true,
-				isPhone: false,
+				isEmail: false,
+				isPhone: true,
 				isDropdown: false,
 				emailUser: '',
 				emailPwd: '',
@@ -68,8 +68,8 @@
 				historyEmailArr: [],
 				phoneUserArr: [],
 				historyPhoneArr: [],
-				isEmailActive: true,
-				isPoneActive: false,
+				isEmailActive: false,
+				isPoneActive: true,
 				isVerCode: false,
 				isValidator: false,
 				verCode: ''
@@ -197,21 +197,18 @@
 							}else if(data.code == 200){
 								uni.showToast({
 									title: data.msg,
-									success: () => {
-										uni.reLaunch({
-											url: '../index/index',
-										})
-									}
+									success: () => {},
 								})
+								setTimeout(()=>{
+									uni.reLaunch({
+										url: '../index/index',
+									})
+								},500)
 							}else{
 								uni.showToast({
+									icon: 'none',
 									title: data.msg,
-									image: '../../static/images/wrong.png',
-									success: () => {
-										uni.reLaunch({
-											url: '../index/index',
-										})
-									}
+									success: () => {},
 								})
 							}
 						}
@@ -219,7 +216,10 @@
 				}
 			},
 			forgetPwdEvent(){
-				
+				uni.reLaunch({
+					url: '/pages/loginIn/forgetPwd',
+					success: () => {}
+				})
 			},
 			registerEvent(){
 				uni.navigateTo({
@@ -264,7 +264,7 @@
 			margin: 0 78rpx;
 			display: flex;
 			text{
-				color: #fff;
+				color: #333;
 				font-size: 28rpx;
 				line-height: 28rpx;
 			}
@@ -282,7 +282,7 @@
 				position: absolute;
 				bottom: -15rpx;
 				left: 0;
-				background-color: #fff;
+				background-color: #B8393C;
 			}
 		}
 		
@@ -294,9 +294,9 @@
 								margin: 68rpx auto 0;
 								width: 594rpx;
 								height: 80rpx;
-								border: 1px solid #676869;
+								border: 1px solid #F2F2F2;
 								border-radius: 6px;
-								color: #fff;
+								color: #999;
 							}
 							input:last-child{
 								margin-top: 42rpx;
@@ -336,7 +336,7 @@
 			margin: 100rpx auto 0;
 			width: 594rpx;
 			button{
-				background-color: #FF6153;
+				background-color: #B8393C;
 				color: #fff;
 			}
 		}

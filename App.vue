@@ -1,6 +1,10 @@
-
 <script>
 	export default {
+		data(){
+			return{
+				model: true,
+			}
+		},
 		onLaunch: function() {
 			
 		},
@@ -14,17 +18,19 @@
 		methods: {
 			
 		},
-		created() {
+		mounted() {
 
+		},
+		created() {
+			 
 		}
 	}
 </script>
 
-<style>
+<style lang="scss">
 
 	/*每个页面公共css */
-	
-	@import url("./style/common.css");
+	@import url("./style/common.scss");
 	@import url("./static/iconfont/style.css");
 	@import url('./style/fontstyle.css');
 	@font-face {
@@ -50,6 +56,13 @@
 	}
 	.uni-tabbar .uni-tabbar__label{
 		line-height: 1.4;
+	}
+
+	.uni-switch-input{
+		height: 40rpx !important;
+	}
+	.uni-switch-input::after, .uni-switch-input::before{
+		height: 40rpx !important;
 	}
 	
 </style>

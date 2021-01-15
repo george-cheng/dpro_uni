@@ -207,7 +207,7 @@
 	.authDeep{
 		.deepTip{
 			padding: 30rpx 40rpx;
-			background-color: #303030;
+			background-color: #fff;
 			font-size: 24rpx;
 			color: #676869;
 		}
@@ -219,12 +219,12 @@
 				.upImg{
 					width: 320rpx;
 					height: 200rpx;
-					border: 1px solid #fff;
+					border: 1px solid #f2f2f2;
 					border-radius: 6rpx;
 					display: flex;
 					justify-content: center;
 					align-items: center;
-					color: #fff;
+					color: #999;
 					image{
 						width: 100%;
 						height: 100%;
@@ -232,7 +232,7 @@
 				}
 				text{
 					margin-top: 20rpx;
-					color: #fff;
+					color: #999;
 					display: flex;
 					justify-content: center;
 				}
@@ -250,7 +250,7 @@
 			}
 			text{
 				margin-top: 20rpx;
-				color: #fff;
+				color: #999;
 				display: flex;
 				justify-content: center;
 				font-size: 24rpx;

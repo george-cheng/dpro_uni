@@ -1,5 +1,5 @@
 <template>
-	<view class="mainBox" >
+	<view class="">
 		<view class="navBarCon" v-if="isNavBar">
 			<view @click="navBarEvent(0)">抢购收益</view>
 			<view @click="navBarEvent(1)">分享收益</view>
@@ -32,8 +32,8 @@
           <view class="sacBody">
             <view class="bodyLft">
               <view class="sacBtn">
-                <view class="sacBuyBtn" :class="{'sacBtnChoice': sacOn !== 1}" @click.stop="sacBuyEvent">买入</view>
-                <view class="sacSaleBtn" :class="{'sacBtnChoice': sacOn === 1}" @click.stop="sacSaleEvent">卖出</view>
+                <view class="sacBuyBtn" :class="{'sacBtnChoice': sacOn !== 1}" :style="{backgroundColor: sacOn != 1 ? '#3BA987' : ''}" @click.stop="sacBuyEvent">买入</view>
+                <view class="sacSaleBtn" :class="{'sacBtnChoice': sacOn === 1}" :style="{backgroundColor: sacOn == 1 ? '#B8393C' : ''}" @click.stop="sacSaleEvent">卖出</view>
               </view>
               <view class="fixPrice">
                 <text>限价</text>
@@ -53,6 +53,10 @@
                   <view class="totalIpt priceIpt">
                     <input type="text" v-model="totalNum" placeholder="总额USDT" disabled>
                   </view>
+									
+									<view class="speedRange">
+										<view class="speedRangeList" :class="{'rangeChoice': item == '1'}" v-for="(item, index) in rangeList" :key="index" @click="speedRangeEvent(item, index)"></view>
+									</view>
                 </view>
 
                 <view v-if="sacOn === 1">
@@ -69,10 +73,12 @@
                   <view class="totalIpt priceIpt">
                     <input type="text" v-model="totalNum" placeholder="总额USDT" disabled>
                   </view>
+									
+									<view class="speedRange">
+										<view class="speedRangeList" :class="{'rangeChoice': item == '1'}" v-for="(item, index) in rangeList" :key="index" @click="speedRangeEvent(item, index)"></view>
+									</view>
+									
                 </view>
-              </view>
-              <view class="sacOpera" @click="sacOperaEvent">
-                <view class="operaBtn">{{operaStatus}}</view>
               </view>
               <view class="sacStatus">
                 <view class="usable statusView">
@@ -88,10 +94,13 @@
                   <text> {{accAdd(ftotal, ffrozen)}} {{unitKind}}</text>
                 </view>
               </view>
+							<view class="sacOpera" :style="{backgroundColor: sacOn == 0 ? '#3BA987' : '#B8393C'}" @click="sacOperaEvent">
+							  <view class="operaBtn">{{operaStatus}}</view>
+							</view>
             </view>
 						<view class="bodyRgt">
 							<view class="rgtTit">
-								<text>价格(USDT)</text>
+								<text>价格({{unitKind}})</text>
 								<text>数量</text>
 							</view>
 							<view class="rgtList">
@@ -104,7 +113,7 @@
 										<view class="perLine" :style="{width: lineArr[index] + 'rpx'}"></view>
 									</view>
 								</view>
-								<view class="listMid">
+								<view class="listMid" @click="nowLastPrice">
 									<view class="midQuantity">{{last}}</view>
 									<view class="midNum">
 										<text class="midNumPrice">¥ {{ accMul(last, cny) }}</text>
@@ -234,63 +243,56 @@
 
         getStroageTradePwd: '',
 
-        symbolID: '1',
+        symbolID: '3',
 
         isTitMenu: false,
         isScoket: false,
 				
 				socketTask: null,
 				
-				priceDecimals: '',
-				amountDecimals: '',
+				priceDecimals: 0,
+				amountDecimals: 0,
 				
 				isCreated: true,
 				getSocketId: '3',
 				
-				initCoinSellType: '',
 				initCoinTradeType: '',
-				initCoinSellTypeOnLoad: '',
 				
 				klineId: '3',
-				klineSymbolId: ''
+				klineSymbolId: '',
+				coinSellType: '53',
+				coinBuyType: '',
+				
+				rangeList: [1,0,0,0,0,0]
 			}
 		},
 		onLoad(options) {
 			if(options.symbol){
+				this.isCreated = false
 				this.klineSymbolId = options.symbol
 				this.getSocket(this.klineSymbolId)
-				this.isCreated = false
-				
-				setTimeout(()=>{
-					for(let i in this.titMenuList){
-						if(this.titMenuList[i].fid == this.klineSymbolId){
-							this.titMenu = this.titMenuList[i].fname_sn
-							this.amountDecimals = this.titMenuList[i].amountDecimals
-							this.priceDecimals = this.titMenuList[i].priceDecimals
-							this.initCoinSellTypeOnLoad = this.titMenuList[i].coinSellType
-						}
-					}
-				},500)
-			}else{
-				if(options.choiceOn == 0){
-					if(options.transacInfo){
-						const transacInfo = JSON.parse(decodeURIComponent(options.transacInfo));
-						
-						this.initCoinSellTypeOnLoad = transacInfo.coinSellType
-						if(transacInfo){
-							this.titMenu = transacInfo.fname_sn
-							this.klineId = this.moneyDataFid = this.getSocketId =  transacInfo.fid
-							this.amountDecimals = transacInfo.amountDecimals
-							this.priceDecimals = transacInfo.priceDecimals
-							this.getSocket(this.moneyDataFid)
-							this.choiceOn = options.choiceOn
-							this.isCreated = false
-						}
-					}
-				}else if(options.choiceOn != 0){
-					this.choiceOn = options.choiceOn
+				this.coinBuyType = options.coinBuyType
+				this.coinSellType = options.coinSellType
+				if(options.coinSellType && options.sacOn == '1'){
+					this.sacOn = parseInt(options.sacOn)
+					this.operaStatus = '卖出'
+					this.iptQuantity = ''
+					this.iptPrice = ''
+					this.totalNum = ''
+					this.initSellEvent(this.coinSellType)
 				}else{
+					this.sacOn =  parseInt(options.sacOn)
+					this.operaStatus = '买入'
+					this.iptQuantity = ''
+					this.iptPrice = ''
+					this.totalNum = ''
+					this.initBuyEvent(this.coinBuyType)
 				}
+				
+			}
+			
+			if(options.choiceOn){
+				this.choiceOn = options.choiceOn
 			}
 			
 		},
@@ -317,7 +319,6 @@
 					this.getEnConList()
 					this.getRate()
 					this.getTotal()
-					this.initTitBuyMenuListEvent()
 				}
 			},
 			klineDiagramEvent(){
@@ -367,7 +368,7 @@
       /* 交易记录  */
       orderHistoryEvent(){
         uni.navigateTo({
-          url: '/pages/transac/transacOrder/transacHistoryOrder?symbol=' + this.symbolID
+          url: '/pages/transac/transacOrder/transacHistoryOrder?symbol=' + this.getSocketId
         })
       },
       titMenuEvent(){
@@ -378,20 +379,16 @@
           url: 'wss://www.dpro.ltd/socket.io/?deep=4&token=dev&symbol=' + moneyDataFid + '&EIO=3&transport=websocket',
           method: 'POST',
           success: (res)=>{
-            console.log('WebSocket连接成功...');
           }
         })
 				
 				this.socketTask.onOpen((res)=>{
-					console.log('WebSocket连接正常打开中...')
 					this.socketTask.send({
 						data: '40/trade',
 						async success(){
-							console.log('WebSocket消息发送成功')
 						}
 					})
 					this.socketTask.onMessage((res)=>{
-						console.log('WebSocket接受服务器数据...')
 						let data = res.data.replace("42/trade,","")
 						if(data.indexOf('entrust-buy') !== -1){
 							let obj = []
@@ -441,20 +438,21 @@
         this.operaStatus = '买入'
         this.unitKind = 'USDT'
         // this.titMenu = 'BTC / USDT'
-        this.initTitBuyMenuListEvent()
 				this.iptQuantity = ''
 				this.iptPrice = ''
 				this.totalNum = ''
-				
+				this.rangeList = [1,0,0,0,0,0]
+				this.initBuyEvent(this.coinBuyType || '50')
       },
       /* 卖出切换 */
       sacSaleEvent(){
         this.sacOn = 1
         this.operaStatus = '卖出'
-        this.initTitSellMenuListEvent(this.initCoinSellTypeOnLoad)
 				this.iptQuantity = ''
 				this.iptPrice = ''
 				this.totalNum = ''
+				this.rangeList = [1,0,0,0,0,0]
+				this.initSellEvent(this.coinSellType)
 				// this.unitKind = 'DPC'
       },
       confirm(done, value){
@@ -507,13 +505,13 @@
           if(count == 0){
             uni.removeStorage({
               key: 'tradePwd',
-              success: () => {
-              }
+              success: () => {}
             })
           }
         }, 1000)
       },
       tranSellBuy(value){
+
         let url = ''
         let type = ''
         if(this.sacOn == 0){   //买入
@@ -523,9 +521,8 @@
           url = '/api/v2/market/sellBtcSubmit'
           type = 'sell'
         }
-
         let params = {
-          symbol: this.getSocketId,
+          symbol: this.klineSymbolId || this.symbolID,
           tradeAmount: this.iptQuantity,
           tradeCnyPrice: this.iptPrice,
           type: type,
@@ -543,15 +540,13 @@
                   this.$refs.popup.close()
 									this.getEnConList()
 									this.titMenuListEvent()
+									this.iptPrice = ''
+									this.iptQuantity = ''
+									this.totalNum = ''
                   uni.setStorage({
                     key: 'tradePwd',
                     data: value,
-                    success: () => {
-                      this.iptPrice = ''
-                      this.iptQuantity = ''
-                      this.totalNum = ''
-                      this.clearTranPwd()
-                    }
+                    success: () => {}
                   })
                 }
               })
@@ -566,7 +561,48 @@
             }
           }
         })
+				this.iptPrice = ''
+				this.iptQuantity = ''
+				this.totalNum = ''
+				
+				this.rangeList = [1,0,0,0,0,0]
       },
+			/* 滑块选择 */
+			speedRangeEvent(item, index){
+				let rangeList = []
+				for(var i=0;i<index + 1;i++){
+					rangeList.push(i)
+				}
+				let addNum = accAdd(5, accMul(index, -1))
+				if(rangeList.length < 6){
+					for(var i=0;i<addNum;i++){
+						rangeList.push('11')
+					}
+				}
+				for(let i in rangeList){
+					if(rangeList[i] == '11'){
+						rangeList[i] = '0'
+					}else{
+						rangeList[i] = '1'
+					}
+				}
+				
+				if(checkNum(this.iptPrice) || this.iptPrice == ''){
+					
+				}else{
+					this.rangeList = rangeList
+					if(this.sacOn == '0'){
+						let per = accMul(index , 20) / 100
+						this.totalNum = accMul(this.ftotal, per)
+						this.iptQuantity = (this.totalNum / this.iptPrice).toFixed(this.amountDecimals)
+					}else{
+						let sellPer = accMul(index, 20) / 100
+						this.iptQuantity = accMul(this.ftotal, sellPer)
+						this.calcTotal()
+					}
+				}
+				
+			},
       /*  限定输入数量  */
       iptQuantityEvent(){
         if(checkNum(this.iptQuantity) || this.iptQuantity == ''){
@@ -578,6 +614,19 @@
             }
           })
         }
+				
+				if(this.iptQuantity){
+					let iptQuantity = this.iptQuantity
+					let pointIndex = iptQuantity.indexOf('.');
+					let len = iptQuantity.length;
+					this.$nextTick(() => {
+						if(pointIndex != -1){
+							this.iptQuantity = iptQuantity.substr(0, accAdd( accAdd( pointIndex ,1), this.amountDecimals))
+						}
+					})
+				}
+				
+				
         this.calcTotal()
       },
       calcTotal(){
@@ -613,6 +662,8 @@
         for(let i in maxArr){
           this.lineArr.push( (maxArr[i] / max) * 326 )
         }
+				
+				
         let btmMaxArr = []
         for(let i in this.btmList){
           if(i < 6){
@@ -629,6 +680,9 @@
         this.iptPrice = item.price
         this.calcTotal()
       },
+			nowLastPrice(){
+				this.iptPrice = this.last
+			},
       /* 限价和计划委托切换 */
       enSwitchEvent(index){
         this.enOn = index
@@ -666,65 +720,62 @@
           url: '/api/v2/market/coins',
           call: (data)=>{
             this.titMenuList = data.dataMap.USDT
-						this.initCoinSellType = this.titMenuList[0].coinSellType
+						for(let i in this.titMenuList){
+							if(this.titMenuList[i].fid == this.klineSymbolId){
+								this.titMenu = this.titMenuList[i].fname_sn
+								this.priceDecimals = this.titMenuList[i].priceDecimals
+								this.amountDecimals = this.titMenuList[i].amountDecimals
+							}
+						}
           }
         })
       },
       titMenuListEvent(item){
-				this.initCoinSellTypeOnLoad = ''
+				this.iptPrice = ''
+				this.iptQuantity = ''
+				this.totalNum = ''
+				this.rangeList = [1,0,0,0,0]
 				this.amountDecimals = item.amountDecimals
 				this.priceDecimals = item.priceDecimals
-				this.initCoinSellType = item.coinSellType
 				this.klineId = this.getSocketId = item.fid
 				this.socketTask.close()
         this.getSocket(item.fid)
         this.symbolID = item.fid
-        let params = {}
-        if(this.sacOn == 0){
-          params = {
-            fvid: '50',
-          }
-          this.unitKind = 'USDT'
-        }else{
-          params = {
-            fvid: item.coinSellType
-          }
-					this.unitKind = item.fShortName
-        }
+
         this.getEnConList()
         this.isTitMenu = false
         this.titMenu = item.fname_sn
-        this.ajaxJson({
-          url: '/api/v1/account/balances/byFvid',
-          data: params,
-          call: (data)=>{
-            this.ftotal = data.data.ftotal
-            this.ffrozen = data.data.ffrozen
-          }
-        })
+        
+				this.coinBuyType = item.coinTradeType
+				this.coinSellType = item.coinSellType
+				if(this.sacOn == '0'){
+					this.initBuyEvent(this.coinBuyType)
+				}else{
+					this.initSellEvent(this.coinSellType)
+				}
       },
-      initTitBuyMenuListEvent(){
-        this.ajaxJson({
-          url: '/api/v1/account/balances/byFvid',
-          data: {fvid: '50'},
-          call: (data)=>{
-            this.ftotal = data.data.ftotal
-            this.ffrozen = data.data.ffrozen
-          }
-        })
-      },
-      initTitSellMenuListEvent(initCoinSellTypeOnLoad){
-        this.ajaxJson({
-          url: '/api/v1/account/balances/byFvid',
-          data: {fvid: initCoinSellTypeOnLoad || this.initCoinSellType},
-          call: (data)=>{
-            this.ftotal = data.data.ftotal
-            this.ffrozen = data.data.ffrozen
-						this.unitKind = data.data.fvirtualcointype.fShortName
-          }
-        })
-      },
-
+			
+			initBuyEvent(coinBuyType){
+				this.ajaxJson({
+					url: '/api/v1/account/balances/byFvid',
+					data: {fvid: coinBuyType},
+					call: (data)=>{
+						this.ftotal = data.data.ftotal
+						this.ffrozen = data.data.ffrozen
+					}
+				})
+			},
+			initSellEvent(coinSellType){
+				this.ajaxJson({
+					url: '/api/v1/account/balances/byFvid',
+					data: {fvid: coinSellType},
+					call: (data)=>{
+						this.ftotal = data.data.ftotal
+						this.ffrozen = data.data.ffrozen
+							this.unitKind = data.data.fvirtualcointype.fShortName
+					}
+				})
+			},
 			tranNavEvent(item, index){
 				this.choiceOn = index
 				this.isNavBar = false
@@ -759,10 +810,10 @@
     computed: {
       reverseTopList() {
         return this.topList.reverse();
-      },
+      }
     },
 		created() {
-			
+			this.clearTranPwd()
 			if(this.isCreated){
 				this.getSocket('3')
 				this.priceDecimals = '6'
@@ -771,8 +822,10 @@
       this.getTitMenuList()
       this.getEnConList()
       this.getRate()
+			if(this.sacOn == '0'){
+				this.initBuyEvent('50')
+			}
       this.getTotal()
-      this.initTitBuyMenuListEvent()
 				let webView = this.$mp.page.$getAppWebview();
 				webView.setTitleNViewButtonStyle(0,{
 					text: ' ',  
@@ -788,24 +841,25 @@
 		justify-content: flex-end;
 		view{
 			color: #fff;
-			border: 2px solid #303030;
-			padding: 3rpx 20rpx;
+			padding: 6rpx 20rpx;
 			border-radius: 8rpx;
+			background-color: #B8393C;
+			font-size: 26rpx;
 		}
 	}
 	.navBarCon{
 		position: fixed;
 		top: 0;
 		right: 20rpx;
-		border: 1px solid #676869;
-		background-color: #303030;
+		border: 1px solid #f2f2f2;
+		background-color: #f2f2f2;
 		z-index: 9;
 		view{
 			font-size: 28rpx;
 			display: flex;
 			flex-wrap: nowrap;
 			padding: 10rpx;
-			color: #fff;
+			color: #999;
 		}
 	}
 	.transacMain{
@@ -831,30 +885,31 @@
 				width: 100%;
 				height: 6rpx;
 				border-radius: 2rpx;
-				background-color: #fff;
+				background-color: #B8393C;
 			}
 		}
 	}
 .transac{
 		.sacCon{
+			padding-bottom: 40rpx;
 			.sacTit{
 				display: flex;
 				justify-content: space-between;
 				margin: 50rpx 35rpx 0;
 				.titLft{
 					.titMenu:before{
-						color: #fff;
+						color: #999;
 					}
 					text{
-						color: #fff;
+						color: #999;
 						margin-left: 35rpx;
 					}
 					.titMenuList{
 						position: absolute;
 						z-index: 9;
 						left: 60rpx;
-						border: 1px solid #676869;
-						background-color: #303030;
+						border: 1px solid #f2f2f2;
+						background-color: #fff;
 						display: flex;
 						flex-direction: column;
 						padding: 5rpx 10rpx;
@@ -886,11 +941,11 @@
 				.bodyLft{
 					.sacBtn{
 						margin-top: 55rpx;
-						background-color: #303030;
+						background-color: #f2f2f2;
 						display: flex;
 						justify-content: space-between;
 						align-items: center;
-						border-radius: 30rpx;
+						border-radius: 6rpx;
 						view{
 							text-align: center;
 							line-height: 60rpx;
@@ -898,23 +953,22 @@
 							width: 184rpx;
 						}
 						.sacBtnChoice{
-							border-radius: 30rpx;
-							background: linear-gradient(#EA4F6E, #EB5F60);;
+							border-radius: 6rpx;
 							color: #fff;
 						}
 					}
 					.fixPrice{
 						margin: 38rpx auto;
 						text{
-							color: #FFFFFF;
-							font-size: 24rpx;
-							line-height: 24rpx;
+							color: #999;
+							font-size: 26rpx;
+							line-height: 26rpx;
 						}
 					}
 					.sacIpt{
 						view{
 							.quantityIpt, .totalIpt{
-								margin-top: 55rpx;
+								margin-top: 30rpx;
 							}
 							.totalIpt{
 								input{
@@ -927,7 +981,7 @@
 								align-items: center;
 								width: 382rpx;
 								height: 80rpx;
-								border: 1px solid #6A3434;
+								border: 1px solid #f2f2f2;
 								border-radius: 10rpx;
 								text{
 									width: 80rpx;
@@ -939,10 +993,42 @@
 									width: 222rpx;
 									height: 80rpx;
 									text-align: center;
-									border-right: 1px solid #6A3434;
-									border-left: 1px solid #6A3434;
+									border-right: 1px solid #f2f2f2;
+									border-left: 1px solid #f2f2f2;
 								}
 							}
+						}
+					}
+					.speedRange{
+						margin-top: 40rpx;
+						width: 100%;
+						height: 30rpx;
+						display: flex;
+						justify-content: space-between;
+						align-items: center;
+						view{
+							width: 10rpx;
+							height: 16rpx;
+							background-color: #f2f2f2;
+							position: relative;
+						}
+						view::before{
+							content: '';
+							position: absolute;
+							top: 6rpx;
+							left: -60rpx;
+							width: 52rpx;
+							height: 5rpx;
+							background-color: #f2f2f2;
+						}
+						view:nth-of-type(1)::before{
+							width: 0 !important;
+						}
+						view.rangeChoice{
+							background-color: #3BA987;
+						}
+						view.rangeChoice::before{
+							background-color: #3BA987;
 						}
 					}
 					.sacOpera{
@@ -953,7 +1039,6 @@
 							line-height: 80rpx;
 							text-align: center;
 							color: #fff;
-							background: linear-gradient(#FD3E6B, #FF614F);
 						}
 					}
 					.sacStatus{
@@ -976,7 +1061,7 @@
 						}
 						.lockout{
 							padding-bottom: 28rpx;
-							border-bottom: 1px solid #4C3232;
+							border-bottom: 1px solid #f2f2f2;
 						}
 						.statusTotal{
 							margin-top: 28rpx;
@@ -1022,7 +1107,7 @@
 								}
 								.perLine{
 									position: absolute;
-									background-color: #4C3232;
+									background-color: #FBEFF3;
 									top: -18rpx;
 									right: 0;
 									height: 46rpx;
@@ -1032,8 +1117,8 @@
 						}
 						.listMid{
 							margin-top: 15rpx;
-							border-top: 1px solid #393745;
-							border-bottom: 1px solid #393745;
+							border-top: 1px solid #f2f2f2;
+							border-bottom: 1px solid #f2f2f2;
 							padding: 18rpx 0;
 							.midQuantity{
 								color: #3BA987;
@@ -1065,7 +1150,7 @@
 			}
 			.reminder{
 				margin: 46rpx 30rpx 0;
-				background-color: #3E3131;
+				background-color: #f2f2f2;
 				padding: 20rpx 30rpx;
 				.remTit{
 					display: flex;
@@ -1093,7 +1178,7 @@
 			.entrustTit{
 				margin: 22rpx 30rpx 28rpx 30rpx;
 				padding-bottom: 15rpx;
-				border-bottom: 1px solid #4A4856;
+				border-bottom: 1px solid #f2f2f2;
 				view{
 					display: flex;
 					justify-content: space-between;
@@ -1131,7 +1216,7 @@
 				}
 				view.enChoice{
 					border-radius: 30rpx;
-					background-color: #303030;
+					background-color: #f2f2f2;
 					color: #BD3A3B;
 				}
 			}
@@ -1160,12 +1245,13 @@
 			}
 			.enConList{
 				margin: 45rpx 30rpx 0;
-				border-top: 2px solid #303030;
+				border-top: 1px solid #f2f2f2;
 				.enList>.viewEnList:last-child{
 					border-bottom: none;
 				}
 				.enList{
 					padding-bottom: 15rpx;
+					border-bottom: 1px solid #f2f2f2;
 					.viewEnList{
 						display: flex;
 						justify-content: space-between;
@@ -1190,7 +1276,7 @@
 								margin-top: 20rpx;
 								font-size: 24rpx;
 								line-height: 24rpx;
-								color: #fff;
+								color: #999;
 							}
 						}
 						view:nth-child(1){

@@ -10,7 +10,9 @@
 </template>
 
 <script>
+	import { unimixin } from '../../utils/unimixin.js'
 	export default {
+		mixins: [ unimixin ],
 		props: [
 			'switchOn'
 		],
@@ -60,9 +62,7 @@
 				this.$emit('tabEvent')
 				uni.reLaunch({
 					url: item.pagePath,
-					success: () => {
-						
-					}
+					success: () => {}
 				})
 				this.swtichOn = index
 			}
@@ -78,9 +78,9 @@
 		width: 100%;
 		position: fixed;
 		bottom: 0;
-		background-color: #282828;
 		display: flex;
-		border-top: 2px solid #333;
+		background-color: #fff;
+		border-top: 1px solid #f7f7f7;
 		.barList{
 			width: 100%;
 			display: flex;

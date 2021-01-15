@@ -28,7 +28,7 @@
 						<view><text>总产量</text><text>{{item.ded_amount*item.out_mult}}</text></view>
 					</view>
 					<view class="enListOpera">
-						<view @click="snapUpEvent(item)">抢购</view>
+						<view @click.once="snapUpRushNowEvent(item)">抢购</view>
 					</view>
 				</view>
 			</view>
@@ -61,7 +61,9 @@
 				pageNum: 0,
 				pageTotal: 0,
 				isFlag: true,
-				
+				isSnapFlag: true,
+				isNumFlag: true,
+				timerNum: null
 			}
 		},
 		onLoad() {
@@ -84,28 +86,56 @@
 					this.paddingTop = 0
 				}
 			},
-			snapUpEvent(item){
-				this.ajaxJson({
-					url: '/api/v1/treatyType/buyByType',
-					data: {typeId: item.id},
-					method: 'POST',
-					call: (data)=>{
-						if(data.code == 200){
-							uni.showToast({
-								title: data.msg,
-								success: () => {
-									this.getContractList()
-								}
-							})
-						}else{
-							uni.showToast({
-								image: '/static/images/wrong.png',
-								title: data.msg,
-								success: () => {}
-							})
-						}
+			snapUpRushNowEvent(item){
+				if(item.state == '1'){
+					if(this.isNumFlag){
+						let numCount = 0
+						this.timerNum = setInterval(()=>{
+							numCount++;
+							if(numCount >= 10){
+								this.isNumFlag = false
+								clearInterval(this.timerNum)
+							}
+							this.snapUpEvent(item)
+						}, 1000)
 					}
-				})
+				}
+			},
+			snapUpEvent(item){
+					this.ajaxJson({
+						url: '/api/v1/treatyType/buyByType',
+						data: {typeId: item.id},
+						method: 'POST',
+						call: (data)=>{
+							if(data.code == 200){
+								this.isSnapFlag = true
+								uni.showToast({
+									title: data.msg,
+									success: () => {
+										this.getContractList()
+									}
+								})
+							}else if(data.code == 500){
+								this.isSnapFlag = true
+								uni.showToast({
+									title: data.msg,
+									success: () => {
+										this.getContractList()
+									}
+								})
+							}else{
+								this.isSnapFlag = false
+								clearInterval(this.timerNum)
+								uni.showToast({
+									image: '/static/images/wrong.png',
+									title: data.msg,
+									success: () => {
+										this.getContractList()
+									}
+								})
+							}
+						}
+					})
 			},
 			tranctBtnEvent(index){
 				if(index === 0){
@@ -143,31 +173,34 @@
 					})
 				} */
 			},
+			
 			rushPurchaseNowEvent(){
-				this.ajaxJson({
-					url: '/api/v1/treatyType/buy',
-					method: 'POST',
-					call: (data)=>{
-						if(data.code == 200){
-							this.isFlag = true
-							uni.showToast({
-								title: data.msg
-							})
-						}else if(data.code == 500){
-							this.isFlag = true
-							uni.showToast({
-								image: '/static/images/wrong.png',
-								title: data.msg
-							})
-						} else{
-							this.isFlag = false
-							uni.showToast({
-								image: '/static/images/wrong.png',
-								title: data.msg
-							})
+				if(this.isFlag){
+					this.ajaxJson({
+						url: '/api/v1/treatyType/buy',
+						method: 'POST',
+						call: (data)=>{
+							if(data.code == 200){
+								this.isFlag = true
+								uni.showToast({
+									title: data.msg
+								})
+							}else if(data.code == 500){
+								this.isFlag = true
+								uni.showToast({
+									image: '/static/images/wrong.png',
+									title: data.msg
+								})
+							} else{
+								this.isFlag = false
+								uni.showToast({
+									image: '/static/images/wrong.png',
+									title: data.msg
+								})
+							}
 						}
-					}
-				})
+					})
+				}
 			},
 			entrustEvent(){
 			},
@@ -196,10 +229,11 @@
 <style scoped lang="scss">
 	.tranContract{
 		position: relative;
-		padding-bottom: 140rpx;
+		padding-bottom: 200rpx !important;
 		.tractCon{
 			.enConList{
-				padding: 10rpx 30rpx 0;
+				padding: 0 30rpx 0;
+				background-color: #f2f2f2;
 				.enList:last-child{
 					border-bottom: none;
 				}
@@ -272,7 +306,7 @@
 					margin-top: 20rpx;
 					width: 340rpx;
 					// height: 270rpx;
-					background-color: #353535;
+					background-color: #f2f2f2;
 					.enListTit{
 						margin: 25rpx 30rpx 0;
 						display: flex;
@@ -321,7 +355,7 @@
 								color: #999;
 							}
 							text:nth-of-type(2){
-								color: #fff;
+								color: #999;
 							}
 						}
 					}

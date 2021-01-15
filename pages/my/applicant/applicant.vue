@@ -134,7 +134,7 @@
 <style scoped lang="scss">
 	.applicant{
 		.applicantArea{
-			color: #fff;
+			color: #999;
 			margin: 20rpx 30rpx 0;
 		}
 		.applicantBtn{

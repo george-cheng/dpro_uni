@@ -20,8 +20,8 @@
 				</view>
 			</view> -->
 			<view class="tranSwitch">
-				<view class="tranBuy" :class="{'tranChoice': tranOn !== 1}" @click="tranBuyEvent">买入</view>
-				<view class="tranSale" :class="{'tranChoice': tranOn === 1}" @click="tranSaleEvent">卖出</view>
+				<view class="tranBuy" :style="{backgroundColor: tranOn != 1 ? '#3BA987' : ''}" :class="{'tranChoice': tranOn !== 1}" @click="tranBuyEvent">买入</view>
+				<view class="tranSale" :style="{backgroundColor: tranOn == 1 ? '#B8393C' : ''}" :class="{'tranChoice': tranOn === 1}" @click="tranSaleEvent">卖出</view>
 			</view>
 			<view class="tranPresent">
 				<view class="choiceKind">
@@ -70,8 +70,8 @@
 			<!-- <view class="iptTip">
 				<text>{{iptTip}}</text>
 			</view> -->
-			<view class="tranBtn" @click="tranBtnEvent">
-				<button>{{btnTxt}}</button>
+			<view class="tranBtn" @click="tranBtnEvent" :style="{backgroundColor: tranOn == 0 ? '#3BA987' : '#B8393C'}">
+				<view>{{btnTxt}}</view>
 			</view>
 		</view>
 		<view class="order">
@@ -119,7 +119,7 @@
 		</view>
 		
 		<uni-popup ref="popup" type="bottom" >
-			<uni-popup-share :title="operaMethod" @comfirm="comfirm" style="background-color: #282828;">
+			<uni-popup-share :title="operaMethod" @comfirm="comfirm" style="background-color: #f2f2f2;" :style="{ color: tranOn == '0'?'#999': '#B8393C' }">
 				<view class="popupCon">
 					<view class="popupPrice">单价：¥{{popupPrice}}</view>
 					<input class="popupQuantity" type="text" v-model="popupQuantity" @input="calcTotalIptEvent" @blur="calcTotalEvent"  placeholder="请输入数量">
@@ -436,9 +436,10 @@
 </script>
 
 <style lang="scss">
+
 	.tranLegal{
 		.popupCon{
-			color: #fff;
+			color: #999;
 			.popupQuantity{
 				border: 1px solid #676869;
 				width: 640rpx;
@@ -484,7 +485,7 @@
 				justify-content: space-between;
 				align-items: center;
 				padding: 0 20rpx;
-				background-color: #303030;
+				background-color: #f2f2f2;
 				.nameLft{
 					display: flex;
 					align-items: center;
@@ -538,22 +539,23 @@
 				text-align: center;
 				align-items: center;
 				view{
-					background-color: #303030;
+					background-color: #f2f2f2;
 					height: 80rpx;
 					width: 330rpx;
 					text-align: center;
-					color: #fff;
+					color: #000;
 					font-size: 30rpx;
 					line-height: 80rpx;
 				}
 				.tranBuy{
-					border-radius: 40rpx 0 0 40rpx;
+					border-radius: 6rpx;
 				}
 				.tranSale{
-					border-radius: 0 40rpx 40rpx 0;
+					border-radius: 6rpx;
 				}
 				.tranChoice{
-					background: linear-gradient(#EA4F6E, #EB5F60);;
+					border-radius: 6rpx;
+					color: #fff;
 				}
 			}
 			.tranPresent{
@@ -579,7 +581,7 @@
 				view.kindIpt{
 					position: relative;
 					input{
-						border: 2px solid #676869;
+						border: 2px solid #f2f2f2;
 						height: 80rpx;
 						border-radius: 10rpx;
 					}
@@ -594,12 +596,12 @@
 					.tranKindList{
 						position: absolute;
 						width: 100%;
-						background-color: #282828;
+						background-color: #f2f2f2;
 						top: 100rpx;
-						border: 1px solid #676869;
+						border: 1px solid #f2f2f2;
 						z-index: 9;
 						view{
-							color: #fff;
+							color: #999;
 							font-size: 32rpx;
 							line-height: 48rpx;
 							padding: 5rpx 0 10rpx 10rpx;
@@ -618,7 +620,7 @@
 					margin-top: 52rpx;
 					position: relative;
 					input{
-						border: 2px solid #676869;
+						border: 2px solid #f2f2f2;
 						height: 80rpx;
 						border-radius: 10rpx;
 					}
@@ -644,8 +646,11 @@
 			}
 			.tranBtn{
 				margin: 28rpx 78rpx 0;
-				button{
-					background: linear-gradient(#EA506E, #EE7154);
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 80rpx;
+				view{
 					color: #fff;
 					font-size: 28rpx;
 				}
@@ -660,16 +665,16 @@
 				.newOrder, .historyOrder{
 					font-size: 28rpx;
 					line-height: 28rpx;
-					color: #fff;
+					color: #666;
 				}
 			}
 		}
 		.orderList>view{
-				border-bottom: 1px solid #383838;
+				border-bottom: 1px solid #f7f7f7;
 			}
 		.orderList{
 			margin-top: 32rpx;
-			background-color: #303030;
+			background-color: #f2f2f2;
 			.orderTime{
 				padding: 10rpx 43rpx 0;
 				justify-content: flex-start;
@@ -692,7 +697,7 @@
 						line-height: 28rpx;
 					}
 					.orderKind{
-						color: #fff;
+						color: #999;
 					}
 				}
 				.orderUnitPrice, .orderQuantity{
@@ -702,7 +707,7 @@
 						color: #999;
 					}
 					text:last-child{
-						color: #fff;
+						color: #999;
 					}
 				}
 			}
@@ -719,7 +724,7 @@
 						color: #999;
 					}
 					text:last-child{
-						color: #fff;
+						color: #999;
 					}
 				}
 				.orderStatus{

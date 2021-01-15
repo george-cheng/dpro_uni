@@ -163,7 +163,7 @@
 <style scoped lang="scss">
 	.pwdTip{
 		margin: 0 80rpx;
-		color: #fff;
+		color: #B8393C;
 		font-size: 22rpx;
 	}
 	.tranPwd{
@@ -175,7 +175,7 @@
 				height: 80rpx;
 				border: 1px solid #676869;
 				border-radius: 6px;
-				color: #fff;
+				color: #999;
 			}
 			.iconLogin{
 				position: absolute;

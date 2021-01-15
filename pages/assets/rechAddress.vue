@@ -1,5 +1,5 @@
 <template>
-	<view class="rechAdd mainBox">
+	<view class="rechAdd noNavMainBox">
 		<view class="rechTit">
 				<view>{{rechInfo.name}}</view>
 				<view>
@@ -102,10 +102,10 @@
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
-			border: 1px solid #AAADB1;
+			border: 1px solid #f2f2f2;
 			border-radius: 6rpx;
 			view{
-				color: #fff;
+				color: #999;
 				font-size: 26rpx;
 			}
 		}

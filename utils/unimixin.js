@@ -15,7 +15,8 @@ const unimixin = {
 			changeY: 0,
 			paddingTop: 0,
 			scrollTop: 0,
-			isUpRefresh: true
+			isUpRefresh: true,
+			screamH: ''
 		}
 	},
 	onReachBottom(){
@@ -23,6 +24,12 @@ const unimixin = {
 	},
 	onPageScroll(res){
 		this.scrollTop = res.scrollTop
+	},
+	onLoad(){
+		
+	},
+	mounted(){
+
 	},
 	methods: {
 		touchStart(e){
@@ -38,6 +45,9 @@ const unimixin = {
 				}
 			}
 		},
+		
+	},
+	created(){
 		
 	}
 }

@@ -160,16 +160,20 @@
 </script>
 
 <style scoped lang="scss">
+
 	.payMethod{
 		.payMethodCon{
 			margin: 0 35rpx;
 		}
+		.payMethodCon>view:nth-of-type(4){
+			border-bottom: none;
+		}
 		.payMethodCon>view{
 			height: 144rpx;
-			border-bottom: 1px solid #303030;
+			border-bottom: 1px solid #f2f2f2;
 			view{
 				font-size: 26rpx;
-				color: #fff;
+				color: #999;
 				margin-top: 24rpx;
 			}
 			input{

@@ -246,6 +246,7 @@
 			this.initWormHole()
 			this.initGetWormHole()
 			this.initAnimationImg()
+
 		}
 	}
 </script>

@@ -339,7 +339,7 @@
 					align-items: center;
 					text{
 						font-size: 48rpx;
-						color: #fff;
+						color: #999;
 					}
 					image{
 						margin-right: 10rpx;
@@ -350,18 +350,18 @@
 			}
 			.clockTip{
 				font-size: 24rpx;
-				color: #fff;
+				color: #999;
 				margin: 40rpx auto 0;
 			}
 		}
 		.orderDetail{
 			margin-top: 50rpx;
-			background-color: #303030;
+			background-color: #fff;
 			padding: 0 30rpx;
 			.detailTit{
 				padding-top: 40rpx;
 				font-size: 28rpx;
-				color: #fff;
+				color: #999;
 			}
 			.orderNum{
 				margin-top: 25rpx;
@@ -379,7 +379,7 @@
 				display: flex;
 				flex-direction: column;
 				text:nth-of-type(1){
-					color: #fff;
+					color: #999;
 					font-size: 28rpx;
 				}
 				text:nth-of-type(2){
@@ -394,7 +394,7 @@
 			display: flex;
 			justify-content: space-between;
 			.orderDetailState{
-				color: #fff;
+				color: #999;
 				font-size: 28rpx;
 			}
 			.orderDetailMoney{
@@ -410,11 +410,11 @@
 		}
 		.bussinessDetail{
 			margin-top: 15rpx;
-			background-color: #303030;
+			background-color: #fff;
 			padding: 0 30rpx;
 			.bussTit{
 				font-size: 28rpx;
-				color: #fff;
+				color: #999;
 				padding-top: 45rpx;
 			}
 			.bussDetailInfo{
@@ -430,17 +430,17 @@
 								display: flex;
 								align-items: center;
 								.payIcon{
-									color: #fff;
+									color: #999;
 									font-size: 40rpx;
 									margin-right: 10rpx;
 								}
 								text{
-									color: #fff;
+									color: #999;
 									font-size: 28rpx;
 								}
 							}
 							.payArrow::before{
-								color: #fff;
+								color: #999;
 							}
 						}
 						.wxMethodPayInfo, .zfbMethodPayInfo{
@@ -457,7 +457,7 @@
 									}
 								}
 								.downQrcodeImg{
-									color: #fff;
+									color: #999;
 									margin-top: 10rpx;
 									text-align: center;
 								}
@@ -467,10 +467,10 @@
 								justify-content: space-between;
 								margin-top: 20rpx;
 								.nameLft{
-									color: #fff;
+									color: #999;
 								}
 								.infoRgt{
-									color: #fff;
+									color: #999;
 									display: flex;
 									flex-direction: row;
 								}
@@ -483,8 +483,8 @@
 	}
 	.copy{
 		font-size: 22rpx;
-		color: #fff;
-		border: 2rpx solid #fff;
+		color: #B8393C;
+		border: 2rpx solid #666;
 		border-radius: 30rpx;
 		padding: 3rpx 15rpx;
 		margin-left: 20rpx;

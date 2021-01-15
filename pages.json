@@ -4,7 +4,7 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "Dpro",
+				"navigationBarTitleText": "迪博pro",
 				"enablePullDownRefresh": false
 			}
 		},
@@ -17,8 +17,8 @@
 					"titleNView": {
 						"buttons": [
 							{
-								"color": "#fff",
-								"colorPressed": "#fff",
+								"color": "#999",
+								"colorPressed": "#999",
 								"float": "right",
 								"fontSize": "30rpx",
 								// "fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
@@ -54,17 +54,40 @@
 			}
 		},
 		{
+			"path" : "pages/loginIn/forgetPwd",
+			"style" :                                                                                    
+			{
+				"navigationBarTitleText": "忘记密码",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"titleNView": {
+						"buttons": [
+							{
+								"color": "#999",
+								"colorPressed": "#999",
+								"float": "left",
+								"fontSize": "30rpx",
+								"fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
+								"text": "\ue92f" // 字体图标\u 开头，加上字体图标unicode后面四位
+							}
+						]
+					}
+				}
+			}
+		},
+		{
 			"path" : "pages/quotation/quotation",
 			"style" :                                                                                    
 			{
+				"backgroundColor": "#49a9ea",
 				"navigationBarTitleText": "市场行情",
 				"enablePullDownRefresh": false,
 				"app-plus": {
 					"titleNView": {
 						"buttons": [
 							{
-								"color": "#fff",
-								"colorPressed": "#fff",
+								"color": "#999",
+								"colorPressed": "#999",
 								"float": "right",
 								"fontSize": "30rpx",
 								"fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
@@ -92,8 +115,8 @@
 					"titleNView": {
 						"buttons": [
 							{
-								"color": "#fff",
-								"colorPressed": "#fff",
+								"color": "#999",
+								"colorPressed": "#999",
 								"float": "right",
 								"fontSize": "30rpx",
 								"fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
@@ -154,14 +177,14 @@
 				"path" : "pages/klineDiagram/klineDiagram",
 				"style" :                                                                                    
 				{
-						"navigationBarTitleText": "K线图",
+						"navigationBarTitleText": "K 线 图",
 						"enablePullDownRefresh": false,
 						"app-plus": {
 							"titleNView": {
 								"buttons": [
 									{
-										"color": "#fff",
-										"colorPressed": "#fff",
+										"color": "#999",
+										"colorPressed": "#999",
 										"float": "left",
 										"fontSize": "30rpx",
 										"fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
@@ -173,14 +196,6 @@
 				}
 		},
 		{
-			"path" : "pages/assets/assRecharge",
-			"style" :                                                                                    
-			{
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		}
-		,{
 			"path" : "pages/assets/selectLetter",
 			"style" :                                                                                    
 			{
@@ -242,8 +257,8 @@
 					"titleNView": {
 						"buttons": [
 							{
-								"color": "#fff",
-								"colorPressed": "#fff",
+								"color": "#999",
+								"colorPressed": "#999",
 								"float": "left",
 								"fontSize": "30rpx",
 								"fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
@@ -275,7 +290,21 @@
 			"style" :                                                                                    
 			{
 				"navigationBarTitleText": "设置",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"titleNView": {
+						"buttons": [
+							{
+								"color": "#999",
+								"colorPressed": "#999",
+								"float": "left",
+								"fontSize": "30rpx",
+								"fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
+								"text": "\ue92f" // 字体图标\u 开头，加上字体图标unicode后面四位
+							}
+						]
+					}
+				}
 			}
 		}
 		,{
@@ -296,12 +325,12 @@
 					"titleNView": {
 						"buttons": [
 							{
-								"color": "#fff",
+								"color": "#999",
 								"colorPressed": "#eee",
 								"float": "right",
-								"fontSize": "56rpx",
+								"fontSize": "30rpx",
 								"fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
-								"text": "\ue91d" // 字体图标\u 开头，加上字体图标unicode后面四位
+								"text": "\ue933" // 字体图标\u 开头，加上字体图标unicode后面四位
 							}
 						]
 					}
@@ -326,16 +355,16 @@
 					"titleNView": {
 						"buttons": [
 							{
-								"color": "#fff",
-								"colorPressed": "#fff",
+								"color": "#999",
+								"colorPressed": "#999",
 								"float": "right",
 								"fontSize": "30rpx",
 								// "fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
 								"text": "记录" // 字体图标\u 开头，加上字体图标unicode后面四位
 							},
 							{
-								"color": "#fff",
-								"colorPressed": "#fff",
+								"color": "#999",
+								"colorPressed": "#999",
 								"float": "left",
 								"fontSize": "30rpx",
 								"fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
@@ -452,8 +481,8 @@
 					"titleNView": {
 						"buttons": [
 							{
-								"color": "#fff",
-								"colorPressed": "#fff",
+								"color": "#999",
+								"colorPressed": "#999",
 								"float": "right",
 								"fontSize": "30rpx",
 								// "fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
@@ -473,14 +502,6 @@
 			}
 		}
 		,{
-			"path" : "pages/my/personal/personal",
-			"style" :                                                                                    
-			{
-					"navigationBarTitleText": "个人中心",
-					"enablePullDownRefresh": false
-			}
-		}
-		,{
 			"path" : "pages/assets/assTranAcc/assTranAcc",
 			"style" :                                                                                    
 			{
@@ -490,8 +511,8 @@
 					"titleNView": {
 						"buttons": [
 							{
-								"color": "#fff",
-								"colorPressed": "#fff",
+								"color": "#999",
+								"colorPressed": "#999",
 								"float": "right",
 								"fontSize": "30rpx",
 								// "fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
@@ -518,18 +539,20 @@
 				"enablePullDownRefresh": false,
 				"app-plus": {
 					"titleNView": {
+						"backgroundColor": "#282828",
+						"titleColor": "#fff",
 						"buttons": [
 							{
-								"color": "#fff",
-								"colorPressed": "#fff",
+								"color": "#999",
+								"colorPressed": "#999",
 								"float": "right",
 								"fontSize": "30rpx",
 								// "fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
 								"text": "记录" // 字体图标\u 开头，加上字体图标unicode后面四位
 							},
 							{
-								"color": "#fff",
-								"colorPressed": "#fff",
+								"color": "#999",
+								"colorPressed": "#999",
 								"float": "left",
 								"fontSize": "30rpx",
 								"fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
@@ -558,8 +581,8 @@
 					"titleNView": {
 						"buttons": [
 							{
-								"color": "#fff",
-								"colorPressed": "#fff",
+								"color": "#999",
+								"colorPressed": "#999",
 								"float": "left",
 								"fontSize": "30rpx",
 								"fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
@@ -580,16 +603,16 @@
 						"titleNView": {
 							"buttons": [
 								{
-									"color": "#fff",
-									"colorPressed": "#fff",
+									"color": "#999",
+									"colorPressed": "#999",
 									"float": "right",
 									"fontSize": "30rpx",
 									// "fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
 									"text": "记录" // 字体图标\u 开头，加上字体图标unicode后面四位
 								},
 								{
-									"color": "#fff",
-									"colorPressed": "#fff",
+									"color": "#999",
+									"colorPressed": "#999",
 									"float": "left",
 									"fontSize": "30rpx",
 									"fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
@@ -611,8 +634,8 @@
 					"titleNView": {
 						"buttons": [
 							{
-								"color": "#fff",
-								"colorPressed": "#fff",
+								"color": "#999",
+								"colorPressed": "#999",
 								"float": "left",
 								"fontSize": "30rpx",
 								"fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
@@ -633,8 +656,8 @@
 						"titleNView": {
 							"buttons": [
 								{
-									"color": "#fff",
-									"colorPressed": "#fff",
+									"color": "#999",
+									"colorPressed": "#999",
 									"float": "left",
 									"fontSize": "30rpx",
 									"fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
@@ -645,12 +668,69 @@
 					}
 				}
 			}
+			,{
+				"path" : "pages/contractExchange/exchangeMall",
+				"style" :{
+					"navigationBarTitleText": "兑换商城",
+					"enablePullDownRefresh": false,
+					"app-plus": {
+						"titleNView": {
+							"buttons": [
+								{
+									"color": "#999",
+									"colorPressed": "#999",
+									"float": "left",
+									"fontSize": "30rpx",
+									"fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
+									"text": "\ue92f" // 字体图标\u 开头，加上字体图标unicode后面四位
+								},
+								{
+									"color": "#999",
+									"colorPressed": "#999",
+									"float": "right",
+									"fontSize": "30rpx",
+									// "fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
+									"text": "记录" // 字体图标\u 开头，加上字体图标unicode后面四位
+								}
+							]
+						}
+					}
+				}
+			}
+			,{
+				"path" : "pages/contractExchange/exchangeMallRecord",
+				"style" :{
+					"navigationBarTitleText": "兑换记录",
+					"enablePullDownRefresh": false,
+					"app-plus": {
+						"titleNView": {
+							"buttons": [
+								{
+									"color": "#999",
+									"colorPressed": "#999",
+									"float": "left",
+									"fontSize": "30rpx",
+									"fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
+									"text": "\ue92f" // 字体图标\u 开头，加上字体图标unicode后面四位
+								}
+							]
+						}
+					}
+				}
+			}
+			,{
+				"path" : "pages/my/resetPwd/resetPwd",
+				"style" :                                                                                    
+				{
+						"navigationBarTitleText": "重置密码",
+						"enablePullDownRefresh": false
+				}
+			}
     ],
 	"globalStyle": {
-		"navigationBarTextStyle": "white",
-		"navigationBarTitleText": "Dpro",
-		"navigationBarBackgroundColor": "#282828",
-		"backgroundColor": "#282828"
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "迪博pro",
+		"navigationBarBackgroundColor": "#fff"
 	},
 	// "tabBar": {
 	// 	"selectedColor": "#BD3A3B",

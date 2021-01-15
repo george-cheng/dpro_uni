@@ -132,7 +132,7 @@
 	.invita{
 		.personInfo{
 			margin: 0 80rpx;
-			color: #fff;
+			color: #999;
 			.infoTit{
 				display: flex;
 				justify-content: center;
@@ -152,7 +152,7 @@
 			margin: 20rpx 30rpx 0;
 			display: flex;
 			justify-content: center;
-			color: #fff;
+			color: #999;
 		}
 		image{
 			width: 280rpx;
@@ -162,13 +162,13 @@
 			justify-content: center;
 		}
 		.linkCopy{
-			color: #fff;
+			color: #999;
 			margin-top: 20rpx;
 			display: flex;
 			justify-content: center;
 		}
 		.invitaLink{
-			color: #fff;
+			color: #999;
 			margin-top: 20rpx;
 			display: flex;
 			justify-content: center;

@@ -1,7 +1,7 @@
 <template>
 	<view class="tranLegOrderToPay">
 		<view class="toPayTit">
-			<view class="toPayClock" v-if="!isOrderCancel && !isCollect">
+			<view class="toPayClock" v-if="isTime">
 				<view class="clock">
 					<image src="/static/images/clock.png" mode=""></image>
 					<text v-if="isConOrder">{{clockTime}}</text>
@@ -47,8 +47,8 @@
 							<view class="payArrow" :class="isWxCheck ? 'i-dwArrow' : 'i-rgtArrow'"></view>
 						</view>
 						<view class="wxMethodPayInfo" v-if="isWxMethod">
-							<view class="qrCodeImg" @longtap="saveQrcodeEvent(urlImg + fbuinessAccount.fwxpayReCode)">
-								<view class="codeImg"><image :src="urlImg + fbuinessAccount.fwxpayReCode" mode="aspectFit"></image></view>
+							<view class="qrCodeImg" @longtap="saveQrcodeEvent(url + fbuinessAccount.fwxpayReCode)">
+								<view class="codeImg"><image :src="url + fbuinessAccount.fwxpayReCode" mode="aspectFit"></image></view>
 								<view class="downQrcodeImg">长按保存收款二维码</view>
 							</view>
 							<view class="payName">
@@ -72,8 +72,8 @@
 							<view class="payArrow" :class="isZfbCheck ? 'i-dwArrow' : 'i-rgtArrow'"></view>
 						</view>
 						<view class="zfbMethodPayInfo" v-if="isZfbMethod">
-							<view class="qrCodeImg" @longtap="saveQrcodeEvent(urlImg + fbuinessAccount.falipayReCode)">
-								<view class="codeImg"><image :src="urlImg + fbuinessAccount.falipayReCode" mode="aspectFit"></image></view>
+							<view class="qrCodeImg" @longtap="saveQrcodeEvent(url + fbuinessAccount.falipayReCode)">
+								<view class="codeImg"><image :src="url + fbuinessAccount.falipayReCode" mode="aspectFit"></image></view>
 								<view class="downQrcodeImg">长按保存收款二维码</view>
 							</view>
 							<view class="payName">
@@ -103,7 +103,9 @@
 
 <script>
 	import { accAdd, getLocalTime } from '../../../utils/common.js'
+	import { unimixin } from '../../../utils/unimixin.js'
 	export default {
+		mixins: [unimixin],
 		data(){
 			return{
 				fbuinessAccount: [],
@@ -132,6 +134,7 @@
 				isCollect: false,   //确认放币
 				isOrderCancel: false,   //取消
 				confirmTxt: '确认付款',
+				isTime: true,
 				
 				urlImg: 'https://dpro-main.oss-cn-hongkong.aliyuncs.com/',
 			}
@@ -214,13 +217,50 @@
 						call: (data)=>{
 							if(data.code == 200){
 								uni.showToast({
-									title: data.msg
+									title: data.msg,
+									success: () => {}
 								})
 								setTimeout(()=>{
 									uni.reLaunch({
 										url: '/pages/assets/orderRecord',
 										success: () => {}
 									})
+								},500)
+							}else{
+								uni.showToast({
+									image: '/static/images/wrong.png',
+									title: data.msg,
+									success: () => {}
+								})
+							}
+						}
+					})
+				}else if(this.confirmTxt == '确认付款'){
+				
+					this.ajaxJson({
+						url: '/api/v1/otcOrder/userEnterPay',
+						method: 'POST',
+						data: params,
+						call: (data)=>{
+							if(data.code == 200){
+								this.isConPay = true
+								this.isConOrder = false
+								this.isConfirmBtn = false
+								this.orderTime = getLocalTime(new Date())
+								this.countProceTime(this.orderTime)
+								uni.showToast({
+									title: data.msg,
+									success: () => {
+										uni.setNavigationBarTitle({
+											title: '订单处理中......',
+											success: () => {
+												const webView = this.$scope.$getAppWebview()
+												webView.setTitleNViewButtonStyle(0, {
+													text: ' ',    
+												});	
+											}
+										});
+									}
 								})
 							}else{
 								uni.showToast({
@@ -231,48 +271,25 @@
 						}
 					})
 				}
-				
-				this.ajaxJson({
-					url: '/api/v1/otcOrder/userEnterPay',
-					method: 'POST',
-					data: params,
-					call: (data)=>{
-						if(data.code == 200){
-							this.isConPay = true
-							this.isConOrder = false
-							this.isConfirmBtn = false
-							this.orderTime = getLocalTime(new Date())
-							this.countProceTime(this.orderTime)
-							uni.showToast({
-								title: data.msg,
-								success: () => {
-									uni.setNavigationBarTitle({
-										title: '订单处理中......',
-										success: () => {
-											const webView = this.$scope.$getAppWebview()
-											webView.setTitleNViewButtonStyle(0, {
-												text: ' ',    
-											});	
-										}
-									});
-								}
-							})
-						}else{
-							uni.showToast({
-								image: '/static/images/wrong.png',
-								title: data.msg
-							})
-						}
-					}
-				})
 			},
 			getPayInfoEvent(){
 				this.ajaxJson({
 					url: '/api/v1/otcOrder/findByOrderId',
 					data: {order_id: this.orderId },
 					call: (data)=>{
+						this.fbuinessAccount = data.data.fbuinessAccount
+						this.fotcOrder = data.data.fotcOrder
+						if(this.fotcOrder.order_status == 1 && this.fotcOrder.order_type == 2){
+							this.isConfirmBtn = false
+						}
+						if(this.fotcOrder.order_status == 2 && this.fotcOrder.order_type == 2){
+							this.isTime = false
+						}
+						if(this.fotcOrder.order_status == 3 ){
+							this.isTime = false
+						}
+
 						if(data.data.fotcOrder.length !=0){
-							this.fotcOrder = data.data.fotcOrder
 							this.orderType = data.data.fotcOrder.order_type
 							if( this.fotcOrder.order_status == 2 && this.fotcOrder.order_type == 2){
 								this.isConfirmBtn = true
@@ -285,8 +302,7 @@
 									text: ' ',    
 								});
 							}
-							
-							
+		
 							if(this.fotcOrder.order_status == 1){
 								this.countTime()
 							}
@@ -303,7 +319,6 @@
 								
 							}
 						}
-						this.fbuinessAccount = data.data.fbuinessAccount
 						let placeTime = this.fotcOrder.place_time
 						if(this.fotcOrder.pay_time){
 							this.countProceTime(this.fotcOrder.pay_time)
@@ -414,7 +429,7 @@
 					align-items: center;
 					text{
 						font-size: 48rpx;
-						color: #fff;
+						color: #999;
 					}
 					image{
 						margin-right: 10rpx;
@@ -425,18 +440,18 @@
 			}
 			.clockTip{
 				font-size: 24rpx;
-				color: #fff;
+				color: #999;
 				margin: 40rpx auto 0;
 			}
 		}
 		.orderDetail{
 			margin-top: 50rpx;
-			background-color: #303030;
+			background-color: #f2f2f2;
 			padding: 0 30rpx;
 			.detailTit{
 				padding-top: 40rpx;
 				font-size: 28rpx;
-				color: #fff;
+				color: #999;
 			}
 			.orderNum{
 				margin-top: 25rpx;
@@ -454,7 +469,7 @@
 				display: flex;
 				flex-direction: column;
 				text:nth-of-type(1){
-					color: #fff;
+					color: #999;
 					font-size: 28rpx;
 				}
 				text:nth-of-type(2){
@@ -469,7 +484,7 @@
 			display: flex;
 			justify-content: space-between;
 			.orderDetailState{
-				color: #fff;
+				color: #999;
 				font-size: 28rpx;
 			}
 			.orderDetailMoney{
@@ -485,11 +500,11 @@
 		}
 		.bussinessDetail{
 			margin-top: 15rpx;
-			background-color: #303030;
+			background-color: #f2f2f2;
 			padding: 0 30rpx;
 			.bussTit{
 				font-size: 28rpx;
-				color: #fff;
+				color: #999;
 				padding-top: 45rpx;
 			}
 			.bussDetailInfo{
@@ -505,17 +520,17 @@
 								display: flex;
 								align-items: center;
 								.payIcon{
-									color: #fff;
+									color: #999;
 									font-size: 40rpx;
 									margin-right: 10rpx;
 								}
 								text{
-									color: #fff;
+									color: #999;
 									font-size: 28rpx;
 								}
 							}
 							.payArrow::before{
-								color: #fff;
+								color: #999;
 							}
 						}
 						.wxMethodPayInfo, .zfbMethodPayInfo{
@@ -532,7 +547,7 @@
 									}
 								}
 								.downQrcodeImg{
-									color: #fff;
+									color: #999;
 									margin-top: 10rpx;
 									text-align: center;
 								}
@@ -542,10 +557,10 @@
 								justify-content: space-between;
 								margin-top: 20rpx;
 								.nameLft{
-									color: #fff;
+									color: #999;
 								}
 								.infoRgt{
-									color: #fff;
+									color: #999;
 									display: flex;
 									flex-direction: row;
 								}
@@ -558,18 +573,17 @@
 	}
 	.copy{
 		font-size: 22rpx;
-		color: #fff;
-		border: 2rpx solid #fff;
+		color: #B8393C;
+		border: 2rpx solid #666;
 		border-radius: 30rpx;
 		padding: 3rpx 15rpx;
 		margin-left: 20rpx;
 	}
 	.confirmPay{
-		color: #fff;
 		margin: 120rpx 30rpx 0;
 		border-radius: 4rpx;
 		button{
-			background: linear-gradient(#EA506E, #EE7154);
+			background-color: #B8393C;
 			color: #fff;
 		}
 	}

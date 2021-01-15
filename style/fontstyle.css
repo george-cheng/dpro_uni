@@ -135,6 +135,10 @@
 	font-family: 'icomoon' !important;
 	content: "\e91d";
 }
+.i-menuDot::before{
+	font-family: 'icomoon' !important;
+	content: "\e933";
+}
 /* 行情 */
 .i-quota::before{
 	font-family: 'icomoon' !important;

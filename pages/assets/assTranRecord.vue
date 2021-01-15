@@ -175,7 +175,7 @@
 	}
 
 .orderRecord>view{
-		background-color: #303030;
+		background-color: #f2f2f2;
 		padding: 0 30rpx;
 		margin-bottom: 30rpx;
 		.orderTop{
@@ -213,7 +213,7 @@
 				flex-direction: column;
 				text-align: center;
 				text:nth-of-type(1){
-					color: #fff;
+					color: #999;
 					font-size: 28rpx;
 				}
 				text:nth-of-type(2){

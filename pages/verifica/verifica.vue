@@ -134,9 +134,9 @@
 					margin: 20rpx auto 0;
 					width: 400rpx;
 					height: 80rpx;
-					border: 1px solid #676869;
+					border: 1px solid #f2f2f2;
 					border-radius: 6px;
-					color: #fff;
+					color: #999;
 				}
 				span{
 					position: absolute;
@@ -152,7 +152,7 @@
 				margin-top: 25rpx;
 				display: flex;
 				align-items: center;
-				color: #fff;
+				color: #999;
 				font-size: 22rpx;
 				line-height: 22rpx;
 			}

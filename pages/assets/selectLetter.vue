@@ -78,7 +78,7 @@
 			view{
 				display: flex;
 				justify-content: space-between;
-				background-color: #303030;
+				background-color: #f2f2f2;
 				border-radius: 10rpx;
 				height: 70rpx;
 				.rechIptIco{
@@ -97,7 +97,7 @@
 			}
 			.cancel{
 				white-space: nowrap;
-				color: #fff;
+				color: #999;
 				display: flex;
 				align-items: center;
 				font-size: 28rpx;
@@ -115,10 +115,10 @@
 				.letterList{
 					view{
 						height: 74rpx;
-						color: #fff;
+						color: #999;
 						font-size: 26rpx;
 						line-height: 26rpx;
-						border-bottom: 1px solid #303030;
+						border-bottom: 1px solid #f2f2f2;
 						display: flex;
 						align-items: center;
 					}
@@ -132,7 +132,7 @@
 			view{
 				font-size: 20rpx;
 				line-height: 20rpx;
-				color: #fff;
+				color: #999;
 				margin: 10rpx 0;
 			}
 			view.choice{

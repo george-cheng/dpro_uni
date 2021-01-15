@@ -1,1 +1,0 @@
-<view class="tranAssetsDetail mainBox data-v-48b555c3"><view class="tranAssetsCon data-v-48b555c3"><text class="data-v-48b555c3">{{"释放数量："+tranAssetsDetail.return_amount}}</text><text class="data-v-48b555c3">{{"进入虫洞数量："+tranAssetsDetail.destroy_amount}}</text></view></view>

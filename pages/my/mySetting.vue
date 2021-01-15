@@ -1,7 +1,7 @@
 <template>
 	<view class="setting mainBox">
 		<view class="perCon">
-			<view  @click="myArrowEvent(0)">
+			<view @click="myArrowEvent(0)">
 				<view class="conLft">
 					<view class="conIcon"></view>
 					<text class="lftTit">语言设置</text>
@@ -11,6 +11,17 @@
 					<view class="conIcon"></view>
 				</view>
 			</view>
+			<view @click="myArrowEvent(1)">
+				<view class="conLft">
+					<view class="conIcon"></view>
+					<text class="lftTit">重置登录密码</text>
+				</view>
+				<view class="conRgt">
+					<text class="rgtInfo"></text>
+					<view class="conIcon i-rgtArrow"></view>
+				</view>
+			</view>
+			
 		</view>
 		<view class="settingBtm">
 			<button type="default" @click="layoutEvent">退出登录</button>
@@ -19,18 +30,33 @@
 </template>
 
 <script>
+	import { unimixin } from '../../utils/unimixin.js'
 	export default {
+		mixins: [ unimixin ],
 		data(){
 			return{
-				
+				stateModel: '日间模式'
 			}
 		},
 		onLoad() {
 
 		},
+		onNavigationBarButtonTap(e) {
+			if(e.float == 'left') {
+				uni.reLaunch({
+					url: '/pages/my/my',
+					success() {}
+				})
+			}
+		},
 		methods: {
 			myArrowEvent(index){
-				
+				if(index == '1'){
+					uni.reLaunch({
+						url: '/pages/my/resetPwd/resetPwd',
+						success: () => {}
+					})
+				}
 			},
 			layoutEvent(){
 				this.ajaxJson({
@@ -67,16 +93,16 @@
 			}
 		},
 		created() {
-
+			
 		}
 	}
 </script>
 
 <style scoped lang="scss">
+	
 	.setting{
-		background-color: #282828;
 		.perCon{
-			background-color: #303030;
+			background-color: #fff;
 			margin-top: 12rpx;
 			view{
 				height: 112rpx;
@@ -84,8 +110,8 @@
 				align-items: center;
 				justify-content: space-between;
 				margin: 0 10rpx;
-				color: #fff;
-				border-top: 1px solid #383838;
+				color: #999;
+				border-top: 1px solid #f2f2f2;
 				.conLft{
 					
 				}

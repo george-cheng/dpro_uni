@@ -82,7 +82,7 @@
 		
 		.transferTotal{
 			margin: 20rpx 50rpx;
-			color: #fff;
+			color: #999;
 			font-size: 24rpx;
 		}
 		
@@ -90,7 +90,7 @@
 			display: flex;
 			justify-content: space-between;
 			margin: 20rpx 50rpx;
-			color: #fff;
+			color: #999;
 			font-size: 24rpx;
 		}
 		.transferIpt{
@@ -100,7 +100,7 @@
 				height: 80rpx;
 				border: 1px solid #676869;
 				border-radius: 6px;
-				color: #fff;
+				color: #999;
 			}
 		}
 		.transferBtn{

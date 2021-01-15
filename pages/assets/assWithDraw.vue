@@ -22,7 +22,7 @@
 		<view class="drawIpt">
 			<view class="amountIpt">
 				<input type="text" v-model="amount" @input="amountNum" placeholder="请输入提现数量">
-				<view>
+				<view class="iptRgt">
 					<text>{{iptTxt}}</text>
 					<text @click="withDrawAll">全部</text>
 				</view>
@@ -40,10 +40,11 @@
 			</view>
 			<view class="amountIpt">
 				<input type="text" v-model="address" placeholder="输入或粘贴地址">
-				<view>
+				<view class="iptRgt">
 					<text @click="pasteEvent(0)">粘贴</text>
 				</view>
 			</view>
+			<view class="iptTip">请输入或粘贴ERC20地址</view>
 			<view>
 				<input  v-model="safeWord" placeholder="输入交易密码" :password="isSafeWord">
 				<span @click="pwdEvent" class="iconLogin i-eye"></span>
@@ -304,7 +305,7 @@
 		.drawInfo{
 			padding: 34rpx 0;
 			margin: 0 auto 0;
-			background-color: #303030;
+			background-color: #fff;
 			.drawImg{
 				width: 60rpx;
 				height: 60rpx;
@@ -318,7 +319,7 @@
 				margin-top: 20rpx;
 				text-align: center;
 				font-size: 28rpx;
-				color: #fff;
+				color: #999;
 			}
 			.line{
 				height: 2rpx;
@@ -344,7 +345,7 @@
 					.infoVal{
 						margin-top: 30rpx;
 						font-size: 28rpx;
-						color: #fff;
+						color: #999;
 					}
 				}
 			}
@@ -353,6 +354,7 @@
 			.amountTip{
 				display: flex;
 				justify-content: space-between;
+				margin-top: 15rpx;
 				text{
 					font-size: 24rpx;
 					color: #999;
@@ -360,7 +362,7 @@
 			}
 			.amountIpt{
 				position: relative;
-				view{
+				view.iptRgt{
 					position: absolute;
 					top: -15rpx;
 					right: 0;
@@ -374,6 +376,11 @@
 						margin-left: 10rpx;
 					}
 				}
+			}
+			.iptTip{
+				color: #999;
+				font-size: 24rpx;
+				margin-top: 10rpx;
 			}
 			view{
 				margin: 35rpx 35rpx 0;
@@ -408,9 +415,10 @@
 				}
 				input{
 					height: 80rpx;
-					background-color: #282828;
-					border: 1px solid #676869;
+					background-color: #fff;
+					border: 1px solid #f2f2f2;
 					border-radius: 8rpx;
+					color: #999;
 				}
 			}
 			.regMsg{

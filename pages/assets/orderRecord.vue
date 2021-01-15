@@ -215,7 +215,7 @@
 		background-color: transparent !important;
 	}
 	.orderRecord>view{
-		background-color: #303030;
+		background-color: #f2f2f2;
 		padding: 0 30rpx;
 		margin-bottom: 30rpx;
 		.orderTop{
@@ -230,7 +230,7 @@
 					margin-right: 10rpx;
 				}
 				.fvShortName{
-					color: #fff;
+					color: #999;
 					font-size: 28rpx;
 					margin-right: 24rpx;
 				}
@@ -248,7 +248,7 @@
 			padding-bottom: 20rpx;
 			display: flex;
 			justify-content: space-between;
-			color: #fff;
+			color: #999;
 			font-size: 26rpx;
 		}
 		.orderCon{
@@ -261,7 +261,7 @@
 				flex-direction: column;
 				text-align: center;
 				text:nth-of-type(1){
-					color: #fff;
+					color: #999;
 					font-size: 28rpx;
 				}
 				text:nth-of-type(2){

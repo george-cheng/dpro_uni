@@ -51,7 +51,7 @@
 			margin-top: 20rpx;
 			display: flex;
 			justify-content: center;
-			color: #fff;
+			color: #999;
 			font-size: 36rpx;
 			font-weight: bold;
 		}
@@ -61,7 +61,7 @@
 			flex-direction: column;
 			text-align: center;
 			font-size: 26rpx;
-			color: #fff;
+			color: #999;
 			text{
 				margin-top: 10rpx;
 			}

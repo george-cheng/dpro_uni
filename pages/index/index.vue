@@ -1,5 +1,5 @@
 <template>
-	<view class="home mainBox" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd" :style="{paddingTop: paddingTop + 'rpx'}">
+	<view class="home mainBox" :style="{paddingTop: paddingTop + 'rpx'}" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd">
 		<swiper indicator-dots circular autoplay interval="3000">
 			<swiper-item v-for="item in swipers" :key="item.id">
 				<image :src="url + item.image_url"></image>
@@ -23,16 +23,24 @@
 		</view>
 		
 		<view class="info">
-			<view class="quickMoney" @click="tranAssetsMain('2')">
-				<text class="colorRed">快捷买币</text>
-				<text>支持USDT</text>
-				<view class="image">
-					<image src="../../static/images/payMethod.png" mode="aspectFit"></image>
+			<view>
+				<view class="quickMoney" @click="tranAssetsMain('2')">
+					<view class="textQuickMoney">
+						<text class="colorRed">快捷买币</text>
+						<text>支持USDT</text>
+					</view>
+					<view class="image">
+						<image src="../../static/images/payMethod.png" mode="aspectFit"></image>
+					</view>
+				</view>
+				<view class="contractExchange" @click="contractExchangeEvent">
+					<image src="../../static/images/contractExchange.png" mode="aspectFit"></image>
+					<text class="colorRed">合约兑换</text>
 				</view>
 			</view>
 			<view class="rgt">
 				<view class="cooTran" @click="tranAssetsMain('1')">
-					<image src="../../static/images/cooTran.png"></image>
+					<image src="../../static/images/cooTran.png" mode="aspectFit"></image>
 					<text class="colorRed">合约交易</text>
 				</view>
 				<view class="redPackage" @click="redPackageEvent">
@@ -42,7 +50,7 @@
 			</view>
 		</view>
 		
-		<view class="invita" @click="invitaEvent">
+		<view class="invita" @click="invitaEvent" >
 			<view class="invitaCon">
 				<view class="lft">
 					<image src="../../static/images/invita.png" mode="aspectFit"></image>
@@ -57,9 +65,9 @@
 		<view class="upMarket">
 			<text class="marketTit">涨幅榜</text>
 			<view class="marketCon">
-				<view class="" v-for="(item, index) in market" :key="item.fid" v-if="index < 10">
+				<view class="" v-for="(item, index) in market" :key="item.fid" v-if="index < 10" @click="marketEvent(item)">
 					<view class="marketImg">
-						<image :src="url + item.furl" mode=""></image>
+						<image :src="url + item.furl" mode="aspectFit"></image>
 						<text>{{item.fShortName}} / {{item.group}}</text>
 					</view>
 					<text class="money">{{item.lastDealPrize}}</text>
@@ -154,10 +162,29 @@
 					success: () => {}
 				})
 			},
+			/* 合约兑换 */
+			contractExchangeEvent(){
+				// uni.reLaunch({
+				// 	url: '/pages/contractExchange/exchangeMall',
+				// 	success: () => {}
+				// })
+				uni.showToast({
+					icon: 'none',
+					title: '此功能暂未开放',
+					success: () => {}
+				})
+			},
 			/* 邀请好友 */
 			invitaEvent(){
 				uni.reLaunch({
 					url: '/pages/my/invitaIncome/invitaIncome?category=2',
+					success: () => {}
+				})
+			},
+			/* 涨幅榜跳转到K线图 */
+			marketEvent(item){
+				uni.reLaunch({
+					url: '/pages/klineDiagram/klineDiagram?symbol=' + item.fid  + '&category=2',
 					success: () => {}
 				})
 			},
@@ -220,7 +247,8 @@
 			},
 			moneyDataEvent(item){
 				uni.reLaunch({
-					url: '/pages/transac/transacMain?transacInfo=' + encodeURIComponent(JSON.stringify(item)) + '&choiceOn=0',
+					// url: '/pages/transac/transacMain?transacInfo=' + encodeURIComponent(JSON.stringify(item)) + '&choiceOn=0',
+					url: '/pages/klineDiagram/klineDiagram?symbol=' + item.fid + '&category=2',
 					success: () => {}
 				})
 			},
@@ -375,6 +403,7 @@
 		color: #b8393c !important;
 	}
 	.home {
+		background-color: #f7f7f7;
 		.upDate{
 			margin: 0 20rpx;
 			.downProgress{
@@ -397,7 +426,7 @@
 			height: 60rpx;
 			line-height: 60rpx;
 			color: #8C8C8C;
-			background-color: #303030;
+			background-color: #fff;
 			.scrool-list-item {
 				font-size: 24rpx;
 				text-align: center;
@@ -410,6 +439,7 @@
 		.content {
 			display: flex;
 			justify-content: space-around;
+			// background-color: #f7f7f7;
 			view {
 				display: flex;
 				flex-wrap: wrap;
@@ -424,7 +454,7 @@
 				}
 				.kind{
 					margin-top: 22rpx;
-					color: #FFFFFF;
+					color: #999;
 					font-size: 24rpx;
 					line-height: 24rpx;
 				}
@@ -453,32 +483,27 @@
 			display: flex;
 			justify-content: space-between;
 			.quickMoney{
+				padding-top: 20rpx;
 				width: 368rpx;
-				height: 240rpx;
-				background-color: #303030;
+				height: 96rpx;
 				display: flex;
-				flex-direction: column;
-				margin-right: 12rpx;
-				text{
-					margin-left: 36rpx;
-				}
+				justify-content: space-between;
+				background-color: #fff;
 				text:first-child{
-					margin-top: 32rpx;
 					color: #ccc;
 					font-weight: 400;
 					font-size: 28rpx;
 					line-height: 28rpx;
 				}
 				text:nth-child(2){
-					margin-top: 22rpx;
 					color: #8C8C8C;
 					font-weight: 400;
 					font-size: 24rpx;
 					line-height: 24rpx;
+					margin-top: 20rpx;
 				}
 				.image{
-					margin-left: 232rpx;
-					margin-top: 30rpx;
+					padding: 0 30rpx;
 					width: 110rpx;
 					height: 110rpx;
 					image{
@@ -486,15 +511,40 @@
 						height: 100%;
 					}
 				}
+				.textQuickMoney{
+					padding: 0 30rpx;
+					display: flex;
+					flex-direction: column;
+				}
+			}
+			.contractExchange{
+				width: calc( 100% - 380)rpx;
+				height: 115rpx;
+				margin-top: 10rpx;
+				display: flex;
+				align-items: center;
+				background-color: #fff;
+				text{
+					font-size: 28rpx;
+					line-height: 28rpx;
+					font-weight: 400;
+					color: #ccc;
+				}
+				image{
+					margin-left: 42rpx;
+					margin-right: 45rpx;
+					width: 62rpx;
+					height: 69rpx;
+				}
 			}
 			.rgt{
 				.cooTran{
 					width: calc( 100% - 380)rpx;
 					height: 115rpx;
-					background-color: #303030;
 					margin-bottom: 12rpx;
 					display: flex;
 					align-items: center;
+					background-color: #fff;
 					text{
 						font-size: 28rpx;
 						line-height: 28rpx;
@@ -511,9 +561,9 @@
 				.redPackage{
 					width: 370rpx;
 					height: 113rpx;
-					background-color: #303030;
 					display: flex;
 					align-items: center;
+					background-color: #fff;
 					text{
 						font-size: 28rpx;
 						line-height: 28rpx;
@@ -533,7 +583,7 @@
 		.invita{
 			margin: 12rpx 0;
 			height: 130rpx;
-			background-color: #303030;
+			background-color: #fff;
 			.invitaCon{
 				margin: 0 30rpx;
 				height: 100%;
@@ -565,7 +615,7 @@
 						display: flex;
 						align-items: center;
 						justify-content: center;
-						color: #fff;
+						color: #999;
 						font-size: 26rpx;
 						line-height: 26rpx;
 					}
@@ -574,13 +624,13 @@
 		}
 		.upMarket{
 			margin-top: 12rpx;
-			background-color: #303030;
 			padding: 0 36rpx;
+			background-color: #fff;
 			.marketTit{
 				height: 105rpx;
 				font-size: 30rpx;
 				line-height: 105rpx;
-				color: #FDFFFE;
+				color: #999;
 			}
 			.marketCon{
 				view{
@@ -588,20 +638,21 @@
 					display: flex;
 					justify-content: space-between;
 					align-items: center;
-					border-top: 1px solid #383838;
+					border-top: 1px solid #f7f7f7;
 					.marketImg{
 						width: 33%;
 						display: flex;
 						align-items: center;
 						justify-content: flex-start;
-						color: #fff;
+						color: #999;
+						border: none;
 						text{
-							font-size: 26rpx;
+							font-size: 28rpx;
 							line-height: 26rpx;
 							margin-left: 20rpx;
 							white-space: nowrap;
 							span{
-								font-size: 20rpx;
+								font-size: 28rpx;
 								line-height: 20rpx;
 							}
 						}
@@ -612,7 +663,7 @@
 					}
 					.money{
 						width: 33%;
-						color: #fff;
+						color: #999;
 					}
 				}
 			}

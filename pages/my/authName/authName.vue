@@ -145,9 +145,9 @@
 				input{
 					margin: 68rpx 35rpx 0;
 					height: 80rpx;
-					border: 1px solid #676869;
+					border: 1px solid #f2f2f2;
 					border-radius: 6px;
-					color: #fff;
+					color: #999;
 				}
 				input:last-child{
 					margin-top: 42rpx;
@@ -155,7 +155,7 @@
 				.dropDownCOn{
 					width: 680rpx;
 					margin: 0 auto;
-					border: 1px solid #676869;
+					border: 1px solid #f2f2f2;
 					border-radius: 6rpx;
 					position: absolute;
 					top: 96rpx;
@@ -167,7 +167,7 @@
 						margin: 0 5rpx;
 						display: flex;
 						flex-wrap: wrap;
-						color: #fff;
+						color: #999;
 						line-height: 48rpx;
 					}
 				}

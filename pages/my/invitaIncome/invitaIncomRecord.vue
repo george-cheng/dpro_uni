@@ -45,7 +45,7 @@
 			getInvitaIncomRecord(){
 				this.ajaxJson({
 					url: '/api/v1/introList',
-					data: {},
+					data: { page: this.page, pageSize: this.pageSize },
 					call: (data)=>{
 						if(data.code == 200){
 							this.pageTotal = data.data.total
@@ -72,7 +72,7 @@
 		.tractCon{
 			.enConList{
 				padding: 20rpx 30rpx 0;
-				border-top: 2px solid #303030;
+				border-top: 2px solid #f2f2f2;
 				.enList:last-child{
 					border-bottom: none;
 				}
@@ -80,7 +80,7 @@
 					display: flex;
 					justify-content: space-between;
 					flex-wrap: wrap;
-					border-bottom: 2px solid #303030;
+					border-bottom: 2px solid #f2f2f2;
 					view{
 						display: flex;
 						flex-wrap: wrap;
@@ -100,7 +100,7 @@
 							margin-top: 15rpx;
 							font-size: 24rpx;
 							line-height: 24rpx;
-							color: #fff;
+							color: #999;
 						}
 					}
 					view:nth-child(1){

@@ -144,8 +144,10 @@
 	import uniPopup from '../../components/uni-popup/uni-popup.vue'
 	import uniPopupDialog from '../../components/uni-popup/uni-popup-dialog.vue'
 	import unitabbar from '../../components/uni-tarbar/tarBar.vue'
+	import { unimixin } from '../../utils/unimixin.js'
 	export default {
 		components: { uniPopup, uniPopupDialog, unitabbar},
+		mixins: [ unimixin ],
 		data(){
 			return {
 				name: '',
@@ -299,7 +301,7 @@
 		},
 		onNavigationBarButtonTap(e) {
 			if (e.float == 'right') {
-				uni.navigateTo({
+				uni.reLaunch({
 					url: './mySetting'
 				})
 			}
@@ -313,11 +315,11 @@
 
 <style scoped lang="scss">
 .my{
-	background-color: #282828;
+	background-color: #fff;
 	.perInfo{
 		height: 170rpx;
 		padding: 0 40rpx;
-		background-color: #303030;
+		background-color: #f2f2f2;
 		display: flex;
 		.lft{
 			float: left;
@@ -329,7 +331,6 @@
 				margin-top: 30rpx;
 				width: 110rpx;
 				height: 110rpx;
-				background-color: #303030;
 				image{
 					width: 80%;
 					height: 80%;
@@ -348,17 +349,17 @@
 					display: flex;
 					flex-direction: row;
 					align-items: center;
-					color: #fff;
+					color: #999;
 				}
 				.userName{
-					color: #fff;
+					color: #999;
 					font-size: 30rpx;
 					line-height: 30rpx;
 					margin-top: 10rpx;
 				}
 				.userEdit{
 					margin-left: 10rpx;
-					color: #fff;
+					color: #999;
 					display: flex;
 					flex-wrap: nowrap;
 				}
@@ -391,8 +392,11 @@
 			}
 		}
 	}
+	.perCon>view{
+		border-bottom: 1px solid #f2f2f2;
+	}
 	.perCon{
-		background-color: #303030;
+		background-color: #fff;
 		margin-top: 12rpx;
 		view{
 			height: 112rpx;
@@ -401,19 +405,26 @@
 			justify-content: space-between;
 			margin: 0 10rpx;
 			color: #f2f2f2;
-			border-top: 1px solid #383838;
 			.conLft{
-				
+				color: #999;
 			}
 			.conRgt{
-				.conIcon{
-					color: #676869;
+				color: #999;
+				.conIcon::before{
+					color: #999;
+				}
+				.i-rgtArrow:before{
+					color: #999;
 				}
 			}
 		}
 		view:first-child{
 			border-top: none;
 		}
+	}
+	
+	.i-idAuth:before,.i-security:before,.i-invita:before,.i-tran:before,.i-order:before,.i-bussManager:before,.i-language:before,.i-about::before,.i-service::before{
+		color: #999;
 	}
 }
 </style>

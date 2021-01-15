@@ -2,8 +2,8 @@
 	<view class="noNavMainBox register">
 		<view class="registerTop">
 			<view class="loginSwitch">
-				<text :class="[isEmailActive?'textLine' : '']" @click="emailEvent">邮箱注册</text>
 				<text :class="[isPoneActive?'textLine' : '']" @click="phoneEvent">手机注册</text>
+				<text :class="[isEmailActive?'textLine' : '']" @click="emailEvent">邮箱注册</text>
 			</view>
 			<view class="loginArea">
 				<view class="areaSwitch" @click="switchAreaEvent">
@@ -127,10 +127,10 @@
 	export default {
 		data(){
 			return{
-				isEmail: true,
-				isPhone: false,
-				isEmailActive: true,
-				isPoneActive: false,
+				isEmail: false,
+				isPhone: true,
+				isEmailActive: false,
+				isPoneActive: true,
 				isAreaList: false,
 				areaName: '中国',
 				areaList: [],
@@ -488,7 +488,7 @@
 </script>
 <style scoped lang="scss">
 	.pwdTip{
-		color: #fff;
+		color: #B8393C;
 		font-size: 22rpx;
 		margin: 0 80rpx;
 	}
@@ -498,7 +498,7 @@
 			margin: 0 78rpx;
 			display: flex;
 			text{
-				color: #fff;
+				color: #999;
 				font-size: 28rpx;
 				line-height: 28rpx;
 			}
@@ -516,7 +516,7 @@
 				position: absolute;
 				bottom: -15rpx;
 				left: 0;
-				background-color: #fff;
+				background-color: #B8393C;
 			}
 		}
 		 .regBox{
@@ -528,9 +528,9 @@
 						margin: 34rpx auto 0;
 						width: 584rpx;
 						height: 80rpx;
-						border: 1px solid #676869;
+						border: 1px solid #F2F2F2;
 						border-radius: 6px;
-						color: #fff;
+						color: #999;
 					}
 					input:last-child{
 						margin-top: 42rpx;
@@ -542,12 +542,12 @@
 							width: 120rpx;
 							height: 80rpx;
 							margin: 34rpx 25rpx 20rpx 80rpx;
-							border: 1px solid #676869;
+							border: 1px solid #F2F2F2;
 							border-radius: 6px;
 							display: flex;
 							align-items: center;
 							justify-content: center;
-							color: #fff;
+							color: #999;
 						}
 						.preIpt{
 							width: 110rpx;

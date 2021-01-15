@@ -1,32 +1,45 @@
-
 var myChart;
 
 // post请求封装
-// function post(url,data) {
-// 	let baseUrl='http://192.168.3.135:8080';
-// 	return new Promise((resolve,reject)=>{
-// 		axios({
-// 			headers:{
-// 				"Content-Type": "application/x-www-form-urlencoded",
-// 			},
-// 			method:'post',
-// 			url:baseUrl+url,
-// 			data:Qs.stringify( data || {})
-// 		})
-// 		.then(res=>{
-// 			console.log(res)
-// 			if(res.data.code==1){
-// 				resolve(res.data)
-// 			}else{
-// 				reject()
-// 				alertError('请求超时')
-// 			}
-// 		})
-// 		.catch(err=>{
-// 			alertError('请求超时')
-// 		})
-// 	})
-// }
+function ajaxJson(url,data) {
+	BASE_URL = ''
+	BASE_URL='http://localhost:8080';
+	// #ifndef H5
+	BASE_URL = 'https://www.dpro.ltd'
+	// #endif
+	return new Promise((resolve,reject)=>{
+		axios({
+			headers:{
+				"Content-Type": "application/x-www-form-urlencoded",
+			},
+			method:'get',
+			url:BASE_URL+url + '?' + Qs.stringify( data || {}),
+		}).then(res=>{
+			if(res.status == 200){
+				resolve(res.data)
+			}else{
+				reject()
+				alertError('请求超时')
+			}
+		})
+		.catch(err=>{
+			alertError('请求超时')
+		})
+	})
+}
+
+function getLocalTime(time) {
+	var now = new Date(time*1000);
+	var year = now.getFullYear();
+	var month = (now.getMonth() + 1) .toString().padStart(2 ,0);
+	var date = now.getDate().toString().padStart(2 ,0);
+	var hour = now.getHours().toString().padStart(2 ,0);
+	var minute = now.getMinutes().toString().padStart(2 ,0);
+	var second = now.getSeconds().toString().padStart(2 ,0);
+	
+	return year+"-"+month+"-"+date+" "+hour+":"+minute+":"+second;
+}
+
 // 弹窗
 function alertError(title) {
 	document.addEventListener('plusready',function() {
@@ -42,6 +55,50 @@ function alertError(title) {
 		//TODO handle the exception
 	}
 }
+
+// var txData={
+// 		// 最新成交价
+// 		"lastPrice": 8.944,
+// 		// 涨幅
+// 		"upRate": "-79.67%",
+// 		"cnyRate": 11,
+// 		// 1涨绿 2跌红
+// 		"upFlag": "2",
+// 		// 24小时交易量
+// 		"volume": 3,
+// 		// 24小时最高价
+// 		"high": 11.922,
+// 		// 24小时最低价
+// 		"low": 8.944
+// }
+
+/* var depthList=function(){
+	let obj={
+		buyList:[],
+		sellList:[]
+	};
+	for(let i=0;i<20;i++){
+		obj.buyList.push({
+			"price": 0.988,
+			"amount": 12,
+			'width':sum(1,100)
+		})
+		obj.sellList.push({
+			"price": 0.252,
+			"amount": 15,
+			'width':sum(1,100)
+		})
+	}
+	return obj;
+}
+ */
+
+// 获取指定区间随机数
+function sum (m,n){
+	var num = Math.floor(Math.random()*(m - n) + n);
+	return num;
+}
+
 var app = new Vue({
 	el:'#app',
 	data:{
@@ -50,14 +107,13 @@ var app = new Vue({
 		MA30:'',
 		volMA5:'',
 		volMA10:'',
+		symbol:'',
 		current:1,
 		tabs:[
-			{'label':'1分钟','value':1},
-			{'label':'15分钟','value':2},
-			{'label':'30分钟','value':3},
-			{'label':'1小时','value':4},
-			{'label':'4小时','value':5},
-			{'label':'1天','value':6},
+			{'label':'15分钟','value':1},
+			{'label':'30分钟','value':2},
+			{'label':'1小时','value':3},
+			{'label':'4小时','value':4},
 		],
 		category:1,
 		categoryList:[
@@ -67,50 +123,71 @@ var app = new Vue({
 		],
 		txData:{},//交易数据统计
 		buyList:[],
-		sellList:[],
+		entrustSellList:[],
 		dealHis:[],
 		tokenInfo:{},
 		page:1,
 		
+		
+		data: '',
+		dates: '',
+		volumes: '',
+		
+		socket: '',
+		cnyRate: '',
+		coinSellType: '',
+		coinTradeType: '',
 	},
-	created() {
-		this.getTxData()
-		this.getDepth()
-	},
-	mounted() {
-		myChart = echarts.init(document.getElementById('main'));
-		this.draw()
-		this.getKline()
-	},
+
 	methods:{
-		// 返回上一页
-		back(){
-			uni.navigateBack()
+		buyEvent(){
+			uni.reLaunch({
+				url: '/pages/transac/transacMain?choiceOn=0' + '&symbol=' + this.symbol + '&sacOn=0'+'&coinSellType=' + this.coinSellType+'&coinBuyType=' + this.coinTradeType,
+				success: () => {}
+			})
+		},
+		sellEvent(){
+			uni.reLaunch({
+				url: '/pages/transac/transacMain?choiceOn=0' + '&symbol=' + this.symbol + '&sacOn=1' +'&coinSellType=' + this.coinSellType+'&coinBuyType=' + this.coinTradeType,
+				success: () => {}
+			})
 		},
 		// 获取24小时交易数据统计
-		getTxData(){
-			this.txData=txData;
-		},
+		// getTxData(){
+		// 	this.txData=txData;
+		// },
 		// 获取k线数据,生成k线
+		getTokenInfo(){
+			ajaxJson('/api/v2/market/coins').then((res)=>{
+				let tokenInfo = res.dataMap.USDT
+				for(let i in tokenInfo){
+					if(tokenInfo[i].fid == this.symbol){
+						this.tokenInfo =  tokenInfo[i]
+						this.coinSellType = tokenInfo[i].coinSellType
+						this.coinTradeType = tokenInfo[i].coinTradeType
+					}
+				}
+			})
+		},
 		getKline(){
-			var dataMA5 = this.calculateMA(5, data);
-			var dataMA10 = this.calculateMA(10, data);
-			var dataMA30 = this.calculateMA(30, data);
-			var volumeMA5 = this.calculateMA(5, volumes);
-			var volumeMA10 = this.calculateMA(10, volumes);
+			var dataMA5 = this.calculateMA(5, this.data);
+			var dataMA10 = this.calculateMA(10, this.data);
+			var dataMA30 = this.calculateMA(30, this.data);
+			var volumeMA5 = this.calculateMA(5, this.volumes);
+			var volumeMA10 = this.calculateMA(10, this.volumes);
 			myChart.setOption({
 				xAxis: [
 					{
-						data: dates
+						data: this.dates
 					},
 					{
-						data: dates
+						data: this.dates
 					},
 				],
 				series: [
 					{
 						name: '日K',
-						data: data
+						data: this.data
 					},
 					{
 						name: 'MA5',
@@ -126,7 +203,7 @@ var app = new Vue({
 					},
 					{
 						name: 'Volume',
-						data: volumes
+						data: this.volumes
 					},
 					{
 						name: 'VolumeMA5',
@@ -156,35 +233,67 @@ var app = new Vue({
 			return list;
 		},
 		// 获取深度数据
-		getDepth(){
+		/* getDepth(){
 			this.buyList=this.addItem(depthList().buyList || []);
 			this.sellList=this.addItem(depthList().sellList || []);
-		},
+		}, */
 		// 获取成交记录
-		getDealHis(){
-			this.dealHis=dealHis();
-		},
+		// getDealHis(){
+		// 	this.dealHis=dealHis();
+		// },
 		// 获取项目简介信息
-		getTokenInfo(){
-			this.tokenInfo=tokenInfo;
-		},
+		// getTokenInfo(){
+		// 	this.tokenInfo=tokenInfo;
+		// },
 		
 		// 切换tab
 		switchTab(val){
 			if(this.current==val) return;
 			this.current=val;
+			this.getKlineData()
 			this.getKline()
+		},
+		/* 获取K线图数据 */
+		getKlineData(){
+			let params = {}
+			switch(this.current){
+				case 1:
+					params = { symbol: this.symbol, step: '300' };
+					break;
+				case 2:
+					params = { symbol: this.symbol, step: 30*60 };
+					break;
+				case 3:
+					params = { symbol: this.symbol, step: 60*60 };
+					break;
+				case 4:
+					params = { symbol: this.symbol, step: 4*60*60 };
+			}
+
+			ajaxJson('/api/v2/market/period', params).then((res)=>{
+				this.dates = res.map((res)=>{
+					return getLocalTime(res[0])
+				})
+				this.data = res.map((res)=>{
+					return [+res[3], +res[4], +res[5], +res[6], +res[7]]
+				})
+				this.volumes = res.map((res, index)=>{
+					return [index, res[7], res[3] > res[4] ? 1 : -1]
+				})
+				this.draw()
+				this.getKline()
+			})
 		},
 		// 切换类目
 		switchCategory(val){
 			if(this.category==val) return;
 			this.category=val;
 			if(this.category==1){
-				this.getDepth()
+				// this.getDepth()
 			}else if(this.category==2){
-				this.getDealHis()
+				// this.getDealHis()
 			}else{
-				this.getTokenInfo()
+				// this.getTokenInfo()
 			}
 		},
 		// 截取数字字符串 保留precision小数
@@ -227,18 +336,19 @@ var app = new Vue({
 					show: false
 				},
 				visualMap: {
-				            show: false,
-				            seriesIndex: 4,
-				            dimension: 2,
-				            pieces: [{
-				                value: 1,
-				                color: downColor
-				            }, {
-				                value: -1,
-				                color: upColor
-				            }]
-				        },
-				grid: [{
+					show: false,
+					seriesIndex: 4,
+					dimension: 2,
+					pieces: [{
+							value: 1,
+							color: downColor
+					}, {
+							value: -1,
+							color: upColor
+					}]
+				},
+				grid: [
+					{
 						top: '5%',
 						left: 20,
 						right: 20,
@@ -327,50 +437,52 @@ var app = new Vue({
 					max: 'dataMax', //坐标轴刻度最大值。可以设置成特殊值 'dataMax'，此时取数据在该轴上的最大值作为最大刻度。
 					// axisPointer: { show: true, type: 'none', label: { show: false }},
 				}],
-				yAxis: [{
-					type: 'value', //坐标轴类型。(value:数值轴，适用于连续数据。,category:类目轴，适用于离散的类目数据,time: 时间轴，适用于连续的时序数据,log:对数轴。适用于对数数据)
-					position: 'right', //y 轴的位置。'left','right'
-					scale: true, //是否是脱离 0 值比例。设置成 true 后坐标刻度不会强制包含零刻度。在双数值轴的散点图中比较有用。(在设置 min 和 max 之后该配置项无效。)
-					axisLine: {
-						show: true
-					}, //坐标轴轴线相关设置。
-					axisTick: {
-						show: true,
-						inside:true
-					}, //坐标轴刻度相关设置。
-					axisLabel: { //坐标轴刻度标签的相关设置。
-						show: true,
-						color: 'rgba(99, 117, 139, 1.0)',
-						inside: true,
-						fontSize: 10,
-						formatter: function(value) {
-							return Number(value).toFixed(2)
+				yAxis: [
+					{
+						type: 'value', //坐标轴类型。(value:数值轴，适用于连续数据。,category:类目轴，适用于离散的类目数据,time: 时间轴，适用于连续的时序数据,log:对数轴。适用于对数数据)
+						position: 'right', //y 轴的位置。'left','right'
+						scale: true, //是否是脱离 0 值比例。设置成 true 后坐标刻度不会强制包含零刻度。在双数值轴的散点图中比较有用。(在设置 min 和 max 之后该配置项无效。)
+						axisLine: {
+							show: true
+						}, //坐标轴轴线相关设置。
+						axisTick: {
+							show: true,
+							inside:true
+						}, //坐标轴刻度相关设置。
+						axisLabel: { //坐标轴刻度标签的相关设置。
+							show: true,
+							color: 'rgba(99, 117, 139, 1.0)',
+							inside: true,
+							fontSize: 10,
+							formatter: function(value) {
+								return Number(value).toFixed(2)
+							}
+						},
+						splitLine: {
+							show: false,
+							lineStyle: {
+								color: 'rgba(255,255,255, 0.1)'
+							}
+						}, //坐标轴在 grid 区域中的分隔线。
+					}, {
+						type: 'value',
+						position: 'right',
+						scale: true,
+						gridIndex: 1,
+						axisLine: {
+							show: false
+						},
+						axisTick: {
+							show: false
+						},
+						axisLabel: {
+							show: false
+						},
+						splitLine: {
+							show: false
 						}
 					},
-					splitLine: {
-						show: false,
-						lineStyle: {
-							color: 'rgba(255,255,255, 0.1)'
-						}
-					}, //坐标轴在 grid 区域中的分隔线。
-				}, {
-					type: 'value',
-					position: 'right',
-					scale: true,
-					gridIndex: 1,
-					axisLine: {
-						show: false
-					},
-					axisTick: {
-						show: false
-					},
-					axisLabel: {
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-				}],
+				],
 			
 				animation: false, //是否开启动画。
 				color: colorList,
@@ -467,13 +579,14 @@ var app = new Vue({
 					}
 				},
 			
-				dataZoom: [{ //用于区域缩放
-					type: 'inside',
-					xAxisIndex: [0, 1],
-					realtime: false,
-					start: 50,
-					end: 100,
-				}
+				dataZoom: [
+					{ //用于区域缩放
+						type: 'inside',
+						xAxisIndex: [0, 1],
+						realtime: false,
+						start: 95,
+						end: 100,
+					}
 				],
 				series: [
 					{
@@ -573,7 +686,7 @@ var app = new Vue({
 						},
 				]
 			};
-			myChart.setOption(option);
+			myChart.setOption(option, true);
 			// 加载上一页数据
 			myChart.on('datazoom',function(params){
 				let num=params.batch[0]['start'];
@@ -582,6 +695,139 @@ var app = new Vue({
 				}
 			})
 			window.addEventListener('resize', () => { myChart.resize()})
-		}
-	}
+		},
+		getExRate(){
+			document.addEventListener('plusready', ()=>{  
+				var exRage = plus.storage.getItem('rate')
+				this.cnyRate = parseFloat(JSON.parse(exRage).data.rate)
+			})
+		},
+		getInitSocket(){
+			let url = 'wss://www.dpro.ltd/socket.io/?deep=4&token=dev&symbol=' + this.symbol + '&EIO=3&transport=websocket'
+			this.socket = new WebSocket(url)
+			this.socket.onopen = this.sockOpen
+			this.socket.onerror = this.sockError
+			this.socket.onmessage = this.sockGetMessage
+		},
+		sockOpen(){
+			this.send('40/trade');
+		},
+		send(Data){
+			this.socket.send(Data);
+		},
+		sockGetMessage(res){
+			let data = res.data.replace("42/trade,","")
+			if(data.indexOf('real') !== -1) {
+				let last = JSON.parse( JSON.parse(data)[1]).last
+				let fupanddown = JSON.parse( JSON.parse(data)[1]).fupanddown
+				let vol = JSON.parse( JSON.parse(data)[1]).vol
+				let high = JSON.parse( JSON.parse(data)[1]).high
+				let low = JSON.parse( JSON.parse(data)[1]).low
+				
+				this.txData = {
+					// 最新成交价
+					"lastPrice": last,
+					"cnyRate": this.cnyRate,
+					// 涨幅
+					"upRate": (fupanddown * 100 ).toFixed(2) + '%',
+					// 1涨绿 2跌红
+					"upFlag": "1",
+					// 24小时交易量
+					"volume": vol,
+					// 24小时最高价
+					"high": high,
+					// 24小时最低价
+					"low": low
+				}
+			}else if(data.indexOf('entrust-buy') !== -1){
+				let obj = []
+				let entrustBuy = data.replace('["entrust-buy","[','').replace(']"]','')
+				let json =  entrustBuy.split('],[')
+				for(let i in json){
+					obj.push(json[i].replace('[','').replace(']',''))
+				}
+				let entrustBuyList = []
+				for(let i of obj){
+					entrustBuyList.push({price: i.split(',')[0] , amount: i.split(',')[1]})
+				}
+				
+				let buyMaxArr = []
+				let lineBuyArr = []
+				for(let i in entrustBuyList){
+					buyMaxArr.push(entrustBuyList[i].amount)
+				}
+				let buyMax = Math.max(...buyMaxArr)
+				for(let i in buyMaxArr){
+					lineBuyArr.push({width: parseInt( (buyMaxArr[i] / buyMax) * 100 )})
+				}
+				this.buyList = entrustBuyList.map((o,i) => { return {...o,...lineBuyArr[i]}})
+				
+				
+			}else if(data.indexOf('entrust-sell') !== -1){
+				let obj = []
+				let entrustSell = data.replace('["entrust-sell","[','').replace(']"]','')
+				let json =  entrustSell.split('],[')
+				for(let i in json){
+					obj.push(json[i].replace('[','').replace(']',''))
+				}
+				let entrustSellList= []
+				for(let i of obj){
+					entrustSellList.push({price: i.split(',')[0] , amount: i.split(',')[1]})
+				}
+				
+				let sellMaxArr = []
+				let lineSellArr = []
+				for(let i in entrustSellList){
+					if( i < 10){
+						sellMaxArr.push(entrustSellList[i].amount)
+					}
+				}
+				let sellMax = Math.max(...sellMaxArr)
+				
+				for(let i in sellMaxArr){
+					lineSellArr.push({width: parseInt( (sellMaxArr[i] / sellMax) * 100 )})
+				}
+
+				this.entrustSellList = entrustSellList.map((o,i) => { return {...o,...lineSellArr[i]}})
+
+				if(this.entrustSellList.length >= 10){
+					this.entrustSellList = this.entrustSellList.slice(0, 10)
+				}else{
+					this.entrustSellList = this.entrustSellList.slice(0,this.entrustSellList.length-1)
+				}
+			}else if(data.indexOf('entrust-log') !== -1){
+				let entrustLog = data.replace('["entrust-log","[','').replace(']"]','')
+				let json =  entrustLog.split('],[')
+				let obj = []
+				for(let i in json){
+					obj.push(json[i].replace('[','').replace(']',''))
+				}
+				this.dealHis = []
+				for(let i in obj){
+					this.dealHis.push({price: obj[i].split(',')[0], amount: obj[i].split(',')[1], date: (obj[i].split(',')[2]).replace(/\\"/g, ''), takerFlag: obj[i].split(',')[3]})
+				}
+			}
+		},
+		
+	},
+	computed: {
+	  sellList() {
+	    return this.entrustSellList.reverse();
+	  },
+	},
+	mounted() {
+		myChart = echarts.init(document.getElementById('main'));
+		this.draw()
+		this.getKline()
+		this.getExRate()
+	},
+	created() {
+		// this.getTxData()
+		// this.getDepth()
+		let reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+		this.symbol = window.location.search.substr(1).replace('symbol=', '');
+		this.getKlineData()
+		this.getInitSocket()
+		this.getTokenInfo()
+	},
 })

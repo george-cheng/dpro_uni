@@ -72,7 +72,7 @@ function alertError(title) {
 // 		"low": 8.944
 // }
 
-var depthList=function(){
+/* var depthList=function(){
 	let obj={
 		buyList:[],
 		sellList:[]
@@ -91,7 +91,7 @@ var depthList=function(){
 	}
 	return obj;
 }
-
+ */
 
 // 获取指定区间随机数
 function sum (m,n){
@@ -123,7 +123,7 @@ var app = new Vue({
 		],
 		txData:{},//交易数据统计
 		buyList:[],
-		sellList:[],
+		entrustSellList:[],
 		dealHis:[],
 		tokenInfo:{},
 		page:1,
@@ -135,18 +135,20 @@ var app = new Vue({
 		
 		socket: '',
 		cnyRate: '',
+		coinSellType: '',
+		coinTradeType: '',
 	},
 
 	methods:{
 		buyEvent(){
 			uni.reLaunch({
-				url: '/pages/transac/transacMain?choiceOn=0' + '&symbol=' + this.symbol,
+				url: '/pages/transac/transacMain?choiceOn=0' + '&symbol=' + this.symbol + '&sacOn=0'+'&coinSellType=' + this.coinSellType+'&coinBuyType=' + this.coinTradeType,
 				success: () => {}
 			})
 		},
 		sellEvent(){
 			uni.reLaunch({
-				url: '',
+				url: '/pages/transac/transacMain?choiceOn=0' + '&symbol=' + this.symbol + '&sacOn=1' +'&coinSellType=' + this.coinSellType+'&coinBuyType=' + this.coinTradeType,
 				success: () => {}
 			})
 		},
@@ -155,6 +157,18 @@ var app = new Vue({
 		// 	this.txData=txData;
 		// },
 		// 获取k线数据,生成k线
+		getTokenInfo(){
+			ajaxJson('/api/v2/market/coins').then((res)=>{
+				let tokenInfo = res.dataMap.USDT
+				for(let i in tokenInfo){
+					if(tokenInfo[i].fid == this.symbol){
+						this.tokenInfo =  tokenInfo[i]
+						this.coinSellType = tokenInfo[i].coinSellType
+						this.coinTradeType = tokenInfo[i].coinTradeType
+					}
+				}
+			})
+		},
 		getKline(){
 			var dataMA5 = this.calculateMA(5, this.data);
 			var dataMA10 = this.calculateMA(10, this.data);
@@ -219,19 +233,18 @@ var app = new Vue({
 			return list;
 		},
 		// 获取深度数据
-		getDepth(){
+		/* getDepth(){
 			this.buyList=this.addItem(depthList().buyList || []);
 			this.sellList=this.addItem(depthList().sellList || []);
-			console.log(this.buyList)
-		},
+		}, */
 		// 获取成交记录
-		getDealHis(){
-			this.dealHis=dealHis();
-		},
+		// getDealHis(){
+		// 	this.dealHis=dealHis();
+		// },
 		// 获取项目简介信息
-		getTokenInfo(){
-			this.tokenInfo=tokenInfo;
-		},
+		// getTokenInfo(){
+		// 	this.tokenInfo=tokenInfo;
+		// },
 		
 		// 切换tab
 		switchTab(val){
@@ -276,11 +289,11 @@ var app = new Vue({
 			if(this.category==val) return;
 			this.category=val;
 			if(this.category==1){
-				this.getDepth()
+				// this.getDepth()
 			}else if(this.category==2){
-				this.getDealHis()
+				// this.getDealHis()
 			}else{
-				this.getTokenInfo()
+				// this.getTokenInfo()
 			}
 		},
 		// 截取数字字符串 保留precision小数
@@ -690,7 +703,6 @@ var app = new Vue({
 			})
 		},
 		getInitSocket(){
-			console.log(this.symbol)
 			let url = 'wss://www.dpro.ltd/socket.io/?deep=4&token=dev&symbol=' + this.symbol + '&EIO=3&transport=websocket'
 			this.socket = new WebSocket(url)
 			this.socket.onopen = this.sockOpen
@@ -698,7 +710,6 @@ var app = new Vue({
 			this.socket.onmessage = this.sockGetMessage
 		},
 		sockOpen(){
-			console.log('连接成功')
 			this.send('40/trade');
 		},
 		send(Data){
@@ -728,9 +739,81 @@ var app = new Vue({
 					// 24小时最低价
 					"low": low
 				}
+			}else if(data.indexOf('entrust-buy') !== -1){
+				let obj = []
+				let entrustBuy = data.replace('["entrust-buy","[','').replace(']"]','')
+				let json =  entrustBuy.split('],[')
+				for(let i in json){
+					obj.push(json[i].replace('[','').replace(']',''))
+				}
+				let entrustBuyList = []
+				for(let i of obj){
+					entrustBuyList.push({price: i.split(',')[0] , amount: i.split(',')[1]})
+				}
+				
+				let buyMaxArr = []
+				let lineBuyArr = []
+				for(let i in entrustBuyList){
+					buyMaxArr.push(entrustBuyList[i].amount)
+				}
+				let buyMax = Math.max(...buyMaxArr)
+				for(let i in buyMaxArr){
+					lineBuyArr.push({width: parseInt( (buyMaxArr[i] / buyMax) * 100 )})
+				}
+				this.buyList = entrustBuyList.map((o,i) => { return {...o,...lineBuyArr[i]}})
+				
+				
+			}else if(data.indexOf('entrust-sell') !== -1){
+				let obj = []
+				let entrustSell = data.replace('["entrust-sell","[','').replace(']"]','')
+				let json =  entrustSell.split('],[')
+				for(let i in json){
+					obj.push(json[i].replace('[','').replace(']',''))
+				}
+				let entrustSellList= []
+				for(let i of obj){
+					entrustSellList.push({price: i.split(',')[0] , amount: i.split(',')[1]})
+				}
+				
+				let sellMaxArr = []
+				let lineSellArr = []
+				for(let i in entrustSellList){
+					if( i < 10){
+						sellMaxArr.push(entrustSellList[i].amount)
+					}
+				}
+				let sellMax = Math.max(...sellMaxArr)
+				
+				for(let i in sellMaxArr){
+					lineSellArr.push({width: parseInt( (sellMaxArr[i] / sellMax) * 100 )})
+				}
+
+				this.entrustSellList = entrustSellList.map((o,i) => { return {...o,...lineSellArr[i]}})
+
+				if(this.entrustSellList.length >= 10){
+					this.entrustSellList = this.entrustSellList.slice(0, 10)
+				}else{
+					this.entrustSellList = this.entrustSellList.slice(0,this.entrustSellList.length-1)
+				}
+			}else if(data.indexOf('entrust-log') !== -1){
+				let entrustLog = data.replace('["entrust-log","[','').replace(']"]','')
+				let json =  entrustLog.split('],[')
+				let obj = []
+				for(let i in json){
+					obj.push(json[i].replace('[','').replace(']',''))
+				}
+				this.dealHis = []
+				for(let i in obj){
+					this.dealHis.push({price: obj[i].split(',')[0], amount: obj[i].split(',')[1], date: (obj[i].split(',')[2]).replace(/\\"/g, ''), takerFlag: obj[i].split(',')[3]})
+				}
 			}
 		},
 		
+	},
+	computed: {
+	  sellList() {
+	    return this.entrustSellList.reverse();
+	  },
 	},
 	mounted() {
 		myChart = echarts.init(document.getElementById('main'));
@@ -740,10 +823,11 @@ var app = new Vue({
 	},
 	created() {
 		// this.getTxData()
-		this.getDepth()
+		// this.getDepth()
 		let reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
 		this.symbol = window.location.search.substr(1).replace('symbol=', '');
 		this.getKlineData()
 		this.getInitSocket()
+		this.getTokenInfo()
 	},
 })

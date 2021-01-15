@@ -3,12 +3,12 @@
 		<view class="tractCon">
 			<view class="enConList">
 				<view class="enList" v-for="(item, index) in historyOrderList" :key="index">
+					<view><text>币种类型</text><text>{{item.sellName}}</text></view>
 					<view><text>委托时间</text><text>{{getLocalTime(item.time)}}</text></view>
 					<view><text>类型</text><text>{{item.type == 0 ? '买入' : '卖出'}}</text></view>
 					<view><text>委托价格</text><text>{{item.price}}</text></view>
 					<view><text>委托数量</text><text>{{item.count}}</text></view>
 					<view><text>成交额</text><text>{{item.amount}}</text></view>
-					<view><text>手续费</text><text>{{item.fee}}</text></view>
 					<view class="state">
 						<text>状态</text>
 						<text v-if="item.status == 1">未成交</text>

@@ -10,6 +10,7 @@
 			return{
 				symbol: '',
 				url: "",
+				category: "",
 				cnyRate: '',
 			}
 		},
@@ -23,8 +24,10 @@
 				let url = ''
 				if(this.category == 0){
 					url = '/pages/quotation/quotation'
-				}else{
+				}else if(this.category == 1){
 					url = '/pages/transac/transacMain?choiceOn=0'
+				}else if(this.category == 2){
+					url = '/pages/index/index'
 				}
 				uni.reLaunch({
 					url: url,

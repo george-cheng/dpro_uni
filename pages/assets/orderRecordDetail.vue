@@ -71,7 +71,7 @@
 				flex-direction: column;
 				.lftTop{
 					font-size: 28rpx;
-					color: #fff;
+					color: #999;
 				}
 				.lftInfo{
 					margin-top: 20rpx;
@@ -83,7 +83,7 @@
 		.fotcOrder{
 			margin-top: 45rpx;
 			padding: 0 34rpx;
-			background-color: #303030;
+			background-color: #fff;
 			view{
 				display: flex;
 				justify-content: space-between;
@@ -96,7 +96,7 @@
 					font-size: 26rpx;
 				}
 				.foctRgt{
-					color: #fff;
+					color: #999;
 					font-size: 28rpx;
 				}
 			}

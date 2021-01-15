@@ -1,6 +1,6 @@
 <template>
 	<view class="uni-popup-share">
-		<view class="uni-share-title"><text class="uni-share-title-text" style="color: #fff;">{{title}}</text></view>
+		<view class="uni-share-title"><text class="uni-share-title-text">{{title}}</text></view>
 		<view class="uni-share-content">
 			<view class="uni-share-content-box">
 					<!-- <image class="uni-share-image" :src="item.icon" mode="aspectFill"></image>

@@ -84,9 +84,11 @@
 
 <style scoped lang="scss">
 	.payMethod{
-		background-color: #282828;
+		.perCon>view{
+			border-top: 1px solid #F2F2F2;
+		}
 		.perCon{
-			background-color: #303030;
+			background-color: #fff;
 			margin-top: 12rpx;
 			view{
 				height: 112rpx;
@@ -95,16 +97,26 @@
 				justify-content: space-between;
 				margin: 0 10rpx;
 				color: #fff;
-				border-top: 1px solid #383838;
 				.conRgt{
 					.conIcon{
-						color: #676869;
+						color: #999;
+					}
+				.rgtInfo{
+					color: #999;
+				}
+				}
+				.conLft{
+					.lftTit{
+						color: #999;
 					}
 				}
 			}
 			view:first-child{
 				border-top: none;
 			}
+		}
+		.i-zfb:before,.i-wx:before{
+			color: #999;
 		}
 	}
 </style>
