@@ -116,13 +116,13 @@
 						text:nth-of-type(1){
 							font-size: 26rpx;
 							line-height: 26rpx;
-							color: #676869;
+							color: $c6;
 						}
 						text:nth-of-type(2){
 							margin-top: 20rpx;
 							font-size: 24rpx;
 							line-height: 24rpx;
-							color: #999;
+							color: $c3;
 						}
 					}
 					view:nth-child(1){

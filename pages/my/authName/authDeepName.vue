@@ -27,14 +27,16 @@
 		
 		
 		<view class="loginBtn">
-			<button @click="authNameDeepEvent" type="default">完成</button>
+			<button @click="isClick && authNameDeepEvent()" type="default">完成</button>
 		</view>
 		
 	</view>
 </template>
 
 <script>
+	import { unimixin } from '../../../utils/unimixin.js'
 	export default {
+		mixins: [ unimixin ],
 		data(){
 			return{
 				upLoadPosImgFile: {},
@@ -59,17 +61,22 @@
 		},
 		methods: {
 			authNameDeepEvent(){
+				this.isClick = false
+				
 				if(!this.isUpload1){
+					this.isClick = true
 					uni.showToast({
 						image: '../../../static/images/wrong.png',
 						title: '请上传身份证正面'
 					})
 				}else if(!this.isUpload2){
+					this.isClick = true
 					uni.showToast({
 						image: '../../../static/images/wrong.png',
 						title: '请上传身份证反面'
 					})
 				}else if(!this.isUpload3){
+					this.isClick = true
 					uni.showToast({
 						image: '../../../static/images/wrong.png',
 						title: '请上传个人签字'
@@ -85,6 +92,7 @@
 						method: 'POST',
 						data: params,
 						call: (data)=>{
+							this.isClick = true
 							if(data.code == 200){
 								uni.showToast({
 									title: data.msg,
@@ -209,7 +217,7 @@
 			padding: 30rpx 40rpx;
 			background-color: #fff;
 			font-size: 24rpx;
-			color: #676869;
+			color: $c3;
 		}
 		.upIdImg{
 			margin: 20rpx 35rpx;
@@ -224,7 +232,7 @@
 					display: flex;
 					justify-content: center;
 					align-items: center;
-					color: #999;
+					color:$c3;
 					image{
 						width: 100%;
 						height: 100%;
@@ -232,7 +240,7 @@
 				}
 				text{
 					margin-top: 20rpx;
-					color: #999;
+					color: $c3;
 					display: flex;
 					justify-content: center;
 				}
@@ -250,7 +258,7 @@
 			}
 			text{
 				margin-top: 20rpx;
-				color: #999;
+				color: $c3;
 				display: flex;
 				justify-content: center;
 				font-size: 24rpx;

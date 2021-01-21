@@ -23,7 +23,7 @@
 					<button @click="getMeg">{{verTxt}}</button>
 				</view>
 			</view>
-			<view class="btnBox" @click="resetPassowrdEvent">
+			<view class="btnBox" @click="isClick && resetPassowrdEvent()">
 				<button type="default">确认</button>
 			</view>
 		</view>
@@ -32,7 +32,9 @@
 
 <script>
 	import { checkPwd } from '../../../utils/common.js'
+	import { unimixin } from '../../../utils/unimixin.js'
 	export default {
+		mixins: [ unimixin ],
 		data(){
 			return{
 				name: '',
@@ -63,6 +65,7 @@
 		},
 		methods: {
 			resetPassowrdEvent(){
+				this.isClick = false
 				this.validator()
 				if(this.isValidator){
 					let params = {
@@ -76,6 +79,7 @@
 						method: 'POST',
 						data: params,
 						call: (data)=>{
+							this.isClick = true
 							if(data.code == 200){
 								this.odlPassword = ''
 								this.password = ''
@@ -281,7 +285,7 @@
 		}
 	}
 	.pwdTip{
-		color: #fff;
+		color: #B8393C;
 		font-size: 22rpx;
 		margin: 0 80rpx;
 	}

@@ -94,7 +94,7 @@
 			</view>
 		</view>
 		
-		<view class="confirmPay" @click="confirmPayEvent(confirmTxt)" v-if="isConfirmBtn">
+		<view class="confirmPay" @click="isClick && confirmPayEvent(confirmTxt)" v-if="isConfirmBtn">
 			<button type="default">  {{confirmTxt}} </button>
 		</view>
 		 <!-- v-if="isConOrder && isOrderType" -->
@@ -206,6 +206,7 @@
 			},
 			/* 确认付款 */
 			confirmPayEvent(confirmTxt){
+				this.isClick = false
 				let params = {
 					order_id: this.orderId
 				}
@@ -215,6 +216,7 @@
 						data: params,
 						method: 'POST',
 						call: (data)=>{
+							this.isClick = true
 							if(data.code == 200){
 								uni.showToast({
 									title: data.msg,
@@ -242,6 +244,7 @@
 						method: 'POST',
 						data: params,
 						call: (data)=>{
+							this.isClick = true
 							if(data.code == 200){
 								this.isConPay = true
 								this.isConOrder = false
@@ -469,7 +472,7 @@
 				display: flex;
 				flex-direction: column;
 				text:nth-of-type(1){
-					color: #999;
+					color: $c3;
 					font-size: 28rpx;
 				}
 				text:nth-of-type(2){
@@ -484,7 +487,7 @@
 			display: flex;
 			justify-content: space-between;
 			.orderDetailState{
-				color: #999;
+				color: $c3;
 				font-size: 28rpx;
 			}
 			.orderDetailMoney{

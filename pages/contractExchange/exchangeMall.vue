@@ -5,6 +5,30 @@
 				<image :src="url + item.image_url"></image>
 			</swiper-item>
 		</swiper>
+		<view class="switchBtn">
+			<view class="" :class="{'platformArea': switchOn != 1}" @click="platformAreaEvent()">平台区</view>
+			<view class="" :class="{'bussArea': switchOn == 1}" @click="bussAreaEvent()">商家区</view>
+		</view>
+		<view class="operaArea">
+			<view class="searchArea">
+				<view class="searchIcon i-search"></view>
+				<input type="text" v-model="search" placeholder="IPFS服务器">
+			</view>
+			<view class="add i-about" @click="addGoodEvent()" v-if="isAdd"></view>
+		</view>
+		<view class="goodsList">
+			<view v-for="(item, index) in goodList" :key="index" @click="goodListDetailEvent(item)">
+				<view class="lftImg">
+					<image :src="url + item.desc_diagram" mode="aspectFit"></image>
+				</view>
+				<view class="rgtInfo">
+					<view class="infoName">{{item.name}}</view>
+					<view class="infoRemarks">{{item.remarks}}</view>
+					<view class="infoMoney">{{item.price}} USDT</view>
+					<view class="infoBtn">兑换</view>
+				</view>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -15,6 +39,11 @@
 		data(){
 			return{
 				swipers: [],
+				switchOn: 0,
+				regionType: '1',
+				search: 'IPFS服务器',
+				isAdd: true,
+				goodList: []
 			}
 		},
 		onLoad() {
@@ -41,10 +70,42 @@
 					this.paddingTop = 0
 				}
 			},
+			addGoodEvent(){
+				
+			},
+			goodListDetailEvent(item){
+				uni.reLaunch({
+					url: '/pages/contractExchange/goodsDetail?gid=' + item.gid,
+					success: () => {}
+				})
+			},
+			platformAreaEvent(){
+				this.switchOn = 0
+				this.regionType = '1'
+				this.getGoodList()
+				this.isAdd = false
+			},
+			bussAreaEvent(){
+				this.switchOn = 1
+				this.regionType = '2'
+				this.getGoodList()
+				this.isAdd = true
+			},
+			getGoodList(){
+				this.ajaxJson({
+					url: '/api/v1/treatyCashGoods/list',
+					data: { page: '1', pageSize: '10', regionType: this.regionType },
+					call: (data)=>{
+						if(data.code == 200){
+							this.goodList = data.data.rows
+						}
+					}
+				})
+			},
 			initSwipersImg(){
 				this.ajaxJson({
 					url: '/api/v1/config/banner',
-					data: {via: 'app'},
+					data: {via: 'treaty_shop'},
 					call: (res)=>{
 						this.swipers = res.data
 					}
@@ -53,18 +114,123 @@
 		},
 		created() {
 			this.initSwipersImg()
+			this.getGoodList()
 		}
 	}
 </script>
 
 <style scoped lang="scss">
+	uni-swiper{
+	}
 	.exchangeMall{
+		
 		swiper {
-			width: 750rpx;
+			width: 690rpx;
 			height: 350rpx;
+			margin: 0 30rpx;
 			image {
+				border-radius: 18rpx;
 				width: 100%;
 				height: 100%;
+			}
+		}
+		.limitp-hg {
+			width: 100%;
+			height: 60rpx;
+			line-height: 60rpx;
+			color: $c3;
+			background-color: #fff;
+			.scrool-list-item {
+				font-size: 24rpx;
+				text-align: center;
+				.title {
+					font-size: 32rpx;
+				}
+			}
+		}
+		
+		
+		.switchBtn{
+			margin: 16rpx 30rpx 0;
+			background-color: #f7f7f7;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			height: 82rpx;
+			border-radius: 40rpx;
+			view{
+				width: 345rpx;
+				height: 82rpx;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				border-radius: 40rpx;
+				color: #666;
+			}
+			.platformArea{
+				background-color: #49d9ad;
+				color: #fff;
+			}
+			.bussArea{
+				background-color: #b8393c;
+				color: #fff;
+			}
+		}
+		
+		.operaArea{
+			margin: 16rpx 30rpx 0;
+			display: flex;
+			justify-content: space-between;
+			.searchArea{
+				width: 100%;
+				font-size: 24rpx;
+				border: 1px solid #d9d9d9;
+				border-radius: 20rpx;
+				display: flex;
+				align-items: center;
+				.searchIcon{
+					margin-left: 10rpx;
+				}
+				input{
+					font-size: 24rpx;
+				}
+			}
+			.add{
+				margin-left: 32rpx;
+			}
+		}
+		.goodsList>view{
+			background-color: #f2f2f2;
+			display: flex;
+			align-items: center;
+			margin: 16rpx 30rpx 0;
+			padding: 30rpx 0;
+			.lftImg{
+				width: 178rpx;
+				height: 120rpx;
+				margin: 0 35rpx;
+				image{
+					width: 100%;
+					height: 100%;
+				}
+			}
+			.infoName{
+				font-size: 30rpx;
+			}
+			.infoRemarks{
+				font-size: 26rpx;
+			}
+			.infoMoney{
+				margin-top: 20rpx;
+				color: #b8393c;
+			}
+			.infoBtn{
+				margin-top: 10rpx;
+				width: 300rpx;
+				padding: 5rpx 0;
+				color: #fff;
+				background-color: #49d9ad;
+				text-align: center;
 			}
 		}
 	}

@@ -82,7 +82,7 @@
 		.tractCon{
 			.enConList{
 				padding: 45rpx 30rpx 0;
-				border-top: 2px solid #303030;
+				border-top: 2px solid #F2f2f2;
 				.enList:last-child{
 					border-bottom: none;
 				}
@@ -90,7 +90,7 @@
 					display: flex;
 					justify-content: space-between;
 					flex-wrap: wrap;
-					border-bottom: 2px solid #303030;
+					border-bottom: 2px solid #f2f2f2;
 					.state{
 						display: flex;
 						justify-content: space-between;
@@ -117,13 +117,13 @@
 						text:nth-of-type(1){
 							font-size: 26rpx;
 							line-height: 26rpx;
-							color: #676869;
+							color: $c6;
 						}
 						text:nth-of-type(2){
 							margin-top: 20rpx;
 							font-size: 24rpx;
 							line-height: 24rpx;
-							color: #fff;
+							color: $c3;
 						}
 					}
 					view:nth-child(1){

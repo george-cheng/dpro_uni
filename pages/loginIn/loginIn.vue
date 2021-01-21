@@ -39,8 +39,8 @@
 				</view>
 			</view>
 		</view>
-		<view class="loginBtn">
-			<button @click="loginBtnEvent" type="default">登录</button>
+		<view class="loginBtn" >
+			<button :style="{backgroundColor: isClick ? '#B8393C' :'#ccc'}" @click="isClick && loginBtnEvent()" type="default">登录</button>
 		</view>
 		<view class="loginBtm">
 			<view @click="forgetPwdEvent">忘记密码？</view>
@@ -51,8 +51,9 @@
 
 <script>
 	import { checkEmail, checkPhone, checkPwd } from '../../utils/common.js'
-	
+	import { unimixin } from '../../utils/unimixin.js'
 	export default{
+		mixins: [ unimixin ],
 		data(){
 			return{
 				isEmail: false,
@@ -165,7 +166,7 @@
 				}
 			},
 			loginBtnEvent(){
-		
+				this.isClick = false
 				let params = {}
 				if(this.isEmail){
 					params = {
@@ -190,6 +191,7 @@
 						method: 'POST',
 						data: params,
 						call: (data)=>{
+							
 							if(data.code == 6 || data.code == 7){
 								uni.redirectTo({
 									url: '/pages/verifica/verifica?category='+ category + '&params=' +  encodeURIComponent(JSON.stringify(params)),
@@ -201,7 +203,8 @@
 								})
 								setTimeout(()=>{
 									uni.reLaunch({
-										url: '../index/index',
+										url: '/pages/index/index',
+										success: () => {}
 									})
 								},500)
 							}else{
@@ -210,6 +213,7 @@
 									title: data.msg,
 									success: () => {},
 								})
+								this.isClick = true
 							}
 						}
 					})
@@ -347,7 +351,7 @@
 			width: 100%;
 			text-align: center;
 			margin: 40rpx auto 0;
-			color: #999999;
+			color: $c3;
 			view:nth-child(2){
 				margin-top: 168rpx;
 				span{

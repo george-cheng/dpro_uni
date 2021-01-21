@@ -96,7 +96,7 @@
 			</view>
 		</view>
 		
-		<view class="confirmPay" @click="confirmPayEvent(confirmTxt)" v-if="isConfirmBtn">
+		<view class="confirmPay" @click="isClick && confirmPayEvent(confirmTxt)" v-if="isConfirmBtn">
 			<button type="default">{{confirmTxt}} </button>
 		</view>
 		
@@ -104,7 +104,9 @@
 </template>
 
 <script>
+	import { unimixin } from '../../../utils/unimixin.js'
 	export default {
+		mixins: [ unimixin ],
 		data(){
 			return{
 				isClockTime: true,
@@ -151,12 +153,14 @@
 		},
 		methods: {
 			confirmPayEvent(confirmTxt){
+				this.isClick = false
 				if(confirmTxt === '确认付款'){
 					this.ajaxJson({
 						url: '/api/v1/otcOrder/buinessEnterPay',
 						method: 'POST',
 						data: {order_id: this.orderId},
 						call: (data)=>{
+							this.isClick = true
 							if(data.code == 200){
 								uni.showToast({
 									title: data.msg
@@ -181,6 +185,7 @@
 						method: 'POST',
 						data: {order_id: this.orderId},
 						call: (data)=>{
+							this.isClick = true
 							if(data.code == 200){
 								uni.showToast({
 									title: data.msg
@@ -357,14 +362,14 @@
 		.orderDetail{
 			margin-top: 50rpx;
 			background-color: #fff;
-			padding: 0 30rpx;
 			.detailTit{
-				padding-top: 40rpx;
+				padding: 40rpx 30rpx 0 30rpx;
 				font-size: 28rpx;
 				color: #999;
 			}
 			.orderNum{
 				margin-top: 25rpx;
+				padding: 0 30rpx 0;
 				color: #676869;
 				font-size: 26rpx;
 				display: flex;
@@ -375,11 +380,13 @@
 			display: flex;
 			justify-content: space-between;
 			margin-top: 60rpx;
+			background-color: #f2f2f2;
+			padding: 10rpx 30rpx 10rpx 30rpx;
 			view{
 				display: flex;
 				flex-direction: column;
 				text:nth-of-type(1){
-					color: #999;
+					color: $c3;
 					font-size: 28rpx;
 				}
 				text:nth-of-type(2){
@@ -391,6 +398,7 @@
 		}
 		.orderDetailBtm{
 			margin-top: 80rpx;
+			padding: 0 30rpx 0;
 			display: flex;
 			justify-content: space-between;
 			.orderDetailState{

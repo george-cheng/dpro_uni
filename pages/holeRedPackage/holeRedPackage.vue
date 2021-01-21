@@ -9,7 +9,7 @@
 		<view class="holeRed">
 			<view class="holeRedArea" v-for="(item, index) in packagePos" v-if="index < dayReceive" :key="index">
 				<view :animation="animationData">
-					<image  @click="redPackageEvent(item, index)" :style="{top: item.top + 'rpx', left: item.left + 'rpx'}" src="../../static/images/redPackage.png" mode="aspectFit"></image>
+					<image  @click="isClick && redPackageEvent(item, index)" :style="{top: item.top + 'rpx', left: item.left + 'rpx'}" src="../../static/images/redPackage.png" mode="aspectFit"></image>
 				</view>
 			</view>
 			<view class="holeRedInfo">
@@ -175,10 +175,12 @@
 				innerAudioContext.src = this.soundUrl;
 			},
 			redPackageEvent(item, index){
+				this.isClick = false
 				this.ajaxJson({
 					url: '/api/v1/wormhole/openRedBag',
 					method: 'POST',
 					call: (data)=>{
+						this.isClick = true
 						if(data.code == 200){
 							this.redPackageSound()
 							this.redBag = data.data

@@ -68,7 +68,7 @@
 		<view class="addTip">
 			<view> · 为保障您的资金安全，当前账户安全策略变更、密码修改，我们 会对提币人工审核，请耐心等待工作人员联系。请务必确认电脑以及浏览器安全，防止信息被篡改或泄露。</view>
 		</view>
-		<view class="widthDrawBtn" @click="withDrawEvent">
+		<view class="widthDrawBtn" @click="isClick && withDrawEvent()">
 			<button type="default">确认</button>
 		</view>
 	</view>
@@ -76,7 +76,9 @@
 
 <script>
 	import { accAdd, accMul } from '../../utils/common.js'
+	import { unimixin } from '../../utils/unimixin.js'
 	export default {
+		mixins: [ unimixin ],
 		data() {
 			return {
 				assetsId: '',
@@ -202,6 +204,7 @@
 				}
 			},
 			withDrawEvent(){
+				this.isClick = false
 				this.validator()
 				if(this.isValidator){
 					let params = {
@@ -218,6 +221,7 @@
 						url: '/api/v1/account/withdrawCoin',
 						data: params,
 						call: (data)=>{
+							this.isClick = true
 							if(data.code == 200){
 								uni.showToast({
 									title: data.msg
@@ -323,7 +327,7 @@
 			}
 			.line{
 				height: 2rpx;
-				background-color: #383838;
+				background-color: #f2f2f2;
 				margin: 42rpx 30rpx 0;
 			}
 			.infoMoney{

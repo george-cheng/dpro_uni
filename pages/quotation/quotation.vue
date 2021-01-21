@@ -265,6 +265,7 @@
             .lftName{
               font-size: 26rpx;
               line-height: 26rpx;
+							color: $c3;
             }
             .lftMoney{
               margin-top: 10rpx;
@@ -272,6 +273,7 @@
               line-height: 24rpx;
               white-space: nowrap;
               width: 320rpx;
+							color: $c3;
             }
           }
           .listMid{

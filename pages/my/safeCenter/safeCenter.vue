@@ -54,9 +54,7 @@
 				if(index == 1){
 					uni.navigateTo({
 						url: '/pages/my/safeCenter/safePwd',
-						success: () => {
-							
-						}
+						success: () => {}
 					})
 				}
 			},
@@ -80,9 +78,9 @@
 				display: flex;
 				flex-direction: row;
 				font-size: 24rpx;
-				color: #676869;
+				color: $c3;
 				text:nth-of-type(2){
-					color: #BD3A3B;
+					color: $c3;
 				}
 			}
 			.perCon>view{
@@ -96,7 +94,7 @@
 					align-items: center;
 					justify-content: space-between;
 					font-size: 26rpx;
-					color: #999;
+					color: $c3;
 					.conRgt{
 						.conIcon{
 						color: #676869;

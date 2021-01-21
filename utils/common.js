@@ -22,6 +22,20 @@ function checkHz(name){
 	return RegExp(/^[0-9\u4e00-\u9fa5]+$/).test(name)
 }
 
+function clickOnce(){
+	if(this.isClick){
+		this.isClick = false
+		setTimeout(()=>{
+			this.isClick = true
+		}, 1500)
+	}else{
+		uni.showToast({
+			icon: 'none',
+			title: '请勿多次点击'
+		})
+	}
+}
+
 //乘法
 function accMul (arg1, arg2) {
   var m = 0, s1 = arg1 + "", s2 = arg2 + "";
@@ -128,5 +142,5 @@ function getRandom(start, end, fixed=0) {
 
 
 export{
-	checkEmail, checkPhone, checkPwd, checkNum, checkId, accMul, accAdd, arrayBufferToBase64, transformImgData, uint8arrayToBase64, getLocalTime, toDecimal, isObject, getRandom, checkHz
+	clickOnce, checkEmail, checkPhone, checkPwd, checkNum, checkId, accMul, accAdd, arrayBufferToBase64, transformImgData, uint8arrayToBase64, getLocalTime, toDecimal, isObject, getRandom, checkHz
 }

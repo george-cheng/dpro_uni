@@ -223,3 +223,14 @@
 	font-family: 'icomoon' !important;
 	content: "\e932";
 }
+
+/* 合约 */
+.i-contract::before{
+	font-family: 'icomoon' !important;
+	content: "\e935";
+}
+/* 商家 */
+.i-legal::before{
+	font-family: 'icomoon' !important;
+	content: "\e934";
+}

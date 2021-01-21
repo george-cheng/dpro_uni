@@ -137,20 +137,25 @@ var app = new Vue({
 		cnyRate: '',
 		coinSellType: '',
 		coinTradeType: '',
+		isRoute: false
 	},
 
 	methods:{
 		buyEvent(){
-			uni.reLaunch({
-				url: '/pages/transac/transacMain?choiceOn=0' + '&symbol=' + this.symbol + '&sacOn=0'+'&coinSellType=' + this.coinSellType+'&coinBuyType=' + this.coinTradeType,
-				success: () => {}
-			})
+			if(this.isRoute){
+				uni.reLaunch({
+					url: '/pages/transac/transacMain?choiceOn=0' + '&symbol=' + this.symbol + '&sacOn=0'+'&coinSellType=' + this.coinSellType+'&coinBuyType=' + this.coinTradeType,
+					success: () => {}
+				})
+			}
 		},
 		sellEvent(){
-			uni.reLaunch({
-				url: '/pages/transac/transacMain?choiceOn=0' + '&symbol=' + this.symbol + '&sacOn=1' +'&coinSellType=' + this.coinSellType+'&coinBuyType=' + this.coinTradeType,
-				success: () => {}
-			})
+			if(this.isRoute){
+				uni.reLaunch({
+					url: '/pages/transac/transacMain?choiceOn=0' + '&symbol=' + this.symbol + '&sacOn=1' +'&coinSellType=' + this.coinSellType+'&coinBuyType=' + this.coinTradeType,
+					success: () => {}
+				})
+			}
 		},
 		// 获取24小时交易数据统计
 		// getTxData(){
@@ -161,6 +166,7 @@ var app = new Vue({
 			ajaxJson('/api/v2/market/coins').then((res)=>{
 				let tokenInfo = res.dataMap.USDT
 				for(let i in tokenInfo){
+					this.isRoute = true
 					if(tokenInfo[i].fid == this.symbol){
 						this.tokenInfo =  tokenInfo[i]
 						this.coinSellType = tokenInfo[i].coinSellType

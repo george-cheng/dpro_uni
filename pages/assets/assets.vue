@@ -18,6 +18,7 @@
 					<text class="totalCny">≈ {{isShow ? accMul(accAdd(accAdd(accAdd( moneyAdd, usdtMoneyAdd ), legAcc), contractAcc), cny).toFixed(2) : '******'}} CNY</text>
 				</view>
 				<view class="totalShow" @click="showEvent">
+					<text class="personId"> UID：{{fuId}} </text>
 					<span class="showIco i-eye"></span>
 				</view>
 			</view>
@@ -158,7 +159,7 @@
 				</view>
 			</view>
 			
-			<view class="tranConfirm" @click="tranConfirmEvent">
+			<view class="tranConfirm" @click="isClick && tranConfirmEvent()">
 				<button type="default">确认划转</button>
 			</view>
 
@@ -360,7 +361,9 @@
 				}
 			},
 			tranConfirmEvent(){
+				this.isClick = false
 				if(!this.tranAmount){
+					this.isClick = true
 					uni.showToast({
 						icon: 'none',
 						title: '请输入数量'
@@ -371,6 +374,7 @@
 						method: 'POST',
 						data: {type: this.type,fvid: '50',amount: this.tranAmount},
 						call: (data)=>{
+							this.isClick = true
 							if(data.code == 200){
 								uni.showToast({
 									title: data.msg,
@@ -762,10 +766,10 @@
 			justify-content: space-between;
 			margin: 30rpx 46rpx 30rpx;
 			padding-top: 20rpx;
-			align-items: center;
 			.assetsTotal{
 				display: flex;
 				flex-direction: column;
+				justify-content: space-between;
 				.totalTit{
 					font-size: 24rpx;
 					line-height: 24rpx;
@@ -774,7 +778,7 @@
 				.totalMoney{
 					font-size: 48rpx;
 					line-height: 48rpx;
-					color: #999;
+					color: $c3;
 					margin-top: 20rpx;
 				}
 				.totalCny{
@@ -785,6 +789,9 @@
 				}
 			}
 			.totalShow{
+				display: flex;
+				align-items: center;
+				flex-direction: column;
 				.showIco:before{
 					color: #515151;
 					font-size: 34rpx;
@@ -830,7 +837,7 @@
 						line-height: 24rpx;
 					}
 					.accMoney{
-						color: #999;
+						color: $c3;
 						font-size: 42rpx;
 						line-height: 42rpx;
 						margin-top: 25rpx;
@@ -999,7 +1006,7 @@
 						.infoTit{
 							font-size: 26rpx;
 							line-height: 26rpx;
-							color: #999;
+							color: $c3;
 							width: 100rpx;
 							display: flex;
 							justify-content: flex-start;
@@ -1007,7 +1014,7 @@
 						.infoIntro{
 							font-size: 22rpx;
 							line-height: 22rpx;
-							color: #676869;
+							color: $c6;
 							width: 100rpx;
 							display: flex;
 							justify-content: flex-start;
@@ -1021,7 +1028,7 @@
 					.rgtMoney{
 						font-size: 26rpx;
 						line-height: 26rpx;
-						color: #999;
+						color: $c3;
 						display: flex;
 						justify-content: flex-end;
 					}
@@ -1064,7 +1071,7 @@
 			.areaLftName, .areaRgtName{
 				border: 1px solid #999;
 				border-radius: 6rpx;
-				color: #999;
+				color: $c3;
 				padding: 22rpx 80rpx;
 			}
 			.areaRgtDown{
@@ -1100,7 +1107,7 @@
 	}
 	.tranUse{
 		margin: 10rpx 40rpx 0;
-		color: #999;
+		color: $c3;
 	}
 	.tranAmount{
 		margin: 30rpx 40rpx 0;
@@ -1128,7 +1135,7 @@
 				align-items: center;
 			}
 			.tranAll{
-				
+				color: $c3;
 			}
 		}
 	}

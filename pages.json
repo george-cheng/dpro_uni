@@ -2,6 +2,15 @@
 	"pages": [ 
 		//pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
+			"path" : "pages/LaunchPage",
+			"style" :{
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		},
+		{
 			"path": "pages/index/index",
 			"style": {
 				"navigationBarTitleText": "迪博pro",
@@ -592,6 +601,50 @@
 					}
 				}
 			}
+		},
+		{
+			"path" : "pages/my/applicant/applicantSetting",
+			"style" :                                                                                    
+			{
+				"navigationBarTitleText": "商家认证",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"titleNView": {
+						"buttons": [
+							{
+								"color": "#999",
+								"colorPressed": "#999",
+								"float": "left",
+								"fontSize": "30rpx",
+								"fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
+								"text": "\ue92f" // 字体图标\u 开头，加上字体图标unicode后面四位
+							}
+						]
+					}
+				}
+			}
+		}
+		,{
+			"path" : "pages/my/applicant/unBindApplicant",
+			"style" :                                                                                    
+			{
+				"navigationBarTitleText": "解绑认定",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"titleNView": {
+						"buttons": [
+							{
+								"color": "#999",
+								"colorPressed": "#999",
+								"float": "left",
+								"fontSize": "30rpx",
+								"fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
+								"text": "\ue92f" // 字体图标\u 开头，加上字体图标unicode后面四位
+							}
+						]
+					}
+				}
+			}
 		}
 		,{
 			"path" : "pages/my/bussManager/bussManager",
@@ -719,13 +772,136 @@
 				}
 			}
 			,{
+				"path" : "pages/contractExchange/goodsDetail",
+				"style" : {
+					"navigationBarTitleText": "商品详情",
+					"enablePullDownRefresh": false,
+					"app-plus": {
+						"titleNView": {
+							"buttons": [
+								{
+									"color": "#999",
+									"colorPressed": "#999",
+									"float": "left",
+									"fontSize": "30rpx",
+									"fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
+									"text": "\ue92f" // 字体图标\u 开头，加上字体图标unicode后面四位
+								}
+							]
+						}
+					}
+				}
+			}
+			,{
+				"path" : "pages/contractExchange/exchangeOpera",
+				"style" :{
+					"navigationBarTitleText": "商品兑换",
+					"enablePullDownRefresh": false,
+					"app-plus": {
+						"titleNView": {
+							"buttons": [
+								{
+									"color": "#999",
+									"colorPressed": "#999",
+									"float": "left",
+									"fontSize": "30rpx",
+									"fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
+									"text": "\ue92f" // 字体图标\u 开头，加上字体图标unicode后面四位
+								}
+							]
+						}
+					}
+				}
+			}
+			,{
 				"path" : "pages/my/resetPwd/resetPwd",
 				"style" :                                                                                    
 				{
-						"navigationBarTitleText": "重置密码",
-						"enablePullDownRefresh": false
+					"navigationBarTitleText": "重置密码",
+					"enablePullDownRefresh": false,
+					"app-plus": {
+						"titleNView": {
+							"buttons": [
+								{
+									"color": "#999",
+									"colorPressed": "#999",
+									"float": "left",
+									"fontSize": "30rpx",
+									"fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
+									"text": "\ue92f" // 字体图标\u 开头，加上字体图标unicode后面四位
+								}
+							]
+						}
+					}
 				}
 			}
+			,{
+				"path" : "pages/my/addressSetting/addressSetting",
+				"style" :                                                                                    
+				{
+					"navigationBarTitleText": "地址管理",
+					"enablePullDownRefresh": false,
+					"app-plus": {
+						"titleNView": {
+							"buttons": [
+								{
+									"color": "#999",
+									"colorPressed": "#999",
+									"float": "left",
+									"fontSize": "30rpx",
+									"fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
+									"text": "\ue92f" // 字体图标\u 开头，加上字体图标unicode后面四位
+								}
+							]
+						}
+					}
+				}
+			}
+			,{
+				"path" : "pages/my/addressSetting/addAddress",
+				"style" :                                                                                    
+				{
+					"navigationBarTitleText": "增加地址",
+					"enablePullDownRefresh": false,
+					"app-plus": {
+						"titleNView": {
+							"buttons": [
+								{
+									"color": "#999",
+									"colorPressed": "#999",
+									"float": "left",
+									"fontSize": "30rpx",
+									"fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
+									"text": "\ue92f" // 字体图标\u 开头，加上字体图标unicode后面四位
+								}
+							]
+						}
+					}
+				}
+			}
+			,{
+				"path" : "pages/my/addressSetting/editAddress",
+				"style" :                                                                                    
+				{
+					"navigationBarTitleText": "修改地址",
+					"enablePullDownRefresh": false,
+					"app-plus": {
+						"titleNView": {
+							"buttons": [
+								{
+									"color": "#999",
+									"colorPressed": "#999",
+									"float": "left",
+									"fontSize": "30rpx",
+									"fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
+									"text": "\ue92f" // 字体图标\u 开头，加上字体图标unicode后面四位
+								}
+							]
+						}
+					}
+				}
+			}
+       
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

@@ -7,12 +7,14 @@
 			</view>
 			<text @click="getSecAgain">{{verTxt}}</text>
 		</view>
-		<button type="default" @click="loginBtn">提交</button>
+		<button type="default" @click="isClick && loginBtn()">提交</button>
 	</view>
 </template>
 
 <script>
+	import { unimixin } from '../../utils/unimixin.js'
 	export default {
+		mixins: [ unimixin ],
 		data(){
 			return{
 				verTxt: '点击获取验证码',
@@ -63,7 +65,7 @@
 			},
 			/* 验证码提交 */
 			loginBtn(){
-				
+				this.isClick = false
 				let secCodeParams = {
 					name: this.params.emailUser || this.params.phoneUser,
 					code: this.code
@@ -73,6 +75,7 @@
 					data: secCodeParams,
 					method: 'POST',
 					call: (data)=>{
+						this.isClick = true
 						if(data.code == 200){
 							uni.showToast({
 								title: '登录成功',

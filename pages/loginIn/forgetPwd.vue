@@ -24,7 +24,7 @@
 			</view>
 			
 			
-			<view class="btnBox" @click="forgetPassowrdEvent">
+			<view class="btnBox" @click="isClick && forgetPassowrdEvent()">
 				<button type="default">确认</button>
 			</view>
 		</view>

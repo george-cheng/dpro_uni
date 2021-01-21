@@ -33,7 +33,7 @@
 						<image src="../../static/images/payMethod.png" mode="aspectFit"></image>
 					</view>
 				</view>
-				<view class="contractExchange" @click="contractExchangeEvent">
+				<view class="contractExchange" @click="contractExchangeEvent()">
 					<image src="../../static/images/contractExchange.png" mode="aspectFit"></image>
 					<text class="colorRed">合约兑换</text>
 				</view>
@@ -164,13 +164,8 @@
 			},
 			/* 合约兑换 */
 			contractExchangeEvent(){
-				// uni.reLaunch({
-				// 	url: '/pages/contractExchange/exchangeMall',
-				// 	success: () => {}
-				// })
-				uni.showToast({
-					icon: 'none',
-					title: '此功能暂未开放',
+				uni.reLaunch({
+					url: '/pages/contractExchange/exchangeMall',
 					success: () => {}
 				})
 			},
@@ -425,14 +420,13 @@
 			width: 100%;
 			height: 60rpx;
 			line-height: 60rpx;
-			color: #8C8C8C;
+			color: $c3;
 			background-color: #fff;
 			.scrool-list-item {
 				font-size: 24rpx;
 				text-align: center;
 				.title {
 					font-size: 32rpx;
-					color: #ccc;
 				}
 			}
 		}
@@ -454,9 +448,10 @@
 				}
 				.kind{
 					margin-top: 22rpx;
-					color: #999;
+					color: $c3;
 					font-size: 24rpx;
 					line-height: 24rpx;
+					font-weight: bold;
 				}
 				.money{
 					margin-top: 20rpx;
@@ -473,7 +468,8 @@
 				.cny{
 					margin-top: 24rpx;
 					margin-bottom: 50rpx;
-					color: #666666;
+					color: #333;
+					font-weight: bold;
 					font-size: 24rpx;
 					line-height: 24rpx;
 				}
@@ -630,7 +626,7 @@
 				height: 105rpx;
 				font-size: 30rpx;
 				line-height: 105rpx;
-				color: #999;
+				color: $c3;
 			}
 			.marketCon{
 				view{
@@ -644,7 +640,7 @@
 						display: flex;
 						align-items: center;
 						justify-content: flex-start;
-						color: #999;
+						color: $c3;
 						border: none;
 						text{
 							font-size: 28rpx;
@@ -663,7 +659,7 @@
 					}
 					.money{
 						width: 33%;
-						color: #999;
+						color: $c3;
 					}
 				}
 			}

@@ -11,13 +11,15 @@
 		</view>
 		<view class="uni-share-button-box">
 			<button class="uni-share-button" @click="close">取消</button>
-			<button class="uni-share-button" @click="confirm">确定</button>
+			<button class="uni-share-button" @click=" isClick && confirm()">确定</button>
 		</view>
 	</view>
 </template>
 
 <script>
+	import { unimixin } from '../../utils/unimixin.js'
 	export default {
+		mixins: [unimixin],
 		name: 'UniPopupShare',
 		props: {
 			title: {
@@ -28,7 +30,6 @@
 		inject: ['popup'],
 		data() {
 			return {
-
 			}
 		},
 		created() {},

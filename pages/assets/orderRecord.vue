@@ -230,7 +230,7 @@
 					margin-right: 10rpx;
 				}
 				.fvShortName{
-					color: #999;
+					color: $c3;
 					font-size: 28rpx;
 					margin-right: 24rpx;
 				}
@@ -248,7 +248,7 @@
 			padding-bottom: 20rpx;
 			display: flex;
 			justify-content: space-between;
-			color: #999;
+			color: $c6;
 			font-size: 26rpx;
 		}
 		.orderCon{
@@ -261,11 +261,11 @@
 				flex-direction: column;
 				text-align: center;
 				text:nth-of-type(1){
-					color: #999;
+					color: $c3;
 					font-size: 28rpx;
 				}
 				text:nth-of-type(2){
-					color: #676869;
+					color: $c6;
 					font-size: 22rpx;
 				}
 			}

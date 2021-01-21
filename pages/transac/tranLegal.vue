@@ -70,7 +70,7 @@
 			<!-- <view class="iptTip">
 				<text>{{iptTip}}</text>
 			</view> -->
-			<view class="tranBtn" @click="tranBtnEvent" :style="{backgroundColor: tranOn == 0 ? '#3BA987' : '#B8393C'}">
+			<view class="tranBtn" @click=" isClick && tranBtnEvent()" :style="{backgroundColor: tranOn == 0 ? '#3BA987' : '#B8393C'}">
 				<view>{{btnTxt}}</view>
 			</view>
 		</view>
@@ -119,7 +119,7 @@
 		</view>
 		
 		<uni-popup ref="popup" type="bottom" >
-			<uni-popup-share :title="operaMethod" @comfirm="comfirm" style="background-color: #f2f2f2;" :style="{ color: tranOn == '0'?'#999': '#B8393C' }">
+			<uni-popup-share :title="operaMethod" @comfirm=" isClick && comfirm()" style="background-color: #f2f2f2;" :style="{ color: tranOn == '0'?'#999': '#B8393C' }">
 				<view class="popupCon">
 					<view class="popupPrice">单价：¥{{popupPrice}}</view>
 					<input class="popupQuantity" type="text" v-model="popupQuantity" @input="calcTotalIptEvent" @blur="calcTotalEvent"  placeholder="请输入数量">
@@ -226,7 +226,11 @@
 				this.payMoney = accMul(this.popupPrice, this.popupQuantity)
 			},
 			comfirm(){
+				
+				this.isClick = false
+				
 				if(!this.popupQuantity){
+					this.isClick = true
 					uni.showToast({
 						image: '/static/images/wrong.png',
 						title: '数量不能为空'
@@ -243,6 +247,7 @@
 							method: 'POST',
 							data: params,
 							call: (data)=>{
+								this.isClick = true
 								if(data.code == 200){
 									uni.showToast({ 
 										title: data.msg,
@@ -319,11 +324,13 @@
 				}
 			},
 			tranBtnEvent(){
+				this.isClick = false
 				if(!this.quantity){
 					uni.showToast({
 						image: '/static/images/wrong.png',
 						title: '请输入数量'
 					})
+					this.isClick = true
 				}else{
 					let params = {
 						market_id: '1',
@@ -336,6 +343,7 @@
 						data: params,
 						method: 'POST',
 						call: (data)=>{
+							this.isClick = true
 							if(data.code == 200){
 								uni.showToast({ 
 									title: data.msg,
@@ -439,9 +447,9 @@
 
 	.tranLegal{
 		.popupCon{
-			color: #999;
+			color: $c3;
 			.popupQuantity{
-				border: 1px solid #676869;
+				border: 1px solid #dabbbb;
 				width: 640rpx;
 				height: 60rpx !important;
 				border-radius: 4rpx;
@@ -567,7 +575,7 @@
 					text{
 						font-size: 28rpx;
 						line-height: 28rpx;
-						color: #999999;
+						color: $c3;
 					}
 				}
 				.myBankCard{
@@ -612,12 +620,12 @@
 						text{
 							font-size: 28rpx;
 							line-height: 28rpx;
-							color: #999;
+							color: $c3;
 						}
 					}
 				}
 				view.kindQuantity{
-					margin-top: 52rpx;
+					margin-top: 32rpx;
 					position: relative;
 					input{
 						border: 2px solid #f2f2f2;
@@ -692,22 +700,22 @@
 				.orderDetail{
 					margin-bottom: 0rpx;
 					.orderType, .orderKind{
-						color: #BD3A3B;
+						color: $c6;
 						font-size: 28rpx;
 						line-height: 28rpx;
 					}
 					.orderKind{
-						color: #999;
+						color: $c3;
 					}
 				}
 				.orderUnitPrice, .orderQuantity{
 					text{
 						font-size: 24rpx;
 						line-height: 24rpx;
-						color: #999;
+						color: $c6;
 					}
 					text:last-child{
-						color: #999;
+						color: $c3;
 					}
 				}
 			}
@@ -721,10 +729,10 @@
 					text{
 						font-size: 24rpx;
 						line-height: 24rpx;
-						color: #999;
+						color: $c6;
 					}
 					text:last-child{
-						color: #999;
+						color: $c3;
 					}
 				}
 				.orderStatus{

@@ -56,7 +56,7 @@
 			<view>转账手续费：{{forwardType.fee}} {{forwardType.coin_name}}。</view>
 		</view>
 		
-		<view class="assTranAccBtn" @click="assTranAccEvent">
+		<view class="assTranAccBtn" @click="isClick && assTranAccEvent()">
 			<button>提交</button>
 		</view>
 		
@@ -65,7 +65,9 @@
 
 <script>
 	import { accAdd, accMul } from '../../../utils/common.js'
+	import { unimixin } from '../../../utils/unimixin.js'
 	export default {
+		mixins: [ unimixin ],
 		data(){
 			return{
 				total: '',
@@ -90,12 +92,15 @@
 		},
 		methods: {
 			assTranAccEvent(){
+				this.isClick = false
 				if(!this.transferUid || !this.amount){
+					this.isClick = true
 					uni.showToast({
 						image: '/static/images/wrong.png',
 						title: '收款账户ID和转账数量不能为空'
 					})
 				}else if(this.amount < this.forwardType.min_amount){
+					this.isClick = true
 					uni.showToast({
 						image: '/static/images/wrong.png',
 						title: '转账数量不能小于 ' + this.forwardType.min_amount + ' ' + this.forwardType.coin_name,
@@ -114,6 +119,7 @@
 						method: 'POST',
 						data: params,
 						call: (data)=>{
+							this.isClick = true
 							if(data.code == 200){
 								uni.showToast({
 									title: '转账成功',

@@ -276,10 +276,12 @@
 			.managerList{
 				margin-top: 20rpx;
 				.listArea{
+					padding-top: 20rpx;
 					display: flex;
 					flex-wrap: wrap;
 					justify-content: center;
-					margin-bottom: 30rpx;
+					margin: 0 0 20rpx 0;
+					background-color: #f2f2f2;
 					view{
 						width: calc(calc(100% / 3) - 30rpx);
 						display: flex;
@@ -291,10 +293,10 @@
 							white-space: nowrap;
 						}
 						text:nth-of-type(1){
-							color: #666;
+							color: $c6;
 						}
 						text:nth-of-type(2){
-							color: #999;
+							color: $c3;
 						}
 					}
 				}

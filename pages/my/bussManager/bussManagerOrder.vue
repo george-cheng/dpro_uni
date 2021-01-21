@@ -102,7 +102,7 @@
 		.orderTop, .orderBtm{
 			display: flex;
 			justify-content: space-between;
-			color: #999;
+			color: $c6;
 		}
 		.orderMid{
 			margin-top: 15rpx;
@@ -112,7 +112,7 @@
 				display: flex;
 				flex-direction: column;
 				text-align: center;
-				color: #999;
+				color: $c3;
 			}
 		}
 		.orderBtm{

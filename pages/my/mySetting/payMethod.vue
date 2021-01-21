@@ -102,12 +102,12 @@
 						color: #999;
 					}
 				.rgtInfo{
-					color: #999;
+					color: $c3;
 				}
 				}
 				.conLft{
 					.lftTit{
-						color: #999;
+						color: $c3;
 					}
 				}
 			}
@@ -116,7 +116,7 @@
 			}
 		}
 		.i-zfb:before,.i-wx:before{
-			color: #999;
+			color: $c3;
 		}
 	}
 </style>

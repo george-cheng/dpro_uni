@@ -28,7 +28,7 @@
 						<view><text>总产量</text><text>{{item.ded_amount*item.out_mult}}</text></view>
 					</view>
 					<view class="enListOpera">
-						<view @click.once="snapUpRushNowEvent(item)">抢购</view>
+						<view  @click="isClick && snapUpRushNowEvent(item, index)">抢购</view>
 					</view>
 				</view>
 			</view>
@@ -63,7 +63,8 @@
 				isFlag: true,
 				isSnapFlag: true,
 				isNumFlag: true,
-				timerNum: null
+				timerNum: null,
+				snapOn: 0
 			}
 		},
 		onLoad() {
@@ -86,7 +87,9 @@
 					this.paddingTop = 0
 				}
 			},
-			snapUpRushNowEvent(item){
+			snapUpRushNowEvent(item, index){
+				this.isClick = false
+				this.snapOn = index
 				if(item.state == '1'){
 					if(this.isNumFlag){
 						let numCount = 0
@@ -102,40 +105,41 @@
 				}
 			},
 			snapUpEvent(item){
-					this.ajaxJson({
-						url: '/api/v1/treatyType/buyByType',
-						data: {typeId: item.id},
-						method: 'POST',
-						call: (data)=>{
-							if(data.code == 200){
-								this.isSnapFlag = true
-								uni.showToast({
-									title: data.msg,
-									success: () => {
-										this.getContractList()
-									}
-								})
-							}else if(data.code == 500){
-								this.isSnapFlag = true
-								uni.showToast({
-									title: data.msg,
-									success: () => {
-										this.getContractList()
-									}
-								})
-							}else{
-								this.isSnapFlag = false
-								clearInterval(this.timerNum)
-								uni.showToast({
-									image: '/static/images/wrong.png',
-									title: data.msg,
-									success: () => {
-										this.getContractList()
-									}
-								})
-							}
+				this.ajaxJson({
+					url: '/api/v1/treatyType/buyByType',
+					data: {typeId: item.id},
+					method: 'POST',
+					call: (data)=>{
+						if(data.code == 200){
+							this.isSnapFlag = true
+							uni.showToast({
+								title: data.msg,
+								success: () => {
+									this.getContractList()
+								}
+							})
+						}else if(data.code == 500){
+							this.isSnapFlag = true
+							uni.showToast({
+								title: data.msg,
+								success: () => {
+									this.getContractList()
+								}
+							})
+						}else{
+							this.isSnapFlag = false
+							this.isClick = true
+							clearInterval(this.timerNum)
+							uni.showToast({
+								image: '/static/images/wrong.png',
+								title: data.msg,
+								success: () => {
+									this.getContractList()
+								}
+							})
 						}
-					})
+					}
+				})
 			},
 			tranctBtnEvent(index){
 				if(index === 0){
@@ -326,18 +330,18 @@
 							flex-direction: column;
 							margin-right: 30rpx;
 							text:nth-of-type(1){
-								color: #999;
+								color: $c3;
 							}
 							text:nth-of-type(2){
 								margin-top: 10rpx;
-								color: #fff;
+								color: $c3;
 							}
 						}
 						.enListTitState{
 							display: flex;
 							flex-direction: column;
 							text:nth-of-type(1){
-								color: #999;
+								color: $c3;
 							}
 							text:nth-of-type(2){
 								margin-top: 10rpx;
@@ -352,10 +356,10 @@
 							margin-top: 10rpx;
 							font-size: 24rpx;
 							text:nth-of-type(1){
-								color: #999;
+								color: $c6;
 							}
 							text:nth-of-type(2){
-								color: #999;
+								color: $c3;
 							}
 						}
 					}
@@ -405,6 +409,6 @@
 	  color: #f00 !important;
 	}
 	.open{
-	  color: #ccc !important;
+	  color: $c3 !important;
 	}
 </style>

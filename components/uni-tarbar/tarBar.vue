@@ -106,7 +106,7 @@
 				padding-bottom: 8rpx;
 			}
 			.tabTxt{
-				color: #999;
+				color: $c3;
 			}
 			.tabTxtChoice{
 				color: #f00;

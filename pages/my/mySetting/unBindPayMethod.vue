@@ -18,13 +18,15 @@
 				<image :src="url + payQrCode" mode="aspectFit" v-if="isPayQrCode"></image>
 			</view>
 		</view>
-		<view class="payMethodBtn" @click="payMethodBtnEvent">
+		<view class="payMethodBtn" @click="isClick && payMethodBtnEvent()">
 			<button type="default">{{btnTxt}}</button>
 		</view>
 	</view>
 </template>
 <script>
+	import { unimixin } from '../../../utils/unimixin.js'
 	export default {
+		mixins: [ unimixin ],
 		data(){
 			return{
 				data: {},
@@ -69,6 +71,7 @@
 		},
 		methods: {
 			payMethodBtnEvent(){
+				this.isClick = false
 				let bindParams = {}
 				if(this.category == 0){
 					bindParams = {
@@ -86,6 +89,7 @@
 					method: 'POST',
 					data: bindParams,
 					call: (data)=>{
+						this.isClick = true
 						if(data.code == 200){
 							uni.showToast({
 								title: data.msg

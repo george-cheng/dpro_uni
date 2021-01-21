@@ -58,11 +58,5 @@
 		line-height: 1.4;
 	}
 
-	.uni-switch-input{
-		height: 40rpx !important;
-	}
-	.uni-switch-input::after, .uni-switch-input::before{
-		height: 40rpx !important;
-	}
 	
 </style>

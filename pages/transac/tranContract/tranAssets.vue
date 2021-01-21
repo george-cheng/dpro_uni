@@ -9,7 +9,7 @@
 					<view><text>剩余天数</text><text>{{item.return_days}} 天</text></view>
 					<view><text>抢购时间</text><text>{{item.purch_date}}</text></view>
 					<view><text>抢购状态</text><text :class="item.purch_state === 0 ? 'close' : 'open'">{{item.purch_state === 0 ? '失败' : '成功'}}</text></view>
-					<view class="state"><text>激活状态</text><text @click.stop="deactivaEvent(item)" :class="item.activate_state === 0 ? 'close' : 'open'">{{item.activate_state === 1 ? '已激活' : '去激活'}}</text></view>
+					<view class="state"><text>激活状态</text><text @click.stop="isClick && deactivaEvent(item)" :class="item.activate_state === 0 ? 'close' : 'open'">{{item.activate_state === 1 ? '已激活' : '去激活'}}</text></view>
 				</view>
 			</view>
 		</view>
@@ -45,12 +45,14 @@
 			},
 			
 			deactivaEvent(item){
+				this.isClick = false
 				if(item.activate_state === 0){
 					this.ajaxJson({
 						url: '/api/v1/purchTreatyLog/active',
 						data: { id: item.id },
 						method: 'POST',
 						call: (data)=>{
+							this.isClick = true
 							if(data.code == 200){
 								uni.showToast({
 									title: data.msg,
@@ -140,7 +142,7 @@
 							margin-top: 20rpx;
 							font-size: 24rpx;
 							line-height: 24rpx;
-							color: #999;
+							color: $c3;
 						}
 					}
 					view:nth-child(1){

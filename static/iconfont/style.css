@@ -14,6 +14,14 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon--1:before {
+  content: "\e934";
+  color: #fff;
+}
+.icon--22:before {
+  content: "\e935";
+  color: #fff;
+}
 .icon-menu1:before {
   content: "\e933";
   color: #fff;

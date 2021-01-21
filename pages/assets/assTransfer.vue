@@ -98,7 +98,7 @@
 				margin: 20rpx auto 0;
 				width: 640rpx;
 				height: 80rpx;
-				border: 1px solid #676869;
+				border: 1px solid #f2f2f2;
 				border-radius: 6px;
 				color: #999;
 			}

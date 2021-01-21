@@ -25,7 +25,7 @@
 				<image :src="payQrCodeImg" mode="" v-if="isPayQrCode"></image>
 			</view>
 		</view>
-		<view class="payMethodBtn" @click="payMethodBtnEvent">
+		<view class="payMethodBtn" @click="isClick && payMethodBtnEvent()">
 			<button type="default">{{btnTxt}}</button>
 		</view>
 	</view>
@@ -33,7 +33,9 @@
 
 <script>
 	import axios from '../../../js_sdk/gangdiedao-uni-axios/index.js'
+	import { unimixin } from '../../../utils/unimixin.js'
 	export default {
+		mixins: [ unimixin ],
 		data(){
 			return{
 				data: {},
@@ -106,6 +108,7 @@
 				}
 			},
 			payMethodBtnEvent(){
+				this.isClick = false
 				let params = {}
 				let name = ''
 				if(this.category == 0){
@@ -132,6 +135,7 @@
 						name: name,
 						formData: params,
 						call: (data1)=>{
+							this.isClick = true
 							let result = JSON.parse(data1);
 							if(result.code == 200){
 								uni.showToast({
@@ -173,7 +177,7 @@
 			border-bottom: 1px solid #f2f2f2;
 			view{
 				font-size: 26rpx;
-				color: #999;
+				color: $c3;
 				margin-top: 24rpx;
 			}
 			input{

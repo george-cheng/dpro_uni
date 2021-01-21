@@ -24,7 +24,7 @@
 			
 		</view>
 		<view class="settingBtm">
-			<button type="default" @click="layoutEvent">退出登录</button>
+			<button type="default"  @click=" isClick && layoutEvent()">退出登录</button>
 		</view>
 	</view>
 </template>
@@ -59,9 +59,11 @@
 				}
 			},
 			layoutEvent(){
+				this.isClick = false
 				this.ajaxJson({
 					url: '/api/v1/logout',
 					call: (data)=>{
+						this.isClick = true
 						if(data.code == 200){
 							uni.showToast({
 								title: data.msg,
@@ -72,14 +74,12 @@
 									uni.removeStorage({
 										key: 'userInfo'
 									})
-									
 									setTimeout(()=>{
 										uni.reLaunch({
 											url: '../index/index'
 										})
 									},500)	
-										
-									
+		
 								}
 							})
 						}else{
@@ -113,12 +113,12 @@
 				color: #999;
 				border-top: 1px solid #f2f2f2;
 				.conLft{
-					
+					color: $c3;
 				}
 				.conRgt{
+					color: $c3;
 					.conIcon{
 						
-					color: #676869;
 					}
 				}
 			}

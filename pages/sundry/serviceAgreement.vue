@@ -110,7 +110,7 @@ DPRO将在DPRO站公布并不定时修订隐私权政策，隐私权政策构成
 	.service{
 		.serviceTit{
 			background-color: #fff;
-			color: #999;
+			color: $c3;
 			padding: 0 20rpx;
 			margin: 30rpx 0;
 			font-size: 26rpx;
@@ -119,7 +119,7 @@ DPRO将在DPRO站公布并不定时修订隐私权政策，隐私权政策构成
 			margin: 20rpx 0;
 			padding: 0 20rpx;
 			background-color: #fff;
-			color: #999;
+			color: $c3;
 			.s_title{
 				font-size: 28rpx;
 			}

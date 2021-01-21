@@ -100,6 +100,16 @@
 					<view class="conIcon i-rgtArrow"></view>
 				</view>
 			</view>
+			<view  @click="myArrowEvent(9)">
+				<view class="conLft">
+					<view class="conIcon i-language"></view>
+					<text class="lftTit">地址管理</text>
+				</view>
+				<view class="conRgt">
+					<text class="rgtInfo"></text>
+					<view class="conIcon i-rgtArrow"></view>
+				</view>
+			</view>
 			<view  @click="myArrowEvent(5)" v-if="false">
 				<view class="conLft">
 					<view class="conIcon i-language"></view>
@@ -238,7 +248,7 @@
 					})
 				}else if(index == 4){
 					uni.reLaunch({
-						url: '/pages/my/applicant/applicant',
+						url: '/pages/my/applicant/applicantSetting',
 						success: () => {}
 					})
 				}
@@ -247,6 +257,11 @@
 				}else if(index == 8){
 					uni.reLaunch({
 						url: '/pages/my/bussManager/bussManager',
+						success: () => {}
+					})
+				}else if(index == 9){
+					uni.reLaunch({
+						url: '/pages/my/addressSetting/addressSetting',
 						success: () => {}
 					})
 				}
@@ -349,17 +364,17 @@
 					display: flex;
 					flex-direction: row;
 					align-items: center;
-					color: #999;
+					color: $c3;
 				}
 				.userName{
-					color: #999;
+					color: $c3;
 					font-size: 30rpx;
 					line-height: 30rpx;
 					margin-top: 10rpx;
 				}
 				.userEdit{
 					margin-left: 10rpx;
-					color: #999;
+					color: $c3;
 					display: flex;
 					flex-wrap: nowrap;
 				}
@@ -371,7 +386,7 @@
 				margin-top: 20rpx;
 				display: flex;
 				.userBtm{
-					color: #676869;
+					color: $c3;
 					font-size: 22rpx;
 					line-height: 22rpx;
 					view{
@@ -406,7 +421,7 @@
 			margin: 0 10rpx;
 			color: #f2f2f2;
 			.conLft{
-				color: #999;
+				color: $c3;
 			}
 			.conRgt{
 				color: #999;

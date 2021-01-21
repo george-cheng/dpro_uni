@@ -94,7 +94,7 @@
                   <text> {{accAdd(ftotal, ffrozen)}} {{unitKind}}</text>
                 </view>
               </view>
-							<view class="sacOpera" :style="{backgroundColor: sacOn == 0 ? '#3BA987' : '#B8393C'}" @click="sacOperaEvent">
+							<view class="sacOpera" :style="{backgroundColor: sacOn == 0 ? '#3BA987' : '#B8393C'}" @click=" isClick && sacOperaEvent()">
 							  <view class="operaBtn">{{operaStatus}}</view>
 							</view>
             </view>
@@ -172,7 +172,7 @@
 								<view><text>成交均价</text><text>{{item.avgPrice}}</text></view>
 								<view><text>成交量({{item.buyName}})</text><text>{{item.successAmount}}</text></view>
 							</view>
-							<view class="viewOpera" @click="enCancelEvent(item)">
+							<view class="viewOpera" @click="isClick && enCancelEvent(item)">
 								<view>撤单</view>
 							</view>
             </view>
@@ -330,11 +330,13 @@
 			
 			/* 委托撤销 */
 			enCancelEvent(item){
+				this.isClick = false
 				this.ajaxJson({
 					url: '/api/v2/market/cancelEntrust',
 					method: 'POST',
 					data: {id: item.id},
 					call: (data)=>{
+						this.isClick = true
 						if(data.code == 200){
 							uni.showToast({
 								title: data.msg,
@@ -469,14 +471,17 @@
         this.$refs.popup.close()
       },
       sacOperaEvent(){
-
+				this.isClick = false
+				
         this.getTradePwd()
         if(!this.iptPrice){
+					this.isClick = true
           uni.showToast({
             image: '../../static/images/wrong.png',
             title: '请输入价位'
           })
         }else if(!this.iptQuantity){
+					this.isClick = true
           uni.showToast({
             image: '../../static/images/wrong.png',
             title: '请输入数量'
@@ -484,6 +489,7 @@
         }else{
           if(this.getStroageTradePwd == ''){
             this.$refs.popup.open()
+						this.isClick = true
           }else{
             this.tranSellBuy(this.getStroageTradePwd.data)
           }
@@ -534,6 +540,7 @@
           method: 'POST',
           call: (data)=>{
             if(data.code == 200){
+							this.isClick = true
               uni.showToast({
                 title: data.msg,
                 success: () => {
@@ -868,7 +875,7 @@
 			justify-content: space-between;
 			margin: 0 100rpx;
 			view{
-				color: #7E7C8A;
+				color: $c3;
 				font-size: 28rpx;
 				line-height: 56rpx;
 			}
@@ -898,10 +905,10 @@
 				margin: 50rpx 35rpx 0;
 				.titLft{
 					.titMenu:before{
-						color: #999;
+						color: $c3;
 					}
 					text{
-						color: #999;
+						color: $c3;
 						margin-left: 35rpx;
 					}
 					.titMenuList{
@@ -1050,10 +1057,10 @@
 								line-height: 24rpx;
 							}
 							text:nth-of-type(1){
-								color: #9896A4;
+								color: $c6;
 							}
 							text:nth-of-type(2){
-								color: #9896A4;
+								color: $c3;
 							}
 						}
 						.usable, .lockout{
@@ -1076,7 +1083,7 @@
 						display: flex;
 						justify-content: space-between;
 						text{
-							color: #8E8C9A;
+							color: $c3;
 							font-size: 24rpx;
 							line-height: 24rpx;
 						}
@@ -1121,7 +1128,7 @@
 							border-bottom: 1px solid #f2f2f2;
 							padding: 18rpx 0;
 							.midQuantity{
-								color: #3BA987;
+								color: $c3;
 								font-size: 30rpx;
 								line-height: 30rpx;
 							}
@@ -1135,10 +1142,10 @@
 									white-space: nowrap;
 								}
 								.midNumPrice{
-									color: #A3A1AF;
+									color: $c3;
 								}
 								.midNumPer{
-									color: #3BA987;
+									color: $c3;
 								}
 							}
 						}
@@ -1191,10 +1198,10 @@
 						display: flex;
 						align-items: center;
 						.recordIco::before{
-							color: #706E7C;
+							color: $c3;
 						}
 						text{
-							color: #999;
+							color: $c3;
 							font-size: 28rpx;
 							line-height: 28rpx;
 						}
@@ -1227,7 +1234,7 @@
 				margin: 52rpx 40rpx 0;
 				
 				view:nth-of-type(1){
-					color: #999;
+					color: $c3;
 					font-size: 28rpx;
 					line-height: 28rpx;
 				}
@@ -1235,7 +1242,7 @@
 					width: 100rpx;
 					height: 58rpx;
 					background-color: #2D2D2D;
-					color: #999;
+					color: $c3;
 					font-size: 28rpx;
 					line-height: 28rpx;
 					display: flex;
@@ -1270,13 +1277,13 @@
 							text:nth-of-type(1){
 								font-size: 26rpx;
 								line-height: 26rpx;
-								color: #676869;
+								color: $c6;
 							}
 							text:nth-of-type(2){
 								margin-top: 20rpx;
 								font-size: 24rpx;
 								line-height: 24rpx;
-								color: #999;
+								color: $c3;
 							}
 						}
 						view:nth-child(1){

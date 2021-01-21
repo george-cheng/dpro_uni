@@ -18,13 +18,15 @@
 				<button @click="getVerMsg">{{verTxt}}</button>
 			</view>
 		</view>
-		<button class="btn" type="default" @click="confirmEvent">确认</button>
+		<button :style="{backgroundColor: isClick ? '#B8393C' :'#ccc'}" class="btn" type="default" @click="isClick && confirmEvent()">确认</button>
 	</view>
 </template>
 
 <script>
 	import { checkPwd } from '../../../utils/common.js'
+	import { unimixin } from '../../../utils/unimixin.js'
 	export default {
+		mixins: [ unimixin ],
 		data(){
 			return{
 				pwd: '',
@@ -49,6 +51,7 @@
 				}
 			},
 			confirmEvent(){
+				this.isClick = false
 				if(!checkPwd(this.pwd) || this.pwd !== this.conPwd){
 					uni.showToast({
 						icon: 'none',
@@ -69,6 +72,7 @@
 						method: 'POST',
 						data: params,
 						call: (data)=>{
+							this.isClick = true
 							if(data.code == 200){
 								uni.showToast({
 									title: data.msg,

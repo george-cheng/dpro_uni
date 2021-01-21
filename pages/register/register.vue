@@ -105,7 +105,7 @@
 		</view>
 		<view class="btnBox">
 			<view class="regBox">
-				<button @click="registerBtn" type="default">注册</button>
+				<button @click=" isClick && registerBtn()" type="default">注册</button>
 			</view>
 			
 		</view>
@@ -318,6 +318,7 @@
 			},
 			/* 注册提交按钮 */
 			registerBtn(){
+				this.isClick = false
 				this.validator()
 				if(this.isValidator){
 					let params = {
@@ -333,6 +334,7 @@
 						data: params,
 						method: 'POST',
 						call: (data)=>{
+							this.isClick = true
 							if(data.code == 200){
 								uni.showToast({
 									title: '注册成功',
@@ -498,7 +500,7 @@
 			margin: 0 78rpx;
 			display: flex;
 			text{
-				color: #999;
+				color: $c3;
 				font-size: 28rpx;
 				line-height: 28rpx;
 			}

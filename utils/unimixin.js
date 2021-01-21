@@ -16,7 +16,8 @@ const unimixin = {
 			paddingTop: 0,
 			scrollTop: 0,
 			isUpRefresh: true,
-			screamH: ''
+			screamH: '',
+			isClick: true,
 		}
 	},
 	onReachBottom(){

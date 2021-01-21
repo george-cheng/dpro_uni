@@ -26,7 +26,7 @@
 		
 		
 		<uni-popup ref="popup" type="dialog">
-			 <uni-popup-dialog :duration="2000" content="是否进行高级实名认证？" :before-close="true" @close="cancel" @confirm="confirm">
+			 <uni-popup-dialog :duration="2000" content="是否进行高级实名认证？" :before-close="true" @close="cancel" @confirm="confirm()">
 				 <view></view>
 			 </uni-popup-dialog>
 		</uni-popup>
@@ -167,7 +167,7 @@
 						margin: 0 5rpx;
 						display: flex;
 						flex-wrap: wrap;
-						color: #999;
+						color: $c3;
 						line-height: 48rpx;
 					}
 				}

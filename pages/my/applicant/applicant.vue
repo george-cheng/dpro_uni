@@ -3,129 +3,76 @@
 		<view class="applicantArea">
 			<rich-text :nodes="certRule.synopsis"></rich-text>
 		</view>
-		<view class="applicantBtn" @click="applicantEvent(userSession.otcType)">
-			<button>{{userSession.otcType == 0 ? '申请成为商家' : '撤销'}}</button>
+		<view class="applicantBtn" @click="isClick && applicantEvent(type)">
+			<button>{{type == '1' ? '申请成为合约商家' : '申请成为法币商家'}}</button>
 		</view>
 	</view>
 </template>
 
 <script>
+	import { unimixin } from '../../../utils/unimixin.js'
 	export default {
+		mixins: [ unimixin ],
 		data(){
 			return{
-				userSession: '',
 				certRule: '',
-				applicantBtn: '申请成为商家',
+				type: ''
 			}
 		},
-		onLoad() {
-
+		onLoad(options) {
+			this.type = options.type
 		},
 		onNavigationBarButtonTap(e){
 			if(e.float == 'left'){
 				uni.reLaunch({
-					url: '/pages/my/my',
+					url: '/pages/my/applicant/applicantSetting',
 					success: () => {}
 				})
 			}
 		},
 		methods: {
-			applicantEvent(otcType){
-				if(otcType == 0){
-					this.ajaxJson({
-						url: '/api/v1/merchant/applyMerchant',
-						method: 'POST',
-						call: (data)=>{
-							if(data.code == 200){
-								uni.showToast({
-									title: '已提交申请，待审核',
-									success: () => {}
-								})
-								setTimeout(()=>{
-									uni.reLaunch({
-										url: '/pages/my/my',
-										success: () => {}
-									})
-								},1000)
-							}else{
-								uni.showToast({
-									image: '/static/images/wrong.png',
-									title: data.msg,
-									success: () => {}
-								})
-							}
-						}
-					})
-				}else{
-					this.ajaxJson({
-						url: '/api/v1/merchant/revokeMerchant',
-						method: 'POST',
-						call: (data)=>{
-							if(data.code == 200){
-								uni.showToast({
-									title: '已提交申请，待审核'
-								})
-								setTimeout(()=>{
-									uni.reLaunch({
-										url: '/pages/my/my',
-										success: () => {}
-									})
-								},1000)
-							}else{
-								uni.showToast({
-									image: '/static/images/wrong.png',
-									title: data.msg,
-									success: () => {}
-								})
-							}
-						}
-					})
-				}
-			},
-			getApplicantInfo(){
+			applicantEvent(type){
+				this.isClick =  false
 				this.ajaxJson({
-					url: '/api/v1/merchant/certRule',
+					url: '/api/v1/business/applyBusiness',
+					method: 'POST',
+					data: { merchant_type: type },
 					call: (data)=>{
+						this.isClick = true
 						if(data.code == 200){
-							this.certRule = data.data
-
+							uni.showToast({
+								title: '已提交申请，待审核',
+								success: () => {}
+							})
+							setTimeout(()=>{
+								uni.reLaunch({
+									url: '/pages/my/applicant/applicantSetting',
+									success: () => {}
+								})
+							},500)
 						}else{
 							uni.showToast({
 								image: '/static/images/wrong.png',
-								title: data.msg
+								title: data.msg,
+								success: () => {}
 							})
 						}
 					}
 				})
 			},
-			getFrontSession(){
+			getApplicantInfo(){
 				this.ajaxJson({
-					url: '/api/v1/frontSession',
+					url: '/api/v1/business/certRule',
+					data: { type: this.type },
 					call: (data)=>{
-						this.userSession = data.data
-						if(this.userSession.otcType == 0){
-							uni.setNavigationBarTitle({
-									title: '申请商家',
-									success: () => {
-								}
-							});
-						}else{
-							uni.setNavigationBarTitle({
-									title: '撤销商家',
-									success: () => {
-								}
-							});
+						if(data.code == 200){
+							this.certRule = data.data
 						}
-						uni.setStorage({
-							key: 'userSession',
-							data: data.data
-						})
 					}
 				})
 			}
 		},
 		created() {
-			this.getFrontSession()
 			this.getApplicantInfo()
 		}
 	}
@@ -134,7 +81,7 @@
 <style scoped lang="scss">
 	.applicant{
 		.applicantArea{
-			color: #999;
+			color: $c3;
 			margin: 20rpx 30rpx 0;
 		}
 		.applicantBtn{
