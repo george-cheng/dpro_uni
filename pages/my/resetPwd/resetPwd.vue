@@ -57,7 +57,7 @@
 		},
 		onNavigationBarButtonTap(e){
 			if(e.float == 'left'){
-				uni.navigateTo({
+				uni.reLaunch({
 					url: '/pages/my/mySetting',
 					success: () => {}
 				})
@@ -173,24 +173,28 @@
 						title: '请输入旧密码'
 					})
 					this.isValidator = false
+					this.isClick = true
 				}else if(!checkPwd(this.password)){
 					uni.showToast({
 						icon: 'none',
 						title: '请输入新密码'
 					})
 					this.isValidator = false
+					this.isClick = true
 				}else if(this.password != this.confirmPassword){
 					uni.showToast({
 						icon: 'none',
 						title: '两次密码输入不一致'
 					})
 					this.isValidator = false
+					this.isClick = true
 				}else if(!this.msgCode){
 					uni.showToast({
 						icon: 'none',
 						title: '请输入验证码'
 					})
 					this.isValidator = false
+					this.isClick = true
 				}else {
 					this.isValidator = true
 				}

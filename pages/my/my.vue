@@ -50,16 +50,6 @@
 					<view class="conIcon i-rgtArrow"></view>
 				</view>
 			</view>
-			<view  @click="myArrowEvent(8)" v-if="false">
-				<view class="conLft">
-					<view class="conIcon i-security"></view>
-					<text class="lftTit">个人中心</text>
-				</view>
-				<view class="conRgt">
-					<text class="rgtInfo"></text>
-					<view class="conIcon i-rgtArrow"></view>
-				</view>
-			</view>
 			<view  @click="myArrowEvent(2)">
 				<view class="conLft">
 					<view class="conIcon i-invita"></view>
@@ -102,7 +92,7 @@
 			</view>
 			<view  @click="myArrowEvent(9)">
 				<view class="conLft">
-					<view class="conIcon i-language"></view>
+					<view class="conIcon i-address"></view>
 					<text class="lftTit">地址管理</text>
 				</view>
 				<view class="conRgt">
@@ -256,7 +246,7 @@
 					plus.runtime.openURL('mqq://im/chat?chat_type=wpa&uin=' + this.qq + '&version=1&src_type=web ');
 				}else if(index == 8){
 					uni.reLaunch({
-						url: '/pages/my/bussManager/bussManager',
+						url: '/pages/my/bussManager/bussManagerSetting',
 						success: () => {}
 					})
 				}else if(index == 9){
@@ -300,7 +290,7 @@
 					url: '/api/v1/frontSession',
 					call: (data)=>{
 						this.userSession = data.data
-						if(this.userSession.otcType == 1){
+						if(this.userSession.otcBusinessType == 2 || this.userSession.treatyBusinessType == 2){
 							this.isBussManager = true
 						}else{
 							this.isBussManager = false
@@ -438,7 +428,7 @@
 		}
 	}
 	
-	.i-idAuth:before,.i-security:before,.i-invita:before,.i-tran:before,.i-order:before,.i-bussManager:before,.i-language:before,.i-about::before,.i-service::before{
+	.i-idAuth:before,.i-security:before,.i-invita:before,.i-tran:before,.i-order:before,.i-bussManager:before,.i-language:before,.i-about::before,.i-service::before,.i-address::before{
 		color: #999;
 	}
 }

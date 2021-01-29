@@ -47,7 +47,7 @@
 				</view> -->
 				<view class="regMsg">
 					<view class="megBox">
-						<input type="text" v-model="msgCode" placeholder="请输入邮箱验证码">
+						<input type="number" v-model="msgCode" placeholder="请输入邮箱验证码">
 						<span @click="pasteEvent">粘贴</span>
 					</view>
 					<view class="msgBtn">
@@ -86,7 +86,7 @@
 				</view> -->
 				<view class="regMsg">
 					<view class="megBox">
-						<input type="text" v-model="msgPhCode" placeholder="请输入短信验证码">
+						<input type="number" v-model="msgPhCode" placeholder="请输入短信验证码">
 						<span @click="pasteEvent">粘贴</span>
 					</view>
 					<view class="msgBtn">
@@ -123,8 +123,11 @@
 	import { checkEmail, checkPhone, checkPwd } from '../../utils/common.js'
 
 	import axios from '../../js_sdk/gangdiedao-uni-axios/index.js'
+	
+	import { unimixin } from '../../utils/unimixin.js'
 
 	export default {
+		mixins: [ unimixin ],
 		data(){
 			return{
 				isEmail: false,
@@ -402,24 +405,28 @@
 							title: '邮箱地址为空或错误，请重新输入'
 						})
 						this.isValidator = false
+						this.isClick = true
 					}else if(!checkPwd(this.phonePwd) || !this.phonePwd){
 						uni.showToast({
 							icon: 'none',
 							title: '请设置登录密码或格式不正确'
 						})
 						this.isValidator = false
+						this.isClick = true
 					}else if(!checkPwd(this.confirmPwd) || this.phonePwd !== this.confirmPwd){
 						uni.showToast({
 							icon: 'none',
 							title: '请输入确认密码或两次密码输入不一致'
 						})
 						this.isValidator = false
+						this.isClick = true
 					}else if(!this.msgCode){
 						uni.showToast({
 							icon: 'none',
 							title: '请输入短信验证码'
 						})
 						this.isValidator = false
+						this.isClick = true
 					}else if(!this.invateCode){
 						uni.showToast({
 							icon: 'none',
@@ -431,6 +438,7 @@
 							title: '请勾选我已阅读并同意《用户注册及隐私协议》'
 						})
 						this.isValidator = false
+						this.isClick = true
 					}else{
 						this.isValidator = true
 					}
@@ -441,12 +449,14 @@
 							title: '手机号码为空或错误，请重新输入'
 						})
 						this.isValidator = false
+						this.isClick = true
 					}else if(!checkPwd(this.phPwd) || !this.phPwd){
 						uni.showToast({
 							icon: 'none',
 							title: '请设置登录密码或密码格式不正确'
 						})
 						this.isValidator = false
+						this.isClick = true
 					}
 					else if(!checkPwd(this.conPwd) || this.phPwd !== this.conPwd){
 						uni.showToast({
@@ -454,23 +464,28 @@
 							title: '请输入确认密码或两次密码输入不一致'
 						})
 						this.isValidator = false
+						this.isClick = true
 					}else if(!this.msgPhCode){
 						uni.showToast({
 							icon: 'none',
 							title: '请输入短信验证码'
 						})
 						this.isValidator = false
+						this.isClick = true
 					}else if(!this.invatePhCode){
 						uni.showToast({
 							icon: 'none',
 							title: '请输入邀请码'
 						})
+						this.isValidator = false
+						this.isClick = true
 					}else if(!this.isCheck){
 						uni.showToast({
 							icon: 'none',
 							title: '请勾选我已阅读并同意《用户注册及隐私协议》'
 						})
 						this.isValidator = false
+						this.isClick = true
 					}else{
 						this.isValidator = true
 					}

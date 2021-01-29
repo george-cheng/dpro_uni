@@ -9,7 +9,12 @@
 					<view><text>剩余天数</text><text>{{item.return_days}} 天</text></view>
 					<view><text>抢购时间</text><text>{{item.purch_date}}</text></view>
 					<view><text>抢购状态</text><text :class="item.purch_state === 0 ? 'close' : 'open'">{{item.purch_state === 0 ? '失败' : '成功'}}</text></view>
-					<view class="state"><text>激活状态</text><text @click.stop="isClick && deactivaEvent(item)" :class="item.activate_state === 0 ? 'close' : 'open'">{{item.activate_state === 1 ? '已激活' : '去激活'}}</text></view>
+					<view class="state">
+						<text>激活状态</text>
+						<text @click.stop="isClick && deactivaEvent(item)" style="color: #b8393c;" v-if="item.activate_state == 0">去激活</text>
+						<text @click.stop="isClick && deactivaEvent(item)" :class="item.activate_state === 0 ? 'close' : 'open'" v-if="item.activate_state == 1">已激活</text>
+						<text @click.stop="isClick && deactivaEvent(item)" :class="item.activate_state === 0 ? 'close' : 'open'" v-if="item.activate_state == 2">已兑换</text>
+					</view>
 				</view>
 			</view>
 		</view>
@@ -17,7 +22,7 @@
 </template>
 
 <script>
-	import { unimixin } from '@/utils/unimixin.js'
+	import { unimixin } from '../../../utils/unimixin.js'
 	export default {
 		mixins: [unimixin],
 		data(){

@@ -23,31 +23,26 @@
 		<view class="bussManagerList">
 			<view class="listTit">市场挂单</view>
 			<view class="managerList">
-					<uni-swipe-action>
-						<uni-swipe-action-item :disabled="item.status == '2'" v-for="(item, index) in bussManagerList" :key="index" :right-options="operaList"  @change="swipeChange($event, index)" @click="swipeClick($event, item, index)">
-							
-							<view class="listArea">
-								<view><text>类型</text><text>{{item.type == '1' ? '卖出' : '买入'}}</text></view>
-								<view><text>数量(USDT)</text><text>{{item.amount}}</text></view>
-								<view><text>状态</text><text>{{item.status == '1' ? '挂单中' : '已撤销'}}</text></view>
-								<view><text>商家名称</text><text>{{item.buiness_name}}</text></view>
-								<view><text>价格(CNY)</text><text>{{item.price}}</text></view>
-								<view><text>发布时间</text><text>{{item.create_time}}</text></view>
-							</view>
-							
-						</uni-swipe-action-item>
-					</uni-swipe-action>
+				<view class="listArea" v-for="(item, index) in bussManagerList" :key="index">
+					<view class="listAreaCon">
+						<view><text>类型</text><text>{{item.type == '1' ? '卖出' : '买入'}}</text></view>
+						<view><text>数量(USDT)</text><text>{{item.amount}}</text></view>
+						<view><text>状态</text><text>{{item.status == '1' ? '挂单中' : '已撤销'}}</text></view>
+						<view><text>商家名称</text><text>{{item.buiness_name}}</text></view>
+						<view><text>价格(CNY)</text><text>{{item.price}}</text></view>
+						<view><text>发布时间</text><text>{{item.create_time}}</text></view>
+					</view>
+					<view class="cancelOrder" @click="cancelOrderEvent(item)" v-if="item.status == 1">撤销</view>
+				</view>
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
-	import { accMul } from '../../../utils/common.js'
-	import { uniSwipeAction } from '../../../components/uni-swipe-action/uni-swipe-action.vue'
-	import { uniSwipeActionItem } from '../../../components/uni-swipe-action-item/uni-swipe-action-item.vue'
+	import { accMul } from '../../../../utils/common.js'
 	
-	import { unimixin } from '../../../utils/unimixin.js'
+	import { unimixin } from '../../../../utils/unimixin.js'
 	
 	export default {
 		mixins: [ unimixin ],
@@ -65,15 +60,7 @@
 				amountHolder: '买入数量 USDT',
 				totalHolder: '金额 CNY',
 				operaTxt: '立即买入',
-				
 				bussManagerList: [],
-				operaList: [{
-					icon: 'i-delete',
-					style: {
-						iconColor: '#fff',
-						backgroundColor: '#b8393c'
-					}
-				}]
 			}
 		},
 		onLoad() {
@@ -82,12 +69,12 @@
 		onNavigationBarButtonTap(e){
 			if(e.float == 'left'){
 				uni.reLaunch({
-					url: '/pages/my/my',
+					url: '/pages/my/bussManager/bussManagerSetting',
 					success: () => {}
 				})
 			}else{
 				uni.reLaunch({
-					url: '/pages/my/bussManager/bussManagerOrder',
+					url: '/pages/my/bussManager/legalBussManager/legalBussManagerOrder',
 					success: () => {}
 				})
 			}
@@ -102,37 +89,29 @@
 				}
 			},
 			
-			swipeChange(e, index) {
-				
-			},
-			swipeClick(e, item, index) {
-				let { content } = e;
-				
-				if(item.status == '1'){
-					if(content.icon == 'i-delete'){
-						this.ajaxJson({
-							url: '/api/v1/otcTrans/revokeTrans',
-							method: 'POST',
-							data: {trans_id: item.trans_id},
-							call: (data)=>{
-								if(data.code == 200){
-									uni.showToast({
-										title: data.msg,
-										success: () => {
-											this.getBussManagerList()
-										}
-									})
-								}else{
-									uni.showToast({
-										image: '/static/images/wrong.png',
-										title: data.msg,
-										success: () => {}
-									})
+
+			cancelOrderEvent(item) {
+				this.ajaxJson({
+					url: '/api/v1/otcTrans/revokeTrans',
+					method: 'POST',
+					data: {trans_id: item.trans_id},
+					call: (data)=>{
+						if(data.code == 200){
+							uni.showToast({
+								title: data.msg,
+								success: () => {
+									this.getBussManagerList()
 								}
-							}
-						})
+							})
+						}else{
+							uni.showToast({
+								image: '/static/images/wrong.png',
+								title: data.msg,
+								success: () => {}
+							})
+						}
 					}
-				}
+				})
 			},
 			bussOperaEvent(){
 				if(!this.price || !this.amount){
@@ -277,27 +256,37 @@
 				margin-top: 20rpx;
 				.listArea{
 					padding-top: 20rpx;
-					display: flex;
-					flex-wrap: wrap;
-					justify-content: center;
 					margin: 0 0 20rpx 0;
 					background-color: #f2f2f2;
-					view{
-						width: calc(calc(100% / 3) - 30rpx);
+					.listAreaCon{
 						display: flex;
-						flex-direction: column;
-						font-size: 26rpx;
-						text-align: left;
-						margin-bottom: 15rpx;
-						text{
-							white-space: nowrap;
+						flex-wrap: wrap;
+						justify-content: center;
+						view{
+							width: calc(calc(100% / 3) - 30rpx);
+							display: flex;
+							flex-direction: column;
+							font-size: 26rpx;
+							text-align: left;
+							margin-bottom: 15rpx;
+							text{
+								white-space: nowrap;
+							}
+							text:nth-of-type(1){
+								color: $c6;
+							}
+							text:nth-of-type(2){
+								color: $c3;
+							}
 						}
-						text:nth-of-type(1){
-							color: $c6;
-						}
-						text:nth-of-type(2){
-							color: $c3;
-						}
+					}
+					.cancelOrder{
+						display: flex;
+						justify-content: flex-end;
+						padding-right: 30rpx;
+						padding-bottom: 20rpx;
+						color: #B8393C;
+						font-size: 30rpx;
 					}
 				}
 			}

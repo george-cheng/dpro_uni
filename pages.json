@@ -645,12 +645,33 @@
 					}
 				}
 			}
+		},
+		{
+			"path": "pages/my/bussManager/bussManagerSetting",
+			"style": {
+				"navigationBarTitleText": "商家管理",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"titleNView": {
+						"buttons": [
+							{
+								"color": "#999",
+								"colorPressed": "#999",
+								"float": "left",
+								"fontSize": "30rpx",
+								"fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
+								"text": "\ue92f" // 字体图标\u 开头，加上字体图标unicode后面四位
+							}
+						]
+					}
+				}
+			}
 		}
 		,{
-			"path" : "pages/my/bussManager/bussManager",
+			"path" : "pages/my/bussManager/legalBussManager/legalBussManager",
 			"style" :                                                                                    
 				{
-					"navigationBarTitleText": "商家管理",
+					"navigationBarTitleText": "商家法币管理",
 					"enablePullDownRefresh": false,
 					"app-plus": {
 						"titleNView": {
@@ -677,7 +698,7 @@
 				}
 			}
 		,{
-			"path" : "pages/my/bussManager/bussManagerOrder",
+			"path" : "pages/my/bussManager/legalBussManager/legalBussManagerOrder",
 			"style" :                                                                                    
 			{
 				"navigationBarTitleText": "订单记录",
@@ -700,10 +721,32 @@
 			}
 		}
 		,{
-			"path" : "pages/my/bussManager/bussManagerOrderToPay",
+			"path" : "pages/my/bussManager/legalBussManager/legalBussManagerOrderToPay",
 			"style" :                                                                                    
 				{
 					"navigationBarTitleText": "确认订单",
+					"enablePullDownRefresh": false,
+					"app-plus": {
+						"titleNView": {
+							"buttons": [
+								{
+									"color": "#999",
+									"colorPressed": "#999",
+									"float": "left",
+									"fontSize": "30rpx",
+									"fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
+									"text": "\ue92f" // 字体图标\u 开头，加上字体图标unicode后面四位
+								}
+							]
+						}
+					}
+				}
+			}
+			,{
+				"path" : "pages/my/bussManager/bussManagerSetting",
+				"style" :                                                                                    
+				{
+					"navigationBarTitleText": "",
 					"enablePullDownRefresh": false,
 					"app-plus": {
 						"titleNView": {
@@ -814,6 +857,53 @@
 				}
 			}
 			,{
+				"path" : "pages/contractExchange/exchangeMallDetail",
+				"style" :                                                                                    
+				{
+					"navigationBarTitleText": "订单详情",
+					"enablePullDownRefresh": false,
+					"app-plus": {
+						"titleNView": {
+							"buttons": [
+								{
+									"color": "#999",
+									"colorPressed": "#999",
+									"float": "left",
+									"fontSize": "30rpx",
+									"fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
+									"text": "\ue92f" // 字体图标\u 开头，加上字体图标unicode后面四位
+								}
+							]
+						}
+					}
+				}
+			}
+			,{
+				"path" : "pages/contractExchange/addShopGood",
+				"style" :                                                                                    
+				{
+					"navigationBarTitleText": "添加商品",
+					"usingSwanComponents": {
+						"editor": "dynamicLib://editorLib/editor"
+					},
+					"enablePullDownRefresh": false,
+					"app-plus": {
+						"titleNView": {
+							"buttons": [
+								{
+									"color": "#999",
+									"colorPressed": "#999",
+									"float": "left",
+									"fontSize": "30rpx",
+									"fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
+									"text": "\ue92f" // 字体图标\u 开头，加上字体图标unicode后面四位
+								}
+							]
+						}
+					}
+				}
+			}
+			,{
 				"path" : "pages/my/resetPwd/resetPwd",
 				"style" :                                                                                    
 				{
@@ -901,7 +991,80 @@
 					}
 				}
 			}
-       
+			,{
+				"path" : "pages/my/bussManager/treatyBussManager/treatyBussManager",
+				"style" :                                                                                    
+				{
+					"navigationBarTitleText": "商品管理",
+					"enablePullDownRefresh": false,
+					"app-plus": {
+						"titleNView": {
+							"buttons": [
+								{
+									"color": "#999",
+									"colorPressed": "#999",
+									"float": "left",
+									"fontSize": "30rpx",
+									"fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
+									"text": "\ue92f" // 字体图标\u 开头，加上字体图标unicode后面四位
+								},
+								{
+									"color": "#999",
+									"colorPressed": "#999",
+									"float": "right",
+									"fontSize": "30rpx",
+									// "fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
+									"text": "记录" // 字体图标\u 开头，加上字体图标unicode后面四位
+								}
+							]
+						}
+					}
+				}
+			}
+			,{
+				"path" : "pages/my/bussManager/treatyBussManager/treatyBussManagerOrder",
+				"style" :                                                                                    
+				{
+					"navigationBarTitleText": "订单记录",
+					"enablePullDownRefresh": false,
+					"app-plus": {
+						"titleNView": {
+							"buttons": [
+								{
+									"color": "#999",
+									"colorPressed": "#999",
+									"float": "left",
+									"fontSize": "30rpx",
+									"fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
+									"text": "\ue92f" // 字体图标\u 开头，加上字体图标unicode后面四位
+								}
+							]
+						}
+					}
+				}
+			}
+			,{
+				"path" : "pages/my/bussManager/treatyBussManager/treatyBussManagerDetail",
+				"style" :                                                                                    
+					{
+					"navigationBarTitleText": "订单详情",
+					"enablePullDownRefresh": false,
+					"app-plus": {
+						"titleNView": {
+							"buttons": [
+								{
+									"color": "#999",
+									"colorPressed": "#999",
+									"float": "left",
+									"fontSize": "30rpx",
+									"fontSrc": "/static/iconfont/fonts/icomoon.ttf", // 字体文件
+									"text": "\ue92f" // 字体图标\u 开头，加上字体图标unicode后面四位
+								}
+							]
+						}
+					}
+				}
+			}
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

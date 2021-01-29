@@ -1,6 +1,6 @@
 <template>
 	<view class="launchPage" :style="{height: areaH + 'px', width: areaW + 'px'}">
-		<video src="../static/openScreen.mp4" :autoplay="true" :duration="7" :controls="false" :loop="true" object-fit="cover"></video>
+		<video src="../static/openScreen.mp4" :autoplay="true" :duration="7" :controls="false" :loop="true" object-fit="cover" :enable-play-gesture="false"></video>
 	</view>
 </template>
 

@@ -131,6 +131,7 @@
 				this.isPhPassword = !this.isPhPassword
 			},
 			validator(){
+				this.isClick = true
 				if(this.isEmail){
 					if(checkEmail(this.emailUser) && checkPwd(this.emailPwd)){						
 						if(this.emailUser){
@@ -142,9 +143,7 @@
 						uni.showToast({
 							icon: 'none',
 							title: '邮箱格式不正确或密码错误，请重新输入',
-							success: () => {
-								
-							}
+							success: () => {}
 						})
 					}
 				}else{ 
@@ -158,9 +157,7 @@
 						uni.showToast({
 							icon: 'none',
 							title: '手机号码格式不正确或密码错误，请重新输入',
-							success: () => {
-								
-							}
+							success: () => {}
 						})
 					}
 				}
@@ -191,7 +188,7 @@
 						method: 'POST',
 						data: params,
 						call: (data)=>{
-							
+							this.isClick = true
 							if(data.code == 6 || data.code == 7){
 								uni.redirectTo({
 									url: '/pages/verifica/verifica?category='+ category + '&params=' +  encodeURIComponent(JSON.stringify(params)),
@@ -213,7 +210,6 @@
 									title: data.msg,
 									success: () => {},
 								})
-								this.isClick = true
 							}
 						}
 					})

@@ -590,7 +590,7 @@ var app = new Vue({
 						type: 'inside',
 						xAxisIndex: [0, 1],
 						realtime: false,
-						start: 95,
+						start: 85,
 						end: 100,
 					}
 				],

@@ -14,7 +14,7 @@ body{
 	padding-bottom: 120rpx !important;
 }
 .noNavMainBox{
-	background-color: #fff;
+	background-color: #fff !important;
 }
 .nMainBox{
 	background-color: #282828 !important;
@@ -46,4 +46,20 @@ text{
 input{
 	 padding-left: 10rpx;
 	 color: #666 !important;
+}
+
+.uniBtn{
+	position: fixed;
+	bottom: 30rpx;
+	left: 0;
+	right: 0;
+	margin: auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 600rpx;
+	height: 80rpx;
+	color: #fff;
+	border-radius: 6rpx;
+	background-color: #b8393c;
 }

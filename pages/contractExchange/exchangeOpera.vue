@@ -12,20 +12,63 @@
 				<view class="i-rgtArrow"></view>
 			</view>
 		</view>
+		<view class="operaDetail">
+			<view class="goodsDetail">
+				<view class="detailLft">
+					<image :src="url + detailInfo.desc_diagram" mode="aspectFit"></image>
+				</view>
+				<view class="detailRgt">
+					<view class="remarks">{{detailInfo.remarks}}</view>
+					<view class="rgtDetail">
+						<view class="detailPrice">{{detailInfo.price}} USDT</view>
+						<view class="goodsNum">商品编号：{{detailInfo.gid}}</view>
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class="contract">
+			<view class="contractTit">已抢购合约</view>
+			<view class="contractList">
+				<view v-for="(item, index) in treatyInfo" :key="index" @click="choiceContract(item, index)">
+					<view class="listId">id：{{item.id}}</view>
+					<view class="listAmount">{{item.ded_amount}}</view>
+					<view class="listPurchDate">{{item.purch_date}}</view>
+					<view class="listTreatyId">{{item.treaty_id}}</view>
+					<view class="contractIcon i-cCheck" :class="{'i-cChecked': treatyIndex.indexOf(index)>-1}"></view>
+				</view>
+			</view>
+		</view>
+		<view class="uniBtn" @click="isClick && confirmExchangeEvent()">
+			<view>确认兑换</view>
+		</view>
 	</view>
 </template>
 
 <script>
+	import { unimixin } from '../../utils/unimixin.js'
 	export default {
+		mixins: [ unimixin ],
 		data(){
 			return{
+				id: '',
 				gid: '',
 				addressInfo: '',
+				detailInfo: '',
 				isAddress: true,
+				treatyInfo: [],
+				treatyIndex: [],
+				treatyPurce: [],
+				treatyPurceId: [],
+				treatyPurceIdArr: [],
+				isDefault: true,
 			}
 		},
 		onLoad(options) {
 			this.gid = options.gid
+			this.id = options.id
+			if(this.id){
+				this.isDefault = false
+			}
 		},
 		onNavigationBarButtonTap(e) {
 			if(e.float == 'left') {
@@ -36,6 +79,51 @@
 			}
 		},
 		methods: {
+			confirmExchangeEvent(){
+				this.isClick = false
+				if(this.treatyPurceId.length == 0){
+					uni.showToast({
+						icon: 'none',
+						title: '请选择已抢购合约',
+						success: () => {}
+					})
+					this.isClick = true
+				}else{
+					let params = {
+						treatyPurceId: this.treatyPurceId,
+						gid: this.gid,
+						addressId: this.addressInfo.id,
+					}
+
+					this.ajaxJson({
+						url: '/api//v1/treatyCashGoods/cashByStr',
+						method: 'POST',
+						data: params,
+						call: (data)=>{
+							this.isClick = true
+							if(data.code == 200){
+								uni.showToast({
+									icon: 'none',
+									title: data.msg,
+									success: () => {}
+								})
+								setTimeout(()=>{
+									uni.reLaunch({
+										url: '/pages/contractExchange/exchangeMallRecord',
+										success: () => {}
+									})
+								},500)
+							}else{
+								uni.showToast({
+									image: '/static/images/wrong.png',
+									title: data.msg,
+									success: () => {}
+								})
+							}
+						}
+					})
+				}
+			},
 			getGoodsDetailInfo(){
 				this.ajaxJson({
 					url: '/api/v1/treatyCashGoods/byId',
@@ -52,13 +140,27 @@
 					url: '/api/v1/purchTreatyLog/list',
 					data: { purchState: '1', activateState: '0',  page: '1', pageSize: '10'},
 					call: (data)=>{
-						console.log(data)
+						if(data.code == 200){
+							this.treatyInfo = data.data.rows
+						}
 					}
 				})
 			},
 			getAddressInfo(){
+				
+				let url = ''
+				let params = {}
+				if(this.isDefault){
+					url = '/api/v1/receiveAddress/default'
+					params = { }
+				}else{
+					url = '/api/v1/receiveAddress/byId'
+					params = { id: this.id }
+				}
+				
 				this.ajaxJson({
-					url: '/api/v1/receiveAddress/default',
+					url: url,
+					data: params,
 					call: (data)=>{
 						if(data.code == 200){
 							this.addressInfo = data.data
@@ -73,6 +175,25 @@
 					url: '/pages/my/addressSetting/addressSetting?category=1' + '&gid=' + this.gid,
 					success: () => {}
 				})
+			},
+			choiceContract(item, index){
+				let arrIndex = this.treatyIndex.indexOf(index)
+				if(arrIndex > -1){
+					this.treatyIndex.splice(arrIndex, 1)
+					this.treatyPurce.splice(arrIndex,1)
+				}else{
+					this.treatyIndex.push(index)
+					this.treatyPurce.push(item.id)
+				}
+				let str = ''
+				for(let i in this.treatyPurce){
+					str += this.treatyPurce[i]+','
+				}
+				
+				if(str.indexOf(',') > -1){
+					this.treatyPurceId = str.substring(0, str.length - 1 )
+				}
+
 			}
 		},
 		created() {
@@ -112,5 +233,62 @@
 				}
 			}
 		}
+		.operaDetail{
+			margin-top: 20rpx;
+			background-color: #f7f7f7;
+			padding: 56rpx 30rpx 20rpx;
+			.goodsDetail{
+				display: flex;
+				.detailLft{
+					width: 300rpx;
+					height: 300rpx;
+					background-color: #fff;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					image{
+						width: 80%;
+						height: 80%;
+					}
+				}
+				.detailRgt{
+					margin-left: 20rpx;
+					position: relative;
+					.remarks{
+						width: 360rpx;
+					}
+					.rgtDetail{
+						position: absolute;
+						bottom: 0;
+						.detailPrice{
+							color: #b8393c;
+						}
+					}
+				}
+			}
+		}
+		.contract{
+			background-color: #f7f7f7;
+			margin-top: 20rpx;
+			padding: 20rpx 30rpx;
+			.contractList{
+				margin-top: 20rpx;
+			}
+			.contractList>view{
+				border: 1px solid #d9d9d9;
+				margin-bottom: 20rpx;
+				border-radius: 6rpx;
+				display: flex;
+				justify-content: space-between;
+				padding: 10rpx;
+				.contractIcon::before{
+					color: #666;
+				}
+				.i-cChecked:before{
+					color: #f00;
+				}
+			}
+		}
+
 	}
 </style>

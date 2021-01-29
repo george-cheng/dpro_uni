@@ -24,11 +24,14 @@
 		data(){
 			return{
 				gid: '',
+				regionType: '',
 				goodsDetail: ''
 			}
 		},
 		onLoad(options) {
 			this.gid = options.gid
+			this.regionType = options.regionType
+			this.switchOn = options.switchOn
 		},
 		onNavigationBarButtonTap(e) {
 			if(e.float == 'left') {
@@ -51,7 +54,6 @@
 					data: { gid: this.gid },
 					call: (data)=>{
 						this.goodsDetail = data.data
-						console.log(this.goodsDetail)
 					}
 				})
 			}
@@ -89,11 +91,12 @@
 			margin-top: 20rpx;
 			padding-bottom: 98rpx;
 			.contentImg{
-				width: 750rpx;
+				width: 750rpx !important;
+				width: 100% !important;
 				margin: 0 auto;
 				// display: flex;
 				// justify-content: center;
-				image{
+				image, img{
 					width: 750rpx;
 					margin: 0 auto;
 				}

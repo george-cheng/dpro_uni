@@ -4,7 +4,7 @@
 			<rich-text :nodes="certRule.synopsis"></rich-text>
 		</view>
 		<view class="applicantBtn" @click="isClick && applicantEvent(type)">
-			<button>{{type == '1' ? '申请成为合约商家' : '申请成为法币商家'}}</button>
+			<button>{{type == '2' ? '申请成为合约商家' : '申请成为法币商家'}}</button>
 		</view>
 	</view>
 </template>

@@ -6,7 +6,7 @@
 			</view>
 			<view class="regMsg">
 				<view class="megBox">
-					<input type="text" v-model="msgCode" placeholder="请输入短信验证码">
+					<input type="text" v-model="msgCode" placeholder="请输入验证码">
 					<span @click="pasteEvent">粘贴</span>
 				</view>
 				<view class="msgBtn">
@@ -33,7 +33,9 @@
 
 <script>
 	import { checkEmail, checkPhone, checkPwd } from '../../utils/common.js'
+	import { unimixin } from '../../utils/unimixin.js'
 	export default {
+		mixins: [ unimixin ],
 		data(){
 			return{
 				name: '',
@@ -61,6 +63,7 @@
 		},
 		methods: {
 			forgetPassowrdEvent(){
+				this.isClick = false
 				this.validator()
 				if(this.isValidator){
 					let params = {
@@ -73,6 +76,7 @@
 						method: 'POST',
 						data: params,
 						call: (data)=>{
+							this.isClick = true
 							if(data.code == 200){
 								uni.showToast({
 									title: data.msg,
@@ -187,18 +191,21 @@
 						title: '邮箱地址为空或错误，请重新输入'
 					})
 					this.isValidator = false
+					this.isClick = true
 				}else if(!this.msgCode){
 					uni.showToast({
 						icon: 'none',
 						title: '密码错误或两次密码输入不一样'
 					})
 					this.isValidator = false
+					this.isClick = true
 				}else if(!checkPwd(this.password) || this.password !== this.confirmPassword){
 					uni.showToast({
 						icon: 'none',
 						title: '密码错误或两次密码输入不一样'
 					})
 					this.isValidator = false
+					this.isClick = true
 				}else{
 					this.isValidator = true
 				}

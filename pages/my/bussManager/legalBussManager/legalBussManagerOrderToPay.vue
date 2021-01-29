@@ -104,7 +104,7 @@
 </template>
 
 <script>
-	import { unimixin } from '../../../utils/unimixin.js'
+	import { unimixin } from '../../../../utils/unimixin.js'
 	export default {
 		mixins: [ unimixin ],
 		data(){
@@ -146,7 +146,7 @@
 		onNavigationBarButtonTap(e){
 			if(e.float == 'left'){
 				uni.reLaunch({
-					url: '/pages/my/bussManager/bussManagerOrder',
+					url: '/pages/my/bussManager/legalBussManager/legalBussManagerOrder',
 					success: () => {}
 				})
 			}

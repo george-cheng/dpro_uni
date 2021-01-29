@@ -12,9 +12,9 @@
 		<view class="operaArea">
 			<view class="searchArea">
 				<view class="searchIcon i-search"></view>
-				<input type="text" v-model="search" placeholder="IPFS服务器">
+				<input type="text" v-model="name" placeholder="IPFS服务器" confirm-type="search" @confirm="searchEvent()">
 			</view>
-			<view class="add i-about" @click="addGoodEvent()" v-if="isAdd"></view>
+			<view class="add i-plus" @click="addGoodEvent()" v-if="isAdd"></view>
 		</view>
 		<view class="goodsList">
 			<view v-for="(item, index) in goodList" :key="index" @click="goodListDetailEvent(item)">
@@ -41,13 +41,29 @@
 				swipers: [],
 				switchOn: 0,
 				regionType: '1',
-				search: 'IPFS服务器',
-				isAdd: true,
+				name: '',
+				isAdd: false,
 				goodList: []
 			}
 		},
-		onLoad() {
-
+		onLoad(options) {
+			if(uni.getStorageSync('regionType')){
+				this.regionType = uni.getStorageSync('regionType')
+			}
+			if(uni.getStorageSync('switchOn')){
+				this.switchOn = uni.getStorageSync('switchOn')
+			}
+			if(options.switchOn){
+				this.switchOn = options.switchOn
+			}
+			if(options.regionType){
+				this.regionType = options.regionType
+			}
+			if(this.regionType == 2){
+				this.isAdd = true
+			}else{
+				this.isAdd = false
+			}
 		},
 		onNavigationBarButtonTap(e) {
 			if(e.float == 'left') {
@@ -71,11 +87,16 @@
 				}
 			},
 			addGoodEvent(){
-				
+				uni.reLaunch({
+					url: '/pages/contractExchange/addShopGood',
+					success: () => {}
+				})
 			},
 			goodListDetailEvent(item){
+				uni.setStorageSync('regionType', this.regionType)
+				uni.setStorageSync('switchOn', this.switchOn)
 				uni.reLaunch({
-					url: '/pages/contractExchange/goodsDetail?gid=' + item.gid,
+					url: '/pages/contractExchange/goodsDetail?gid=' + item.gid ,
 					success: () => {}
 				})
 			},
@@ -111,6 +132,22 @@
 					}
 				})
 			},
+			searchEvent(){
+				this.ajaxJson({
+					url: '/api/v1/treatyCashGoods/list',
+					data: { page: '1', pageSize: '10', regionType: this.regionType, name: this.name},
+					call: (data)=>{
+						if(data.code == 200){
+							this.goodList = data.data.rows
+						}else{
+							uni.showToast({
+								icon: 'none',
+								title: '未查询到商品'
+							})
+						}
+					}
+				})
+			}
 		},
 		created() {
 			this.initSwipersImg()
@@ -192,11 +229,16 @@
 					margin-left: 10rpx;
 				}
 				input{
+					padding: 8rpx 0;
+					width: 100%;
+					text-indent: 0.5em;
 					font-size: 24rpx;
 				}
 			}
 			.add{
 				margin-left: 32rpx;
+				display: flex;
+				align-items: center;
 			}
 		}
 		.goodsList>view{

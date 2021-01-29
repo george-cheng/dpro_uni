@@ -22,7 +22,7 @@
 </template>
 
 <script>
-	import { unimixin } from '../../../utils/unimixin.js'
+	import { unimixin } from '../../../../utils/unimixin.js'
 	export default {
 		mixins: [ unimixin ],
 		data(){
@@ -44,7 +44,7 @@
 		onNavigationBarButtonTap(e){
 			if(e.float == 'left'){
 				uni.reLaunch({
-					url: '/pages/my/bussManager/bussManager',
+					url: '/pages/my/bussManager/legalBussManager/legalBussManager',
 					success: () => {}
 				})
 			}
@@ -60,7 +60,7 @@
 			},
 			bussManagerOrderEvent(item, index){
 				uni.reLaunch({
-					url: '/pages/my/bussManager/bussManagerOrderToPay?orderId=' + item.order_id,
+					url: '/pages/my/bussManager/legalBussManager/legalBussManagerOrderToPay?orderId=' + item.order_id,
 					success: () => {}
 				})
 			},

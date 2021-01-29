@@ -133,7 +133,7 @@
 				isConPay: false,   //确认付款
 				isCollect: false,   //确认放币
 				isOrderCancel: false,   //取消
-				confirmTxt: '确认付款',
+				confirmTxt: '确认已付款',
 				isTime: true,
 				
 				urlImg: 'https://dpro-main.oss-cn-hongkong.aliyuncs.com/',
@@ -190,7 +190,13 @@
 			/* 复制 */
 			copyEvent(data){
 				uni.setClipboardData({
-					data: data.toString()
+					data: data.toString(),
+					success: () => {
+						uni.showToast({
+							icon: 'none',
+							title: '复制成功'
+						})
+					}
 				})
 			},
 			/* 保存图片 */
@@ -237,7 +243,7 @@
 							}
 						}
 					})
-				}else if(this.confirmTxt == '确认付款'){
+				}else if(this.confirmTxt == '确认已付款'){
 				
 					this.ajaxJson({
 						url: '/api/v1/otcOrder/userEnterPay',

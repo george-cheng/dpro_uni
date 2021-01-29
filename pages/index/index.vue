@@ -164,6 +164,13 @@
 			},
 			/* 合约兑换 */
 			contractExchangeEvent(){
+				
+				// uni.showToast({
+				// 	icon: 'none',
+				// 	title: '此功能暂未开放',
+				// 	success: () => {}
+				// })
+				
 				uni.reLaunch({
 					url: '/pages/contractExchange/exchangeMall',
 					success: () => {}

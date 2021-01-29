@@ -117,7 +117,7 @@
 			getAddressEvent(item){
 				if(this.category == 1){
 					uni.reLaunch({
-						url: '/pages/contractExchange/exchangeOpera?id=' + item.id,
+						url: '/pages/contractExchange/exchangeOpera?id=' + item.id + '&gid=' + this.gid,
 						success: () => {}
 					})
 				}

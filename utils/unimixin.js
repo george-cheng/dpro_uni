@@ -18,6 +18,8 @@ const unimixin = {
 			isUpRefresh: true,
 			screamH: '',
 			isClick: true,
+			
+			isUploadImg: false
 		}
 	},
 	onReachBottom(){

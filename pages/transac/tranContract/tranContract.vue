@@ -113,6 +113,7 @@
 						if(data.code == 200){
 							this.isSnapFlag = true
 							uni.showToast({
+								icon: 'none',
 								title: data.msg,
 								success: () => {
 									this.getContractList()
@@ -121,6 +122,7 @@
 						}else if(data.code == 500){
 							this.isSnapFlag = true
 							uni.showToast({
+								icon: 'none',
 								title: data.msg,
 								success: () => {
 									this.getContractList()
@@ -187,19 +189,23 @@
 							if(data.code == 200){
 								this.isFlag = true
 								uni.showToast({
-									title: data.msg
+									icon: 'none',
+									title: data.msg,
+									success: () => {}
 								})
 							}else if(data.code == 500){
 								this.isFlag = true
 								uni.showToast({
 									image: '/static/images/wrong.png',
-									title: data.msg
+									title: data.msg,
+									success: () => {}
 								})
 							} else{
 								this.isFlag = false
 								uni.showToast({
 									image: '/static/images/wrong.png',
-									title: data.msg
+									title: data.msg,
+									success: () => {}
 								})
 							}
 						}

@@ -234,3 +234,20 @@
 	font-family: 'icomoon' !important;
 	content: "\e934";
 }
+
+.i-cCheck::before{
+	font-family: 'icomoon' !important;
+	content: "\e936";
+}
+.i-cChecked::before{
+	font-family: 'icomoon' !important;
+	content: "\e937";
+}
+.i-plus::before{
+	font-family: 'icomoon' !important;
+	content: "\e938";
+}
+.i-address::before{
+	font-family: 'icomoon' !important;
+	content: "\e939";
+}
