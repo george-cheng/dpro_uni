@@ -34,7 +34,7 @@
 						<image :src="url + item.treatyType.logo" mode="aspectFit"></image>
 					</view>
 					<view class="listName">{{item.treaty_name}}</view>
-					<view class="listAmount">{{item.ded_amount}}</view>
+					<view class="listAmount">{{ parseInt(accMul(item.ded_amount, item.out_mult))}}</view>
 					<view class="listState">未激活</view>
 					<view class="contractIcon i-cCheck" :class="{'i-cChecked': treatyIndex.indexOf(index)>-1}"></view>
 				</view>
@@ -52,6 +52,7 @@
 
 <script>
 	import { unimixin } from '../../utils/unimixin.js'
+	import { accMul } from '../../utils/common.js'
 	export default {
 		mixins: [ unimixin ],
 		data(){
