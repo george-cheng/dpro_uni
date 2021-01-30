@@ -5,7 +5,7 @@
 		</view>
 		
 		<view class="recordArea">
-			<view v-for="(item, index) in treatyInfo" :key="index" @click="mallDetailEvent(item)">
+			<view v-for="(item, index) in treatyInfo" :key="index">
 				<view class="flexArea">
 					<view class="areaLft">
 						<view class="areaName">{{item.region_type == '1' ? '平台区' : '商家区'}}</view>
@@ -133,12 +133,12 @@
 					}
 				})
 			},
-			mallDetailEvent(item){
-				uni.reLaunch({
-					url: '/pages/my/bussManager/treatyBussManager/treatyBussManagerDetail?category=1&id=' + item.id,
-					success: () => {}
-				})
-			},
+			// mallDetailEvent(item){
+			// 	uni.reLaunch({
+			// 		url: '/pages/my/bussManager/treatyBussManager/treatyBussManagerDetail?category=1&id=' + item.id,
+			// 		success: () => {}
+			// 	})
+			// },
 			switchEvent(item, index){
 				this.switchOn = index
 				this.getTreatyInfo()

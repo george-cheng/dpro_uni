@@ -9,7 +9,7 @@
 		</view>
 		<view class="content">
 			<view class="contentTit"></view>
-			<rich-text class="contentImg" :nodes="goodsDetail.content"></rich-text>
+			<rich-text class="contentImg" :nodes="content"></rich-text>
 		</view>
 		<view class="goodExchange" @click="exchangeEvent()">
 			<view>立即兑换</view>
@@ -25,6 +25,7 @@
 			return{
 				gid: '',
 				regionType: '',
+				content: '',
 				goodsDetail: ''
 			}
 		},
@@ -54,6 +55,7 @@
 					data: { gid: this.gid },
 					call: (data)=>{
 						this.goodsDetail = data.data
+						this.content = this.goodsDetail.content.replace(/\<img/g, '<img style="width: 100%"');
 					}
 				})
 			}

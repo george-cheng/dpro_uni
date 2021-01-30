@@ -14,7 +14,7 @@
 				<view class="searchIcon i-search"></view>
 				<input type="text" v-model="name" placeholder="IPFS服务器" confirm-type="search" @confirm="searchEvent()">
 			</view>
-			<view class="add i-plus" @click="addGoodEvent()" v-if="isAdd"></view>
+			<!-- <view class="add i-plus" @click="addGoodEvent()" v-if="isAdd"></view> -->
 		</view>
 		<view class="goodsList">
 			<view v-for="(item, index) in goodList" :key="index" @click="goodListDetailEvent(item)">
@@ -29,6 +29,10 @@
 				</view>
 			</view>
 		</view>
+		
+		<view class="add i-plus" @click="addGoodEvent()" v-if="isAdd"></view>
+		
+		
 	</view>
 </template>
 
@@ -119,6 +123,8 @@
 					call: (data)=>{
 						if(data.code == 200){
 							this.goodList = data.data.rows
+						}else{
+							this.goodList = []
 						}
 					}
 				})
@@ -157,7 +163,14 @@
 </script>
 
 <style scoped lang="scss">
-	uni-swiper{
+	.add{
+		position: absolute;
+		bottom: 150rpx;
+		right: 30rpx;
+	}
+	.add::before{
+		font-size: 70rpx;
+		color: #b8393c;
 	}
 	.exchangeMall{
 		
@@ -222,7 +235,7 @@
 				width: 100%;
 				font-size: 24rpx;
 				border: 1px solid #d9d9d9;
-				border-radius: 20rpx;
+				border-radius: 16rpx;
 				display: flex;
 				align-items: center;
 				.searchIcon{
@@ -235,11 +248,7 @@
 					font-size: 24rpx;
 				}
 			}
-			.add{
-				margin-left: 32rpx;
-				display: flex;
-				align-items: center;
-			}
+			
 		}
 		.goodsList>view{
 			background-color: #f2f2f2;
@@ -248,8 +257,8 @@
 			margin: 16rpx 30rpx 0;
 			padding: 30rpx 0;
 			.lftImg{
-				width: 178rpx;
-				height: 120rpx;
+				width: 200rpx;
+				height: 240rpx;
 				margin: 0 35rpx;
 				image{
 					width: 100%;

@@ -42,6 +42,8 @@
 					<view class="shopState" v-if="mallDetail.state == 3">订单已完成</view>
 				</view>
 			</view>
+			
+		
 		</view>
 		
 		<uni-popup ref="popup" type="dialog">

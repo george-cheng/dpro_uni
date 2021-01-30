@@ -26,17 +26,23 @@
 				</view>
 			</view>
 		</view>
-		<view class="contract">
+		<view class="contract" v-if="isTreaty">
 			<view class="contractTit">已抢购合约</view>
 			<view class="contractList">
 				<view v-for="(item, index) in treatyInfo" :key="index" @click="choiceContract(item, index)">
-					<view class="listId">id：{{item.id}}</view>
+					<view class="treatyImg">
+						<image :src="url + item.treatyType.logo" mode="aspectFit"></image>
+					</view>
+					<view class="listName">{{item.treaty_name}}</view>
 					<view class="listAmount">{{item.ded_amount}}</view>
-					<view class="listPurchDate">{{item.purch_date}}</view>
-					<view class="listTreatyId">{{item.treaty_id}}</view>
+					<view class="listState">未激活</view>
 					<view class="contractIcon i-cCheck" :class="{'i-cChecked': treatyIndex.indexOf(index)>-1}"></view>
 				</view>
 			</view>
+		</view>
+		<view class="remarksSize">
+			<view class="remarksSizeTit">订单备注</view>
+			<textarea v-model="remarksSize" maxlength="-1" value="" placeholder="请备注商品的规格、尺寸、颜色等信息" />
 		</view>
 		<view class="uniBtn" @click="isClick && confirmExchangeEvent()">
 			<view>确认兑换</view>
@@ -61,6 +67,8 @@
 				treatyPurceId: [],
 				treatyPurceIdArr: [],
 				isDefault: true,
+				isTreaty: false,
+				remarksSize: ''
 			}
 		},
 		onLoad(options) {
@@ -92,9 +100,9 @@
 					let params = {
 						treatyPurceId: this.treatyPurceId,
 						gid: this.gid,
+						remarks: this.remarksSize,
 						addressId: this.addressInfo.id,
 					}
-
 					this.ajaxJson({
 						url: '/api//v1/treatyCashGoods/cashByStr',
 						method: 'POST',
@@ -141,7 +149,10 @@
 					data: { purchState: '1', activateState: '0',  page: '1', pageSize: '10'},
 					call: (data)=>{
 						if(data.code == 200){
+							this.isTreaty = true
 							this.treatyInfo = data.data.rows
+						}else{
+							this.isTreaty = false
 						}
 					}
 				})
@@ -193,7 +204,6 @@
 				if(str.indexOf(',') > -1){
 					this.treatyPurceId = str.substring(0, str.length - 1 )
 				}
-
 			}
 		},
 		created() {
@@ -275,18 +285,47 @@
 				margin-top: 20rpx;
 			}
 			.contractList>view{
+				padding: 10rpx 20rpx;
 				border: 1px solid #d9d9d9;
 				margin-bottom: 20rpx;
 				border-radius: 6rpx;
 				display: flex;
 				justify-content: space-between;
-				padding: 10rpx;
+				align-items: center;
+				color: $c9;
+				.treatyImg{
+					width: 38rpx;
+					height: 44rpx;
+					image{
+						width: 100%;
+						height: 100%;
+					}
+				}
 				.contractIcon::before{
 					color: #666;
 				}
 				.i-cChecked:before{
 					color: #f00;
 				}
+			}
+		}
+		.remarksSize{
+			margin-top: 20rpx;
+			.remarksSizeTit{
+				margin: 0 30rpx;
+				margin-top: 20rpx;
+				padding: 10rpx 0;
+			}
+			text-indent: 0.5em;
+			font-size: 30rpx;
+			color: $c9;
+			textarea{
+				margin: 0 30rpx;
+				border-radius: 8rpx;
+				border: 1px solid #d9d9d9;
+				padding-top: 10rpx;
+				height: 100rpx;
+				width: auto;
 			}
 		}
 

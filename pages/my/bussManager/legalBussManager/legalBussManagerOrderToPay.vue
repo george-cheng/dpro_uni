@@ -174,7 +174,8 @@
 							}else{
 								uni.showToast({
 									image: '/static/images/wrong.png',
-									title: data.msg
+									title: data.msg,
+									success: () => {}
 								})
 							}
 						}
@@ -188,14 +189,15 @@
 							this.isClick = true
 							if(data.code == 200){
 								uni.showToast({
-									title: data.msg
+									title: data.msg,
+									success: () => {}
 								})
 								setTimeout(()=>{
 									uni.reLaunch({
-										url: '/pages/my/bussManager/bussManager',
+										url: '/pages/my/bussManager/legalBussManager/legalBussManagerOrder',
 										success: () => {}
 									})
-								}, 1000)
+								}, 500)
 							}else{
 								uni.showToast({
 									image: '/static/images/wrong.png',
@@ -292,6 +294,12 @@
 								webView.setTitleNViewButtonStyle(0, {
 									text: ' ',    
 								});
+							}
+							
+							if(this.fotcOrder.order_status == '1' && this.fotcOrder.order_type == '1'){
+								this.isConfirmBtn = true
+								this.isClick = false
+								this.confirmTxt = '等待用户确认付款'
 							}
 						}
 					}

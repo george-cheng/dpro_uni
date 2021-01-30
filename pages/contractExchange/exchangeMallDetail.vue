@@ -42,6 +42,13 @@
 					<view class="shopState" v-if="mallDetail.state == 3">订单已完成</view>
 				</view>
 			</view>
+			<view class="remarksSize">
+				<view class="sizeTit">用户备注：</view>
+				<view class="remarksSizeArea">
+					{{mallDetail.remarks}}
+				</view>
+			</view>
+			
 		</view>
 		<view class="orderDetail">
 			<view class="detailTxt">订单信息</view>
@@ -288,6 +295,13 @@
 				}
 			}
 		}
+		.remarksSize{
+			font-size: 28rpx;
+			color: $c9;
+			.remarksSizeArea{
+				color: $c3;
+			}
+		}
 		.orderDetail{
 			margin-top: 20rpx;
 			background-color: #f7f7f7;
@@ -318,5 +332,7 @@
 				}
 			}
 		}
+		
+		
 	}
 </style>

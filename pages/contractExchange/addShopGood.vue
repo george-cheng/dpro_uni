@@ -45,8 +45,9 @@
 			
 		</view>
 		<view class="editor">
-			<jinEdit placeholder="请输入内容" @editOk="editOk" fileKeyName="img" uploadFileUrl="https://www.dpro.ltd/api/v1/treatyCashGoods/imgUpload"></jinEdit> 
+			<jinEdit placeholder="请输入内容" @editOk="editOk" fileKeyName="img" uploadFileUrl="/api/v1/treatyCashGoods/imgUpload"></jinEdit> 
 		</view>
+		<!-- https://www.dpro.ltd -->
 		
 		<view class="uniBtn" @click="isClick && upLoadShopEvent()">确定上传</view>
 	</view>
@@ -238,6 +239,7 @@
 </script>
 
 <style scoped lang="scss">
+	
 	.itemCheck::before{
 		color: $c6;
 	}
