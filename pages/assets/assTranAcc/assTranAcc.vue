@@ -99,7 +99,8 @@
 		},
 		methods: {
 			close(){
-				this.$refs.close()
+				this.$refs.popup.close()
+				this.isClick = true
 			},
 			confirm(done, value){
 				let params = {

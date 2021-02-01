@@ -469,6 +469,7 @@
       },
       close(){
         this.$refs.popup.close()
+				this.isClick = true
       },
       sacOperaEvent(){
 				this.isClick = false
