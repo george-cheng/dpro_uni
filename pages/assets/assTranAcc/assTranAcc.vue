@@ -60,14 +60,21 @@
 			<button>提交</button>
 		</view>
 		
+		<uni-popup ref="popup" type="dialog">
+		  <uni-popup-dialog iptType="password" title="交易密码" :duration="2000" mode="input" placeholder="请输入交易密码" :before-close="true" @close="close" @confirm="confirm"></uni-popup-dialog>
+		</uni-popup>
+		
 	</view>
 </template>
 
 <script>
 	import { accAdd, accMul } from '../../../utils/common.js'
 	import { unimixin } from '../../../utils/unimixin.js'
+	import uniPopup from '../../../components/uni-popup/uni-popup.vue'
+	import uniPopupDialog from '../../../components/uni-popup/uni-popup-dialog.vue'
 	export default {
 		mixins: [ unimixin ],
+		components: { uniPopup, uniPopupDialog },
 		data(){
 			return{
 				total: '',
@@ -76,7 +83,7 @@
 				transferUid: '',
 				amount: '',
 				actualTotal: '0',
-				fee: ''
+				fee: '',
 			}
 		},
 		onLoad(options) {
@@ -91,56 +98,75 @@
 			}
 		},
 		methods: {
+			close(){
+				this.$refs.close()
+			},
+			confirm(done, value){
+				let params = {
+					forwardTypeId: this.forwardType.id,
+					transferUid: this.transferUid,
+					amount: this.amount,
+					tradePwd: value,
+				}
+				this.ajaxJson({
+					url: '/api/v1/transfer/forwardAccount',
+					method: 'POST',
+					data: params,
+					call: (data)=>{
+						this.isClick = true
+						if(data.code == 200){
+							uni.showToast({
+								title: '转账成功',
+								success: () => {}
+							})
+							setTimeout(()=>{
+								uni.reLaunch({
+									url: '/pages/assets/assets',
+									success: () => {}
+								})
+							},500)
+						}else if(data.code == 1045){
+							uni.showToast({
+								icon: 'none',
+								title: '交易密码错误',
+								success: () => {
+									this.$refs.popup.close()
+									this.isClick = true
+								}
+							})
+						}
+						else{
+							uni.showToast({
+								image: '/static/images/wrong.png',
+								title: data.msg,
+								success: () => {
+									this.isClick = true
+								}
+							})
+						}
+					}
+				})
+			},
 			assTranAccEvent(){
 				this.isClick = false
 				if(!this.transferUid || !this.amount){
 					this.isClick = true
 					uni.showToast({
-						image: '/static/images/wrong.png',
+						icon: 'none',
 						title: '收款账户ID和转账数量不能为空'
 					})
 				}else if(this.amount < this.forwardType.min_amount){
 					this.isClick = true
 					uni.showToast({
-						image: '/static/images/wrong.png',
+						icon: 'none',
 						title: '转账数量不能小于 ' + this.forwardType.min_amount + ' ' + this.forwardType.coin_name,
 						success: () => {
 							this.amount = ''
 						}
 					})
 				}else{
-					let params = {
-						forwardTypeId: this.forwardType.id,
-						transferUid: this.transferUid,
-						amount: this.amount
-					}
-					this.ajaxJson({
-						url: '/api/v1/transfer/forwardAccount',
-						method: 'POST',
-						data: params,
-						call: (data)=>{
-							this.isClick = true
-							if(data.code == 200){
-								uni.showToast({
-									title: '转账成功',
-									success: () => {
-										uni.navigateTo({
-											url: '/pages/assets/assets'
-										})
-									}
-								})
-								
-							}else{
-								uni.showToast({
-									image: '/static/images/wrong.png',
-									title: data.msg
-								})
-							}
-						}
-					})
+					this.$refs.popup.open()
 				}
-				
-				
 			},
 			accAllEvent(){
 				this.amount = this.total

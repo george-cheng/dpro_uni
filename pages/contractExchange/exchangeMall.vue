@@ -257,19 +257,25 @@
 			margin: 16rpx 30rpx 0;
 			padding: 30rpx 0;
 			.lftImg{
-				width: 200rpx;
-				height: 240rpx;
+				width: 340rpx;
+				height: 340rpx;
 				margin: 0 35rpx;
 				image{
-					width: 100%;
-					height: 100%;
+					margin-top: 30rpx;
+					width: 280rpx;
+					height: 280rpx;
 				}
+			}
+			.rgtInfo{
+				padding-right: 10rpx;
 			}
 			.infoName{
 				font-size: 30rpx;
+				line-height: 30rpx;
 			}
 			.infoRemarks{
 				font-size: 26rpx;
+				margin-top: 20rpx;
 			}
 			.infoMoney{
 				margin-top: 20rpx;

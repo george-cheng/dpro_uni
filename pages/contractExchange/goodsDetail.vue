@@ -5,6 +5,8 @@
 		</view>
 		<view class="detailInfo">
 			<view class="goodsPrice">{{goodsDetail.price}} USDT</view>
+			<view class="goodsName">{{goodsDetail.name}}</view>
+			<view class="goodsRemarks">{{goodsDetail.remarks}}</view>
 			<rich-text class="synopsis" :nodes="goodsDetail.synopsis"></rich-text>
 		</view>
 		<view class="content">
@@ -55,7 +57,7 @@
 					data: { gid: this.gid },
 					call: (data)=>{
 						this.goodsDetail = data.data
-						this.content = this.goodsDetail.content.replace(/\<img/g, '<img style="width: 100%"');
+						this.content = this.goodsDetail.content.replace(/\<img/g, '<img style="width: 100%;height:auto"');
 					}
 				})
 			}
@@ -76,17 +78,30 @@
 			align-items: center;
 			text-align: center;
 			image{
-
 				margin: 0 auto;
 			}
 		}
 		.detailInfo{
 			margin: 25rpx 30rpx 0;
 			.goodsPrice{
+				font-size: 40rpx;
 				color: #b8393c;
 				margin-bottom: 10rpx;
 			}
+			.goodsName{
+				margin-top: 10rpx;
+				font-size: 36rpx;
+				color: $c3;
+			}
+			.goodsRemarks{
+				color: $c6;
+				font-size: 34rpx;
+				margin-top: 10rpx;
+				margin-bottom: 20rpx;
+			}
 			.synopsis{
+				margin-top: 20rpx;
+				font-size: 34rpx;
 			}
 		}
 		.content{
