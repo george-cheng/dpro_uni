@@ -251,3 +251,11 @@
 	font-family: 'icomoon' !important;
 	content: "\e939";
 }
+.i-shopCart::before{
+	font-family: 'icomoon' !important;
+	content: '\e93a';
+}
+.i-wCoin::before{
+	font-family: 'icomoon' !important;
+	content: '\e93b';
+}

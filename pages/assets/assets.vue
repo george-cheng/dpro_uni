@@ -164,17 +164,13 @@
 			</view>
 
 		</view>
-		<uni-popup ref="popup" type="bottom" v-if="switchOn == 0">
+		<uni-popup ref="popup" type="bottom">
 			<view class="popupCon">
 				<view @click="popupEvent(0)" v-if="isPopupRecharge">充值</view>
 				<view @click="popupEvent(1)" v-if="isPopupWithDraw">提币</view>
 				<view @click="popupEvent(2)" v-if="isPopupTransfer">兑换</view>
 				<view @click="popupEvent(3)" v-if="isPopupTranAcc">转账</view>
 			</view>
-		</uni-popup>
-		
-		<uni-popup ref="popup" type="dialog" v-if="switchOn == 1">
-		  <uni-popup-dialog iptType="password" title="交易密码" :duration="2000" mode="input" placeholder="请输入交易密码" :before-close="true" @close="close" @confirm="confirm"></uni-popup-dialog>
 		</uni-popup>
 		
 		<unitabbar :switchOn = "3"></unitabbar>
@@ -184,11 +180,10 @@
 <script>
 	import { accAdd, accMul } from '../../utils/common.js'
 	import uniPopup from '@/components/uni-popup/uni-popup.vue'
-	import uniPopupDialog from '../../components/uni-popup/uni-popup-dialog.vue'
 	import unitabbar from '../../components/uni-tarbar/tarBar.vue'
 	import { unimixin } from '../../utils/unimixin.js'
 	export default{
-		components: {uniPopup, unitabbar, uniPopupDialog },
+		components: {uniPopup, unitabbar},
 		mixins: [unimixin],
 		data(){
 			return{
@@ -365,49 +360,6 @@
 					})
 				}
 			},
-			close(){
-				this.$refs.popup.close()
-				this.isClick = true
-			},
-			confirm(done, value){
-				this.ajaxJson({
-					url: '/api/v1/capitalTransfer',
-					method: 'POST',
-					data: {type: this.type,fvid: '50',amount: this.tranAmount, tradePwd: value},
-					call: (data)=>{
-						this.isClick = true
-						if(data.code == 200){
-							uni.showToast({
-								title: data.msg,
-								success: () => {
-									this.$refs.popup.close()
-									this.initTranType()
-									this.tranType()
-									this.tranAmount = ''
-								}
-							})
-						}else if(data.code == 1045){
-							uni.showToast({
-								icon: 'none',
-								title: '交易密码错误',
-								success: () => {
-									this.$refs.popup.close()
-									this.isClick = true
-								}
-							})
-						}
-						else{
-							uni.showToast({
-								image: '/static/images/wrong.png',
-								title: data.msg,
-								success: () => {
-									this.isClick = true
-								}
-							})
-						}
-					}
-				})
-			},
 			tranConfirmEvent(){
 				this.isClick = false
 				if(!this.tranAmount){
@@ -418,7 +370,30 @@
 						success: () => {}
 					})
 				}else{
-					this.$refs.popup.open()
+					this.ajaxJson({
+						url: '/api/v1/capitalTransfer',
+						method: 'POST',
+						data: {type: this.type,fvid: '50',amount: this.tranAmount},
+						call: (data)=>{
+							this.isClick = true
+							if(data.code == 200){
+								uni.showToast({
+									title: data.msg,
+									success: () => {
+										this.initTranType()
+										this.tranType()
+										this.tranAmount = ''
+									}
+								})
+							}else{
+								uni.showToast({
+									image: '/static/images/wrong.png',
+									title: data.msg,
+									success: () => {}
+								})
+							}
+						}
+					})
 				}
 			},
 			touchEnd(e){

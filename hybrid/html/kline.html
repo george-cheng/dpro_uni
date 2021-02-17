@@ -78,7 +78,7 @@
 					</div>
 					<div class="depth-main">
 						<div class="depth-main-item">
-							<div class="dmi-cell" style="justify-content: flex-end;" v-for="(item,index) in buyList" :key="index"  v-if="index < 10">
+							<div class="dmi-cell" style="justify-content: flex-end;" v-for="(item,index) in buyList" :key="index"  v-if="index < 20">
 								<div class="dmi-cell-bg" :style="{'width': `${item.width}%`,'backgroundColor':'#303f38'}"></div>
 								<div class="dmi-cell-item">
 									<div class="dmi-cell-index">{{index+1}}</div>
@@ -88,7 +88,7 @@
 							</div>
 						</div>
 						<div class="depth-main-item">
-							<div class="dmi-cell" v-for="(item,index) in sellList" :key="index">
+							<div class="dmi-cell" v-for="(item,index) in sellList" :key="index" v-if="index < 20">
 								<div class="dmi-cell-bg" :style="{'width': `${item.width}%`,'backgroundColor':'#3c2a2e'}"></div>
 								<div class="dmi-cell-item">
 									<div class="dmi-cell-price" style="padding-left: 5px; color: #fe5c57;">{{item.price || '--'}}</div>

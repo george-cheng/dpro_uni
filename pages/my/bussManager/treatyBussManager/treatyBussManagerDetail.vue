@@ -16,7 +16,7 @@
 				<view class="area">{{receiveAddress.area}}</view>
 				<view class="fullAddress">{{receiveAddress.full_address}}</view>
 				<view class="personInfo">
-					{{receiveAddress.name}} &nbsp; {{receiveAddress.phone.toString().replace(/(\d{3})\d{4}(\d{4})/g, '$1****$2')}}
+					{{receiveAddress.name}} &nbsp; {{phone.replace(/(\d{3})\d{4}(\d{4})/g, '$1****$2')}}
 				</view>
 			</view>
 		</view>
@@ -82,7 +82,7 @@
 				receiveAddress: '',
 				giftImg: '/static/images/gift.png',
 				isSendShop: true,
-			
+			phone: '',
 				
 				express_name: '',
 				express_order: '',
@@ -154,6 +154,7 @@
 						title: '请输入物流公司或单号',
 						success: () => {}
 					})
+					this.isClick = true
 				}else{
 					this.ajaxJson({
 						url: '/api/v1/treatyCashOrder/businessEnterSend',
@@ -188,6 +189,7 @@
 						if(data.code == 200){
 							this.mallDetail = data.data
 							this.receiveAddress = data.data.receiveAddress
+							this.phone = this.receiveAddress.phone
 						}
 					}
 				})
@@ -363,11 +365,13 @@
 				justify-content: center;
 				font-size: 32rpx;
 				color: $c3;
+				white-space: nowrap;
 			}
 			.logisticsName, .logisticsNum{
 				display: flex;
 				align-items: center;
 				margin-top: 10rpx;
+				white-space: nowrap;
 				input{
 					border-bottom: 1px solid $c3;
 				}

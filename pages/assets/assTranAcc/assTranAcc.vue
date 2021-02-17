@@ -125,7 +125,7 @@
 									url: '/pages/assets/assets',
 									success: () => {}
 								})
-							},500)
+							},1000)
 						}else if(data.code == 1045){
 							uni.showToast({
 								icon: 'none',

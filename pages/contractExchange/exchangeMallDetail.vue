@@ -76,11 +76,11 @@
 					<view class="orderLft">联系方式：{{mallDetail.fuser.floginName}}</view>
 					<view class="orderRgt" @click="copyEvent(mallDetail.fuser.floginName)">复制</view>
 				</view>
-				<view>
+				<view v-if="mallDetail.express_order">
 					<view class="orderLft">物流单号：{{mallDetail.express_order}}</view>
 					<view class="orderRgt" @click="copyEvent(mallDetail.express_order)">复制</view>
 				</view>
-				<view>
+				<view v-if="mallDetail.express_name">
 					<view class="orderLft">物流名称：{{mallDetail.express_name}}</view>
 					<view class="orderRgt" @click="copyEvent(mallDetail.express_name)">复制</view>
 				</view>

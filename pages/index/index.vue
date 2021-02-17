@@ -34,7 +34,7 @@
 					</view>
 				</view>
 				<view class="contractExchange" @click="contractExchangeEvent()">
-					<image src="../../static/images/contractExchange.png" mode="aspectFit"></image>
+					<image src="../../static/images/shopCart.png" mode="aspectFit"></image>
 					<text class="colorRed">合约兑换</text>
 				</view>
 			</view>

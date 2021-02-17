@@ -784,7 +784,7 @@ var app = new Vue({
 				let sellMaxArr = []
 				let lineSellArr = []
 				for(let i in entrustSellList){
-					if( i < 10){
+					if( i < 20){
 						sellMaxArr.push(entrustSellList[i].amount)
 					}
 				}
@@ -796,8 +796,8 @@ var app = new Vue({
 
 				this.entrustSellList = entrustSellList.map((o,i) => { return {...o,...lineSellArr[i]}})
 
-				if(this.entrustSellList.length >= 10){
-					this.entrustSellList = this.entrustSellList.slice(0, 10)
+				if(this.entrustSellList.length >= 20){
+					this.entrustSellList = this.entrustSellList.slice(0, 20)
 				}else{
 					this.entrustSellList = this.entrustSellList.slice(0,this.entrustSellList.length-1)
 				}

@@ -82,11 +82,21 @@
 				})
 			}
 		},
+		onReachBottom() {
+			
+			if(this.page >= this.pageNum){
+				this.page = this.pageNum
+				console.log(1111)
+			}else{
+				this.page += 1
+				this.getGoodList()
+			}
+		},
 		methods: {
 			touchEnd(e){
 				if(this.changeY > 50){
 					this.initSwipersImg()
-					
+					this.getGoodList()
 					this.paddingTop = 0
 				}
 			},
@@ -119,10 +129,11 @@
 			getGoodList(){
 				this.ajaxJson({
 					url: '/api/v1/treatyCashGoods/list',
-					data: { page: '1', pageSize: '10', regionType: this.regionType },
+					data: { page: this.page, pageSize: this.pageSize, regionType: this.regionType },
 					call: (data)=>{
 						if(data.code == 200){
-							this.goodList = data.data.rows
+							this.pageTotal = data.data.total
+							this.goodList = [...this.goodList, ...data.data.rows]
 						}else{
 							this.goodList = []
 						}
@@ -164,7 +175,7 @@
 
 <style scoped lang="scss">
 	.add{
-		position: absolute;
+		position: fixed;
 		bottom: 150rpx;
 		right: 30rpx;
 	}

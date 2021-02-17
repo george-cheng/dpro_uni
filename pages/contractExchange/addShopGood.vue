@@ -45,7 +45,7 @@
 			
 		</view>
 		<view class="editor">
-			<jinEdit placeholder="请输入内容" @editOk="editOk" fileKeyName="img" uploadFileUrl="/api/v1/treatyCashGoods/imgUpload"></jinEdit> 
+			<jinEdit placeholder="请输入内容" @editOk="editOk" fileKeyName="img" uploadFileUrl="https://www.dpro.ltd/api/v1/treatyCashGoods/imgUpload"></jinEdit> 
 		</view>
 		<!-- https://www.dpro.ltd -->
 		
@@ -140,7 +140,8 @@
 						stock: this.stock,
 						content: this.content,
 					}
-	
+					console.log(params)
+					return
 					this.ajaxJson({
 						url: '/api/v1/treatyCashGoods/publish',
 						method: 'POST',
@@ -222,7 +223,7 @@
 				}else if(!this.content){
 					uni.showToast({
 						icon: 'none',
-						title: '请上传商品详情并点击对号上传',
+						title: '请上传商品详情并点击右下角对号上传',
 						success: () => {}
 					})
 					this.isValidator = false

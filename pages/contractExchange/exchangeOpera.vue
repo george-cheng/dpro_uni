@@ -2,6 +2,7 @@
 	<view class="exchangeOpera">
 		<view class="addressArea" @click="choiceAddressEvent()">
 			<view class="addressInfo">
+				<view class="addAddressTxt" v-if="!isAddress">点击添加地址</view>
 				<view class="area" v-if="isAddress">{{addressInfo.area}}</view>
 				<view class="fullAddress" v-if="isAddress">{{addressInfo.full_address}}</view>
 				<view class="personInfo" v-if="isAddress">
@@ -227,6 +228,12 @@
 			.addressInfo{
 				width: 550rpx;
 				height: 200rpx;
+				.addAddressTxt{
+					display: flex;
+					font-size: 36rpx;
+					color: $c3;
+					line-height: 200rpx;
+				}
 				.area{
 					font-size: 24rpx;
 					color: $c6;

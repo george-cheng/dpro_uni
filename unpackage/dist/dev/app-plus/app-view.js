@@ -3291,99 +3291,77 @@ var render = function() {
             1
           )
         : _vm._e(),
-      _vm._$g(94, "i")
-        ? _c(
-            "uni-popup",
-            { ref: "popup", attrs: { _i: 94 } },
+      _c(
+        "uni-popup",
+        { ref: "popup", attrs: { _i: 94 } },
+        [
+          _c(
+            "v-uni-view",
+            { staticClass: _vm._$g(95, "sc"), attrs: { _i: 95 } },
             [
-              _c(
-                "v-uni-view",
-                { staticClass: _vm._$g(95, "sc"), attrs: { _i: 95 } },
-                [
-                  _vm._$g(96, "i")
-                    ? _c(
-                        "v-uni-view",
-                        {
-                          attrs: { _i: 96 },
-                          on: {
-                            click: function($event) {
-                              return _vm.$handleViewEvent($event)
-                            }
-                          }
-                        },
-                        [_vm._v("充值")]
-                      )
-                    : _vm._e(),
-                  _vm._$g(97, "i")
-                    ? _c(
-                        "v-uni-view",
-                        {
-                          attrs: { _i: 97 },
-                          on: {
-                            click: function($event) {
-                              return _vm.$handleViewEvent($event)
-                            }
-                          }
-                        },
-                        [_vm._v("提币")]
-                      )
-                    : _vm._e(),
-                  _vm._$g(98, "i")
-                    ? _c(
-                        "v-uni-view",
-                        {
-                          attrs: { _i: 98 },
-                          on: {
-                            click: function($event) {
-                              return _vm.$handleViewEvent($event)
-                            }
-                          }
-                        },
-                        [_vm._v("兑换")]
-                      )
-                    : _vm._e(),
-                  _vm._$g(99, "i")
-                    ? _c(
-                        "v-uni-view",
-                        {
-                          attrs: { _i: 99 },
-                          on: {
-                            click: function($event) {
-                              return _vm.$handleViewEvent($event)
-                            }
-                          }
-                        },
-                        [_vm._v("转账")]
-                      )
-                    : _vm._e()
-                ],
-                1
-              )
+              _vm._$g(96, "i")
+                ? _c(
+                    "v-uni-view",
+                    {
+                      attrs: { _i: 96 },
+                      on: {
+                        click: function($event) {
+                          return _vm.$handleViewEvent($event)
+                        }
+                      }
+                    },
+                    [_vm._v("充值")]
+                  )
+                : _vm._e(),
+              _vm._$g(97, "i")
+                ? _c(
+                    "v-uni-view",
+                    {
+                      attrs: { _i: 97 },
+                      on: {
+                        click: function($event) {
+                          return _vm.$handleViewEvent($event)
+                        }
+                      }
+                    },
+                    [_vm._v("提币")]
+                  )
+                : _vm._e(),
+              _vm._$g(98, "i")
+                ? _c(
+                    "v-uni-view",
+                    {
+                      attrs: { _i: 98 },
+                      on: {
+                        click: function($event) {
+                          return _vm.$handleViewEvent($event)
+                        }
+                      }
+                    },
+                    [_vm._v("兑换")]
+                  )
+                : _vm._e(),
+              _vm._$g(99, "i")
+                ? _c(
+                    "v-uni-view",
+                    {
+                      attrs: { _i: 99 },
+                      on: {
+                        click: function($event) {
+                          return _vm.$handleViewEvent($event)
+                        }
+                      }
+                    },
+                    [_vm._v("转账")]
+                  )
+                : _vm._e()
             ],
             1
           )
-        : _vm._e(),
-      _vm._$g(100, "i")
-        ? _c(
-            "uni-popup",
-            { ref: "popup", attrs: { _i: 100 } },
-            [
-              _c("uni-popup-dialog", {
-                attrs: { _i: 101 },
-                on: {
-                  close: function($event) {
-                    return _vm.$handleViewEvent($event)
-                  },
-                  confirm: function($event) {
-                    return _vm.$handleViewEvent($event)
-                  }
-                }
-              })
-            ],
-            1
-          )
-        : _vm._e(),
-      _c("unitabbar", { attrs: { _i: 102 } })
+        ],
+        1
+      ),
+      _c("unitabbar", { attrs: { _i: 100 } })
     ],
     1
   )
@@ -3420,8 +3398,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 var _uniPopup = _interopRequireDefault(__webpack_require__(/*! @/components/uni-popup/uni-popup.vue */ 17));
-var _tarBar = _interopRequireDefault(__webpack_require__(/*! ../../components/uni-tarbar/tarBar.vue */ 43));
-var _uniPopupDialog = _interopRequireDefault(__webpack_require__(/*! ../../components/uni-popup/uni-popup-dialog.vue */ 35));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
+var _tarBar = _interopRequireDefault(__webpack_require__(/*! ../../components/uni-tarbar/tarBar.vue */ 43));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
 {
 
   data: function data() {
@@ -3431,8 +3408,7 @@ var _uniPopupDialog = _interopRequireDefault(__webpack_require__(/*! ../../compo
   },
   components: {
     'uniPopup': _uniPopup.default,
-    'unitabbar': _tarBar.default,
-    'uniPopupDialog': _uniPopupDialog.default } };exports.default = _default;
+    'unitabbar': _tarBar.default } };exports.default = _default;
 
 /***/ }),
 /* 59 */
@@ -22557,6 +22533,9 @@ var render = function() {
       style: _vm._$g(0, "s"),
       attrs: { _i: 0 },
       on: {
+        click: function($event) {
+          return _vm.$handleViewEvent($event)
+        },
         touchstart: function($event) {
           return _vm.$handleViewEvent($event)
         },
@@ -22623,7 +22602,9 @@ var render = function() {
                           },
                           on: {
                             click: function($event) {
-                              return _vm.$handleViewEvent($event)
+                              return _vm.$handleViewEvent($event, {
+                                stop: true
+                              })
                             }
                           }
                         })
@@ -22707,7 +22688,7 @@ var render = function() {
                 attrs: { _i: 21 },
                 on: {
                   click: function($event) {
-                    return _vm.$handleViewEvent($event)
+                    return _vm.$handleViewEvent($event, { stop: true })
                   }
                 }
               }),
@@ -22789,7 +22770,7 @@ var render = function() {
                       attrs: { _i: 32 },
                       on: {
                         click: function($event) {
-                          return _vm.$handleViewEvent($event)
+                          return _vm.$handleViewEvent($event, { stop: true })
                         }
                       }
                     },
@@ -22812,7 +22793,7 @@ var render = function() {
                 attrs: { _i: 34 },
                 on: {
                   click: function($event) {
-                    return _vm.$handleViewEvent($event)
+                    return _vm.$handleViewEvent($event, { stop: true })
                   }
                 }
               }),
@@ -22837,7 +22818,7 @@ var render = function() {
                   attrs: { _i: 37 },
                   on: {
                     click: function($event) {
-                      return _vm.$handleViewEvent($event)
+                      return _vm.$handleViewEvent($event, { stop: true })
                     }
                   }
                 },
@@ -24254,7 +24235,7 @@ if(false) {}
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ./node_modules/css-loader/dist/runtime/api.js */ 10);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "@charset \"UTF-8\";\r\n/**\r\n * 这里是uni-app内置的常用样式变量\r\n *\r\n * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量\r\n * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App\r\n *\r\n */\r\n/**\r\n * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能\r\n *\r\n * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件\r\n */\r\n/* 颜色变量 */\r\n/* 行为相关颜色 */\r\n/* 文字基本颜色 */\r\n/* 背景颜色 */\r\n/* 边框颜色 */\r\n/* 尺寸变量 */\r\n/* 文字尺寸 */\r\n/* 图片尺寸 */\r\n/* Border Radius */\r\n/* 水平间距 */\r\n/* 垂直间距 */\r\n/* 透明度 */\r\n/* 文章场景相关 */\n.i-legal[data-v-32afa715]::before {\r\n  color: #C22E2E;\n}\n.i-contract[data-v-32afa715]::before {\r\n  color: #F2994A;\n}\n.bussManagerSetting .perCon > uni-view[data-v-32afa715] {\r\n  border-top: 1px solid #F2F2F2;\n}\n.bussManagerSetting .perCon[data-v-32afa715] {\r\n  background-color: #fff;\r\n  margin-top: 12rpx;\n}\n.bussManagerSetting .perCon uni-view[data-v-32afa715] {\r\n  height: 112rpx;\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  -webkit-box-align: center;\r\n  -webkit-align-items: center;\r\n          align-items: center;\r\n  -webkit-box-pack: justify;\r\n  -webkit-justify-content: space-between;\r\n          justify-content: space-between;\r\n  margin: 0 10rpx;\r\n  color: #fff;\n}\n.bussManagerSetting .perCon uni-view .conRgt .conIcon[data-v-32afa715] {\r\n  color: #999;\n}\n.bussManagerSetting .perCon uni-view .conRgt .rgtInfo[data-v-32afa715] {\r\n  color: #333;\n}\n.bussManagerSetting .perCon uni-view .conLft .lftTit[data-v-32afa715] {\r\n  color: #333;\n}\n.bussManagerSetting .perCon uni-view[data-v-32afa715]:first-child {\r\n  border-top: none;\n}\n.bussManagerSetting .i-zfb[data-v-32afa715]:before, .bussManagerSetting .i-wx[data-v-32afa715]:before {\r\n  color: #333;\n}\r\n", ""]);
+exports.push([module.i, "@charset \"UTF-8\";\r\n/**\r\n * 这里是uni-app内置的常用样式变量\r\n *\r\n * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量\r\n * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App\r\n *\r\n */\r\n/**\r\n * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能\r\n *\r\n * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件\r\n */\r\n/* 颜色变量 */\r\n/* 行为相关颜色 */\r\n/* 文字基本颜色 */\r\n/* 背景颜色 */\r\n/* 边框颜色 */\r\n/* 尺寸变量 */\r\n/* 文字尺寸 */\r\n/* 图片尺寸 */\r\n/* Border Radius */\r\n/* 水平间距 */\r\n/* 垂直间距 */\r\n/* 透明度 */\r\n/* 文章场景相关 */\n.i-legal[data-v-32afa715]::before {\r\n  color: #C22E2E;\n}\n.i-wCoin[data-v-32afa715]::before {\r\n  color: #F2994A;\r\n  font-size: 48rpx;\n}\n.bussManagerSetting .perCon > uni-view[data-v-32afa715] {\r\n  border-top: 1px solid #F2F2F2;\n}\n.bussManagerSetting .perCon[data-v-32afa715] {\r\n  background-color: #fff;\r\n  margin-top: 12rpx;\n}\n.bussManagerSetting .perCon uni-view[data-v-32afa715] {\r\n  height: 112rpx;\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  -webkit-box-align: center;\r\n  -webkit-align-items: center;\r\n          align-items: center;\r\n  -webkit-box-pack: justify;\r\n  -webkit-justify-content: space-between;\r\n          justify-content: space-between;\r\n  margin: 0 10rpx;\r\n  color: #fff;\n}\n.bussManagerSetting .perCon uni-view .conRgt .conIcon[data-v-32afa715] {\r\n  color: #999;\n}\n.bussManagerSetting .perCon uni-view .conRgt .rgtInfo[data-v-32afa715] {\r\n  color: #333;\n}\n.bussManagerSetting .perCon uni-view .conLft .lftTit[data-v-32afa715] {\r\n  color: #333;\n}\n.bussManagerSetting .perCon uni-view[data-v-32afa715]:first-child {\r\n  border-top: none;\n}\n.bussManagerSetting .i-zfb[data-v-32afa715]:before, .bussManagerSetting .i-wx[data-v-32afa715]:before {\r\n  color: #333;\n}\r\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -27096,7 +27077,7 @@ var render = function() {
                 ? _c(
                     "v-uni-view",
                     { staticClass: _vm._$g(3, "sc"), attrs: { _i: 3 } },
-                    [_vm._v(_vm._$g(3, "t0-0"))]
+                    [_vm._v("点击添加地址")]
                   )
                 : _vm._e(),
               _vm._$g(4, "i")
@@ -27110,7 +27091,14 @@ var render = function() {
                 ? _c(
                     "v-uni-view",
                     { staticClass: _vm._$g(5, "sc"), attrs: { _i: 5 } },
-                    [_vm._v(_vm._$g(5, "t0-0") + "   " + _vm._$g(5, "t0-1"))]
+                    [_vm._v(_vm._$g(5, "t0-0"))]
+                  )
+                : _vm._e(),
+              _vm._$g(6, "i")
+                ? _c(
+                    "v-uni-view",
+                    { staticClass: _vm._$g(6, "sc"), attrs: { _i: 6 } },
+                    [_vm._v(_vm._$g(6, "t0-0") + "   " + _vm._$g(6, "t0-1"))]
                   )
                 : _vm._e()
             ],
@@ -27119,11 +27107,11 @@ var render = function() {
           true
             ? _c(
                 "v-uni-view",
-                { staticClass: _vm._$g(6, "sc"), attrs: { _i: 6 } },
+                { staticClass: _vm._$g(7, "sc"), attrs: { _i: 7 } },
                 [
                   _c("v-uni-view", {
-                    staticClass: _vm._$g(7, "sc"),
-                    attrs: { _i: 7 }
+                    staticClass: _vm._$g(8, "sc"),
+                    attrs: { _i: 8 }
                   })
                 ],
                 1
@@ -27134,21 +27122,21 @@ var render = function() {
       ),
       _c(
         "v-uni-view",
-        { staticClass: _vm._$g(8, "sc"), attrs: { _i: 8 } },
+        { staticClass: _vm._$g(9, "sc"), attrs: { _i: 9 } },
         [
           _c(
             "v-uni-view",
-            { staticClass: _vm._$g(9, "sc"), attrs: { _i: 9 } },
+            { staticClass: _vm._$g(10, "sc"), attrs: { _i: 10 } },
             [
               _c(
                 "v-uni-view",
-                { staticClass: _vm._$g(10, "sc"), attrs: { _i: 10 } },
+                { staticClass: _vm._$g(11, "sc"), attrs: { _i: 11 } },
                 [
                   _c("v-uni-image", {
                     attrs: {
-                      src: _vm._$g(11, "a-src"),
+                      src: _vm._$g(12, "a-src"),
                       mode: "aspectFit",
-                      _i: 11
+                      _i: 12
                     }
                   })
                 ],
@@ -27156,26 +27144,26 @@ var render = function() {
               ),
               _c(
                 "v-uni-view",
-                { staticClass: _vm._$g(12, "sc"), attrs: { _i: 12 } },
+                { staticClass: _vm._$g(13, "sc"), attrs: { _i: 13 } },
                 [
                   _c(
                     "v-uni-view",
-                    { staticClass: _vm._$g(13, "sc"), attrs: { _i: 13 } },
-                    [_vm._v(_vm._$g(13, "t0-0"))]
+                    { staticClass: _vm._$g(14, "sc"), attrs: { _i: 14 } },
+                    [_vm._v(_vm._$g(14, "t0-0"))]
                   ),
                   _c(
                     "v-uni-view",
-                    { staticClass: _vm._$g(14, "sc"), attrs: { _i: 14 } },
+                    { staticClass: _vm._$g(15, "sc"), attrs: { _i: 15 } },
                     [
                       _c(
                         "v-uni-view",
-                        { staticClass: _vm._$g(15, "sc"), attrs: { _i: 15 } },
-                        [_vm._v(_vm._$g(15, "t0-0") + " USDT")]
+                        { staticClass: _vm._$g(16, "sc"), attrs: { _i: 16 } },
+                        [_vm._v(_vm._$g(16, "t0-0") + " USDT")]
                       ),
                       _c(
                         "v-uni-view",
-                        { staticClass: _vm._$g(16, "sc"), attrs: { _i: 16 } },
-                        [_vm._v("商品编号：" + _vm._$g(16, "t0-0"))]
+                        { staticClass: _vm._$g(17, "sc"), attrs: { _i: 17 } },
+                        [_vm._v("商品编号：" + _vm._$g(17, "t0-0"))]
                       )
                     ],
                     1
@@ -27189,25 +27177,25 @@ var render = function() {
         ],
         1
       ),
-      _vm._$g(17, "i")
+      _vm._$g(18, "i")
         ? _c(
             "v-uni-view",
-            { staticClass: _vm._$g(17, "sc"), attrs: { _i: 17 } },
+            { staticClass: _vm._$g(18, "sc"), attrs: { _i: 18 } },
             [
               _c(
                 "v-uni-view",
-                { staticClass: _vm._$g(18, "sc"), attrs: { _i: 18 } },
+                { staticClass: _vm._$g(19, "sc"), attrs: { _i: 19 } },
                 [_vm._v("已抢购合约")]
               ),
               _c(
                 "v-uni-view",
-                { staticClass: _vm._$g(19, "sc"), attrs: { _i: 19 } },
-                _vm._l(_vm._$g(20, "f"), function(item, index, $20, $30) {
+                { staticClass: _vm._$g(20, "sc"), attrs: { _i: 20 } },
+                _vm._l(_vm._$g(21, "f"), function(item, index, $20, $30) {
                   return _c(
                     "v-uni-view",
                     {
                       key: item,
-                      attrs: { _i: "20-" + $30 },
+                      attrs: { _i: "21-" + $30 },
                       on: {
                         click: function($event) {
                           return _vm.$handleViewEvent($event)
@@ -27218,27 +27206,19 @@ var render = function() {
                       _c(
                         "v-uni-view",
                         {
-                          staticClass: _vm._$g("21-" + $30, "sc"),
-                          attrs: { _i: "21-" + $30 }
+                          staticClass: _vm._$g("22-" + $30, "sc"),
+                          attrs: { _i: "22-" + $30 }
                         },
                         [
                           _c("v-uni-image", {
                             attrs: {
-                              src: _vm._$g("22-" + $30, "a-src"),
+                              src: _vm._$g("23-" + $30, "a-src"),
                               mode: "aspectFit",
-                              _i: "22-" + $30
+                              _i: "23-" + $30
                             }
                           })
                         ],
                         1
-                      ),
-                      _c(
-                        "v-uni-view",
-                        {
-                          staticClass: _vm._$g("23-" + $30, "sc"),
-                          attrs: { _i: "23-" + $30 }
-                        },
-                        [_vm._v(_vm._$g("23-" + $30, "t0-0"))]
                       ),
                       _c(
                         "v-uni-view",
@@ -27254,12 +27234,20 @@ var render = function() {
                           staticClass: _vm._$g("25-" + $30, "sc"),
                           attrs: { _i: "25-" + $30 }
                         },
+                        [_vm._v(_vm._$g("25-" + $30, "t0-0"))]
+                      ),
+                      _c(
+                        "v-uni-view",
+                        {
+                          staticClass: _vm._$g("26-" + $30, "sc"),
+                          attrs: { _i: "26-" + $30 }
+                        },
                         [_vm._v("未激活")]
                       ),
                       _c("v-uni-view", {
-                        staticClass: _vm._$g("26-" + $30, "sc"),
-                        class: _vm._$g("26-" + $30, "c"),
-                        attrs: { _i: "26-" + $30 }
+                        staticClass: _vm._$g("27-" + $30, "sc"),
+                        class: _vm._$g("27-" + $30, "c"),
+                        attrs: { _i: "27-" + $30 }
                       })
                     ],
                     1
@@ -27273,11 +27261,11 @@ var render = function() {
         : _vm._e(),
       _c(
         "v-uni-view",
-        { staticClass: _vm._$g(27, "sc"), attrs: { _i: 27 } },
+        { staticClass: _vm._$g(28, "sc"), attrs: { _i: 28 } },
         [
           _c(
             "v-uni-view",
-            { staticClass: _vm._$g(28, "sc"), attrs: { _i: 28 } },
+            { staticClass: _vm._$g(29, "sc"), attrs: { _i: 29 } },
             [_vm._v("订单备注")]
           ),
           _c("v-uni-textarea", {
@@ -27285,12 +27273,12 @@ var render = function() {
               maxlength: "-1",
               value: "",
               placeholder: "请备注商品的规格、尺寸、颜色等信息",
-              _i: 29
+              _i: 30
             },
             model: {
-              value: _vm._$g(29, "v-model"),
+              value: _vm._$g(30, "v-model"),
               callback: function($$v) {
-                _vm.$handleVModelEvent(29, $$v)
+                _vm.$handleVModelEvent(30, $$v)
               },
               expression: "remarksSize"
             }
@@ -27301,15 +27289,15 @@ var render = function() {
       _c(
         "v-uni-view",
         {
-          staticClass: _vm._$g(30, "sc"),
-          attrs: { _i: 30 },
+          staticClass: _vm._$g(31, "sc"),
+          attrs: { _i: 31 },
           on: {
             click: function($event) {
               return _vm.$handleViewEvent($event)
             }
           }
         },
-        [_c("v-uni-view", { attrs: { _i: 31 } }, [_vm._v("确认兑换")])],
+        [_c("v-uni-view", { attrs: { _i: 32 } }, [_vm._v("确认兑换")])],
         1
       )
     ],
@@ -27404,7 +27392,7 @@ if(false) {}
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ./node_modules/css-loader/dist/runtime/api.js */ 10);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "@charset \"UTF-8\";\r\n/**\r\n * 这里是uni-app内置的常用样式变量\r\n *\r\n * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量\r\n * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App\r\n *\r\n */\r\n/**\r\n * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能\r\n *\r\n * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件\r\n */\r\n/* 颜色变量 */\r\n/* 行为相关颜色 */\r\n/* 文字基本颜色 */\r\n/* 背景颜色 */\r\n/* 边框颜色 */\r\n/* 尺寸变量 */\r\n/* 文字尺寸 */\r\n/* 图片尺寸 */\r\n/* Border Radius */\r\n/* 水平间距 */\r\n/* 垂直间距 */\r\n/* 透明度 */\r\n/* 文章场景相关 */\n.exchangeOpera .addressArea[data-v-5c8152bf] {\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  -webkit-box-pack: justify;\r\n  -webkit-justify-content: space-between;\r\n          justify-content: space-between;\r\n  -webkit-box-align: center;\r\n  -webkit-align-items: center;\r\n          align-items: center;\r\n  margin-top: 30rpx;\r\n  padding: 20rpx 30rpx;\r\n  background-color: #f7f7f7;\n}\n.exchangeOpera .addressArea .addressInfo[data-v-5c8152bf] {\r\n  width: 550rpx;\r\n  height: 200rpx;\n}\n.exchangeOpera .addressArea .addressInfo .area[data-v-5c8152bf] {\r\n  font-size: 24rpx;\r\n  color: #666;\n}\n.exchangeOpera .addressArea .addressInfo .fullAddress[data-v-5c8152bf] {\r\n  margin-top: 20rpx;\r\n  font-size: 30rpx;\r\n  color: #333;\r\n  font-weight: bold;\n}\n.exchangeOpera .addressArea .addressInfo .personInfo[data-v-5c8152bf] {\r\n  margin-top: 20rpx;\r\n  font-size: 26rpx;\r\n  color: #666;\n}\n.exchangeOpera .operaDetail[data-v-5c8152bf] {\r\n  margin-top: 20rpx;\r\n  background-color: #f7f7f7;\r\n  padding: 56rpx 30rpx 20rpx;\n}\n.exchangeOpera .operaDetail .goodsDetail[data-v-5c8152bf] {\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\n}\n.exchangeOpera .operaDetail .goodsDetail .detailLft[data-v-5c8152bf] {\r\n  width: 300rpx;\r\n  height: 300rpx;\r\n  background-color: #fff;\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  -webkit-box-align: center;\r\n  -webkit-align-items: center;\r\n          align-items: center;\r\n  -webkit-box-pack: center;\r\n  -webkit-justify-content: center;\r\n          justify-content: center;\n}\n.exchangeOpera .operaDetail .goodsDetail .detailLft uni-image[data-v-5c8152bf] {\r\n  width: 80%;\r\n  height: 80%;\n}\n.exchangeOpera .operaDetail .goodsDetail .detailRgt[data-v-5c8152bf] {\r\n  margin-left: 20rpx;\r\n  position: relative;\n}\n.exchangeOpera .operaDetail .goodsDetail .detailRgt .remarks[data-v-5c8152bf] {\r\n  width: 360rpx;\n}\n.exchangeOpera .operaDetail .goodsDetail .detailRgt .rgtDetail[data-v-5c8152bf] {\r\n  position: absolute;\r\n  bottom: 0;\n}\n.exchangeOpera .operaDetail .goodsDetail .detailRgt .rgtDetail .detailPrice[data-v-5c8152bf] {\r\n  color: #b8393c;\n}\n.exchangeOpera .contract[data-v-5c8152bf] {\r\n  background-color: #f7f7f7;\r\n  margin-top: 20rpx;\r\n  padding: 20rpx 30rpx;\n}\n.exchangeOpera .contract .contractList[data-v-5c8152bf] {\r\n  margin-top: 20rpx;\n}\n.exchangeOpera .contract .contractList > uni-view[data-v-5c8152bf] {\r\n  padding: 10rpx 20rpx;\r\n  border: 1px solid #d9d9d9;\r\n  margin-bottom: 20rpx;\r\n  border-radius: 6rpx;\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  -webkit-box-pack: justify;\r\n  -webkit-justify-content: space-between;\r\n          justify-content: space-between;\r\n  -webkit-box-align: center;\r\n  -webkit-align-items: center;\r\n          align-items: center;\r\n  color: #999;\n}\n.exchangeOpera .contract .contractList > uni-view .treatyImg[data-v-5c8152bf] {\r\n  width: 38rpx;\r\n  height: 44rpx;\n}\n.exchangeOpera .contract .contractList > uni-view .treatyImg uni-image[data-v-5c8152bf] {\r\n  width: 100%;\r\n  height: 100%;\n}\n.exchangeOpera .contract .contractList > uni-view .contractIcon[data-v-5c8152bf]::before {\r\n  color: #666;\n}\n.exchangeOpera .contract .contractList > uni-view .i-cChecked[data-v-5c8152bf]:before {\r\n  color: #f00;\n}\n.exchangeOpera .remarksSize[data-v-5c8152bf] {\r\n  margin-top: 20rpx;\r\n  text-indent: 0.5em;\r\n  font-size: 30rpx;\r\n  color: #999;\n}\n.exchangeOpera .remarksSize .remarksSizeTit[data-v-5c8152bf] {\r\n  margin: 0 30rpx;\r\n  margin-top: 20rpx;\r\n  padding: 10rpx 0;\n}\n.exchangeOpera .remarksSize uni-textarea[data-v-5c8152bf] {\r\n  margin: 0 30rpx;\r\n  border-radius: 8rpx;\r\n  border: 1px solid #d9d9d9;\r\n  padding-top: 10rpx;\r\n  height: 100rpx;\r\n  width: auto;\n}\r\n", ""]);
+exports.push([module.i, "@charset \"UTF-8\";\r\n/**\r\n * 这里是uni-app内置的常用样式变量\r\n *\r\n * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量\r\n * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App\r\n *\r\n */\r\n/**\r\n * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能\r\n *\r\n * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件\r\n */\r\n/* 颜色变量 */\r\n/* 行为相关颜色 */\r\n/* 文字基本颜色 */\r\n/* 背景颜色 */\r\n/* 边框颜色 */\r\n/* 尺寸变量 */\r\n/* 文字尺寸 */\r\n/* 图片尺寸 */\r\n/* Border Radius */\r\n/* 水平间距 */\r\n/* 垂直间距 */\r\n/* 透明度 */\r\n/* 文章场景相关 */\n.exchangeOpera .addressArea[data-v-5c8152bf] {\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  -webkit-box-pack: justify;\r\n  -webkit-justify-content: space-between;\r\n          justify-content: space-between;\r\n  -webkit-box-align: center;\r\n  -webkit-align-items: center;\r\n          align-items: center;\r\n  margin-top: 30rpx;\r\n  padding: 20rpx 30rpx;\r\n  background-color: #f7f7f7;\n}\n.exchangeOpera .addressArea .addressInfo[data-v-5c8152bf] {\r\n  width: 550rpx;\r\n  height: 200rpx;\n}\n.exchangeOpera .addressArea .addressInfo .addAddressTxt[data-v-5c8152bf] {\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  font-size: 36rpx;\r\n  color: #333;\r\n  line-height: 200rpx;\n}\n.exchangeOpera .addressArea .addressInfo .area[data-v-5c8152bf] {\r\n  font-size: 24rpx;\r\n  color: #666;\n}\n.exchangeOpera .addressArea .addressInfo .fullAddress[data-v-5c8152bf] {\r\n  margin-top: 20rpx;\r\n  font-size: 30rpx;\r\n  color: #333;\r\n  font-weight: bold;\n}\n.exchangeOpera .addressArea .addressInfo .personInfo[data-v-5c8152bf] {\r\n  margin-top: 20rpx;\r\n  font-size: 26rpx;\r\n  color: #666;\n}\n.exchangeOpera .operaDetail[data-v-5c8152bf] {\r\n  margin-top: 20rpx;\r\n  background-color: #f7f7f7;\r\n  padding: 56rpx 30rpx 20rpx;\n}\n.exchangeOpera .operaDetail .goodsDetail[data-v-5c8152bf] {\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\n}\n.exchangeOpera .operaDetail .goodsDetail .detailLft[data-v-5c8152bf] {\r\n  width: 300rpx;\r\n  height: 300rpx;\r\n  background-color: #fff;\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  -webkit-box-align: center;\r\n  -webkit-align-items: center;\r\n          align-items: center;\r\n  -webkit-box-pack: center;\r\n  -webkit-justify-content: center;\r\n          justify-content: center;\n}\n.exchangeOpera .operaDetail .goodsDetail .detailLft uni-image[data-v-5c8152bf] {\r\n  width: 80%;\r\n  height: 80%;\n}\n.exchangeOpera .operaDetail .goodsDetail .detailRgt[data-v-5c8152bf] {\r\n  margin-left: 20rpx;\r\n  position: relative;\n}\n.exchangeOpera .operaDetail .goodsDetail .detailRgt .remarks[data-v-5c8152bf] {\r\n  width: 360rpx;\n}\n.exchangeOpera .operaDetail .goodsDetail .detailRgt .rgtDetail[data-v-5c8152bf] {\r\n  position: absolute;\r\n  bottom: 0;\n}\n.exchangeOpera .operaDetail .goodsDetail .detailRgt .rgtDetail .detailPrice[data-v-5c8152bf] {\r\n  color: #b8393c;\n}\n.exchangeOpera .contract[data-v-5c8152bf] {\r\n  background-color: #f7f7f7;\r\n  margin-top: 20rpx;\r\n  padding: 20rpx 30rpx;\n}\n.exchangeOpera .contract .contractList[data-v-5c8152bf] {\r\n  margin-top: 20rpx;\n}\n.exchangeOpera .contract .contractList > uni-view[data-v-5c8152bf] {\r\n  padding: 10rpx 20rpx;\r\n  border: 1px solid #d9d9d9;\r\n  margin-bottom: 20rpx;\r\n  border-radius: 6rpx;\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  -webkit-box-pack: justify;\r\n  -webkit-justify-content: space-between;\r\n          justify-content: space-between;\r\n  -webkit-box-align: center;\r\n  -webkit-align-items: center;\r\n          align-items: center;\r\n  color: #999;\n}\n.exchangeOpera .contract .contractList > uni-view .treatyImg[data-v-5c8152bf] {\r\n  width: 38rpx;\r\n  height: 44rpx;\n}\n.exchangeOpera .contract .contractList > uni-view .treatyImg uni-image[data-v-5c8152bf] {\r\n  width: 100%;\r\n  height: 100%;\n}\n.exchangeOpera .contract .contractList > uni-view .contractIcon[data-v-5c8152bf]::before {\r\n  color: #666;\n}\n.exchangeOpera .contract .contractList > uni-view .i-cChecked[data-v-5c8152bf]:before {\r\n  color: #f00;\n}\n.exchangeOpera .remarksSize[data-v-5c8152bf] {\r\n  margin-top: 20rpx;\r\n  text-indent: 0.5em;\r\n  font-size: 30rpx;\r\n  color: #999;\n}\n.exchangeOpera .remarksSize .remarksSizeTit[data-v-5c8152bf] {\r\n  margin: 0 30rpx;\r\n  margin-top: 20rpx;\r\n  padding: 10rpx 0;\n}\n.exchangeOpera .remarksSize uni-textarea[data-v-5c8152bf] {\r\n  margin: 0 30rpx;\r\n  border-radius: 8rpx;\r\n  border: 1px solid #d9d9d9;\r\n  padding-top: 10rpx;\r\n  height: 100rpx;\r\n  width: auto;\n}\r\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -27853,56 +27841,60 @@ var render = function() {
                 ],
                 1
               ),
-              _c(
-                "v-uni-view",
-                { attrs: { _i: 52 } },
-                [
-                  _c(
+              _vm._$g(52, "i")
+                ? _c(
                     "v-uni-view",
-                    { staticClass: _vm._$g(53, "sc"), attrs: { _i: 53 } },
-                    [_vm._v("物流单号：" + _vm._$g(53, "t0-0"))]
-                  ),
-                  _c(
-                    "v-uni-view",
-                    {
-                      staticClass: _vm._$g(54, "sc"),
-                      attrs: { _i: 54 },
-                      on: {
-                        click: function($event) {
-                          return _vm.$handleViewEvent($event)
-                        }
-                      }
-                    },
-                    [_vm._v("复制")]
+                    { attrs: { _i: 52 } },
+                    [
+                      _c(
+                        "v-uni-view",
+                        { staticClass: _vm._$g(53, "sc"), attrs: { _i: 53 } },
+                        [_vm._v("物流单号：" + _vm._$g(53, "t0-0"))]
+                      ),
+                      _c(
+                        "v-uni-view",
+                        {
+                          staticClass: _vm._$g(54, "sc"),
+                          attrs: { _i: 54 },
+                          on: {
+                            click: function($event) {
+                              return _vm.$handleViewEvent($event)
+                            }
+                          }
+                        },
+                        [_vm._v("复制")]
+                      )
+                    ],
+                    1
                   )
-                ],
-                1
-              ),
-              _c(
-                "v-uni-view",
-                { attrs: { _i: 55 } },
-                [
-                  _c(
+                : _vm._e(),
+              _vm._$g(55, "i")
+                ? _c(
                     "v-uni-view",
-                    { staticClass: _vm._$g(56, "sc"), attrs: { _i: 56 } },
-                    [_vm._v("物流名称：" + _vm._$g(56, "t0-0"))]
-                  ),
-                  _c(
-                    "v-uni-view",
-                    {
-                      staticClass: _vm._$g(57, "sc"),
-                      attrs: { _i: 57 },
-                      on: {
-                        click: function($event) {
-                          return _vm.$handleViewEvent($event)
-                        }
-                      }
-                    },
-                    [_vm._v("复制")]
+                    { attrs: { _i: 55 } },
+                    [
+                      _c(
+                        "v-uni-view",
+                        { staticClass: _vm._$g(56, "sc"), attrs: { _i: 56 } },
+                        [_vm._v("物流名称：" + _vm._$g(56, "t0-0"))]
+                      ),
+                      _c(
+                        "v-uni-view",
+                        {
+                          staticClass: _vm._$g(57, "sc"),
+                          attrs: { _i: 57 },
+                          on: {
+                            click: function($event) {
+                              return _vm.$handleViewEvent($event)
+                            }
+                          }
+                        },
+                        [_vm._v("复制")]
+                      )
+                    ],
+                    1
                   )
-                ],
-                1
-              )
+                : _vm._e()
             ],
             1
           )
@@ -32525,7 +32517,7 @@ if(false) {}
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ./node_modules/css-loader/dist/runtime/api.js */ 10);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "@charset \"UTF-8\";\r\n/**\r\n * 这里是uni-app内置的常用样式变量\r\n *\r\n * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量\r\n * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App\r\n *\r\n */\r\n/**\r\n * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能\r\n *\r\n * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件\r\n */\r\n/* 颜色变量 */\r\n/* 行为相关颜色 */\r\n/* 文字基本颜色 */\r\n/* 背景颜色 */\r\n/* 边框颜色 */\r\n/* 尺寸变量 */\r\n/* 文字尺寸 */\r\n/* 图片尺寸 */\r\n/* Border Radius */\r\n/* 水平间距 */\r\n/* 垂直间距 */\r\n/* 透明度 */\r\n/* 文章场景相关 */\n.uni-popup[data-v-0bced1e9] {\r\n  z-index: 1;\n}\n.treatyBussManagerDetail .topDetail[data-v-0bced1e9] {\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  -webkit-box-pack: justify;\r\n  -webkit-justify-content: space-between;\r\n          justify-content: space-between;\r\n  background-color: #f7f7f7;\r\n  padding: 40rpx 112rpx 40rpx 40rpx;\n}\n.treatyBussManagerDetail .topDetail .detailTit[data-v-0bced1e9] {\r\n  font-size: 26rpx;\r\n  color: #b8393c;\n}\n.treatyBussManagerDetail .topDetail .detailImg[data-v-0bced1e9] {\r\n  width: 116rpx;\r\n  height: 90rpx;\n}\n.treatyBussManagerDetail .topDetail .detailImg uni-image[data-v-0bced1e9] {\r\n  width: 100%;\r\n  height: 100%;\n}\n.treatyBussManagerDetail .detailAddress[data-v-0bced1e9] {\r\n  margin-top: 20rpx;\r\n  padding: 35rpx 30rpx 70rpx;\r\n  background-color: #f7f7f7;\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  -webkit-box-align: center;\r\n  -webkit-align-items: center;\r\n          align-items: center;\n}\n.treatyBussManagerDetail .detailAddress .addressImg[data-v-0bced1e9] {\r\n  width: 44rpx;\r\n  height: 44rpx;\n}\n.treatyBussManagerDetail .detailAddress .addressImg uni-image[data-v-0bced1e9] {\r\n  width: 100%;\r\n  height: 100%;\n}\n.treatyBussManagerDetail .addressInfo[data-v-0bced1e9] {\r\n  margin-left: 30rpx;\n}\n.treatyBussManagerDetail .addressInfo .area[data-v-0bced1e9] {\r\n  font-size: 24rpx;\r\n  color: #666;\n}\n.treatyBussManagerDetail .addressInfo .fullAddress[data-v-0bced1e9] {\r\n  color: #333;\r\n  font-size: 36rpx;\n}\n.treatyBussManagerDetail .addressInfo .personInfo[data-v-0bced1e9] {\r\n  color: #666;\r\n  font-size: 26rpx;\n}\n.treatyBussManagerDetail .detailShop[data-v-0bced1e9] {\r\n  margin-top: 20rpx;\r\n  background-color: #f7f7f7;\r\n  padding: 30rpx;\n}\n.treatyBussManagerDetail .detailShop .shopInfo[data-v-0bced1e9] {\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  margin-left: 38rpx;\r\n  -webkit-box-pack: justify;\r\n  -webkit-justify-content: space-between;\r\n          justify-content: space-between;\r\n  margin-top: 20rpx;\n}\n.treatyBussManagerDetail .detailShop .shopInfo .infoArea[data-v-0bced1e9] {\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\n}\n.treatyBussManagerDetail .detailShop .shopInfo .infoArea .infoLft .shopRegionType[data-v-0bced1e9] {\r\n  font-size: 24rpx;\r\n  color: #b8393c;\n}\n.treatyBussManagerDetail .detailShop .shopInfo .infoArea .infoLft .shopImg[data-v-0bced1e9] {\r\n  margin-top: 20rpx;\r\n  width: 158rpx;\r\n  height: 158rpx;\r\n  background-color: #fff;\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  -webkit-box-align: center;\r\n  -webkit-align-items: center;\r\n          align-items: center;\r\n  -webkit-box-pack: center;\r\n  -webkit-justify-content: center;\r\n          justify-content: center;\n}\n.treatyBussManagerDetail .detailShop .shopInfo .infoArea .infoLft .shopImg uni-image[data-v-0bced1e9] {\r\n  width: 80%;\r\n  height: 80%;\n}\n.treatyBussManagerDetail .detailShop .shopInfo .infoArea .infoMid[data-v-0bced1e9] {\r\n  margin-left: 28rpx;\n}\n.treatyBussManagerDetail .detailShop .shopInfo .infoArea .infoMid .shopName[data-v-0bced1e9] {\r\n  font-size: 30rpx;\r\n  color: #333;\n}\n.treatyBussManagerDetail .detailShop .shopInfo .infoArea .infoMid .shopItemType[data-v-0bced1e9] {\r\n  margin-top: 18rpx;\r\n  font-size: 26rpx;\r\n  color: #666;\n}\n.treatyBussManagerDetail .detailShop .shopInfo .infoRgt .shopPrice[data-v-0bced1e9] {\r\n  color: #666;\r\n  font-size: 28rpx;\n}\n.treatyBussManagerDetail .detailShop .shopInfo .infoRgt .shopAmount[data-v-0bced1e9] {\r\n  margin-top: 20rpx;\r\n  font-size: 28rpx;\r\n  color: #999;\n}\n.treatyBussManagerDetail .detailShop .shopInfo .infoRgt .shopState[data-v-0bced1e9] {\r\n  margin-top: 60rpx;\r\n  padding: 12rpx 0;\r\n  border: 1px solid #b8393c;\r\n  border-radius: 24rpx;\r\n  text-align: center;\r\n  font-size: 24rpx;\r\n  line-height: 24rpx;\r\n  color: #b8393c;\n}\n.treatyBussManagerDetail .orderDetail[data-v-0bced1e9] {\r\n  margin-top: 20rpx;\r\n  background-color: #f7f7f7;\r\n  padding: 30rpx;\n}\n.treatyBussManagerDetail .orderDetail .detailTxt[data-v-0bced1e9] {\r\n  font-size: 28rpx;\r\n  color: #666;\n}\n.treatyBussManagerDetail .orderDetail .orderInfo[data-v-0bced1e9] {\r\n  margin-top: 32rpx;\n}\n.treatyBussManagerDetail .orderDetail .orderInfo > uni-view[data-v-0bced1e9] {\r\n  margin-top: 10rpx;\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  -webkit-box-pack: justify;\r\n  -webkit-justify-content: space-between;\r\n          justify-content: space-between;\r\n  font-size: 28rpx;\r\n  color: #666;\n}\n.treatyBussManagerDetail .orderDetail .orderInfo > uni-view .orderRgt[data-v-0bced1e9] {\r\n  padding: 2rpx 12rpx;\r\n  border: 1px solid #b8393c;\r\n  border-radius: 8rpx;\r\n  text-align: center;\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  -webkit-box-align: center;\r\n  -webkit-align-items: center;\r\n          align-items: center;\r\n  font-size: 24rpx;\r\n  line-height: 24rpx;\r\n  color: #b8393c;\n}\n.treatyBussManagerDetail .sendShopArea[data-v-0bced1e9] {\r\n  width: 540rpx;\r\n  background-color: #fff;\r\n  border-radius: 20rpx;\r\n  padding: 0 30rpx 30rpx;\n}\n.treatyBussManagerDetail .sendShopArea .sendShopTit[data-v-0bced1e9] {\r\n  padding-top: 20rpx;\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  -webkit-box-pack: center;\r\n  -webkit-justify-content: center;\r\n          justify-content: center;\r\n  font-size: 32rpx;\r\n  color: #333;\n}\n.treatyBussManagerDetail .sendShopArea .logisticsName[data-v-0bced1e9], .treatyBussManagerDetail .sendShopArea .logisticsNum[data-v-0bced1e9] {\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  -webkit-box-align: center;\r\n  -webkit-align-items: center;\r\n          align-items: center;\r\n  margin-top: 10rpx;\n}\n.treatyBussManagerDetail .sendShopArea .logisticsName uni-input[data-v-0bced1e9], .treatyBussManagerDetail .sendShopArea .logisticsNum uni-input[data-v-0bced1e9] {\r\n  border-bottom: 1px solid #333;\n}\n.treatyBussManagerDetail .sendShopArea .logisticsNum[data-v-0bced1e9] {\r\n  margin-top: 20rpx;\n}\n.treatyBussManagerDetail .sendShopArea .logisticsBtn[data-v-0bced1e9] {\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  -webkit-box-pack: end;\r\n  -webkit-justify-content: flex-end;\r\n          justify-content: flex-end;\r\n  font-size: 30rpx;\r\n  margin-top: 30rpx;\r\n  margin-right: 18rpx;\r\n  color: #b8393c;\n}\r\n", ""]);
+exports.push([module.i, "@charset \"UTF-8\";\r\n/**\r\n * 这里是uni-app内置的常用样式变量\r\n *\r\n * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量\r\n * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App\r\n *\r\n */\r\n/**\r\n * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能\r\n *\r\n * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件\r\n */\r\n/* 颜色变量 */\r\n/* 行为相关颜色 */\r\n/* 文字基本颜色 */\r\n/* 背景颜色 */\r\n/* 边框颜色 */\r\n/* 尺寸变量 */\r\n/* 文字尺寸 */\r\n/* 图片尺寸 */\r\n/* Border Radius */\r\n/* 水平间距 */\r\n/* 垂直间距 */\r\n/* 透明度 */\r\n/* 文章场景相关 */\n.uni-popup[data-v-0bced1e9] {\r\n  z-index: 1;\n}\n.treatyBussManagerDetail .topDetail[data-v-0bced1e9] {\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  -webkit-box-pack: justify;\r\n  -webkit-justify-content: space-between;\r\n          justify-content: space-between;\r\n  background-color: #f7f7f7;\r\n  padding: 40rpx 112rpx 40rpx 40rpx;\n}\n.treatyBussManagerDetail .topDetail .detailTit[data-v-0bced1e9] {\r\n  font-size: 26rpx;\r\n  color: #b8393c;\n}\n.treatyBussManagerDetail .topDetail .detailImg[data-v-0bced1e9] {\r\n  width: 116rpx;\r\n  height: 90rpx;\n}\n.treatyBussManagerDetail .topDetail .detailImg uni-image[data-v-0bced1e9] {\r\n  width: 100%;\r\n  height: 100%;\n}\n.treatyBussManagerDetail .detailAddress[data-v-0bced1e9] {\r\n  margin-top: 20rpx;\r\n  padding: 35rpx 30rpx 70rpx;\r\n  background-color: #f7f7f7;\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  -webkit-box-align: center;\r\n  -webkit-align-items: center;\r\n          align-items: center;\n}\n.treatyBussManagerDetail .detailAddress .addressImg[data-v-0bced1e9] {\r\n  width: 44rpx;\r\n  height: 44rpx;\n}\n.treatyBussManagerDetail .detailAddress .addressImg uni-image[data-v-0bced1e9] {\r\n  width: 100%;\r\n  height: 100%;\n}\n.treatyBussManagerDetail .addressInfo[data-v-0bced1e9] {\r\n  margin-left: 30rpx;\n}\n.treatyBussManagerDetail .addressInfo .area[data-v-0bced1e9] {\r\n  font-size: 24rpx;\r\n  color: #666;\n}\n.treatyBussManagerDetail .addressInfo .fullAddress[data-v-0bced1e9] {\r\n  color: #333;\r\n  font-size: 36rpx;\n}\n.treatyBussManagerDetail .addressInfo .personInfo[data-v-0bced1e9] {\r\n  color: #666;\r\n  font-size: 26rpx;\n}\n.treatyBussManagerDetail .detailShop[data-v-0bced1e9] {\r\n  margin-top: 20rpx;\r\n  background-color: #f7f7f7;\r\n  padding: 30rpx;\n}\n.treatyBussManagerDetail .detailShop .shopInfo[data-v-0bced1e9] {\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  margin-left: 38rpx;\r\n  -webkit-box-pack: justify;\r\n  -webkit-justify-content: space-between;\r\n          justify-content: space-between;\r\n  margin-top: 20rpx;\n}\n.treatyBussManagerDetail .detailShop .shopInfo .infoArea[data-v-0bced1e9] {\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\n}\n.treatyBussManagerDetail .detailShop .shopInfo .infoArea .infoLft .shopRegionType[data-v-0bced1e9] {\r\n  font-size: 24rpx;\r\n  color: #b8393c;\n}\n.treatyBussManagerDetail .detailShop .shopInfo .infoArea .infoLft .shopImg[data-v-0bced1e9] {\r\n  margin-top: 20rpx;\r\n  width: 158rpx;\r\n  height: 158rpx;\r\n  background-color: #fff;\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  -webkit-box-align: center;\r\n  -webkit-align-items: center;\r\n          align-items: center;\r\n  -webkit-box-pack: center;\r\n  -webkit-justify-content: center;\r\n          justify-content: center;\n}\n.treatyBussManagerDetail .detailShop .shopInfo .infoArea .infoLft .shopImg uni-image[data-v-0bced1e9] {\r\n  width: 80%;\r\n  height: 80%;\n}\n.treatyBussManagerDetail .detailShop .shopInfo .infoArea .infoMid[data-v-0bced1e9] {\r\n  margin-left: 28rpx;\n}\n.treatyBussManagerDetail .detailShop .shopInfo .infoArea .infoMid .shopName[data-v-0bced1e9] {\r\n  font-size: 30rpx;\r\n  color: #333;\n}\n.treatyBussManagerDetail .detailShop .shopInfo .infoArea .infoMid .shopItemType[data-v-0bced1e9] {\r\n  margin-top: 18rpx;\r\n  font-size: 26rpx;\r\n  color: #666;\n}\n.treatyBussManagerDetail .detailShop .shopInfo .infoRgt .shopPrice[data-v-0bced1e9] {\r\n  color: #666;\r\n  font-size: 28rpx;\n}\n.treatyBussManagerDetail .detailShop .shopInfo .infoRgt .shopAmount[data-v-0bced1e9] {\r\n  margin-top: 20rpx;\r\n  font-size: 28rpx;\r\n  color: #999;\n}\n.treatyBussManagerDetail .detailShop .shopInfo .infoRgt .shopState[data-v-0bced1e9] {\r\n  margin-top: 60rpx;\r\n  padding: 12rpx 0;\r\n  border: 1px solid #b8393c;\r\n  border-radius: 24rpx;\r\n  text-align: center;\r\n  font-size: 24rpx;\r\n  line-height: 24rpx;\r\n  color: #b8393c;\n}\n.treatyBussManagerDetail .orderDetail[data-v-0bced1e9] {\r\n  margin-top: 20rpx;\r\n  background-color: #f7f7f7;\r\n  padding: 30rpx;\n}\n.treatyBussManagerDetail .orderDetail .detailTxt[data-v-0bced1e9] {\r\n  font-size: 28rpx;\r\n  color: #666;\n}\n.treatyBussManagerDetail .orderDetail .orderInfo[data-v-0bced1e9] {\r\n  margin-top: 32rpx;\n}\n.treatyBussManagerDetail .orderDetail .orderInfo > uni-view[data-v-0bced1e9] {\r\n  margin-top: 10rpx;\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  -webkit-box-pack: justify;\r\n  -webkit-justify-content: space-between;\r\n          justify-content: space-between;\r\n  font-size: 28rpx;\r\n  color: #666;\n}\n.treatyBussManagerDetail .orderDetail .orderInfo > uni-view .orderRgt[data-v-0bced1e9] {\r\n  padding: 2rpx 12rpx;\r\n  border: 1px solid #b8393c;\r\n  border-radius: 8rpx;\r\n  text-align: center;\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  -webkit-box-align: center;\r\n  -webkit-align-items: center;\r\n          align-items: center;\r\n  font-size: 24rpx;\r\n  line-height: 24rpx;\r\n  color: #b8393c;\n}\n.treatyBussManagerDetail .sendShopArea[data-v-0bced1e9] {\r\n  width: 540rpx;\r\n  background-color: #fff;\r\n  border-radius: 20rpx;\r\n  padding: 0 30rpx 30rpx;\n}\n.treatyBussManagerDetail .sendShopArea .sendShopTit[data-v-0bced1e9] {\r\n  padding-top: 20rpx;\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  -webkit-box-pack: center;\r\n  -webkit-justify-content: center;\r\n          justify-content: center;\r\n  font-size: 32rpx;\r\n  color: #333;\r\n  white-space: nowrap;\n}\n.treatyBussManagerDetail .sendShopArea .logisticsName[data-v-0bced1e9], .treatyBussManagerDetail .sendShopArea .logisticsNum[data-v-0bced1e9] {\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  -webkit-box-align: center;\r\n  -webkit-align-items: center;\r\n          align-items: center;\r\n  margin-top: 10rpx;\r\n  white-space: nowrap;\n}\n.treatyBussManagerDetail .sendShopArea .logisticsName uni-input[data-v-0bced1e9], .treatyBussManagerDetail .sendShopArea .logisticsNum uni-input[data-v-0bced1e9] {\r\n  border-bottom: 1px solid #333;\n}\n.treatyBussManagerDetail .sendShopArea .logisticsNum[data-v-0bced1e9] {\r\n  margin-top: 20rpx;\n}\n.treatyBussManagerDetail .sendShopArea .logisticsBtn[data-v-0bced1e9] {\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  -webkit-box-pack: end;\r\n  -webkit-justify-content: flex-end;\r\n          justify-content: flex-end;\r\n  font-size: 30rpx;\r\n  margin-top: 30rpx;\r\n  margin-right: 18rpx;\r\n  color: #b8393c;\n}\r\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -32587,7 +32579,7 @@ var ___CSS_LOADER_URL_REPLACEMENT_2___ = ___CSS_LOADER_GET_URL_IMPORT___(___CSS_
 var ___CSS_LOADER_URL_REPLACEMENT_3___ = ___CSS_LOADER_GET_URL_IMPORT___(___CSS_LOADER_URL_IMPORT_2___);
 var ___CSS_LOADER_URL_REPLACEMENT_4___ = ___CSS_LOADER_GET_URL_IMPORT___(___CSS_LOADER_URL_IMPORT_3___, { hash: "#icomoon" });
 // Module
-exports.push([module.i, "@charset \"UTF-8\";\r\n/**\r\n * 这里是uni-app内置的常用样式变量\r\n *\r\n * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量\r\n * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App\r\n *\r\n */\r\n/**\r\n * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能\r\n *\r\n * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件\r\n */\r\n/* 颜色变量 */\r\n/* 行为相关颜色 */\r\n/* 文字基本颜色 */\r\n/* 背景颜色 */\r\n/* 边框颜色 */\r\n/* 尺寸变量 */\r\n/* 文字尺寸 */\r\n/* 图片尺寸 */\r\n/* Border Radius */\r\n/* 水平间距 */\r\n/* 垂直间距 */\r\n/* 透明度 */\r\n/* 文章场景相关 */\r\n/*每个页面公共css */\r\n/* 全局公共scss */\nbody{\r\n\tbackground-color: #fff !important;\n}\n.container{\n}\n.sunMainBox{\r\n\tbackground-color: #fff !important;\r\n\tpadding-bottom: 120rpx !important;\n}\n.mainBox{\r\n\tbackground-color: #fff;\r\n\tpadding-bottom: 120rpx !important;\n}\n.noNavMainBox{\r\n\tbackground-color: #fff !important;\n}\n.nMainBox{\r\n\tbackground-color: #282828 !important;\n}\n.theme{\r\n\tbackground-color: #fff;\n}\n.nTheme{\r\n\tbackground-color: #303030;\n}\n.bdt{\r\n\tborder-top: 1px solid #d9d9d9;\n}\n.nbdt{\r\n\tborder-top: 1px solid #383838;\n}\n.vheight{\n}\nuni-text{\r\n\tfont-weight: 400;\n}\n.uni-page-head-ft{\r\n\tmargin-right: 10rpx;\n}\nuni-input{\r\n\t padding-left: 10rpx;\r\n\t color: #666 !important;\n}\n.uniBtn{\r\n\tposition: fixed;\r\n\tbottom: 30rpx;\r\n\tleft: 0;\r\n\tright: 0;\r\n\tmargin: auto;\r\n\tdisplay: -webkit-box;\r\n\tdisplay: -webkit-flex;\r\n\tdisplay: flex;\r\n\t-webkit-box-align: center;\r\n\t-webkit-align-items: center;\r\n\t        align-items: center;\r\n\t-webkit-box-pack: center;\r\n\t-webkit-justify-content: center;\r\n\t        justify-content: center;\r\n\twidth: 600rpx;\r\n\theight: 80rpx;\r\n\tcolor: #fff;\r\n\tborder-radius: 6rpx;\r\n\tbackground-color: #b8393c;\n}\n[class^=\"icon-\"], [class*=\" icon-\"] {\r\n  /* use !important to prevent issues with browser extensions that change fonts */\r\n  font-family: 'icomoon' !important;\r\n  speak: never;\r\n  font-style: normal;\r\n  font-weight: normal;\r\n  font-variant: normal;\r\n  text-transform: none;\r\n  line-height: 1;\r\n\r\n  /* Better Font Rendering =========== */\r\n  -webkit-font-smoothing: antialiased;\r\n  -moz-osx-font-smoothing: grayscale;\n}\n.icon-uniE939:before {\r\n  content: \"\\e939\";\r\n  color: #fff;\n}\n.icon--13:before {\r\n  content: \"\\e936\";\r\n  color: #fff;\n}\n.icon--23:before {\r\n  content: \"\\e937\";\r\n  color: #fff;\n}\n.icon--7:before {\r\n  content: \"\\e938\";\r\n  color: #fff;\n}\n.icon--1:before {\r\n  content: \"\\e934\";\r\n  color: #fff;\n}\n.icon--22:before {\r\n  content: \"\\e935\";\r\n  color: #fff;\n}\n.icon-menu1:before {\r\n  content: \"\\e933\";\r\n  color: #fff;\n}\n.icon--12:before {\r\n  content: \"\\e931\";\r\n  color: #fff;\n}\n.icon--21:before {\r\n  content: \"\\e932\";\r\n  color: #fff;\n}\n.icon--111:before {\r\n  content: \"\\e930\";\r\n  color: #fff;\n}\n.icon-uniE92F:before {\r\n  content: \"\\e92f\";\r\n  color: #fff;\n}\n.icon-close-1:before {\r\n  content: \"\\e92e\";\r\n  color: #fff;\n}\n.icon-menu:before {\r\n  content: \"\\e92d\";\r\n  color: #fff;\n}\n.icon-uniE92C:before {\r\n  content: \"\\e92c\";\r\n  color: #fff;\n}\n.icon-yooxi:before {\r\n  content: \"\\e92a\";\r\n  color: #fff;\n}\n.icon-zhifubao:before {\r\n  content: \"\\e92b\";\r\n  color: #fff;\n}\n.icon-jiantou8:before {\r\n  content: \"\\e929\";\r\n  color: #fff;\n}\n.icon-youjiantou2:before {\r\n  content: \"\\e927\";\r\n  color: #fff;\n}\n.icon-youjiantou1:before {\r\n  content: \"\\e928\";\r\n  color: #fff;\n}\n.icon-chongzhi:before {\r\n  content: \"\\e923\";\r\n  color: #fff;\n}\n.icon-qiehuan:before {\r\n  content: \"\\e924\";\r\n  color: #fff;\n}\n.icon-tixianguize:before {\r\n  content: \"\\e925\";\r\n  color: #fff;\n}\n.icon-zijinzhuanzhang:before {\r\n  content: \"\\e926\";\r\n  color: #fff;\n}\n.icon-downarrow:before {\r\n  content: \"\\e921\";\r\n  color: #fff;\n}\n.icon-jilu:before {\r\n  content: \"\\e922\";\r\n  color: #fff;\n}\n.icon-ego-menu:before {\r\n  content: \"\\e91d\";\r\n  color: #fff;\n}\n.icon-hangqing:before {\r\n  content: \"\\e91e\";\r\n  color: #fff;\n}\n.icon-tishi:before {\r\n  content: \"\\e91f\";\r\n  color: #fff;\n}\n.icon-xiangshangjiantou:before {\r\n  content: \"\\e920\";\r\n  color: #fff;\n}\n.icon-yinxingqia:before {\r\n  content: \"\\e91b\";\r\n  color: #fff;\n}\n.icon-youjiantou:before {\r\n  content: \"\\e91c\";\r\n  color: #fff;\n}\n.icon-search:before {\r\n  content: \"\\e918\";\r\n  color: #fff;\n}\n.icon-star:before {\r\n  content: \"\\e919\";\r\n  color: #fff;\n}\n.icon-wujiaoxing:before {\r\n  content: \"\\e91a\";\r\n  color: #fff;\n}\n.icon-fuxuankuang_xuanzhong:before {\r\n  content: \"\\e916\";\r\n  color: #fff;\n}\n.icon-kuangxuan:before {\r\n  content: \"\\e917\";\r\n  color: #fff;\n}\n.icon-eye:before {\r\n  content: \"\\e914\";\r\n  color: #fff;\n}\n.icon-xiajiantou:before {\r\n  content: \"\\e915\";\r\n  color: #fff;\n}\n.icon--2:before {\r\n  content: \"\\e913\";\n}\n.icon-uniE912:before {\r\n  content: \"\\e912\";\n}\n.icon--:before {\r\n  content: \"\\e902\";\n}\n.icon-uniE903:before {\r\n  content: \"\\e903\";\r\n  color: #707070;\n}\n.icon-edit:before {\r\n  content: \"\\e901\";\r\n  color: #fff;\n}\n.icon-uniE900:before {\r\n  content: \"\\e900\";\r\n  color: #707070;\n}\n.icon--11:before {\r\n  content: \"\\e911\";\r\n  color: #fff;\n}\n.icon-anquanzhuye:before {\r\n  content: \"\\e905\";\r\n  color: #fff;\n}\n.icon-biaoqiankuozhan_jiaoyi-179:before {\r\n  content: \"\\e906\";\r\n  color: #fff;\n}\n.icon-dingdan:before {\r\n  content: \"\\e907\";\r\n  color: #fff;\n}\n.icon-guanyu:before {\r\n  content: \"\\e908\";\r\n  color: #fff;\n}\n.icon-lianxi:before {\r\n  content: \"\\e909\";\r\n  color: #fff;\n}\n.icon-shenfenrenzhengtubiao:before {\r\n  content: \"\\e90a\";\r\n  color: #fff;\n}\n.icon-yaoqinghaoyou:before {\r\n  content: \"\\e90b\";\r\n  color: #fff;\n}\n.icon-yuyanfanyi .path1:before {\r\n  content: \"\\e90c\";\r\n  color: rgb(154, 220, 207);\n}\n.icon-yuyanfanyi .path2:before {\r\n  content: \"\\e90d\";\r\n  margin-left: -1em;\r\n  color: rgb(255, 243, 112);\n}\n.icon-yuyanfanyi .path3:before {\r\n  content: \"\\e90e\";\r\n  margin-left: -1em;\r\n  color: rgb(79, 61, 59);\n}\n.icon-yuyanfanyi .path4:before {\r\n  content: \"\\e90f\";\r\n  margin-left: -1em;\r\n  color: rgb(79, 61, 59);\n}\n.icon-yuyanfanyi .path5:before {\r\n  content: \"\\e910\";\r\n  margin-left: -1em;\r\n  color: rgb(79, 61, 59);\n}\n.icon-uniE9001:before {\r\n  content: \"\\e904\";\r\n  color: #707070;\n}\n@charset \"utf-8\";\r\n/*  设置  */\n.i-setting::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e900\";\n}\r\n/*  编辑  */\n.i-edit::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e901\";\n}\r\n/*  感叹号  */\n.i-excla::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e903\";\n}\r\n/*  等级  */\n.i-grade::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e902\";\n}\r\n/*  身份认证  */\n.i-idAuth::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e90a\";\n}\r\n/*  安全中心  */\n.i-security::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e905\";\n}\r\n/*  邀请返佣  */\n.i-invita::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e90b\";\n}\r\n/*  交易挖矿  */\n.i-tran::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e906\";\n}\r\n/*  我的订单  */\n.i-order::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e907\";\n}\r\n/*  语言设置  */\n.i-language::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e911\";\n}\r\n/*  关于我们  */\n.i-about::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e908\";\n}\r\n/*  联系客服  */\n.i-service::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e909\";\n}\r\n/*  右箭头  */\n.i-rgtArrow::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e912\";\n}\n.i-rgtArrowAfter::after{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e912\";\n}\r\n/*  关闭  */\n.i-close::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e913\";\n}\r\n/*  eye  */\n.i-eye::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e914\";\n}\r\n/*  下实箭头  */\n.i-downArrow::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e915\";\n}\r\n/* 未框选 */\n.i-check::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e917\";\n}\r\n/* 已框选 */\n.i-checked::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e916\";\n}\r\n/* 搜索 */\n.i-search::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e918\";\n}\r\n/* 五角星 */\n.i-star::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e91a\";\n}\r\n/* 五角星-已选中 */\n.i-stared::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e919\";\n}\r\n/* 银行卡 */\n.i-bankIco::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e91b\";\n}\r\n/* 向右箭头 */\n.i-lftArrow::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e91c\";\n}\r\n/* 菜单 */\n.i-menu::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e91d\";\n}\n.i-menuDot::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e933\";\n}\r\n/* 行情 */\n.i-quota::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e91e\";\n}\r\n/* 警告 */\n.i-warn::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e91f\";\n}\r\n/* 向上箭头 */\n.i-upArrow::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e920\";\n}\n.i-upArrowed::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e921\";\n}\n.i-record::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e922\";\n}\r\n/* 充值 */\n.i-recharge::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e923\";\n}\r\n/* 提现 */\n.i-wdrawal::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e925\";\n}\r\n/* 充值记录 */\n.i-reRecord::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e924\";\n}\r\n/* 法币记录 */\n.i-legalCurrRecord::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e926\";\n}\r\n/* 向右 --- 转账 */\n.i-tranAcc::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e930\";\n}\r\n/* 向下箭头 */\n.i-dwArrow::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e929\";\n}\n.i-wx::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e92a\";\n}\n.i-zfb::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e92b\";\n}\n.i-closeRgt::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e92e\";\n}\n.i-lftArrow::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e92f\";\n}\r\n/* 删除 */\n.i-delete::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e931\";\n}\n.i-bussManager::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e932\";\n}\r\n/* 合约 */\n.i-contract::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e935\";\n}\r\n/* 商家 */\n.i-legal::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e934\";\n}\n.i-cCheck::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e936\";\n}\n.i-cChecked::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e937\";\n}\n.i-plus::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e938\";\n}\n.i-address::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e939\";\n}\n@font-face {\r\n  font-family: 'icomoon';\r\n  src: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\r\n  src: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ") format(\"embedded-opentype\"), url(" + ___CSS_LOADER_URL_REPLACEMENT_2___ + ") format(\"truetype\"), url(" + ___CSS_LOADER_URL_REPLACEMENT_3___ + ") format(\"woff\"), url(" + ___CSS_LOADER_URL_REPLACEMENT_4___ + ") format(\"svg\");\r\n  font-weight: normal;\r\n  font-style: normal;\r\n  font-display: block;\n}\n.uni-tabbar {\r\n  z-index: 9 !important;\r\n  background-color: #282828 !important;\n}\n.uni-tabbar .uni-tabbar__icon {\r\n  width: 38rpx;\r\n  height: 38rpx;\n}\n.uni-tabbar .uni-tabbar__label {\r\n  line-height: 1.4;\n}\r\n", ""]);
+exports.push([module.i, "@charset \"UTF-8\";\r\n/**\r\n * 这里是uni-app内置的常用样式变量\r\n *\r\n * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量\r\n * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App\r\n *\r\n */\r\n/**\r\n * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能\r\n *\r\n * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件\r\n */\r\n/* 颜色变量 */\r\n/* 行为相关颜色 */\r\n/* 文字基本颜色 */\r\n/* 背景颜色 */\r\n/* 边框颜色 */\r\n/* 尺寸变量 */\r\n/* 文字尺寸 */\r\n/* 图片尺寸 */\r\n/* Border Radius */\r\n/* 水平间距 */\r\n/* 垂直间距 */\r\n/* 透明度 */\r\n/* 文章场景相关 */\r\n/*每个页面公共css */\r\n/* 全局公共scss */\nbody{\r\n\tbackground-color: #fff !important;\n}\n.container{\n}\n.sunMainBox{\r\n\tbackground-color: #fff !important;\r\n\tpadding-bottom: 120rpx !important;\n}\n.mainBox{\r\n\tbackground-color: #fff;\r\n\tpadding-bottom: 120rpx !important;\n}\n.noNavMainBox{\r\n\tbackground-color: #fff !important;\n}\n.nMainBox{\r\n\tbackground-color: #282828 !important;\n}\n.theme{\r\n\tbackground-color: #fff;\n}\n.nTheme{\r\n\tbackground-color: #303030;\n}\n.bdt{\r\n\tborder-top: 1px solid #d9d9d9;\n}\n.nbdt{\r\n\tborder-top: 1px solid #383838;\n}\n.vheight{\n}\nuni-text{\r\n\tfont-weight: 400;\n}\n.uni-page-head-ft{\r\n\tmargin-right: 10rpx;\n}\nuni-input{\r\n\t padding-left: 10rpx;\r\n\t color: #666 !important;\n}\n.uniBtn{\r\n\tposition: fixed;\r\n\tbottom: 30rpx;\r\n\tleft: 0;\r\n\tright: 0;\r\n\tmargin: auto;\r\n\tdisplay: -webkit-box;\r\n\tdisplay: -webkit-flex;\r\n\tdisplay: flex;\r\n\t-webkit-box-align: center;\r\n\t-webkit-align-items: center;\r\n\t        align-items: center;\r\n\t-webkit-box-pack: center;\r\n\t-webkit-justify-content: center;\r\n\t        justify-content: center;\r\n\twidth: 600rpx;\r\n\theight: 80rpx;\r\n\tcolor: #fff;\r\n\tborder-radius: 6rpx;\r\n\tbackground-color: #b8393c;\n}\n[class^=\"icon-\"], [class*=\" icon-\"] {\r\n  /* use !important to prevent issues with browser extensions that change fonts */\r\n  font-family: 'icomoon' !important;\r\n  speak: never;\r\n  font-style: normal;\r\n  font-weight: normal;\r\n  font-variant: normal;\r\n  text-transform: none;\r\n  line-height: 1;\r\n\r\n  /* Better Font Rendering =========== */\r\n  -webkit-font-smoothing: antialiased;\r\n  -moz-osx-font-smoothing: grayscale;\n}\n.icon--24:before {\r\n  content: \"\\e93b\";\r\n  color: #fff;\n}\n.icon-uniE93A:before {\r\n  content: \"\\e93a\";\r\n  color: #fff;\n}\n.icon-uniE939:before {\r\n  content: \"\\e939\";\r\n  color: #fff;\n}\n.icon--13:before {\r\n  content: \"\\e936\";\r\n  color: #fff;\n}\n.icon--23:before {\r\n  content: \"\\e937\";\r\n  color: #fff;\n}\n.icon--7:before {\r\n  content: \"\\e938\";\r\n  color: #fff;\n}\n.icon--1:before {\r\n  content: \"\\e934\";\r\n  color: #fff;\n}\n.icon--22:before {\r\n  content: \"\\e935\";\r\n  color: #fff;\n}\n.icon-menu1:before {\r\n  content: \"\\e933\";\r\n  color: #fff;\n}\n.icon--12:before {\r\n  content: \"\\e931\";\r\n  color: #fff;\n}\n.icon--21:before {\r\n  content: \"\\e932\";\r\n  color: #fff;\n}\n.icon--111:before {\r\n  content: \"\\e930\";\r\n  color: #fff;\n}\n.icon-uniE92F:before {\r\n  content: \"\\e92f\";\r\n  color: #fff;\n}\n.icon-close-1:before {\r\n  content: \"\\e92e\";\r\n  color: #fff;\n}\n.icon-menu:before {\r\n  content: \"\\e92d\";\r\n  color: #fff;\n}\n.icon-uniE92C:before {\r\n  content: \"\\e92c\";\r\n  color: #fff;\n}\n.icon-yooxi:before {\r\n  content: \"\\e92a\";\r\n  color: #fff;\n}\n.icon-zhifubao:before {\r\n  content: \"\\e92b\";\r\n  color: #fff;\n}\n.icon-jiantou8:before {\r\n  content: \"\\e929\";\r\n  color: #fff;\n}\n.icon-youjiantou2:before {\r\n  content: \"\\e927\";\r\n  color: #fff;\n}\n.icon-youjiantou1:before {\r\n  content: \"\\e928\";\r\n  color: #fff;\n}\n.icon-chongzhi:before {\r\n  content: \"\\e923\";\r\n  color: #fff;\n}\n.icon-qiehuan:before {\r\n  content: \"\\e924\";\r\n  color: #fff;\n}\n.icon-tixianguize:before {\r\n  content: \"\\e925\";\r\n  color: #fff;\n}\n.icon-zijinzhuanzhang:before {\r\n  content: \"\\e926\";\r\n  color: #fff;\n}\n.icon-downarrow:before {\r\n  content: \"\\e921\";\r\n  color: #fff;\n}\n.icon-jilu:before {\r\n  content: \"\\e922\";\r\n  color: #fff;\n}\n.icon-ego-menu:before {\r\n  content: \"\\e91d\";\r\n  color: #fff;\n}\n.icon-hangqing:before {\r\n  content: \"\\e91e\";\r\n  color: #fff;\n}\n.icon-tishi:before {\r\n  content: \"\\e91f\";\r\n  color: #fff;\n}\n.icon-xiangshangjiantou:before {\r\n  content: \"\\e920\";\r\n  color: #fff;\n}\n.icon-yinxingqia:before {\r\n  content: \"\\e91b\";\r\n  color: #fff;\n}\n.icon-youjiantou:before {\r\n  content: \"\\e91c\";\r\n  color: #fff;\n}\n.icon-search:before {\r\n  content: \"\\e918\";\r\n  color: #fff;\n}\n.icon-star:before {\r\n  content: \"\\e919\";\r\n  color: #fff;\n}\n.icon-wujiaoxing:before {\r\n  content: \"\\e91a\";\r\n  color: #fff;\n}\n.icon-fuxuankuang_xuanzhong:before {\r\n  content: \"\\e916\";\r\n  color: #fff;\n}\n.icon-kuangxuan:before {\r\n  content: \"\\e917\";\r\n  color: #fff;\n}\n.icon-eye:before {\r\n  content: \"\\e914\";\r\n  color: #fff;\n}\n.icon-xiajiantou:before {\r\n  content: \"\\e915\";\r\n  color: #fff;\n}\n.icon--2:before {\r\n  content: \"\\e913\";\n}\n.icon-uniE912:before {\r\n  content: \"\\e912\";\n}\n.icon--:before {\r\n  content: \"\\e902\";\n}\n.icon-uniE903:before {\r\n  content: \"\\e903\";\r\n  color: #707070;\n}\n.icon-edit:before {\r\n  content: \"\\e901\";\r\n  color: #fff;\n}\n.icon-uniE900:before {\r\n  content: \"\\e900\";\r\n  color: #707070;\n}\n.icon--11:before {\r\n  content: \"\\e911\";\r\n  color: #fff;\n}\n.icon-anquanzhuye:before {\r\n  content: \"\\e905\";\r\n  color: #fff;\n}\n.icon-biaoqiankuozhan_jiaoyi-179:before {\r\n  content: \"\\e906\";\r\n  color: #fff;\n}\n.icon-dingdan:before {\r\n  content: \"\\e907\";\r\n  color: #fff;\n}\n.icon-guanyu:before {\r\n  content: \"\\e908\";\r\n  color: #fff;\n}\n.icon-lianxi:before {\r\n  content: \"\\e909\";\r\n  color: #fff;\n}\n.icon-shenfenrenzhengtubiao:before {\r\n  content: \"\\e90a\";\r\n  color: #fff;\n}\n.icon-yaoqinghaoyou:before {\r\n  content: \"\\e90b\";\r\n  color: #fff;\n}\n.icon-yuyanfanyi .path1:before {\r\n  content: \"\\e90c\";\r\n  color: rgb(154, 220, 207);\n}\n.icon-yuyanfanyi .path2:before {\r\n  content: \"\\e90d\";\r\n  margin-left: -1em;\r\n  color: rgb(255, 243, 112);\n}\n.icon-yuyanfanyi .path3:before {\r\n  content: \"\\e90e\";\r\n  margin-left: -1em;\r\n  color: rgb(79, 61, 59);\n}\n.icon-yuyanfanyi .path4:before {\r\n  content: \"\\e90f\";\r\n  margin-left: -1em;\r\n  color: rgb(79, 61, 59);\n}\n.icon-yuyanfanyi .path5:before {\r\n  content: \"\\e910\";\r\n  margin-left: -1em;\r\n  color: rgb(79, 61, 59);\n}\n.icon-uniE9001:before {\r\n  content: \"\\e904\";\r\n  color: #707070;\n}\n@charset \"utf-8\";\r\n/*  设置  */\n.i-setting::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e900\";\n}\r\n/*  编辑  */\n.i-edit::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e901\";\n}\r\n/*  感叹号  */\n.i-excla::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e903\";\n}\r\n/*  等级  */\n.i-grade::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e902\";\n}\r\n/*  身份认证  */\n.i-idAuth::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e90a\";\n}\r\n/*  安全中心  */\n.i-security::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e905\";\n}\r\n/*  邀请返佣  */\n.i-invita::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e90b\";\n}\r\n/*  交易挖矿  */\n.i-tran::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e906\";\n}\r\n/*  我的订单  */\n.i-order::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e907\";\n}\r\n/*  语言设置  */\n.i-language::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e911\";\n}\r\n/*  关于我们  */\n.i-about::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e908\";\n}\r\n/*  联系客服  */\n.i-service::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e909\";\n}\r\n/*  右箭头  */\n.i-rgtArrow::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e912\";\n}\n.i-rgtArrowAfter::after{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e912\";\n}\r\n/*  关闭  */\n.i-close::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e913\";\n}\r\n/*  eye  */\n.i-eye::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e914\";\n}\r\n/*  下实箭头  */\n.i-downArrow::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e915\";\n}\r\n/* 未框选 */\n.i-check::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e917\";\n}\r\n/* 已框选 */\n.i-checked::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e916\";\n}\r\n/* 搜索 */\n.i-search::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e918\";\n}\r\n/* 五角星 */\n.i-star::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e91a\";\n}\r\n/* 五角星-已选中 */\n.i-stared::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e919\";\n}\r\n/* 银行卡 */\n.i-bankIco::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e91b\";\n}\r\n/* 向右箭头 */\n.i-lftArrow::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e91c\";\n}\r\n/* 菜单 */\n.i-menu::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e91d\";\n}\n.i-menuDot::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e933\";\n}\r\n/* 行情 */\n.i-quota::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e91e\";\n}\r\n/* 警告 */\n.i-warn::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e91f\";\n}\r\n/* 向上箭头 */\n.i-upArrow::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e920\";\n}\n.i-upArrowed::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e921\";\n}\n.i-record::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e922\";\n}\r\n/* 充值 */\n.i-recharge::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e923\";\n}\r\n/* 提现 */\n.i-wdrawal::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e925\";\n}\r\n/* 充值记录 */\n.i-reRecord::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e924\";\n}\r\n/* 法币记录 */\n.i-legalCurrRecord::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e926\";\n}\r\n/* 向右 --- 转账 */\n.i-tranAcc::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e930\";\n}\r\n/* 向下箭头 */\n.i-dwArrow::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e929\";\n}\n.i-wx::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e92a\";\n}\n.i-zfb::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e92b\";\n}\n.i-closeRgt::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e92e\";\n}\n.i-lftArrow::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e92f\";\n}\r\n/* 删除 */\n.i-delete::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e931\";\n}\n.i-bussManager::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e932\";\n}\r\n/* 合约 */\n.i-contract::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e935\";\n}\r\n/* 商家 */\n.i-legal::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e934\";\n}\n.i-cCheck::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e936\";\n}\n.i-cChecked::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e937\";\n}\n.i-plus::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e938\";\n}\n.i-address::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: \"\\e939\";\n}\n.i-shopCart::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: '\\e93a';\n}\n.i-wCoin::before{\r\n\tfont-family: 'icomoon' !important;\r\n\tcontent: '\\e93b';\n}\n@font-face {\r\n  font-family: 'icomoon';\r\n  src: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\r\n  src: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ") format(\"embedded-opentype\"), url(" + ___CSS_LOADER_URL_REPLACEMENT_2___ + ") format(\"truetype\"), url(" + ___CSS_LOADER_URL_REPLACEMENT_3___ + ") format(\"woff\"), url(" + ___CSS_LOADER_URL_REPLACEMENT_4___ + ") format(\"svg\");\r\n  font-weight: normal;\r\n  font-style: normal;\r\n  font-display: block;\n}\n.uni-tabbar {\r\n  z-index: 9 !important;\r\n  background-color: #282828 !important;\n}\n.uni-tabbar .uni-tabbar__icon {\r\n  width: 38rpx;\r\n  height: 38rpx;\n}\n.uni-tabbar .uni-tabbar__label {\r\n  line-height: 1.4;\n}\r\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -32630,7 +32622,7 @@ module.exports = "/static/iconfont/fonts/icomoon.woff";
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "static/img/icomoon.5b53a1cb.svg";
+module.exports = __webpack_require__.p + "static/img/icomoon.91d81cec.svg";
 
 /***/ })
 /******/ ]);

@@ -123,8 +123,8 @@
 								<view class="listTop listBtm">
 									<view v-for="(item, index) in btmList" @click="priceEvent(item)" :key="index" v-if="index < 6">
 										<view style="z-index: 9;">
-											<text>{{toDecimal(item.price, priceDecimals)}}</text>
-											<text>{{toDecimal(item.quantity, amountDecimals)}}</text>
+											<text style="color: #3BA987;">{{toDecimal(item.price, priceDecimals)}}</text>
+											<text style="color: #3BA987;">{{toDecimal(item.quantity, amountDecimals)}}</text>
 										</view>
 										<view class="perLine" :style="{width: btmLineArr[index] + 'rpx'}"></view>
 									</view>
@@ -542,6 +542,8 @@
           call: (data)=>{
             if(data.code == 200){
 							this.isClick = true
+							this.initSellEvent(this.coinSellType)
+							this.initBuyEvent('50')
               uni.showToast({
                 title: data.msg,
                 success: () => {
@@ -1111,6 +1113,7 @@
 									}
 									text:nth-of-type(2){
 										color: #9492A0;
+										
 									}
 								}
 								.perLine{

@@ -1,6 +1,6 @@
 <template>
 	
-	<view class="holeRedPackage" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd" :style="{paddingTop: paddingTop + 'rpx'}">
+	<view class="holeRedPackage" @click="hideEvent()" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd" :style="{paddingTop: paddingTop + 'rpx'}">
 		<view class="holeRedPackageBg" :style="{height: areaH + 'px', width: areaW + 'px'}"></view>
 		<view class="redTit">
 			<view class="redTxt">虫洞剩余({{wormHoleInfo.coin_name}})</view>
@@ -9,7 +9,7 @@
 		<view class="holeRed">
 			<view class="holeRedArea" v-for="(item, index) in packagePos" v-if="index < dayReceive" :key="index">
 				<view :animation="animationData">
-					<image  @click="isClick && redPackageEvent(item, index)" :style="{top: item.top + 'rpx', left: item.left + 'rpx'}" src="../../static/images/redPackage.png" mode="aspectFit"></image>
+					<image  @click.stop="isClick && redPackageEvent(item, index)" :style="{top: item.top + 'rpx', left: item.left + 'rpx'}" src="../../static/images/redPackage.png" mode="aspectFit"></image>
 				</view>
 			</view>
 			<view class="holeRedInfo">
@@ -29,7 +29,7 @@
 			<text>已领取总数量：{{redWallet.quantity_received}} {{wormHoleInfo.coin_name}}</text>
 		</view>
 		<view class="redInfoShow" v-if="isRedInfoShow">
-			<view class="redInfoClose i-closeRgt" @click="redInfoCloseEvent"></view>
+			<view class="redInfoClose i-closeRgt" @click.stop="redInfoCloseEvent"></view>
 			<view class="redShowImg">
 				<image src="../../static/images/redTip.png" mode="aspectFit"></image>
 			</view>
@@ -44,15 +44,15 @@
 						<view class="redInfoCon">{{redBag.receive_amount}}</view>
 					</view>
 				</view>
-				<view class="redShowRecord" @click="redShowRecordEvent">已存入红包账户，可查询</view>
+				<view class="redShowRecord" @click.stop="redShowRecordEvent">已存入红包账户，可查询</view>
 			</view>
 		</view>
 		<view class="redInvitaArea" v-if="isRedInvitaArea">
-			<view class="redInfoClose i-closeRgt" @click="invitaCloseEvent"></view>
+			<view class="redInfoClose i-closeRgt" @click.stop="invitaCloseEvent"></view>
 			<view class="invitaImg">
 				<image src="../../static/images/redInvita.png" mode="aspectFit"></image>
 			</view>
-			<view class="invitaBtn" @click="invitaBtnEvent">
+			<view class="invitaBtn" @click.stop="invitaBtnEvent">
 				<image src="../../static/images/redInvitaBtn.png" mode="aspectFit"></image>
 			</view>
 		</view>
@@ -118,6 +118,8 @@
 			}
 		},
 		onNavigationBarButtonTap(e){
+			this.isRedInfoShow = false
+			this.isRedInvitaArea = false
 			if(e.float == 'right'){
 				uni.navigateTo({
 					url: '/pages/holeRedPackage/holeRedPackageRecord',
@@ -131,6 +133,10 @@
 			}
 		},
 		methods: {
+			hideEvent(){
+				this.isRedInfoShow = false
+				this.isRedInvitaArea = false
+			},
 			initAnimationImg(){
 				this.animation.translateY(10).step({duration: 1000})
 				this.animationData = this.animation.export()

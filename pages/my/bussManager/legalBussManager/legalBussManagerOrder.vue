@@ -53,7 +53,6 @@
 			touchEnd(e){
 				if(this.changeY > 50){
 					this.page = 1
-					this.bussManagerOrderList = []
 					this.getBussManagerOrderList()
 					this.paddingTop = 0
 				}
@@ -66,8 +65,8 @@
 			},
 			getBussManagerOrderList(){
 				let params = {
-					page: '1',
-					pageSize: '10',
+					page: this.page,
+					pageSize: this.pageSize,
 				}
 				this.ajaxJson({
 					url: '/api/v1/otcOrder/buinessOrderList',
@@ -88,9 +87,7 @@
 </script>
 
 <style scoped lang="scss">
-	.bussManagerOrder{
-		
-	}
+
 	.bussManagerOrder>view{
 		background-color: #f2f2f2;
 		padding: 10rpx 30rpx 10rpx;
