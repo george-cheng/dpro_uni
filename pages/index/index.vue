@@ -66,8 +66,10 @@
 			<text class="marketTit">涨幅榜</text>
 			<view class="marketCon">
 				<view class="" v-for="(item, index) in market" :key="item.fid" v-if="index < 10" @click="marketEvent(item)">
-					<view class="marketImg">
-						<image :src="url + item.furl" mode="aspectFit"></image>
+					<view class="marketLft">
+						<view class="marketImg">
+							<image :src="url + item.furl" mode="aspectFit"></image>
+						</view>
 						<text>{{item.fShortName}} / {{item.group}}</text>
 					</view>
 					<text class="money">{{item.lastDealPrize}}</text>
@@ -642,7 +644,18 @@
 					justify-content: space-between;
 					align-items: center;
 					border-top: 1px solid #f7f7f7;
-					.marketImg{
+					.marketLft{
+						.marketImg{
+							width: 62rpx;
+							height: 62rpx;
+							margin-right: 10rpx;
+							image{
+								width: 100%;
+								height: 100%;
+							}
+						}
+					}
+					/* .marketImg{
 						width: 33%;
 						display: flex;
 						align-items: center;
@@ -663,7 +676,7 @@
 							width: 62rpx;
 							height: 62rpx;
 						}
-					}
+					} */
 					.money{
 						width: 33%;
 						color: $c3;

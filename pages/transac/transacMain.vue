@@ -836,10 +836,10 @@
 				this.initBuyEvent('50')
 			}
       this.getTotal()
-				let webView = this.$mp.page.$getAppWebview();
-				webView.setTitleNViewButtonStyle(0,{
-					text: ' ',  
-				})
+				// let webView = this.$mp.page.$getAppWebview();
+				// webView.setTitleNViewButtonStyle(0,{
+				// 	text: ' ',  
+				// })
 		}
 	}
 </script>
@@ -869,7 +869,7 @@
 			display: flex;
 			flex-wrap: nowrap;
 			padding: 10rpx;
-			color: #999;
+			color: $c3;
 		}
 	}
 	.transacMain{

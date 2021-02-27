@@ -86,7 +86,6 @@
 			
 			if(this.page >= this.pageNum){
 				this.page = this.pageNum
-				console.log(1111)
 			}else{
 				this.page += 1
 				this.getGoodList()
@@ -115,12 +114,16 @@
 				})
 			},
 			platformAreaEvent(){
+				this.goodList = []
+				this.page = 1
 				this.switchOn = 0
 				this.regionType = '1'
 				this.getGoodList()
 				this.isAdd = false
 			},
 			bussAreaEvent(){
+				this.goodList = []
+				this.page = 1
 				this.switchOn = 1
 				this.regionType = '2'
 				this.getGoodList()

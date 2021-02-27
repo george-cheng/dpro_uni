@@ -1,81 +1,72 @@
 <template>
 	<view class="tranContract mainBox" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd" :style="{paddingTop: paddingTop + 'rpx'}">
 		<view class="tractCon">
-			<view class="enConList">
-				<view class="enList" v-for="(item, index) in contractList" :key="index" v-if="false">
-					<view><text>合约名称</text><text>{{item.name}}</text></view>
-					<view><text>抢购币种名称</text><text>{{item.coin_name}}</text></view>
-					<view><text>抢购标准</text><text>{{item.ded_amount}}</text></view>
-					<view><text>总产量</text><text>{{item.ded_amount*item.out_mult}}</text></view>
-					<view><text>释放周期</text><text>{{item.return_days}}</text></view>
-					<view><text>开放时间</text><text>{{item.open_date}}</text></view>
-					<view class="state"><text>状态</text><text :class="item.state === 0 ? 'close' : 'open'">{{item.state === 0 ? '关闭' : '开启'}}</text></view>
-				</view>
-			</view>
-			
-			
-			<view class="cardEnConList">
-				<view class="enList" v-for="(item, index) in contractList" :key="index">
-					<view class="enListTit">
-						<view class="enListTitImg"><image :src="url + item.logo" mode=""></image></view>
-						<view class="enListTitName"><text>合约名称</text><text>{{item.name}}</text></view>
-						<view class="enListTitState"><text>状态</text><text :class="item.state === 0 ? 'close' : 'open'">{{item.state === 0 ? '关闭' : '开启'}}</text></view>
-					</view>
-					<view class="enListArea">
-						<view><text>抢购币种名称</text><text>{{item.coin_name}}</text></view>
-						<view><text>抢购标准</text><text>{{item.ded_amount}}</text></view>
-						<view><text>释放周期</text><text>{{item.return_days}}</text></view>
-						<view><text>总产量</text><text>{{item.ded_amount*item.out_mult}}</text></view>
-					</view>
-					<view class="enListOpera">
-						<view  @click="isClick && snapUpRushNowEvent(item, index)">抢购</view>
-					</view>
-				</view>
-			</view>
-			
-			
-			
-			<view class="tractBtn">
-				<view @click="tranctBtnEvent(0)" v-if="false">抢1单</view>
-				<view @click="tranctBtnEvent(1)" v-if="false">委托抢购</view>
-				<view @click="tranctBtnEvent(2)">合约资产</view>
-<!-- 				<view @click="tranctBtnEvent(3)">抢购收益</view>
-				<view @click="tranctBtnEvent(4)">分享收益</view> -->
+			<view class="dedAmount" :class="{dedChoice: dedChoiceOn == index}" v-for="(item, index) in dedAmountTit" :key="index" @click="dedAmountEvent(item, index)">
+				<view>{{item.dedAmountName}}</view>
 			</view>
 			
 		</view>
+		<view class="widthDraw">
+			<my-turn-table-draw ref="raffleWheel"
+				:width="boxData.width"
+				:height="boxData.height"
+				:prizeList="prizeList"
+				:targetIndex="targetIndex"
+				@befoterClick="befoterClick"
+				@afterClick="afterClick"
+				:isClick = 'isClick'
+			></my-turn-table-draw>
+		</view>
+		
+		<view class="turnTabArea" v-if="isTrunTabArea">
+			<view class="turnTabClose i-closeRgt" @click.stop="turnTabCloseEvent()"></view>
+			<view class="turnTabImg">
+				<image src="../../../static/images/turnTabImg.png" mode="aspectFit"></image>
+			</view>
+		</view>
+		
+		
 	</view>
 </template>
 
 <script>
 	import {unimixin} from '../../../utils/unimixin.js'
 	import { accMul, accAdd} from '../../../utils/common.js'
+	import myTurnTableDraw from '../../../components/my-turntable-draw/my-turntable-draw.vue'
+	
 	export default {
-		mixins: [unimixin],
+		mixins: [ unimixin ],
+		components: { myTurnTableDraw },
 		data(){
 			return{
-				contractList: [],
-				flag: true,
-				page: 1,
-				pageSize: 10,
-				pageNum: 0,
-				pageTotal: 0,
-				isFlag: true,
-				isSnapFlag: true,
-				isNumFlag: true,
-				timerNum: null,
-				snapOn: 0
+				dedAmountList: [],
+				prizeList: [],
+				tipMsg: '',
+				boxData: {
+					height: '',
+					width: '',
+				},
+				targetIndex: 0,
+				dedAmountTit: [
+					{'dedAmount': '100','dedAmountName': '100区'},
+					{'dedAmount': '300','dedAmountName': '300区'},
+					{'dedAmount': '500','dedAmountName': '500区'}
+				],
+				dedAmount: '100',
+				dedChoiceOn: '0',
+				getIndex: 0,
+				isClick: true,
+				isTrunTabArea: true
 			}
 		},
 		onLoad() {
-
 		},
 		onReachBottom(){
 			if(this.page>=this.pageNum){
 				this.page = this.pageNum
 			}else{
 				this.page += 1
-				this.getContractList()
+				this.dedAmountEvent()
 			}
 		},
 
@@ -83,338 +74,176 @@
 			touchEnd(e){
 				if(this.changeY > 50){
 					this.page = 1
-					this.getContractList()
+					this.dedAmountEvent()
 					this.paddingTop = 0
 				}
 			},
-			snapUpRushNowEvent(item, index){
-				this.isClick = false
-				this.snapOn = index
-				if(item.state == '1'){
-					if(this.isNumFlag){
-						let numCount = 0
-						this.timerNum = setInterval(()=>{
-							numCount++;
-							if(numCount >= 10){
-								this.isNumFlag = false
-								clearInterval(this.timerNum)
-							}
-							this.snapUpEvent(item)
-						}, 1000)
-					}
+			dedAmountEvent(item, index){
+				if(item){
+					this.dedChoiceOn = index
+					this.dedAmount = item.dedAmount
 				}
-			},
-			snapUpEvent(item){
 				this.ajaxJson({
-					url: '/api/v1/treatyType/buyByType',
-					data: {typeId: item.id},
-					method: 'POST',
+					url: '/api/v1/treatyType/byDedAmount',
+					data: {dedAmount: this.dedAmount},
 					call: (data)=>{
 						if(data.code == 200){
-							this.isSnapFlag = true
-							uni.showToast({
-								icon: 'none',
-								title: data.msg,
-								success: () => {
-									this.getContractList()
+							this.dedAmountList = data.data.rows
+							let prizeListArr = []
+							for(let i in this.dedAmountList){
+								prizeListArr.push('',{
+									name: this.dedAmountList[i].name, 
+									logo:this.dedAmountList[i].logo, 
+									ded_amount:this.dedAmountList[i].ded_amount,
+									out_mult: this.dedAmountList[i].out_mult,
+									id: this.dedAmountList[i].id
+								})
+							}
+							this.prizeList = prizeListArr
+							console.log(this.prizeList)
+						}
+					}
+				})
+				this.trunTableEvent()
+			},
+			trunTableEvent(){
+				this.ajaxJson({
+					url: '/api/v1/treatyType/turntable',
+					method: 'POST',
+					data: { dedAmount: this.dedAmount },
+					call: (data)=>{
+						let trunTableId = 6
+						for(let i in this.prizeList){
+							if(this.prizeList[i].id == trunTableId){
+								this.getIndex = parseInt(i)
+							}
+						}
+						
+						return
+						if(data.code == 200){
+							let trunTableId = data.data.id							
+							for(let i in this.prizeList){
+								if(this.prizeList[i].id == trunTableId){
+									this.getIndex = parseInt(i)
 								}
-							})
+							}
 						}else if(data.code == 500){
-							this.isSnapFlag = true
+							this.targetIndex = 0
 							uni.showToast({
 								icon: 'none',
 								title: data.msg,
-								success: () => {
-									this.getContractList()
-								}
+								success: () => {}
 							})
 						}else{
-							this.isSnapFlag = false
-							this.isClick = true
-							clearInterval(this.timerNum)
+							this.isClick = false
+							this.tipMsg = data.msg
 							uni.showToast({
-								image: '/static/images/wrong.png',
+								icon: 'none',
 								title: data.msg,
-								success: () => {
-									this.getContractList()
-								}
+								success: () => {}
 							})
 						}
 					}
 				})
 			},
-			tranctBtnEvent(index){
-				if(index === 0){
-					this.rushPurchaseNowEvent()
-				}else if(index === 1){
-					this.isFlag = true
-					let count = 0
-					if(this.flag){
-						this.flag = false
-						clearInterval(timer)
-						let timer = setInterval(()=>{
-							count ++ 
-							if(count >= 10){
-								clearInterval(timer)
-							}
-							if(this.isFlag){
-								this.rushPurchaseNowEvent()
-							}
-						}, 3000)
-					}
-				}else if(index === 2){
-					uni.navigateTo({
-						url: '/pages/transac/tranContract/tranAssets'
-					})
-				}
+			 befoterClick(data) {
+				 
+				 if(this.isClick){
+				 
+			    if(data.type == 'start') {
+			      console.log('开始抽奖')
+			      // 获取中奖单位下标
+			      // let _n = Math.floor(Math.random() * this.prizeList.length)
+						// console.log(_n + '111')
+			   //    console.log('选中商品项：' + _n)
+			   //    console.log('选中商品名：' + this.prizeList[_n].name)
+			      // this.targetIndex = _n
+						// _n = this.targetIndex
+						
 
-				
-				/* else if(index === 3){
-					uni.navigateTo({
-						url: '/pages/transac/tranContract/tranAssetsFailPurchase'
-					})
-				}else if(index === 4){
-					uni.navigateTo({
-						url: '/pages/transac/tranContract/transAssetsShare'
-					})
-				} */
-			},
-			
-			rushPurchaseNowEvent(){
-				if(this.isFlag){
-					this.ajaxJson({
-						url: '/api/v1/treatyType/buy',
-						method: 'POST',
-						call: (data)=>{
-							if(data.code == 200){
-								this.isFlag = true
-								uni.showToast({
-									icon: 'none',
-									title: data.msg,
-									success: () => {}
-								})
-							}else if(data.code == 500){
-								this.isFlag = true
-								uni.showToast({
-									image: '/static/images/wrong.png',
-									title: data.msg,
-									success: () => {}
-								})
-							} else{
-								this.isFlag = false
-								uni.showToast({
-									image: '/static/images/wrong.png',
-									title: data.msg,
-									success: () => {}
-								})
+						
+						this.$nextTick(()=>{
+							this.trunTableEvent()
+						})
+							this.targetIndex = this.getIndex
+						
+						console.log(this.targetIndex)
+						data.callback && data.callback(this.getIndex)
+			    }
+					}else{
+						uni.showToast({
+							icon: 'none',
+							title: this.tipMsg,
+							success: () => {
+								
 							}
-						}
-					})
-				}
-			},
-			entrustEvent(){
-			},
-			getContractList(){
-				this.ajaxJson({
-					url: '/api/v1/treatyType/allList',
-					data: {page: this.page, pageSize: this.pageSize },
-					call: (data)=>{
-						this.pageTotal = data.data.total
-						this.contractList = []
-						this.contractList = [...this.contractList, ...data.data.rows]
+						})
 					}
-				})
-			},
+			  },
+			 afterClick(data) {
+			    if(data.type == 'end') {
+			      data.callback && data.callback()
+			    }
+			  },
+				turnTabCloseEvent(){
+					this.isTrunTabArea = false
+				}
 		},
 		created() {
-			this.getContractList()
-			let webView = this.$mp.page.$getAppWebview()
-			webView.setTitleNViewButtonStyle(0,{  
-				text: '\ue91d',  
-			})
+
+				this.dedAmountEvent()
+				// this.trunTableEvent()
+				this.$nextTick(()=>{
+					
+				// this.$refs.raffleWheel.setView()
+				})
 		}
 	}
 </script>
 
 <style scoped lang="scss">
-	.tranContract{
-		position: relative;
-		padding-bottom: 200rpx !important;
-		.tractCon{
-			.enConList{
-				padding: 0 30rpx 0;
-				background-color: #f2f2f2;
-				.enList:last-child{
-					border-bottom: none;
-				}
-				.enList{
-					display: flex;
-					justify-content: space-between;
-					flex-wrap: wrap;
-					border-bottom: 2px solid #303030;
-					.state{
-						display: flex;
-						justify-content: space-between;
-						flex-direction: row;
-						align-items: center;
-						width: 100%;
-						margin-top: 0;
-						text:nth-of-type(2){
-							margin-top: 0;
-							margin-right: 90rpx;
-						}
-					}
-					view{
-						display: flex;
-						flex-wrap: wrap;
-						flex-direction: column;
-						margin-top: 25rpx;
-						
-						padding-bottom: 20rpx;
-						text{
-							font-size: 24rpx;
-							white-space: nowrap;
-						}
-						text:nth-of-type(1){
-							font-size: 26rpx;
-							line-height: 26rpx;
-							color: #676869;
-						}
-						text:nth-of-type(2){
-							margin-top: 20rpx;
-							font-size: 24rpx;
-							line-height: 24rpx;
-							color: #fff;
-						}
-					}
-					view:nth-child(1){
-						width: 270rpx;
-					}
-					view:nth-child(4){
-						width: 270rpx;
-					}
-					view:nth-child(2){
-						width: 260rpx;
-					}
-					view:nth-child(5){
-						width: 260rpx;
-					}
-					view:nth-child(3){
-						width: 140rpx;
-					}
-					view:nth-child(6){
-						width: 140rpx;
-					}
-				}
-			}
-			.cardEnConList{
-				margin: 0 30rpx;
-				display: flex;
-				justify-content: space-between;
-				flex-wrap: wrap;
-				.enList{
-					margin-top: 20rpx;
-					width: 340rpx;
-					// height: 270rpx;
-					background-color: #f2f2f2;
-					.enListTit{
-						margin: 25rpx 30rpx 0;
-						display: flex;
-						flex-direction: row;
-						font-size: 24rpx;
-						.enListTitImg{
-							width: 60rpx;
-							height: 60rpx;
-							margin-right: 30rpx;
-							image{
-								width: 100%;
-								height: 100%;
-							}
-						}
-						.enListTitName{
-							display: flex;
-							flex-direction: column;
-							margin-right: 30rpx;
-							text:nth-of-type(1){
-								color: $c3;
-							}
-							text:nth-of-type(2){
-								margin-top: 10rpx;
-								color: $c3;
-							}
-						}
-						.enListTitState{
-							display: flex;
-							flex-direction: column;
-							text:nth-of-type(1){
-								color: $c3;
-							}
-							text:nth-of-type(2){
-								margin-top: 10rpx;
-							}
-						}
-					}
-					.enListArea{
-						margin: 0 30rpx;
-						view{
-							display: flex;
-							justify-content: space-between;
-							margin-top: 10rpx;
-							font-size: 24rpx;
-							text:nth-of-type(1){
-								color: $c6;
-							}
-							text:nth-of-type(2){
-								color: $c3;
-							}
-						}
-					}
-					.enListOpera{
-						margin: 10rpx 30rpx 0;
-						padding-bottom: 20rpx;
-						color: #fff;
-						view{
-							background-color: #BD3A3B;
-							line-height: 42rpx;
-							border-radius: 4rpx;
-							display: flex;
-							align-items: center;
-							justify-content: center;
-						}
-					}
-				}
-				
-			}
+	
+	.turnTabArea{
+		position: absolute;
+		top: 220rpx;
+		width: 100%;
+		.turnTabClose{
+			position: absolute;
+			top: 0;
+			right: 0;
 		}
-		.tractBtn{
-			position: fixed;
-			z-index: 9;
-			bottom: 120rpx;
+		.turnTabImg{
 			display: flex;
 			justify-content: center;
-			width: 100%;
-			font-size: 20rpx;
-			view{
-				background-color: #BD3A3B;
-				color: #fff;
-				display: flex;
-				width: 100%;
-				margin: 0 30rpx;
-				flex-wrap: nowrap;
-				justify-content: center;
-				font-size: 26rpx;
-				padding: 15rpx 12rpx;
-				border-radius: 4rpx;
-				white-space: nowrap;
-			}
-
+			
 		}
 	}
 	
-	.close{
-	  color: #f00 !important;
+	.turnTabClose::before{
+		position: absolute;
+		right: 76rpx;
+		top: -40rpx;
+		color: #000;
+		font-size: 48rpx;
 	}
-	.open{
-	  color: $c3 !important;
+	.tranContract{
+		position: relative;
+		.tractCon{
+			margin: 58rpx 75rpx 0;
+			display: flex;
+			justify-content: space-between;
+			.dedAmount{
+				padding: 16rpx 40rpx;
+				background-color: #38a987;
+				color: #fff;
+				border-radius: 6rpx;
+			}
+			.dedChoice{
+				background-color: #af1416;
+			}
+		}
+		.widthDraw{
+			margin-top: 150rpx;
+		}
 	}
 </style>

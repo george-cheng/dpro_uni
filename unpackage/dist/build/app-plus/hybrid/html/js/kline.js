@@ -123,6 +123,7 @@ var app = new Vue({
 		],
 		txData:{},//交易数据统计
 		buyList:[],
+		sellList:[],
 		entrustSellList:[],
 		dealHis:[],
 		tokenInfo:{},
@@ -794,13 +795,13 @@ var app = new Vue({
 					lineSellArr.push({width: parseInt( (sellMaxArr[i] / sellMax) * 100 )})
 				}
 
-				this.entrustSellList = entrustSellList.map((o,i) => { return {...o,...lineSellArr[i]}})
+				this.sellList = entrustSellList.map((o,i) => { return {...o,...lineSellArr[i]}})
 
-				if(this.entrustSellList.length >= 20){
-					this.entrustSellList = this.entrustSellList.slice(0, 20)
-				}else{
-					this.entrustSellList = this.entrustSellList.slice(0,this.entrustSellList.length-1)
-				}
+				// if(this.entrustSellList.length >= 20){
+				// 	this.entrustSellList = this.entrustSellList.slice(0, 20)
+				// }else{
+				// 	this.entrustSellList = this.entrustSellList.slice(0,this.entrustSellList.length-1)
+				// }
 			}else if(data.indexOf('entrust-log') !== -1){
 				let entrustLog = data.replace('["entrust-log","[','').replace(']"]','')
 				let json =  entrustLog.split('],[')
@@ -817,9 +818,9 @@ var app = new Vue({
 		
 	},
 	computed: {
-	  sellList() {
-	    return this.entrustSellList.reverse();
-	  },
+	  // sellList() {
+	  //   return this.entrustSellList.reverse();
+	  // },
 	},
 	mounted() {
 		myChart = echarts.init(document.getElementById('main'));

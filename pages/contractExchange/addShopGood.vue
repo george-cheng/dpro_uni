@@ -128,7 +128,6 @@
 				
 				this.isClick = false
 				this.validator()
-				this.isValidator = true
 				if(this.isValidator){
 					let params = {
 						name: this.name,
@@ -140,8 +139,6 @@
 						stock: this.stock,
 						content: this.content,
 					}
-					console.log(params)
-					return
 					this.ajaxJson({
 						url: '/api/v1/treatyCashGoods/publish',
 						method: 'POST',

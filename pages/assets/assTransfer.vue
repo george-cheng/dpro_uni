@@ -6,7 +6,7 @@
 		</view>
 		<view class="transferRate">
 			<view class="transferExchange">DPC：{{lastDealPrize}}</view>
-			<view class="transferResult" v-if="amount">≈ {{transferResult}}</view>
+			<view class="transferResult" v-if="amount">USD ≈ {{transferResult}}</view>
 		</view>
 		<view class="transferBtn">
 			<button type="default" @click="transferEvent">兑换</button>
@@ -85,13 +85,12 @@
 			color: #999;
 			font-size: 24rpx;
 		}
-		
 		.transferRate{
 			display: flex;
 			justify-content: space-between;
 			margin: 20rpx 50rpx;
-			color: #999;
-			font-size: 24rpx;
+			color: #666;
+			font-size: 30rpx;
 		}
 		.transferIpt{
 			input{
