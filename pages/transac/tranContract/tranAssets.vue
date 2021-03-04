@@ -28,6 +28,7 @@
 		data(){
 			return{
 				recordList: [],
+				tran_index: '',
 			}
 		},
 		onReachBottom(){
@@ -38,6 +39,10 @@
 				this.page += 1
 				this.getRecordList()
 			}
+		},
+		onLoad(options){
+			this.tran_index = options.tranIndex
+			console.log(this.tran_index)
 		},
 		methods: {
 			
@@ -69,7 +74,8 @@
 							}else{
 								uni.showToast({
 									image: '../../../static/images/wrong.png',
-									title: data.msg
+									title: data.msg,
+									success: () => {}
 								})
 							}
 						}
@@ -83,9 +89,26 @@
 			},
 			getRecordList(){
 				let params = {}
+				
+				console.log(this.tran_index)
+				
+				if(this.tran_index == 2){
+					params = {
+						purchState: 1,
+						activateState: 1,
+						page: this.page, 
+						pageSize: this.pageSize
+					}
+				}else{
+					params = {
+						purchState: 1,
+						page: this.page, 
+						pageSize: this.pageSize
+					}
+				}
 				this.ajaxJson({
 					url: '/api/v1/purchTreatyLog/list',
-					data: { purchState: 1, page: this.page, pageSize: this.pageSize},
+					data: params,
 					call: (res)=>{
 						this.pageTotal = res.data.total
 						this.recordList = [...this.recordList, ...res.data.rows]

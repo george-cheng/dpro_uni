@@ -1,33 +1,42 @@
 <template>
   <view class="raffle-wheel" :style="{ width: canvasWidth + 44 + 'px', height: canvasHeight + 44 + 'px'}">
+		<canvas :style="{width:wh+30+'px',height:wh+30+'px'}" canvas-id="canvas-bg" class="canvasBg"></canvas>
     <view class="raffle-wheel-box" :style="{ width: canvasWidth + 'px', height: canvasHeight + 'px'}">
       <view class="raffle-wheel-show" :style="'transform: rotate(' + rotates + 'deg);transition-duration: ' + duration + 's;'">
         <view class="item-block" v-for="(item, index) in prizeList" :key="index">
           <view class="item-view-block" :style="'transform: rotate(' + (degs * index) + 'deg) skewY(' + skew + 'deg);background: ' + ((index % 2) > 0 ? color1 : color2) + ';'"></view>
           <view class="item-view" :style="'transform: translateX(-50%) rotate(' + (degs * index + (degs / 2)) + 'deg);width: ' + textWidth + ';'">
-            <text style="white-space: nowrap;">{{item.name}}</text>
+						
+						
+						
+            <text style="white-space: nowrap;" :style="{ color:item.color }">{{item.name}}</text>
+						
+						
+						
+						
+						
             <image :src="url + item.logo" mode="aspectFill"></image>
 						<text v-if="item.ded_amount">总产量：{{accMul(item.ded_amount, item.out_mult)}}</text>
           </view>
         </view>
       </view>
-      <view class="raffle-wheel__action" @click="handleAction"></view>
+      <view class="raffle-wheel__action" @click="handleAction()"></view>
     </view>
   </view>
 </template>
 
 <script>
-	
+	import wheelDraw from './my_turntable-draw.js'
 	
   export default {
     props: {
       canvasWidth: {
         type: Number,
-        default: 320
+        default: 240
       },
       canvasHeight: {
         type: Number,
-        default: 320
+        default: 240
       },
       // 奖品列表
       prizeList: {
@@ -43,7 +52,7 @@
         type: Array,
         default: () => [
           '#FFF',
-          '#FFE9AA'
+          '#f00'
         ],
         // 必须是偶数且仅为 2 个颜色相互交替
         validator: function (value) {
@@ -69,14 +78,11 @@
       targetIndex: {
         type: Number,
       },
-			isClick: {
-				type: Boolean,
-				default: true
-			}
+			
     },
     data() {
       return {
-        // isClick: true, // 当前是否可点击
+        isClick: true, // 当前是否可点击
         isShow: true, // 是否初始化
         skew: 0, // 偏移角度
         degs: 0, // 旋转角度
@@ -86,6 +92,8 @@
         rotates: 0, // box旋转角度
         isRoteIndex: 0 ,// 已经选中的key
 				dedAmountList : [],
+				wheelDraw: null,
+				wh: 240,
 				url: 'https://dpro-main.oss-cn-hongkong.aliyuncs.com/',
       }
     },
@@ -93,8 +101,8 @@
       this.color1 = this.colors[0]
       this.color2 = this.colors[1]
 			this.$nextTick(()=>{
-			this.setView()
-				
+				this.setView()
+				this.turnDrawEvent()
 			})
       // this.setView()
     },
@@ -150,12 +158,15 @@
       },
       endAction() {
         console.log('本次选中的：' + this.prizeList[this.targetIndex].name)
-      }
+      },
+			turnDrawEvent(){
+				this.wheelDraw = new wheelDraw()
+				var ctx = uni.createCanvasContext("canvas-bg")
+				this.wheelDraw.init(ctx, this.wh)
+			}
     },
 		created() {
-			
-			
-			
+
 		}
   }
 </script>
@@ -172,21 +183,24 @@
     background-repeat: no-repeat;
     background-position: center center;
     background-size: contain;
-    background-image: url($raffleBgUrl + ".png");
-    @media (-webkit-min-device-pixel-ratio: 2),(min-device-pixel-ratio: 2) {
-      background-image: url($raffleBgUrl + "@2x.png");
-    }
-    @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3) {
-      background-image: url($raffleBgUrl + "@3x.png");
-    }
+    // background-image: url($raffleBgUrl + ".png");
+    // @media (-webkit-min-device-pixel-ratio: 2),(min-device-pixel-ratio: 2) {
+    //   background-image: url($raffleBgUrl + "@2x.png");
+    // }
+    // @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3) {
+    //   background-image: url($raffleBgUrl + "@3x.png");
+    // }
   }
   .raffle-wheel-box {
     border-radius: 50%;
     overflow: hidden;
     background-color: #f2f2f2;
-    box-shadow: 1px 1px 1px 1px #FFE9AA;
+    box-shadow: 1px 1px 1px 1px #f00;
     position: relative;
   }
+	.canvasBg{
+		position: absolute;
+	}
   .raffle-wheel-show {
     width: 100%;
     height: 100%;
@@ -213,7 +227,7 @@
     width: 25%;
     height: 50%;
     transform-origin: center 100%;
-    font-size: 26upx;
+    font-size: 22upx;
     text-align: center;
     padding-top: 20upx;
     text {
@@ -233,10 +247,10 @@
   }
   .raffle-wheel__action {
     position: absolute;
-    top: calc(50% - 58px);
-    left: calc(50% - 58px);
-    width: 114px;
-    height: 114px;
+    top: calc(50% - 46px);
+    left: calc(50% - 40px);
+    width: 80px;
+    height: 80px;
     background-repeat: no-repeat;
     background-position: center center;
     background-size: contain;

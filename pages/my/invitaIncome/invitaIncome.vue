@@ -13,6 +13,9 @@
 					<view>直推人数：{{userInfo.introCount}}</view>
 					<view>团队人数：{{userInfo.introTeamTotal}}</view>
 				</view>
+				<view>
+					<view>直推业绩：{{userInfo.subordinateDedAmount}}</view>
+				</view>
 			</view>
 		</view>
 		<view class="invitaTit">扫码推荐</view>

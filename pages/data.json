@@ -1,0 +1,20 @@
+{
+	"code": "200",
+	"data": {
+		"coin_id": 69,
+		"coin_name": "USD",
+		"ded_amount": 100,
+		"fail_mult": 0.01,
+		"id": 4,
+		"logo": "/upload/banner/202012221835047_iBa8B.png",
+		"max_failures": 8,
+		"max_success": 2,
+		"name": "量化合约",
+		"open_date": "10:00-12:00",
+		"out_mult": 1.8,
+		"probability": 0.4,
+		"purch_times": 10,
+		"return_days": 50,
+		"state": 1
+	}
+}
