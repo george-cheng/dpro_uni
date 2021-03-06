@@ -183,6 +183,7 @@
     background-repeat: no-repeat;
     background-position: center center;
     background-size: contain;
+		overflow: hidden;
     // background-image: url($raffleBgUrl + ".png");
     // @media (-webkit-min-device-pixel-ratio: 2),(min-device-pixel-ratio: 2) {
     //   background-image: url($raffleBgUrl + "@2x.png");
@@ -205,11 +206,15 @@
     width: 100%;
     height: 100%;
     position: relative;
+		overflow: hidden;
   }
   .item-block {
     width: 100%;
     height: 100%;
     position: absolute;
+		overflow: hidden;
+		z-index: -9;
+		border-radius: 50%;
   }
   .item-view-block {
     position: absolute;
@@ -217,6 +222,7 @@
     right: 0;
     width: 50%;
     height: 50%;
+		overflow: hidden;
     transform-origin: 0% 100%;
   }
   .item-view {
@@ -229,6 +235,7 @@
     transform-origin: center 100%;
     font-size: 22upx;
     text-align: center;
+		overflow: hidden;
     padding-top: 20upx;
     text {
       display: -webkit-box;

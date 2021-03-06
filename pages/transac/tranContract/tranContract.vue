@@ -112,6 +112,14 @@
 				}
 			},
 			dedAmountEvent(item, index){
+				if(index == 2){
+					uni.showToast({
+						icon: 'none',
+						title: '合约已售完',
+						success: () => {}
+					})
+					return
+				}
 				if(item){
 					this.dedChoiceOn = index
 					this.dedAmount = item.dedAmount
