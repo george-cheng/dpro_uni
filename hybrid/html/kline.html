@@ -12,7 +12,8 @@
 			<div class="head">
 				<div class="price">
 					<span class="price-label">{{txData.lastPrice || 0}}</span>
-					<span class="price-value">≈ ¥ {{ (txData.lastPrice  * txData.cnyRate).toFixed(2) || 0}} CNY </span>
+					<!-- <span class="price-value">{{txData.cnyRate}}</span> -->
+					<span class="price-value">≈ ¥ {{ (txData.lastPrice  * 6.5).toFixed(2) || 0}} CNY </span>
 				</div>
 				<div class="head-item">
 					<div class="head-item-cell">

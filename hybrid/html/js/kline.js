@@ -706,6 +706,14 @@ var app = new Vue({
 		getExRate(){
 			document.addEventListener('plusready', ()=>{  
 				var exRage = plus.storage.getItem('rate')
+				
+				uni.getStorage({
+					key: 'rate',
+					success: (res) => {
+						console.log(res.data)
+					}
+				})
+				
 				this.cnyRate = parseFloat(JSON.parse(exRage).data.rate)
 			})
 		},
@@ -826,7 +834,7 @@ var app = new Vue({
 		myChart = echarts.init(document.getElementById('main'));
 		this.draw()
 		this.getKline()
-		this.getExRate()
+		// this.getExRate()
 	},
 	created() {
 		// this.getTxData()
